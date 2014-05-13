@@ -1,4 +1,4 @@
-JavaScript-APIs and resources for Adobe CEP
+Resource for getting started with Adobe CEP
 ==============
 
 This is the place to get started with Adobe CEP 5. (Page is still being constructed).
