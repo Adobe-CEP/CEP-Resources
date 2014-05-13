@@ -21,4 +21,4 @@ This is the place to get started with Adobe CEP 5. (Page is still being construc
 
 [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 
-[Guide to signing extensions (valid for CEP 4.x and most likely CEP 5 as well)(http://bit.ly/1fARUZy)
+[Guide to signing extensions (valid for CEP 4.x and most likely CEP 5 as well)](http://bit.ly/1fARUZy)
