@@ -19,4 +19,4 @@ This is the place to get started with Adobe CEP 5. (Page is still being construc
 
 [Adobe Exchange](http://bit.ly/1mHVksI)
 
-[The other API (Article on Medium)[http://bit.ly/1hIFZay]
+[The other API (Article on Medium)](http://bit.ly/1hIFZay)
