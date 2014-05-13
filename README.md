@@ -1,4 +1,4 @@
-Resource for getting started with Adobe CEP
+Resources for getting started with Adobe CEP
 ==============
 
 This is the place to get started with Adobe CEP 5. (Page is still being constructed).
@@ -18,3 +18,5 @@ This is the place to get started with Adobe CEP 5. (Page is still being construc
 [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
 
 [Adobe Exchange](http://bit.ly/1mHVksI)
+
+[The other API (Article on Medium)[http://bit.ly/1hIFZay]
