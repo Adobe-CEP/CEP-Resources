@@ -7,6 +7,8 @@ This is the place to get started with Adobe CEP 5. (Page is still being construc
 
 [CSInterface for CEP4.2](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-4.2.0.js)
 
+[CEPEngine Extension API spec (note, this file must NOT be included in an extension project as it is already integrated into CEP](http://adobe.ly/1p2Onnl)
+
 [Vulcan for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
 
 [Sample extensions](https://github.com/Adobe-CEP/Samples)
