@@ -1,7 +1,18 @@
-Resources for getting started with Adobe CEP
+Getting Started with the CC2014 Extension SDK
 ==============
 
-This is the place to get started with Adobe CEP 5. (Page is still being constructed).
+(Page under construction)
+This page provides resources you need to get started creating extensions for Adobe Creative Cloud 2014 applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is no longer supported.
+
+Extensions and add-ins are built on the CEP 5 infrastructure and loaded with Extension Manager. Extensions that you build using these low-level tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file. 
+
+Resources you will need include:
+* CEP JavaScript libraries for communicating  with the operating system and Extension Manager.
+* The Vulcan library for communicating wtih the host application and other extensions.
+* Sample code for how to use these libraries
+* The ZXP packager, a command-line utility
+
+(some of the documents provided here are in the process of being updated, and may not be entirely applicable)
 
 [CSInterface for CEP5](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
 
