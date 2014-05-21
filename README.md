@@ -1,7 +1,8 @@
-Getting Started with the CC.Next Extension SDK
+Getting Started with the CC2014 Extension SDK
 ==============
 
 (Page under construction)
+
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud.Next applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is no longer supported.
 
 Extensions and add-ins are built on the CEP 5 infrastructure and loaded with Extension Manager. Extensions that you build using these low-level tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file. 
