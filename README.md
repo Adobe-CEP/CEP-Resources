@@ -39,7 +39,7 @@ Resources you will need include:
 
 [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 
-[Guide to signing extensions (valid for CEP 4.x and most likely CEP 5 as well)](http://bit.ly/1fARUZy)
+[Guide to signing extensions (valid for CEP 4.x and most likely CEP 5 as well)](http://adobe.ly/1oiS4FE)
 
 [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
 
