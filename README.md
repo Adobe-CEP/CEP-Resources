@@ -16,31 +16,35 @@ Resources you will need include:
 (some of the documents provided here are in the process of being updated, and may not be entirely applicable)
 
 [CSInterface for CEP5](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
+NOTE: Include this file in your extension project for CC2014 host apps
 
-[CSInterface for CEP4.2](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-4.2.0.js)
-
-[CEPEngine Extension API spec (note, this file must NOT be included in an extension project as it is already integrated into CEP)](http://adobe.ly/1p2Onnl)
+[CEPEngine Extension API spec (zipped)](http://adobe.ly/1p2Onnl) 
+NOTE: Do NOT include this file in your extension project. It is already integrated into CEP
 
 [Vulcan for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
+NOTE: Include this file in your extension project for CC2014 host apps if you wish to exchange messages with the host or other extensions
 
 [Sample extensions](https://github.com/Adobe-CEP/Samples)
 
-[Offical documentation (for CEP 4.2)](http://adobe.ly/1cWBggl)
+[A short guide to HTML5 extensions](http://adobe.ly/Nk1EK7)
+NOTE:  For CEP 4.0 but still mostly relevant
 
-[A short guide to HTML5 extensions (for CEP 4.0 but still mostly relevant)](http://adobe.ly/Nk1EK7)
+[Guide to signing extensions](http://adobe.ly/1oiS4FE)
+NOTE:  For CEP 4.0 but probably valid for CEP 5
 
 [Davide Barranca’s blog](http://bit.ly/Nk1Mta)
-
-[Extension Builder 3 Preview (Note, compatible with CEP 4.x only)](http://adobe.ly/1pho2QU)
-
 [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
-
-[Adobe Exchange](http://bit.ly/1mHVksI)
-
 [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 
-[Guide to signing extensions (valid for CEP 4.x and most likely CEP 5 as well)](http://adobe.ly/1oiS4FE)
-
+[Extension Builder 3 Preview](http://adobe.ly/1pho2QU)
 [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
+NOTE: EB3 is compatible with CEP 4.x only
 
-[Nice tutorial (a bit old)](http://bit.ly/1nNLqH4)
+[Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
+[CSInterface for CEP4.2](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-4.2.0.js)
+NOTE: Include this file in your extension project for CS6/CC host apps
+
+[Tutorial](http://bit.ly/1nNLqH4)
+NOTE: A bit old
+
+[Adobe Exchange](http://bit.ly/1mHVksI)
