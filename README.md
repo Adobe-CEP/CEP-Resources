@@ -21,7 +21,7 @@ Resources you will need include:
 For developing CEP 4.x and extensions for CS6/CC host applications
 * [Extension Builder 3 Preview](http://adobe.ly/1pho2QU)
 * [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
-   (NOTE: EB3 is compatible with CEP 4.x only)
+   (NOTE: EB3 is compatible with CEP 4.x only. You can [tweak it](http://adobe.ly/1v3wgiq) so that it supports CC 2014 (with limitations))
 * [Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
 * [CSInterface for CEP4.2](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-4.2.0.js)
    (NOTE: Include this file in your extension project for CS6/CC host apps)
