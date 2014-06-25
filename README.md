@@ -34,11 +34,12 @@ For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
 
 * [CSInterface for CEP5](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
    (NOTE: Include this file in your extension project)
-* [Vulcan for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
+* [IPC for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
    (NOTE: Include this file in your extension project if you wish to exchange messages with the host or other extensions
 * [CEPEngine Extension API spec (zipped)](http://adobe.ly/1p2Onnl) 
    (NOTE: Do NOT include this file in your extension project. It is already integrated into CEP)
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
+* [Extending Adobe CC 2014 apps using Node.js](http://bit.ly/1yAR0T9)
 * [A short guide to HTML5 extensions](http://adobe.ly/Nk1EK7)
    (NOTE:  For CEP 4.0 but still mostly relevant)
 * [Guide to signing extensions](http://adobe.ly/1oiS4FE)
