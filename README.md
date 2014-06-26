@@ -52,6 +52,7 @@ Miscellaneous help
 * [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
 * [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 * [Adobe Exchange](http://bit.ly/1mHVksI)
+* [Photoshop CC 2014 CEP samples by John Peterson](http://bit.ly/1nGAWYN)
 
 ----
 
