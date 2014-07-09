@@ -36,6 +36,7 @@ For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
    (NOTE: Include this file in your extension project)
 * [IPC for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
    (NOTE: Include this file in your extension project if you wish to exchange messages with the host or other extensions
+* [PlugPlugExternalObject for InDesign CC 2014](http://bit.ly/1qlnKOb)
 * [CEPEngine Extension API spec (zipped)](http://adobe.ly/1p2Onnl) 
    (NOTE: Do NOT include this file in your extension project. It is already integrated into CEP)
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
