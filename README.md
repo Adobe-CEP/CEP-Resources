@@ -44,7 +44,7 @@ For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
 * [A short guide to HTML5 extensions](http://adobe.ly/Nk1EK7)
    (NOTE:  For CEP 4.0 but still mostly relevant)
 * [Guide to signing extensions](http://adobe.ly/1oiS4FE)
-   (NOTE:  For CEP 4.0 but probably valid for CEP 5)
+   (NOTE:  For CEP 4.0 but valid for CEP 5)
 
 ----
 
