@@ -51,6 +51,7 @@ For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
 Miscellaneous help
 * [Davide Barranca’s blog](http://bit.ly/Nk1Mta)
 * [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
+* [Olav Martin Kvern's article on extensibility and InDesign](http://bit.ly/1zEa9Ef)
 * [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 * [Adobe Exchange](http://bit.ly/1mHVksI)
 * [Photoshop CC 2014 CEP samples by John Peterson](http://bit.ly/1nGAWYN)
