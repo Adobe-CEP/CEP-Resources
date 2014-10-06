@@ -32,7 +32,9 @@ For developing CEP 4.x and extensions for CS6/CC host applications
 
 For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
 * [Offical Adobe Extension SDK Documentation for CC 2014](http://adobe.ly/1rin38t)
-* [CSInterface for CEP5](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
+* [CSInterface for CEP5 (Adobe CC 2014 products)](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
+   (NOTE: Include this file in your extension project)
+* [CSInterface for CEP5.2 (Adobe CC 2014 October updates)](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-5.2.js)
    (NOTE: Include this file in your extension project)
 * [IPC for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
    (NOTE: Include this file in your extension project if you wish to exchange messages with the host or other extensions
