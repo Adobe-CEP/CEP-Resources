@@ -19,30 +19,52 @@ Resources you will need include:
 ----
 
 For developing CEP 4.x and extensions for CS6/CC host applications
+
+**Documentation**
+* [Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
+* [Tutorial](http://bit.ly/1nNLqH4)
+   (NOTE: A bit old)
+
+**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_4.x)
+* Include these files in your extension project if you need to use the APIs.
+  * CSInterface.js
+  * Vulcan.js
+* Do NOT include this file in your extension project. It is already integrated into CEP.
+  * CEPEngine_extensions.js
+* Extension Manifest
+  * ExtensionManifest_v_4_0.xsd
+
+**Tooling**
 * [Extension Builder 3 Preview](http://adobe.ly/1pho2QU)
 * [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
    (NOTE: EB3 is compatible with CEP 4.x only. You can [tweak it](http://adobe.ly/1v3wgiq) so that it supports CC 2014 (with limitations))
-* [Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
-* [CSInterface for CEP4.2](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-4.2.0.js)
-   (NOTE: Include this file in your extension project for CS6/CC host apps)
-* [Tutorial](http://bit.ly/1nNLqH4)
-   (NOTE: A bit old)
 
 ----
 
 For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
+
+**Documentation**
 * [Offical Adobe Extension SDK Documentation for CC 2014](http://adobe.ly/1rin38t)
-* [CSInterface for CEP5 (Adobe CC 2014 products)](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface.js)
-   (NOTE: Include this file in your extension project)
-* [CSInterface for CEP5.2 (Adobe CC 2014 October updates)](https://github.com/Adobe-CEP/JavaScript-API/blob/master/CSInterface-5.2.js)
-   (NOTE: Include this file in your extension project)
-* [IPC for CEP5 (Communication API)](https://github.com/Adobe-CEP/CEP-Resources/blob/master/Vulcan.js)
-   (NOTE: Include this file in your extension project if you wish to exchange messages with the host or other extensions
-* [CEP for the InDesign Developer](http://adobe.ly/1xXkviH)
-* [PlugPlugExternalObject for InDesign CC 2014](http://bit.ly/1qlnKOb)
-* [CEPEngine Extension API spec (zipped)](http://adobe.ly/1p2Onnl) 
-   (NOTE: Do NOT include this file in your extension project. It is already integrated into CEP)
+* [CEP 5 HTML Extension Cookbook for CC 2014](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-5-HTML-Extension-Cookbook-for-CC-2014)
+* [CEP 5 Flash Extension Cookbook for CC 2014](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-5-Flash-Extension-Cookbook-for-CC-2014)
+
+**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_5.x)
+* Include these files in your extension project if you need to use the APIs.
+  * AgoraLib.js
+  * CSInterface.js
+  * Vulcan.js
+* Do NOT include this file in your extension project. It is already integrated into CEP.
+  * CEPEngine_extensions.js
+* Extension Manifest
+  * ExtensionManifest_v_5_0.xsd
+* PlugPlugExternalObject
+  * [PlugPlugExternalObject for InDesign CC 2014](http://bit.ly/1qlnKOb)
+
+**Samples**
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
+
+**Other Documents**
+* [CEP for the InDesign Developer](http://adobe.ly/1xXkviH)
 * [Extending Adobe CC 2014 apps using Node.js](http://bit.ly/1yAR0T9)
 * [A short guide to HTML5 extensions](http://adobe.ly/Nk1EK7)
    (NOTE:  For CEP 4.0 but still mostly relevant)
