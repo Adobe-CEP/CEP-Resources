@@ -18,7 +18,7 @@ Resources you will need include:
 
 ---
 
-For developing CEP6 HTML/JavaScript extensions for CC2015 host applications
+For developing CEP 6.x HTML/JavaScript extensions for CC2015 host applications
 
 **Documentation**
 * [CEP 6 HTML Extension Cookbook for CC 2015](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015)
@@ -35,9 +35,13 @@ For developing CEP6 HTML/JavaScript extensions for CC2015 host applications
 **Samples**
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
 
+**Other Information**
+* [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
+* [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+
 ----
 
-For developing CEP5 HTML/JavaScript extensions for CC2014 host applications
+For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 
 **Documentation**
 * [Offical Adobe Extension SDK Documentation for CC 2014](http://adobe.ly/1rin38t)
