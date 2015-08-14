@@ -38,6 +38,7 @@ For developing CEP 6.x HTML/JavaScript extensions for CC2015 host applications
 **Other Information**
 * [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
 * [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+* [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
 
 ----
 
