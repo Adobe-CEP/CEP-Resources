@@ -43,6 +43,9 @@ For developing CEP 6.x HTML/JavaScript extensions for CC2015 host applications
 **Packaging and Signing Tool (ZXPSignCMD)**
 * [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 6)
 
+**Other Tools**
+* [A Python script to install & manage extensions](https://github.com/adobe-photoshop/generator-panels/blob/master/installPanels.py) (by John Peterson)
+
 ----
 
 For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
@@ -101,6 +104,7 @@ For developing CEP 4.x and extensions for CS6/CC host applications
 ----
 
 Miscellaneous help
+* [CS SDK Blog](https://blogs.adobe.com/cssdk/)
 * [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P) 
 * [Davide Barranca’s blog](http://bit.ly/Nk1Mta)
 * [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
