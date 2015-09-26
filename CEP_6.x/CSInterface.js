@@ -989,7 +989,7 @@ CSInterface.prototype.setContextMenu = function(menu, callback)
  * @param menu      A JSON string which describes menu structure.
  * @param callback  The callback function which is called when a menu item is clicked. The only parameter is the returned ID of clicked menu item.
  *
- * An example menu JSON:
+ * @description An example menu JSON:
  *
  * { 
  *      "menu": [
@@ -1024,7 +1024,7 @@ CSInterface.prototype.setContextMenu = function(menu, callback)
  *                      "enabled": true,
  *                      "checkable": true,
  *                      "checked": true
-                    }
+ *                  }
  *              ]
  *          },
  *          {
