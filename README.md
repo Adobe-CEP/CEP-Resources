@@ -35,16 +35,18 @@ For developing CEP 6.x HTML/JavaScript extensions for CC2015 host applications
 **Samples**
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
 
-**Extension Manager Command Line Tool**
-* [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
-* [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
-* [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
-
 **Packaging and Signing Tool (ZXPSignCMD)**
 * [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 6)
 
-**Other Tools**
+**Extension Installation Tools**
+* Extension Manager Command Line Tool
+  * [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
+  * [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+  * [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
 * [A Python script to install & manage extensions](https://github.com/adobe-photoshop/generator-panels/blob/master/installPanels.py) (by John Peterson)
+* Other Tools
+  * http://zxpinstaller.com/
+  * http://install.anastasiy.com/
 
 ----
 
