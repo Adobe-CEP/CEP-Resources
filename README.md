@@ -9,7 +9,7 @@ This page provides resources you need to get started creating extensions for Ado
 
 * The Creative Suite 6 and the Creative Cloud 2013 releases of Adobe desktop applications support CEP 4, which allows you to build extensions using the older Flash/ActionScript interface model. However, the new HTML5/JavaScript model is preferred. It is recommended that you port existing Flash/ActionScript extensions to the new model.
 
-This SDK provides the low-level tools that you need to build extensions. Extensions that you build using these tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file. 
+This SDK provides the low-level tools that you need to build extensions. Extensions that you build using these tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file.
 
 Resources you will need include:
 * CEP JavaScript libraries for communicating  with the operating system and Extension Manager and for communicating wtih the host application and other extensions.
@@ -18,7 +18,39 @@ Resources you will need include:
 
 ---
 
-For developing CEP 6.x HTML/JavaScript extensions for CC2015 host applications
+For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
+
+**Documentation**
+* CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
+
+**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x)
+* Include these files in your extension project if you need to use the APIs.
+  * AgoraLib.js
+  * CSInterface.js
+* Do NOT include this file in your extension project. It is already integrated into CEP.
+  * CEPEngine_extensions.js
+* Extension Manifest
+  * ExtensionManifest_v_6_0.xsd
+
+**Samples**
+* [Sample extensions](https://github.com/Adobe-CEP/Samples)
+
+**Packaging and Signing Tool (ZXPSignCMD)**
+* [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 6.x)
+
+**Extension Installation Tools**
+* Extension Manager Command Line Tool
+  * [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
+  * [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+  * [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
+* [A Python script to install & manage extensions](https://github.com/adobe-photoshop/generator-panels/blob/master/installPanels.py) (by John Peterson)
+* Other Tools
+  * http://zxpinstaller.com/
+  * http://install.anastasiy.com/
+
+----
+
+For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 
 **Documentation**
 * [CEP 6 HTML Extension Cookbook for CC 2015](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015)
@@ -107,7 +139,7 @@ For developing CEP 4.x and extensions for CS6/CC host applications
 
 Miscellaneous help
 * [CS SDK Blog](https://blogs.adobe.com/cssdk/)
-* [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P) 
+* [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P)
 * [Davide Barranca’s blog](http://bit.ly/Nk1Mta)
 * [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
 * [Olav Martin Kvern's article on extensibility and InDesign](http://bit.ly/1zEa9Ef)

@@ -11,7 +11,7 @@
 *
 **************************************************************************************************/
 
-/** Vulcan - v6.0.0 */
+/** Vulcan - v6.1.0 */
 
 /**
  * @class Vulcan
@@ -22,7 +22,7 @@
  */
 function Vulcan()
 {
-};
+}
 
 /**
  * Gets all available application specifiers on the local machine.
@@ -61,7 +61,7 @@ Vulcan.prototype.launchApp = function(targetSpecifier, focus, cmdLine)
 	var params = {};
 	params.targetSpecifier = targetSpecifier;
 	params.focus = focus ? "true" : "false";
-	params.cmdLine = (cmdLine == undefined || cmdLine == null) ? "" : cmdLine;
+	params.cmdLine = (cmdLine === undefined || cmdLine === null) ? "" : cmdLine;
 	
 	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanLaunchApp", JSON.stringify(params))).result;
 };
@@ -253,7 +253,7 @@ function VulcanMessage(type)
     this.appId = VulcanMessage.DEFAULT_APP_ID;
 	this.appVersion = VulcanMessage.DEFAULT_APP_VERSION;
     this.data = VulcanMessage.DEFAULT_DATA;
-};
+}
 
 VulcanMessage.TYPE_PREFIX    = "vulcan.SuiteMessage.";
 VulcanMessage.SCOPE_SUITE    = "GLOBAL";
@@ -284,7 +284,7 @@ VulcanMessage.prototype.initialize = function(message)
  */
 VulcanMessage.prototype.xmlData = function ()
 {
-    if(this.data == undefined)
+    if(this.data === undefined)
     {
         var str = "";
 		str = String.format(VulcanMessage.payloadTemplate, str);
@@ -313,7 +313,7 @@ VulcanMessage.prototype.setPayload = function(payload)
 VulcanMessage.prototype.getPayload = function()
 {
     var str = GetValueByKey(this.data, "payload");
-    if(str != null)
+    if(str !== null)
     {
         return cep.encoding.convertion.b64_to_utf8(str);
     }
@@ -347,7 +347,7 @@ VulcanMessage.prototype.toString = function()
  */
 String.format = function(src)
 {
-    if (arguments.length == 0)
+    if (arguments.length === 0)
     {
         return null;
     }
@@ -387,7 +387,7 @@ function GetValueByKey(xmlStr, key)
         }
     }
     return "";
-};
+}
 
 /**
  * Reports whether required parameters are valid.
@@ -400,14 +400,14 @@ function requiredParamsValid()
     for(var i = 0; i< arguments.length; i++)
     {
         var argument = arguments[i];
-        if(argument == undefined || argument == null)
+        if(argument === undefined || argument === null)
         {
             return false;
         }
     }
 
     return true;
-};
+}
 
 /**
  * Reports whether a string has a given prefix.
@@ -424,4 +424,4 @@ function strStartsWith(str, prefix)
         return false;
     }
     return str.indexOf(prefix) === 0;
-};
+}

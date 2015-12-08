@@ -11,7 +11,7 @@
 *
 **************************************************************************************************/
 
-/** AgoraLib - v6.0.0 */
+/** AgoraLib - v6.1.0 */
 
 /**
  * @class AgoraLib
@@ -45,7 +45,7 @@ function AgoraLib() {
                 }
                 console.log("Decoded payload: " + payloadNode);
 
-                var payloadDoc = parser.parseFromString(payloadNode, "text/xml")
+                var payloadDoc = parser.parseFromString(payloadNode, "text/xml");
                 var responses = payloadDoc.getElementsByTagName("Response");
                 
                 for (var i = 0; i < responses.length; i++) {
@@ -71,22 +71,22 @@ function AgoraLib() {
 
                             if (apiName === AgoraLib.IS_ENTITLED) {
                                 console.log("IsEntitled callback");
-                                var response = new AgoraLibResponse(params[AgoraLib.IS_ENTITLED], params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
-                                that.isEntitledCallback(response);
+                                var response1 = new AgoraLibResponse(params[AgoraLib.IS_ENTITLED], params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
+                                that.isEntitledCallback(response1);
                             } else if (apiName === AgoraLib.GET_PURCHASE_URL) {
                                 console.log("GetPurchaseUrl callback");
-                                var url = params["URL"];
-                                var response = new AgoraLibResponse(url, params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
-                                that.getPurchaseUrlCallback(response);
+                                var url = params.URL;
+                                var response2 = new AgoraLibResponse(url, params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
+                                that.getPurchaseUrlCallback(response2);
                             } else if (apiName === AgoraLib.GET_VERSION) {
                                 console.log("GetVersion callback");
-                                var response = new AgoraLibResponse(params["Version"], params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
-                                that.exchangeVersion = params["Version"];
-                                that.getVersionCallback(response);
+                                var response3 = new AgoraLibResponse(params.Version, params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
+                                that.exchangeVersion = params.Version;
+                                that.getVersionCallback(response3);
                             } else if (apiName === AgoraLib.CREATE_ENTITLEMENT) {
                                 console.log("CreateEntitlement callback");
-                                var response = new AgoraLibResponse("", params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
-                                that.createEntitlementCallback(response);
+                                var response4 = new AgoraLibResponse("", params[AgoraLib.STATUS], params[AgoraLib.STATUSCODE]);
+                                that.createEntitlementCallback(response4);
                             }
                         }
                     }
@@ -183,8 +183,8 @@ function AgoraLib() {
             }
         }
         return a.length - b.length;
-    }
-};
+    };
+}
 
 
 //--------------------------------------- Public API ------------------------------
@@ -215,11 +215,11 @@ AgoraLib.prototype = (function(){
             throw 'Vulcan.js is required.';
         }
 
-        if (callback == null || callback == undefined) {
+        if (callback === null || callback === undefined) {
             callback = function(result){};
         }
         
-        if (ignoreACCC == null || ignoreACCC == undefined) {
+        if (ignoreACCC === null || ignoreACCC === undefined) {
             ignoreACCC = false;
         }
         
@@ -275,16 +275,16 @@ AgoraLib.prototype = (function(){
             throw 'Vulcan.js is required.';
         }
 
-        if (callback == null || callback == undefined) {
+        if (callback === null || callback === undefined) {
             callback = function(result){};
         }
         
-        if (ignoreACCC == null || ignoreACCC == undefined) {
+        if (ignoreACCC === null || ignoreACCC === undefined) {
             ignoreACCC = false;
         }
 
         this.getPurchaseUrlCallback = callback;
-        var straightToCheckout = (!requiredParamsValid(straightToCheckout) || straightToCheckout === '') ? false : straightToCheckout;
+        straightToCheckout = (!requiredParamsValid(straightToCheckout) || straightToCheckout === '') ? false : straightToCheckout;
         
         var that = this;
         var success = false;
@@ -343,11 +343,11 @@ AgoraLib.prototype = (function(){
             throw 'CSInterface.js is required.';
         }
 
-        if (callback == null || callback == undefined) {
+        if (callback === null || callback === undefined) {
             callback = function(result){};
         }
         
-        if (ignoreACCC == null || ignoreACCC == undefined) {
+        if (ignoreACCC === null || ignoreACCC === undefined) {
             ignoreACCC = false;
         }
 
@@ -396,12 +396,12 @@ AgoraLib.prototype = (function(){
 
                 if (error)
                 {
-                    var response = new AgoraLibResponse("", AgoraLib.status.internalClientError.status, AgoraLib.status.internalClientError.code);
-                    callback(response);
+                    var response1 = new AgoraLibResponse("", AgoraLib.status.internalClientError.status, AgoraLib.status.internalClientError.code);
+                    callback(response1);
                 }
             } else {
-                var response = new AgoraLibResponse("", responseObj.status, responseObj.statusCode);
-                callback(response);
+                var response2 = new AgoraLibResponse("", responseObj.status, responseObj.statusCode);
+                callback(response2);
             }
         }, ignoreACCC);
         // add a timeout and return error if response is not returned after a minute
