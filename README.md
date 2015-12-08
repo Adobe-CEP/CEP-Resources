@@ -21,7 +21,7 @@ Resources you will need include:
 For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
-* CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
+* [CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x)
 * Include these files in your extension project if you need to use the APIs.
