@@ -140,7 +140,7 @@ For developing CEP 4.x and extensions for CS6/CC host applications
 Miscellaneous help
 * [CS SDK Blog](https://blogs.adobe.com/cssdk/)
 * [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P)
-* [Davide Barranca’s blog](http://bit.ly/Nk1Mta)
+* [Davide Barranca’s blog](http://www.davidebarranca.com/) and [HTML Panels Development Course](http://htmlpanelsbook.com/)
 * [David Deraedt’s plugin for Adobe Brackets](http://bit.ly/QKWWYL)
 * [Olav Martin Kvern's article on extensibility and InDesign](http://bit.ly/1zEa9Ef)
 * [The other API (Article on Medium)](http://bit.ly/1hIFZay)
