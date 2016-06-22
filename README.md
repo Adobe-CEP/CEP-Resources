@@ -3,6 +3,8 @@ Getting Started with the Creative Cloud Extension SDK
 
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in the Creative Cloud release; support has already been removed in Adobe Photoshop CC2014, Adobe Flash CC2015 and Adobe Dreamweaver CC2015.
 
+* In the Creative Cloud 2016 release, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ins must be built on at least CEP 6.1 infrastructure.
+
 * In the Creative Cloud 2015 release extensions and add-ins must be built on the CEP 6 infrastructure.
 
 * In the Creative Cloud 2014 release, extensions and add-ins must be built on the CEP 5 infrastructure and loaded with Extension Manager. The current releases either do not now or soon will not support CEP 4 and Flash/ActionScript extensions.
@@ -12,11 +14,44 @@ This page provides resources you need to get started creating extensions for Ado
 This SDK provides the low-level tools that you need to build extensions. Extensions that you build using these tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file.
 
 Resources you will need include:
-* CEP JavaScript libraries for communicating  with the operating system and Extension Manager and for communicating wtih the host application and other extensions.
+* CEP JavaScript libraries for communicating with the operating system and Extension Manager and for communicating with the host application and other extensions.
 * Sample code for how to use these libraries
 * The ZXP packager, a command-line utility
 
 ---
+
+For developing CEP 7.0 HTML/JavaScript extensions for CC2016 host applications
+
+**Documentation**
+* [CEP 7.0 HTML Extension Cookbook for CC 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
+
+**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x)
+* Include these files in your extension project if you need to use the APIs.
+  * AgoraLib.js
+  * CSInterface.js
+  * Vulcan.js
+* Do NOT include this file in your extension project. It is already integrated into CEP.
+  * CEPEngine_extensions.js
+* Extension Manifest
+  * ExtensionManifest_v_7_0.xsd
+
+**Samples**
+* [Sample extensions](https://github.com/Adobe-CEP/Samples)
+
+**Packaging and Signing Tool (ZXPSignCMD)**
+* [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 7.x)
+
+**Extension Installation Tools**
+* Extension Manager Command Line Tool
+  * [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
+  * [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+  * [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
+* [A Python script to install & manage extensions](https://github.com/adobe-photoshop/generator-panels/blob/master/installPanels.py) (by John Peterson)
+* Other Tools
+  * http://zxpinstaller.com/
+  * http://install.anastasiy.com/
+
+----
 
 For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
@@ -27,6 +62,7 @@ For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 * Include these files in your extension project if you need to use the APIs.
   * AgoraLib.js
   * CSInterface.js
+  * Vulcan.js
 * Do NOT include this file in your extension project. It is already integrated into CEP.
   * CEPEngine_extensions.js
 * Extension Manifest
@@ -59,6 +95,7 @@ For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 * Include these files in your extension project if you need to use the APIs.
   * AgoraLib.js
   * CSInterface.js
+  * Vulcan.js
 * Do NOT include this file in your extension project. It is already integrated into CEP.
   * CEPEngine_extensions.js
 * Extension Manifest (unchanged in CEP 6.0)
