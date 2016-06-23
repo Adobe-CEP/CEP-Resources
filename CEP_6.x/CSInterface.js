@@ -762,7 +762,7 @@ CSInterface.prototype.getOSInformation = function()
                 winVersion = "Windows 10";
             }
 
-            if (userAgent.indexOf("WOW64") > -1)
+            if (userAgent.indexOf("WOW64") > -1 || userAgent.indexOf("Win64") > -1)
             {
                 winBit = " 64-bit";
             }
