@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2013, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>TEST WEB PAGE for media plugin</title>
+    <style type="text/css">
+        div#plugins {
+            width: 800px;
+            height: 430px;
+            border: 1px #CCCCCC solid;
+            font-family: Calibri;
+            color:#DADADA;
+            font-size:18px;
+            overflow:auto;
+        }
+        
+        .desc {
+            width:100px;
+            margin-right:10px;
+            text-align:right;
+            display:inline-block;
+            font-weight:800;
+            color:#FFEFB7;
+            font-size:22px;
+        }
+        
+        .summary {
+            font-weight:800;
+            color:#FFEFB7;
+            font-size:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+    var msgThere = "There";
+    var msgPlugin = " Plugin";
+    
+    if (0 === navigator.plugins.length || 1 === navigator.plugins.length)
+    {
+        msgThere += " is ";
+    }
+    else
+    {
+        msgThere += " are ";
+        msgPlugin += "s";
+    }
+	
+    document.writeln("<b class='summary'>" + msgThere + navigator.plugins.length + msgPlugin + "</b><br/>");
+    document.writeln("<div id='plugins'>");
+    for (var i = 0; i < navigator.plugins.length; i++)
+    {
+        var plugin = navigator.plugins[i];
+        document.writeln("<b class='desc'>Name: </b><b>" + plugin["name"] + "</b><br/>");
+        document.writeln("<b class='desc'>MIMEType: </b>");
+        document.writeln("{");
+        for (tItem in plugin[0]) 
+        {
+            var itemValue;
+            if (!plugin[0][tItem])
+            {
+                itemValue = "null";    
+            }
+            else
+            {
+                itemValue = plugin[0][tItem];
+            }
+            document.writeln("<i>" + tItem + ":" + itemValue + ";  </i>");
+        }
+        document.writeln("}<br/>");
+        document.writeln("<b class='desc'>FileName: </b>" + plugin["filename"] + "<br/>");
+        document.writeln("<b class='desc'>Description: </b>" + plugin["description"] + "<br/>");
+        document.writeln("<hr/>");
+    }
+    document.writeln("</div>");
+    </script>
+</body>  
+</html>  

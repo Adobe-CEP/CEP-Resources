@@ -1,0 +1,1244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="../js/SpryAssets/SpryTabbedPanels.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<link href="../css/main_tylesheet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#EnvHostEnvironmentDiv").show();
+        $("#EnvHostCapabilitiesDiv").hide();
+        $("#EnvCurrentStateInfoDiv").hide();
+        $("#EnvOthersDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+        initExtensionSizeAndConstraints();
+        parent.window.addEventListener('resize', browserResized);
+    });
+
+    <!---------------------------------->
+    <!-- Get System Path script begin -->
+    <!---------------------------------->
+    var CSLibrary = new CSInterface();
+    var PlugPlugExtensionPath;
+    var PlugPlugUserDataPath;
+    var PlugPlugCommonFilesPath;
+    var PlugPlugMyDocumentsPath;
+    var PlugPlugHostApplicationPath;
+    function OnclickGSPExtension() {
+        PlugPlugExtensionPath = CSLibrary.getSystemPath(SystemPath.EXTENSION);
+        $("#GSPExtensionResult").val(PlugPlugExtensionPath);
+    }
+
+    function OnclickGSPUserData() {
+        PlugPlugUserDataPath = CSLibrary.getSystemPath(SystemPath.USER_DATA);
+        $("#GSPUserDataResult").val(PlugPlugUserDataPath);
+    }
+
+    function OnclickGSPCommonFiles() {
+        PlugPlugCommonFilesPath = CSLibrary.getSystemPath(SystemPath.COMMON_FILES);
+        $("#GSPCommonFilesResult").val(PlugPlugCommonFilesPath);
+    }
+
+    function OnclickGSPMyDocuments() {
+        PlugPlugMyDocumentsPath = CSLibrary.getSystemPath(SystemPath.MY_DOCUMENTS);
+        $("#GSPMyDocumentsResult").val(PlugPlugMyDocumentsPath);
+    }
+
+    function OnclickGSPHostApplication() {
+        PlugPlugHostApplicationPath = CSLibrary.getSystemPath(SystemPath.HOST_APPLICATION);
+        $("#GSPHostApplicationResult").val(PlugPlugHostApplicationPath);
+    }
+
+    function onclickGSPGetAllSytemPaths() {
+        PlugPlugExtensionPath = CSLibrary.getSystemPath(SystemPath.EXTENSION);
+        PlugPlugUserDataPath = CSLibrary.getSystemPath(SystemPath.USER_DATA);
+        PlugPlugCommonFilesPath = CSLibrary.getSystemPath(SystemPath.COMMON_FILES);
+        PlugPlugMyDocumentsPath = CSLibrary.getSystemPath(SystemPath.MY_DOCUMENTS);
+        PlugPlugHostApplicationPath = CSLibrary.getSystemPath(SystemPath.HOST_APPLICATION);
+
+        $("#GSPExtensionResult").val(PlugPlugExtensionPath);
+        $("#GSPUserDataResult").val(PlugPlugUserDataPath);
+        $("#GSPCommonFilesResult").val(PlugPlugCommonFilesPath);
+        $("#GSPMyDocumentsResult").val(PlugPlugMyDocumentsPath);
+        $("#GSPHostApplicationResult").val(PlugPlugHostApplicationPath);
+    }
+
+    function onclickGSPClearOutput() {
+        $("#GSPExtensionResult").val("");
+        $("#GSPUserDataResult").val("");
+        $("#GSPCommonFilesResult").val("");
+        $("#GSPMyDocumentsResult").val("");
+        $("#GSPHostApplicationResult").val("");
+    }
+    <!-------------------------------->
+    <!-- Get System Path script end -->
+    <!-------------------------------->
+
+    <!------------------------------>
+    <!-- Environment script begin -->
+    <!------------------------------>
+    function onclickEnvHostEnvironmentBtn() {
+        $("#EnvHostEnvironmentDiv").show();
+        $("#EnvHostCapabilitiesDiv").hide();
+        $("#EnvCurrentStateInfoDiv").hide();
+        $("#EnvOthersDiv").hide();
+    }
+
+    function onclickEnvHostCapabilitiesBtn() {
+        $("#EnvHostEnvironmentDiv").hide();
+        $("#EnvHostCapabilitiesDiv").show();
+        $("#EnvCurrentStateInfoDiv").hide();
+        $("#EnvOthersDiv").hide();
+    }
+
+    function onclickEnvCurrentStateInfoBtn() {
+        $("#EnvHostEnvironmentDiv").hide();
+        $("#EnvHostCapabilitiesDiv").hide();
+        $("#EnvCurrentStateInfoDiv").show();
+        $("#EnvOthersDiv").hide();
+    }
+
+    function onclickEnvOthersBtn() {
+        $("#EnvHostEnvironmentDiv").hide();
+        $("#EnvHostCapabilitiesDiv").hide();
+        $("#EnvCurrentStateInfoDiv").hide();
+        $("#EnvOthersDiv").show();
+    }
+
+    function parseAppSkinInfoClor(skinInfoClor) {
+    var hostEnv = CSLibrary.hostEnvironment;
+    var skinInfoClorDes;
+    var skinInfoClorType;
+    if (1 == skinInfoClor.type) {
+        skinInfoClorType = ColorType.RGB;
+        skinInfoClorDes = ("      alpha = " + skinInfoClor.color.alpha + "\n") +
+                  ("      red = " + skinInfoClor.color.red + "\n") +
+                  ("      green = " + skinInfoClor.color.green + "\n") +
+                  ("      blue = " + skinInfoClor.color.blue + "\n");
+    } else if (2 == skinInfoClor.type) {
+        skinInfoClorType = ColorType.GRADIENT;
+        var arrGradientStop = skinInfoClor.color.arrGradientStop;
+        var arrGradientStopDes;
+        for (var i in arrGradientStop) {
+            var aGradientStop = arrGradientStop[i];
+            arrGradientStopDes += ("        aGradientStop.offset = " + aGradientStop.offset + "\n") +
+                ("        aGradientStop.alpha = " + aGradientStop.color.alpha + "\n") +
+                ("        aGradientStop.red = " + aGradientStop.color.red + "\n") +
+                    ("        aGradientStop.green = " + aGradientStop.color.green + "\n") +
+                ("        aGradientStop.blue = " + aGradientStop.color.blue + "\n");
+        }
+        skinInfoClorDes = ("      type = " + skinInfoClor.color.type + "\n") +
+                  ("      direction = " + skinInfoClor.color.direction + "\n") +
+                  ("      numStops = " + skinInfoClor.color.numStops + "\n") +
+                  arrGradientStopDes;
+    } else {
+        skinInfoClorType = ColorType.NONE;
+        skinInfoClorDes = "";
+    }
+    var fullSkinInfoClorDes = ("    antialiasLevel = " + skinInfoClor.antialiasLevel + "\n") +
+                    ("    type = " + skinInfoClorType + "\n" ) +
+                    skinInfoClorDes;
+
+    return fullSkinInfoClorDes;
+    }
+
+    function onclickEnvGetHostEnvironmentInfo() {
+        // there are color maps in hostEnv, need parse it later
+    var hostEnv = CSLibrary.getHostEnvironment();
+    var UIColorObj = new UIColor();
+    UIColorObj = hostEnv.appSkinInfo.appBarBackgroundColor;
+    var appBarBackgroundColorDes = parseAppSkinInfoClor(UIColorObj);
+    UIColorObj = hostEnv.appSkinInfo.panelBackgroundColor;
+    var panelBackgroundColorDes = parseAppSkinInfoClor(UIColorObj);
+    UIColorObj = hostEnv.appSkinInfo.appBarBackgroundColorSRGB;
+    var appBarBackgroundColorSRGBDes = parseAppSkinInfoClor(UIColorObj);
+    UIColorObj = hostEnv.appSkinInfo.panelBackgroundColorSRGB;
+    var panelBackgroundColorSRGBDes = parseAppSkinInfoClor(UIColorObj);
+    var RGBColorObj = hostEnv.appSkinInfo.systemHighlightColor;
+    var systemHighlightColorDes  = ("      alpha = " + RGBColorObj.alpha + "\n") +
+                                   ("      red = " + RGBColorObj.red + "\n") +
+                                   ("      green = " + RGBColorObj.green + "\n") +
+                                   ("      blue = " + RGBColorObj.blue + "\n");
+    var appSkinInfoDes = "appSkinInfo = (com.adobe.csxs.types::AppSkinInfo)\n";
+    appSkinInfoDes += ("  baseFontFamily: " + hostEnv.appSkinInfo.baseFontFamily + "\n") +
+              ("  baseFontSize: " + hostEnv.appSkinInfo.baseFontSize + "\n") +
+              ("  appBarBackgroundColor = UIColor:\n" + appBarBackgroundColorDes + "\n") +
+              ("  panelBackgroundColor = UIColor:\n" + panelBackgroundColorDes + "\n") +
+              ("  appBarBackgroundColorSRGB = UIColor:\n" + appBarBackgroundColorSRGBDes + "\n") +
+              ("  panelBackgroundColorSRGB = UIColor:\n" + panelBackgroundColorSRGBDes + "\n") +
+              ("  systemHighlightColor = RGBColor:\n" + systemHighlightColorDes + "\n");
+
+        var hostEnvDes = "appId = " + hostEnv.appId +"\n" + "appLocale = " + hostEnv.appLocale +"\n" +
+            "appName = " + hostEnv.appName + "\n" + "appUILocale = " + hostEnv.appUILocale + "\n" +
+            "isAppOnline = " + hostEnv.isAppOnline + "\n" +
+            "appVersion = " + hostEnv.appVersion + "\n" + appSkinInfoDes;
+        document.getElementById("EnvHostEnvironmentInfo").value = hostEnvDes;
+    }
+
+    function onclickEnvClearTextArea() {
+        document.getElementById("EnvHostEnvironmentInfo").value = "";
+    }
+
+    function onclickEnvGetHostCapabilities() {
+        var hostCap = CSLibrary.getHostCapabilities();
+        var result = "";
+        if (hostCap.EXTENDED_PANEL_MENU) {
+             result += "[HostCapabilities: EXTENDED_PANEL_MENU]\n";
+        }
+        if (hostCap.EXTENDED_PANEL_ICONS) {
+            result += "[HostCapabilities: EXTENDED_PANEL_ICONS]\n";
+        }
+        if (hostCap.DELEGATE_APE_ENGINE) {
+             result += "[HostCapabilities: DELEGATE_APE_ENGINE]\n";
+        }
+        if (hostCap.SUPPORT_HTML_EXTENSIONS) {
+             result += "[HostCapabilities: SUPPORT_HTML_EXTENSIONS]\n";
+        }
+        if (hostCap.DISABLE_FLASH_EXTENSIONS) {
+             result += "[HostCapabilities: DISABLE_FLASH_EXTENSIONS]\n";
+        }
+        document.getElementById("EnvHostCapabilitiesInfo").value = result;
+    }
+
+    function onclickEnvHCClearTextArea() {
+        document.getElementById("EnvHostCapabilitiesInfo").value = "";
+    }
+
+    function onclickEnvGCIGetCurrentStateInfo() {
+        var hostEnv = CSLibrary.hostEnvironment;
+        var curStateInfo = "isAppOnline = " + hostEnv.isAppOnline + "\n" +
+            "baseFontFamily = " + hostEnv.appSkinInfo.baseFontFamily + "\n" +
+            "baseFontSize = " + hostEnv.appSkinInfo.baseFontSize + "\n";
+        document.getElementById("EnvGCICurrentStateInfo").value = curStateInfo;
+    }
+
+    function onclickEnvGCIClearTextArea() {
+        document.getElementById("EnvGCICurrentStateInfo").value = "";
+    }
+
+    function onclickEnvOthersClearTextArea() {
+        document.getElementById('EnvApplicationID').value = "";
+        document.getElementById('EnvOSInfo').value = "";
+        document.getElementById('EnvDumpInstallationInfo').value = "";
+    }
+
+    <!---------------------------->
+    <!-- Environment script end -->
+    <!---------------------------->
+
+    <!------------------------------------->
+    <!-- Online Preferences script begin -->
+    <!------------------------------------->
+    function onclickOPGetNetworkPreferences() {
+        var networkPre = CSLibrary.getNetworkPreferences();
+        if(networkPre.isAdminOnline) {
+            document.getElementById("OPAdminallowsonlineaccess").setAttribute("checked", true);
+        } else {
+            document.getElementById("OPAdminallowsonlineaccess").removeAttribute("checked");
+        }
+
+        if(networkPre.isUserOnline) {
+            document.getElementById("OPUserallowsonlineaccess").setAttribute("checked", true);
+        } else {
+            document.getElementById("OPUserallowsonlineaccess").removeAttribute("checked");
+        }
+
+        if(networkPre.isAppOnline) {
+            document.getElementById("OPApplicationallowsonlineaccess").setAttribute("checked", true);
+        } else {
+            document.getElementById("OPApplicationallowsonlineaccess").removeAttribute("checked");
+        }
+
+        if(networkPre.isAdminOnline && networkPre.isUserOnline && networkPre.isAppOnline) {
+            document.getElementById("OPOverallonlineaccessallowed").setAttribute("checked", true);
+        } else {
+            document.getElementById("OPOverallonlineaccessallowed").removeAttribute("checked");
+        }
+    }
+
+    function checkLineStatus() {
+        // navigator.onLine standardized in HTML5
+        var netStatus = navigator.onLine;
+        var imgSrc = "../img/";
+
+        if (true === netStatus) {
+            imgSrc += "greenLED.png";
+        } else {
+            imgSrc += "redLED.png";
+        }
+
+        document.getElementById("imgStatus").src = imgSrc;
+    }
+    <!----------------------------------->
+    <!-- Online Preferences script end -->
+    <!----------------------------------->
+
+    <!--------------------------->
+    <!-- Open Extensions begin -->
+    <!--------------------------->
+    var extensions;
+    function onclickOpenSelectedExtension()
+    {
+        var list = document.getElementById("ExtensionList");
+        CSLibrary.requestOpenExtension(extensions[list.selectedIndex].id);
+    }
+
+    function onclickGetAllExtensions()
+    {
+        extensions = CSLibrary.getExtensions();
+        var list = document.getElementById("ExtensionList");
+        // clean listbox
+        while (list.firstChild)
+        {
+            list.removeChild(list.firstChild);
+        }
+        // insert all extensions' name to listbox
+        for (i = 0; i < extensions.length; i++)
+        {
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(document.createTextNode(extensions[i].name));
+            list.appendChild(option);
+        }
+    }
+
+    function onclickOpenAllExtensions()
+    {
+        for (i = 0; i < extensions.length; i++)
+        {
+            CSLibrary.requestOpenExtension(extensions[i].id);
+        }
+    }
+
+    function onclickCloseMe()
+    {
+        CSLibrary.closeExtension();
+    }
+
+    <!------------------------->
+    <!-- Open Extensions end -->
+    <!------------------------->
+
+    <!----------------------->
+    <!-- Eval Script begin -->
+    <!----------------------->
+    function onclickInvokeEvalScript() {
+        var exeTimes = parseInt(document.getElementById("ExecutionTimes").value);
+        for (i = 0; i < exeTimes; i++)
+        {
+            CSLibrary.evalScript(document.getElementById("EvalScriptPara").value, function(result) {
+            $("#EvalScriptResult").val(result);
+            });
+        }
+    }
+	
+	function onclickLoadMainJSX() {
+		var mainJSX =  CSLibrary.getSystemPath(SystemPath.EXTENSION) + '/jsx/main.jsx';
+		var script = '$.evalFile("' + mainJSX + '");';
+		CSLibrary.evalScript(script, function(result) {
+				// If CEP failed to load other jsx files, the return result will be "EvalScript error."
+				if ('EvalScript error.' !== result) {
+					document.getElementById("TestMainFunction").disabled = false;
+					document.getElementById("TestMainObj").disabled = false;
+					document.getElementById("TestUtilFunction").disabled = false;
+					document.getElementById("TestUtilObj").disabled = false;
+					document.getElementById("TestMultiJSXScriptResult").value = "Load main.jsx successfully!";	
+				} else {
+					document.getElementById("TestMultiJSXScriptResult").value = result;	
+				}
+            });
+	}
+	
+	function onclickTestMultiJSX(script) {
+		CSLibrary.evalScript(script, function(result) {
+				document.getElementById("TestMultiJSXScriptResult").value = result;	
+            });
+	}
+    <!--------------------->
+    <!-- Eval Script end -->
+    <!--------------------->
+
+    <!--------------------->
+    <!-- Open Url begin --->
+    <!--------------------->
+    function onClickOpenUrlInDefaultBrowser() {
+        CSLibrary.openURLInDefaultBrowser(document.getElementById("OpenUrlInDefaultBrowser").value);
+    }
+    function onclickOpenUrlBtn() {
+        $("#OpenUrlDiv").show();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+    <!--------------------->
+    <!--- Open Url end ---->
+    <!--------------------->
+
+    <!--------------------------->
+    <!--- GetExtensionID begin -->
+    <!--------------------------->
+    function onclickGetExtensionIDBtn(){
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").show();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+
+    function onclickGetExtensionID(){
+        document.getElementById("ExtensionIdText").value = CSLibrary.getExtensionID();
+    }
+    <!--------------------------->
+    <!--- GetExtensionID end ---->
+    <!--------------------------->
+
+    <!--------------------------->
+    <!--- GetScaleFactor begin -->
+    <!--------------------------->
+    function onclickGetScaleFactorBtn(){
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#GetScaleFactorDiv").show();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+
+    function onclickGetScaleFactor(){
+        document.getElementById("ScaleFactorText").value = CSLibrary.getScaleFactor();
+    }
+
+    var scaleFactorHandlerTimes = 0;
+    var scaleFactor;
+    var imgSrc;
+    window.scaleFactorHandler = function(){
+        scaleFactorHandlerTimes += 1;
+        document.getElementById("SFCH").value = scaleFactorHandlerTimes;
+        scaleFactor = CSLibrary.getScaleFactor();
+        if (2 == scaleFactor)
+        {
+            imgSrc = "../img/PS_AppIcon_r.png"
+        }
+        else
+        {
+            imgSrc = "../img/PS_AppIcon.png"
+        }
+        document.getElementById("SFCHimg").src = imgSrc;
+    }
+
+    CSLibrary.setScaleFactorChangedHandler(window.scaleFactorHandler);
+    <!--------------------------->
+    <!--- GetScaleFactor end ---->
+    <!--------------------------->
+
+    <!--------------------------------->
+    <!--- GetCurrentApiVersion begin -->
+    <!--------------------------------->
+    function onclickGetCurrentApiVersionBtn(){
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#GetCurrentApiVersionDiv").show();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+
+    function onclickGetCurrentApiVersion(){
+        var versionText = document.getElementById("CurrentApiVersionText");
+        versionText.value = "";
+        var apiVersion = CSLibrary.getCurrentApiVersion();
+        var apiVersionInfo = ("  major: " + apiVersion.major + "\n") +
+                                ("  minor: " + apiVersion.minor + "\n") +
+                                ("  micro: " + apiVersion.micro);
+
+        versionText.value = apiVersionInfo;
+    }
+    <!--------------------------------->
+    <!--- GetCurrentApiVersion end----->
+    <!--------------------------------->
+
+    <!---------------------------->
+    <!--- IsWindowVisible begin -->
+    <!---------------------------->
+    function onclickIsWindowVisibleBtn() {
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").show();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+
+    function onclickIsWindowVisible() {
+        var versionText = document.getElementById("IsWindowVisibleText");
+        versionText.value = CSLibrary.isWindowVisible();
+    }
+    <!---------------------------->
+    <!--- IsWindowVisible end----->
+    <!---------------------------->
+
+    <!---------------------------------------------->
+    <!--- LoadWebSiteWithInvalidCertificate begin -->
+    <!---------------------------------------------->
+
+    function onLoadWebSiteWithInvalidCertificateBtn() {
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#LoadWebSiteWithInvalidCertificateDiv").show();
+		$("#SetAndGetWindowTitleDiv").hide();
+    }
+
+    function onclickLoadWebSite() {
+        var isRegisterCallback = document.getElementById("IsRegisterCallback").checked;
+        if (isRegisterCallback) {
+            CSLibrary.registerInvalidCertificateCallback(function() {
+                alert('registered callback is called!');
+            });
+        }
+
+        parent.window.location = "https://tv.eurosport.com/";
+    }
+
+    <!---------------------------------------------->
+    <!--- LoadWebSiteWithInvalidCertificate end -->
+    <!---------------------------------------------->
+
+	<!--------------------------------->
+    <!--- SetAndGetWindowTitle begin -->
+    <!--------------------------------->
+
+    function onclickSetWindowTitle() {
+        $("#OpenUrlDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+        $("#IsWindowVisibleDiv").hide();
+        $("#LoadWebSiteWithInvalidCertificateDiv").hide();
+		$("#SetAndGetWindowTitleDiv").show();
+    }
+
+    function onclickSetWindowTitleBtn() {
+		CSLibrary.setWindowTitle(document.getElementById("SetWindowTitle").value);
+	}
+	
+	function onclickGetWindowTitleBtn() {
+		document.getElementById("GetWindowTitle").value = CSLibrary.getWindowTitle();
+	}
+	
+	function onClickRestoreDefaultWindowTitle() {
+		CSLibrary.setWindowTitle(CSLibrary.getExtensionID());
+	}
+	
+    <!------------------------------->
+    <!--- SetAndGetWindowTitle end -->
+    <!------------------------------->
+	
+    function browserResized() {
+        $('#currentContentSize').text('(' + parent.window.innerWidth + ', ' +
+                                      parent.window.innerHeight + ')');
+    }
+
+    function initExtensionSizeAndConstraints() {
+        var extensionId = CSLibrary.getExtensionID();
+        var arr = [extensionId];
+        var thisExtension = CSLibrary.getExtensions(arr)[0];
+        var width = thisExtension.minWidth;
+        var height = thisExtension.minHeight;
+        $('#extensionMinSize').text('(' + width + ', ' + height + ')');
+        width = thisExtension.maxWidth;
+        height = thisExtension.maxHeight;
+        $('#extensionMaxSize').text('(' + width + ', ' + height + ')');
+
+        $('#currentContentSize').text('(' + parent.window.innerWidth + ', ' +
+                                      parent.window.innerHeight + ')');
+
+    }
+
+    function onclickResizeExtension() {
+        var width = parseInt($('#extensionNewWidth').val());
+        var height = parseInt($('#extensionNewHeight').val());
+        CSLibrary.resizeContent(width, height);
+    }
+</script>
+</head>
+
+<body>
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">System Path</li>
+    <li class="TabbedPanelsTab" tabindex="0">Environment</li>
+    <li class="TabbedPanelsTab" tabindex="0">Online Preferences</li>
+    <li class="TabbedPanelsTab" tabindex="0">EvalScript</li>
+    <li class="TabbedPanelsTab" tabindex="0">Open/Close Extension</li>
+    <li class="TabbedPanelsTab" tabindex="0">Resize Extension</li>
+    <li class="TabbedPanelsTab" tabindex="0">Others</li>
+  </ul>
+
+  <div class="TabbedPanelsContentGroup">
+    <!--------------------------->
+    <!-- System path tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <table width="656" height="112" border="2">
+        <tr>
+          <td width="131"><form id="formGSPExtension" name="formGSPExtension" method="post" action="">
+            <input type="button" name="GSPExtension" id="GSPExtension" value="Extension" onclick="OnclickGSPExtension()" />
+          </form></td>
+          <td width="507"><input name="GSPExtensionResult" type="text" id="GSPExtensionResult" readonly="readonly" size="90"/></td>
+        </tr>
+
+        <tr>
+          <td><form id="formGSPUserData" name="formGSPUserData" method="post" action="">
+            <input type="button" name="GSPUserData" id="GSPUserData" value="User Data" onclick="OnclickGSPUserData()" />
+          </form></td>
+          <td><input name="GSPUserDataResult" type="text" id="GSPUserDataResult" readonly="readonly" size="90"/></td>
+        </tr>
+
+        <tr>
+          <td><form id="formGSPCF" name="formGSPCF" method="post" action="">
+            <input type="button" name="GSPCommonFiles" id="GSPCommonFiles" value="Common Files" onclick="OnclickGSPCommonFiles()" />
+          </form></td>
+          <td><input name="GSPCommonFilesResult" type="text" id="GSPCommonFilesResult" readonly="readonly" size="90"/></td>
+        </tr>
+
+        <tr>
+          <td><form id="formGSPMD" name="formGSPMD" method="post" action="">
+            <input type="button" name="GSPMyDocuments" id="GSPMyDocuments" value="My Documents" onclick="OnclickGSPMyDocuments()"/>
+          </form></td>
+          <td><input name="GSPMyDocumentsResult" type="text" id="GSPMyDocumentsResult" readonly="readonly" size="90"/></td>
+        </tr>
+
+        <tr>
+          <td><form id="formGSPHA" name="formGSPHA" method="post" action="">
+            <input type="button" name="GSPHostApplication" id="GSPHostApplication" value="Host Application" onclick="OnclickGSPHostApplication()"/>
+          </form></td>
+          <td><input name="GSPHostApplicationResult" type="text" id="GSPHostApplicationResult" readonly="readonly" size="90"/></td>
+        </tr>
+      </table>
+
+      <table width="200">
+        <tr>
+          <td><form id="formGSPGASP" name="formGSPGASP" method="post" action="">
+            <input type="button" name="GSPGetAllSytemPaths" id="GSPGetAllSytemPaths" value="Get All System Paths" onclick="onclickGSPGetAllSytemPaths()"/>
+          </form></td>
+
+          <td><form id="formGSPO" name="formGSPO" method="post" action="">
+            <input type="button" name="GSPClearOutput" id="GSPClearOutput" value="Clear Output" onclick="onclickGSPClearOutput()"/>
+          </form></td>
+        </tr>
+      </table>
+
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    </div>
+    <!------------------------->
+    <!-- System path tab end -->
+    <!------------------------->
+
+    <!--------------------------->
+    <!-- Environment tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <!-- Environment tab div EnvnavigationDiv begin -->
+      <div id="EnvnavigationDiv">
+        <ul id="ul1">
+          <li><button id="EnvHostEnvironmentBtn" onclick="onclickEnvHostEnvironmentBtn()" style="background-color:#333; border:none; color:#FFF;">Host Environment</button></li>
+          <li><button id="EnvHostCapabilitiesBtn" onclick="onclickEnvHostCapabilitiesBtn()" style="background-color:#333; border:none; color:#FFF;">Host Capabilities</button></li>
+          <li><button id="EnvCurrentStateInfoBtn" onclick="onclickEnvCurrentStateInfoBtn()" style="background-color:#333; border:none; color:#FFF;" >Current State Info</button></li>
+          <li><button id="EnvOthersBtn" onclick="onclickEnvOthersBtn()" style="background-color:#333; border:none; color:#FFF;" >Others</button></li>
+      </ul>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      </div>
+      <!-- Environment tab div EnvnavigationDiv end -->
+
+      <!-- Environment tab div EnvHostEnvironmentDiv begin -->
+      <div id="EnvHostEnvironmentDiv">
+        <form id="formEvnInfo" name="formEvnInfo" method="post" action="">
+          <label for="EnvHostEnvironmentInfo">Host Environment Info</label>
+          <br/>
+          <textarea name="EnvHostEnvironmentInfo" id="EnvHostEnvironmentInfo" cols="65" rows="10"></textarea>
+          <table width="423" border="0" align="left">
+            <tr>
+              <td width="146"><input type="button" name="EnvGetHostEnvironmentInfo" id="EnvGetHostEnvironmentInfo" value="Get Host Environment" onclick="onclickEnvGetHostEnvironmentInfo()"/></td>
+              <td width="32">&nbsp;</td>
+              <td width="231"><input type="button" name="EnvClearTextArea" id="EnvClearTextArea" value="Clear Text Area" onclick="onclickEnvClearTextArea()"/></td>
+            </tr>
+          </table>
+
+          <p>&nbsp;</p>
+        </form>
+      </div>
+      <!-- Environment tab div EnvHostEnvironmentDiv end -->
+
+      <!-- Environment tab div EnvHostCapabilitiesDiv begin -->
+      <div id="EnvHostCapabilitiesDiv">
+        <form id="form2" name="form2" method="post" action="">
+          <label for="EnvHostCapabilitiesInfo">Host Capabilities Info</label>
+          <br/>
+          <textarea name="EnvHostCapabilitiesInfo" id="EnvHostCapabilitiesInfo" cols="65" rows="10"></textarea>
+          <table width="200" border="0">
+            <tr>
+              <td><input type="button" name="EnvGetHostCapabilities" id="EnvGetHostCapabilities" value="Get Host Capabilities" onclick="onclickEnvGetHostCapabilities()"/></td>
+              <td>&nbsp;</td>
+              <td><input type="button" name="EnvHCClearTextArea" id="EnvHCClearTextArea" value="Clear Text Area" onclick="onclickEnvHCClearTextArea()"/></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <!-- Environment tab div EnvHostCapabilitiesDiv end -->
+
+      <!-- Environment tab div EnvCurrentStateInfoDiv begin -->
+      <div id="EnvCurrentStateInfoDiv">
+        <form id="form3" name="form3" method="post" action="">
+          <label for="EnvGCICurrentStateInfo">Current State Info</label>
+          <br/>
+          <textarea name="EnvGCICurrentStateInfo" id="EnvGCICurrentStateInfo" cols="65" rows="10"></textarea>
+        </form>
+
+        <table width="200" border="0">
+          <tr>
+            <td><form id="form4" name="form4" method="post" action="">
+              <input type="button" name="EnvGCIGetCurrentStateInfo" id="EnvGCIGetCurrentStateInfo" value="Get Current State Info" onclick="onclickEnvGCIGetCurrentStateInfo()"/>
+            </form></td>
+            <td>&nbsp;</td>
+            <td><form id="form5" name="form5" method="post" action="">
+              <input type="button" name="EnvGCIClearTextArea" id="EnvGCIClearTextArea" value="Clear Text Area" onclick="onclickEnvGCIClearTextArea()"/>
+            </form></td>
+          </tr>
+        </table>
+      </div>
+      <!-- Environment tab div EnvCurrentStateInfoDiv end -->
+
+      <!-- Environment tab div Others begin -->
+      <div id="EnvOthersDiv">
+        <form method="post" action="">
+          <label>Others</label>
+          <br/>
+          <table width="300" border="0" align="left">
+            <tr>
+              <td width="100"><input type="button" value="Get Application ID" onclick="document.getElementById('EnvApplicationID').value = CSLibrary.getApplicationID()  "/></td>
+              <td width="200"><textarea id="EnvApplicationID" cols="40" rows="1"></textarea></td>
+            </tr>
+            <tr>
+              <td width="100"><input type="button" value="Get OS Info" onclick="document.getElementById('EnvOSInfo').value = CSLibrary.getOSInformation()  "/></td>
+              <td width="200"><textarea id="EnvOSInfo" cols="40" rows="1"></textarea></td>
+            </tr>
+            <tr>
+              <td width="100"><input type="button" value="Dump Installation Info" onclick="document.getElementById('EnvDumpInstallationInfo').value = CSLibrary.dumpInstallationInfo()"/></td>
+              <td width="200"><textarea id="EnvDumpInstallationInfo" cols="40" rows="3"/></textarea></td>
+            </tr>
+            <tr>
+              <td width="100"></td>
+              <td width="200"><input type="button" value="Clear Text Area" onclick="onclickEnvOthersClearTextArea()"/></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <!-- Environment tab div Others end -->
+    </div>
+    <!------------------------->
+    <!-- Environment tab end -->
+    <!------------------------->
+
+    <!----------------------------------->
+    <!-- Network Preferences tab begin -->
+    <!----------------------------------->
+    <div class="TabbedPanelsContent">
+      <table width="558">
+        <tr>
+          <td>&nbsp;</td>
+          <td width="356">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><label style="color: #FFF"><strong>Network Preferences</strong></label>
+          <strong>&nbsp;</strong></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><form id="formOPGNP" name="formOPGNP" method="post" action="">
+            <input type="button" name="OPGetNetworkPreferences" id="OPGetNetworkPreferences" value="Get Network Preferences" onclick="onclickOPGetNetworkPreferences()"/>
+          </form></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Current Online Preferences:</label>&nbsp;</td>
+          <td><form id="formOPA" name="formOPA" method="post" action="">
+            <input type="checkbox" name="OPAdminallowsonlineaccess" id="OPAdminallowsonlineaccess" disabled="disabled"/>
+            <label for="OPAdminallowsonlineaccess" style="color: #FFF">Admin allows online access</label>
+          </form></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><form id="formOPU" name="formOPU" method="post" action="">
+            <input type="checkbox" name="OPUserallowsonlineaccess" id="OPUserallowsonlineaccess" disabled="disabled" />
+            <label for="OPUserallowsonlineaccess" style="color: #FFF">User allows online access</label>
+          </form></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><form id="formOPApp" name="formOPApp" method="post" action="">
+            <input type="checkbox" name="OPApplicationallowsonlineaccess" id="OPApplicationallowsonlineaccess" disabled="disabled"/>
+            <label for="OPApplicationallowsonlineaccess" style="color: #FFF">Application allows online access</label>
+          </form></td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><form id="formOPO" name="formOPO" method="post" action="">
+            <input type="checkbox" name="OPOverallonlineaccessallowed" id="OPOverallonlineaccessallowed" disabled="disabled"/>
+            <label for="OPOverallonlineaccessallowed" style="color: #FFF">Overall online access allowed</label>
+          </form></td>
+        </tr>
+
+        <tr>
+            <td><label style="color: #FFF">Current Internet Status:</label>&nbsp;</td>
+            <td>
+                <img id="imgStatus" src="" width="10" height="10" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button name="checkInternetStatus" id="checkInternetStatus" onclick="checkLineStatus()">check</button>
+            </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <!----------------------------------->
+    <!-- Network Preferences tab end -->
+    <!----------------------------------->
+
+    <!--------------------------->
+    <!-- EvalScript tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <table width="535" border="0">
+         <tr>
+          <td width="184">&nbsp;</td>
+          <td width="356">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="72">&nbsp;</td>
+          <td width="325"><label style="color: #FFF"><strong>Invoke evalScript() with script</strong></label></td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Script:</label></td>
+          <td>
+            <label for="EvalScriptPara"></label>
+            <textarea name="EvalScriptPara" id="EvalScriptPara" cols="48" rows="3">app.documents.add();</textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Execution times:</label></td>
+          <td>
+            <label for="ExecutionTimes"></label>
+            <textarea name="ExecutionTimes" id="ExecutionTimes" cols="48" rows="1">1</textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Result:</label></td>
+          <td>
+            <label for="EvalScriptResult"></label>
+            <textarea name="EvalScriptResult" id="EvalScriptResult" cols="48" rows="3" readonly="readonly"></textarea>
+		  </td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <input type="button" name="InvokeEvalScript" id="InvokeEvalScript" value="Invoke evalScript()" onclick="onclickInvokeEvalScript()" />
+          </td>
+        </tr>
+      </table>
+	  
+	  <!--Multiple JSX Testing-->
+	  <table width="552" border="0">
+         <tr>
+          <td width="220"></td>
+          <td width="456"></td>
+        </tr>
+        <tr>
+          <td width="72"></td>
+          <td width="325"><label style="color: #FFF"><strong>Multiple JSX Test</strong></label></td>
+        </tr>
+
+		<tr>
+          <td width="72"></td>
+          <td width="400"><label style="color: #FFF"><strong>core.jsx has already been loaded as this extension is loaded.</strong></label></td>
+        </tr>
+		
+        <tr>
+          <td><label style="color: #FFF">Test core.jsx:</label></td>
+          <td>
+			<input type="button" name="TestCoreFunction" id="TestCoreFunction" value="TestCoreFunction" onclick="onclickTestMultiJSX('getMessageFromCore()');" />
+			<input type="button" name="TestCoreObj" id="TestCoreObj" value="TestCoreObj" onclick="onclickTestMultiJSX('objCore.getMessage();');" />
+          </td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Test main.jsx:</label></td>
+          <td>
+			<input type="button" name="LoadMainJSX" id="LoadMainJSX" value="LoadMainJSX" onclick="onclickLoadMainJSX();" />
+			<input type="button" name="TestMainFunction" id="TestMainFunction" value="TestMainFunction" onclick="onclickTestMultiJSX('getMessageFromMain()');" disabled="disabled" />
+			<input type="button" name="TestMainObj" id="TestMainObj" value="TestMainObj" onclick="onclickTestMultiJSX('objMain.getMessage();');" disabled="disabled" />
+          </td>
+        </tr>
+		
+		<tr>
+          <td width="72"></td>
+          <td width="325"><label style="color: #FFF"><strong>util.jsx will be loaded by main.jsx</strong></label></td>
+        </tr>
+		
+        <tr>
+          <td><label style="color: #FFF">Test util.jsx:</label></td>
+          <td>
+			<input type="button" name="TestUtilFunction" id="TestUtilFunction" value="TestUtilFunction" onclick="onclickTestMultiJSX('getMessageFromUtil()');" disabled="disabled" />
+			<input type="button" name="TestUtilObj" id="TestUtilObj" value="TestUtilObj" onclick="onclickTestMultiJSX('objUtil.getMessage();');" disabled="disabled" />
+          </td>
+        </tr>
+		
+		<tr>
+          <td><label style="color: #FFF">Result:</label></td>
+          <td>
+            <label for="TestMultiJSXScriptResult"></label>
+            <textarea name="TestMultiJSXScriptResult" id="TestMultiJSXScriptResult" cols="48" rows="3" readonly="readonly"></textarea>
+          </td>
+        </tr>
+		
+      </table>
+    </div>
+    <!--------------------------->
+    <!-- EvalScript tab end -->
+    <!--------------------------->
+	
+    <!------------------------------>
+    <!-- Open extension tab begin -->
+    <!------------------------------>
+    <div class="TabbedPanelsContent">
+      <table width="557" border="0">
+         <tr>
+          <td width="184">&nbsp;</td>
+          <td width="356">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Get All Extensions:</label>&nbsp;</td>
+          <td><form id="formIEO" name="formIEO" method="post" action="">
+            <input type="button" name="GetAllExtensions" id="GetAllExtensions" value="Get All Extensions" onclick="onclickGetAllExtensions()" />
+          </form></td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Extension List:</label>&nbsp;</td>
+          <td><form id="formIEP" name="formIEP" method="post" action="">
+            <label for="IEParameters"></label>
+            <select name="ExtensionList" id="ExtensionList" style="width:300px"/>
+          </form></td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Open Selected Extension:</label>&nbsp;</td>
+          <td><form id="formIEO" name="formIEO" method="post" action="">
+            <input type="button" name="OpenSelectedExtension" id="OpenSelectedExtension" value="Open Selected Extension" onclick="onclickOpenSelectedExtension()" />
+          </form></td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Open All Extensions:</label>&nbsp;</td>
+          <td><form id="formIEO" name="formIEO" method="post" action="">
+            <input type="button" name="OpenAllExtensions" id="OpenAllExtensions" value="Open All Extensions" onclick="onclickOpenAllExtensions()" />
+          </form></td>
+        </tr>
+
+        <tr>
+          <td><label style="color: #FFF">Close this extension:</label>&nbsp;</td>
+          <td><form id="formIEO" name="formIEO" method="post" action="">
+            <input type="button" name="Close this extension" id="CloseMe" value="Close this extension" onclick="onclickCloseMe()" />
+          </form></td>
+        </tr>
+      </table>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <!------------------------------>
+    <!-- Open extension tab End ---->
+    <!------------------------------>
+
+    <!------------------------------>
+    <!-- Resize Extension Tab     -->
+    <!------------------------------>
+    <div class="TabbedPanelsContent">
+      <table width="557" border="0" class="resizeExtension">
+         <tr>
+          <td width="184">&nbsp;</td>
+          <td width="356">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td><label>Current Extension Size:</label>&nbsp;</td>
+          <td><label id="currentContentSize"></td>
+        </tr>
+
+        <tr>
+          <td><label>Min Size:</label>&nbsp;</td>
+          <td><label id="extensionMinSize"></td>
+        </tr>
+
+        <tr>
+          <td><label>Max Size:</label>&nbsp;</td>
+          <td><label id="extensionMaxSize"></td>
+        </tr>
+
+        <tr>
+          <td><label>New Width:</label>&nbsp;</td>
+          <td><input type="text" id="extensionNewWidth"></td>
+        </tr>
+
+        <tr>
+          <td><label>New Height:</label>&nbsp;</td>
+          <td><input type="text" id="extensionNewHeight"></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <input type="button" id="btnResizeExtension" value="Resize Extension" onclick="onclickResizeExtension()" />
+          </td>
+        </tr>
+
+      </table>
+    </div>
+    <!------------------------------>
+    <!-- Resize Extension Tab end -->
+    <!------------------------------>
+
+    <!------------------------------>
+    <!----- Others tab begin ------->
+    <!------------------------------>
+    <div class="TabbedPanelsContent">
+        <div id="EnvnavigationDiv">
+            <ul id="ul2">
+                <li><button id="OpenUrlBtn" onclick="onclickOpenUrlBtn()">OpenUrl</button></li>
+                <li><button id="GetExtensionIDBtn" onclick="onclickGetExtensionIDBtn()">GetExtensionID</button></li>
+                <li><button id="GetScaleFactorBtn" onclick="onclickGetScaleFactorBtn()">GetScaleFactor</button></li>
+                <li><button id="GetCurrentApiVersionBtn" onclick="onclickGetCurrentApiVersionBtn()">GetApiVersion</button></li>
+                <li><button id="IsWindowVisible" onclick="onclickIsWindowVisibleBtn()">IsWindowVisible</button></li>
+                <li><button id="LoadWebSiteWithInvalidCertificate" onclick="onLoadWebSiteWithInvalidCertificateBtn()">InvalidCertificate</button></li>
+				<li><button id="SetAndGetWindowTitle" onclick="onclickSetWindowTitle()">WindowTitle</button></li>
+            </ul>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </div>
+
+      <div id="OpenUrlDiv" class="CEPAPIOthersDiv">
+        <form id="formEvnInfo" name="formEvnInfo" method="post" action="">
+          <p>&nbsp;</p>
+          <p><label><strong>DefaultBrowser</strong></label></p>
+          <label for="EnvHostEnvironmentInfo"></label>
+          <table width="300" border="0" align="left">
+            <tr>
+              <td><textarea name="OpenUrlInDefaultBrowser" id="OpenUrlInDefaultBrowser" cols="40" rows="1">http://www.adobe.com</textarea></td>
+              <td><input type="button" value="OpenUrl" onclick="onClickOpenUrlInDefaultBrowser();"></td>
+            </tr>
+          </table>
+          <p>&nbsp;</p>
+        </form>
+      </div>
+
+       <div id="GetExtensionIdDiv" class="CEPAPIOthersDiv">
+        <form id="formExtensionID" name="formExtensionID" method="post" action="">
+          <p>&nbsp;</p>
+          <p><label><strong>GetExtensionID</strong></label></p>
+          <label for="ExtensionID"></label>
+          <table width="300" border="0" align="left">
+            <tr>
+              <td><textarea name="ExtensionIdText" id="ExtensionIdText" cols="40" rows="1"></textarea></td>
+              <td><input type="button" value="GetExtensionID" onclick="onclickGetExtensionID();"></td>
+            </tr>
+          </table>
+          <p>&nbsp;</p>
+        </form>
+      </div>
+
+        <div id="GetScaleFactorDiv" class="CEPAPIOthersDiv">
+            <form id="formScaleFactor" name="formScaleFactor" method="post" action="">
+                <p>&nbsp;</p>
+                <p><label><strong>GetExtensionID</strong></label></p>
+                <label for="ScaleFactor"></label>
+                <table width="350" border="0" align="left">
+                    <tr>
+                      <td><textarea name="ScaleFactorText" id="ScaleFactorText" cols="40" rows="1"></textarea></td>
+                      <td><input type="button" value="GetScaleFactor" onclick="onclickGetScaleFactor();"></td>
+                  </tr>
+                  <tr>
+                      <td><label>ScaleFactorChangedHandler is called</label></td>
+                      <td><textarea name="SFCH" id="SFCH" cols="1" rows="1"></textarea></td>
+                      <td><label>times!</label></td>
+                  </tr>
+                  <tr>
+                      <td>
+                        <textarea style="font-size:18px" rows="9" cols="26" >The chess-board is the world: the pieces are the phenomena of the universe; the rules of the game are what we call the laws of nature. The player on the other side is hidden from us. We know that his play is always fair, just and patient. But also we know, to our cost, that he never overlooks a mistake, or makes the smallest allowance for ignorance.
+                        </textarea>
+                    </td>
+                    <td colspan="2">
+                        <img id="SFCHimg" src="../img/PS_AppIcon_r.png" width="192" height="192" />
+                    </td>
+                  </tr>
+                </table>
+                <p>&nbsp;</p>
+            </form>
+        </div>
+
+        <div id="GetCurrentApiVersionDiv" class="CEPAPIOthersDiv">
+            <form id="formCurrentApiVersion" name="formCurrentApiVersion" method="post" action="">
+              <p>&nbsp;</p>
+              <p><label><strong>GetCurrentApiVersion</strong></label></p>
+              <label for="CurrentApiVersion"></label>
+              <table width="300" border="0" align="left">
+                <tr>
+                  <td><textarea name="CurrentApiVersionText" id="CurrentApiVersionText" cols="40" rows="3"></textarea></td>
+                  <td><input type="button" value="GetCurrentApiVersion" onclick="onclickGetCurrentApiVersion();"></td>
+                </tr>
+              </table>
+              <p>&nbsp;</p>
+            </form>
+          </div>
+
+          <div id="IsWindowVisibleDiv" class="CEPAPIOthersDiv">
+             <p>&nbsp;</p>
+             <p><label><strong>IsWindowVisible</strong></label></p>
+             <label for="IsWindowVisible"></label>
+             <table width="300" border="0" align="left">
+               <tr>
+                 <td><textarea name="IsWindowVisibleText" id="IsWindowVisibleText" cols="40" rows="1"></textarea></td>
+                 <td><input type="button" value="IsWindowVisible" onclick="onclickIsWindowVisible();"></td>
+               </tr>
+             </table>
+             <p>&nbsp;</p>
+          </div>
+
+          <div id="LoadWebSiteWithInvalidCertificateDiv" class="CEPAPIOthersDiv">
+             <p>&nbsp;</p>
+             <p><label><strong>LoadWebSiteWithInvalidCertificate</strong></label></p>
+             <p><label><strong>Callback cannot be removed once registered.</strong></label></p>
+             <label for="LoadWebSiteWithInvalidCertificate"></label>
+             <table width="500" border="0">
+               <tr>
+                 <td><input type="checkbox" name="IsRegisterCallback" id="IsRegisterCallback" value="IsRegisterCallback">IsRegisterCallback</input></td>
+                 <td><input type="button" value="LoadWebSite" onclick="onclickLoadWebSite();"></td>
+               </tr>
+             </table>
+             <p>&nbsp;</p>
+          </div>
+		  
+		  <div id="SetAndGetWindowTitleDiv" class="CEPAPIOthersDiv">
+             <p>&nbsp;</p>
+             <p><label><strong>Set and Get the title of the extension window.</strong></label></p>
+			 <p><label><strong>These functions work with modal and modeless extensions in all Adobe products, and panel extensions in Photoshop, InDesign, InCopy, Illustrator, Flash Pro and Dreamweaver. If user uses this function under other point products, the title can be get and set but it may not be changed on the screen.</strong></label></p>
+             <label for="SetAndGetWindowTitleDiv"></label>
+             <table width="500" border="0">
+               <tr>
+                 <td><input type="button" name="SetWindowTitleBtn" id="SetWindowTitleBtn" value="SetWindowTitle" onclick="onclickSetWindowTitleBtn();"></input></td>
+				 <td><textarea name="SetWindowTitle" id="SetWindowTitle" cols="40" rows="1"></textarea></td>
+               </tr>
+			   <tr>
+                 <td><input type="button" name="GetWindowTitleBtn" id="GetWindowTitleBtn" value="GetWindowTitle" onclick="onclickGetWindowTitleBtn();"></input></td>
+				 <td><textarea name="GetWindowTitle" id="GetWindowTitle" cols="40" rows="1"></textarea></td>
+               </tr>
+			   <tr>
+				 <td><input type="button" name="RestoreDefaultWindowTitle" id="RestoreDefaultWindowTitle" value="RestoreDefaultWindowTitle" onclick="onClickRestoreDefaultWindowTitle();"></input></td>
+			   </tr>
+             </table>
+             <p>&nbsp;</p>
+          </div>
+		  
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+        </div>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <!------------------------------>
+    <!------ Others tab end -------->
+    <!------------------------------>
+
+    <!--------------------------->
+    <!-- All extensions tab end-->
+    <!--------------------------->
+  </div>
+</div>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
+</body>
+</html>
