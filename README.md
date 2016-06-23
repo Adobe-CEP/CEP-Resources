@@ -24,7 +24,7 @@ For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host application
 
 **Documentation**
 * [CEP 7.0 HTML Extension Cookbook for 2015.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
-* [CEP 7.0 Feature List](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7_Feature_List.pdf)
+* [CEP 7 Feature List](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7_Feature_List.pdf)
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x)
 * Include these files in your extension project if you need to use the APIs.
@@ -58,6 +58,7 @@ For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
 * [CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
+* [CEP 6 Feature List](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6_Feature_List.pdf)
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x)
 * Include these files in your extension project if you need to use the APIs.
