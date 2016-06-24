@@ -40,7 +40,8 @@ For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host application
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
 
 **Packaging and Signing Tool (ZXPSignCMD)**
-* [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 7.x)
+* Tool: [ZXPSignCMD](https://github.com/Adobe-CEP/CEP-Resources/tree/master/ZXPSignCMD)
+* Document: [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) (NOTE:  For CEP 4.0 but valid for CEP 7.x)
 
 **Extension Installation Tools**
 * Extension Manager Command Line Tool
