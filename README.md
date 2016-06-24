@@ -3,7 +3,7 @@ Getting Started with the Creative Cloud Extension SDK
 
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in the Creative Cloud release; support has already been removed in Adobe Photoshop CC2014, Adobe Flash CC2015 and Adobe Dreamweaver CC2015.
 
-* In the Creative Cloud 2016 release, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ins must be built on at least CEP 6 infrastructure.
+* In the Creative Cloud 2015.x release in June 2016, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ins must be built on at least CEP 6 infrastructure.
 
 * In the Creative Cloud 2015 release extensions and add-ins must be built on the CEP 6 infrastructure.
 
@@ -20,10 +20,11 @@ Resources you will need include:
 
 ---
 
-For developing CEP 7.0 HTML/JavaScript extensions for CC2016 host applications
+For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
 
 **Documentation**
-* [CEP 7.0 HTML Extension Cookbook for CC 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
+* [CEP 7.0 HTML Extension Cookbook for 2015.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
+* [CEP 7 Feature List](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7_Feature_List.pdf)
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_7.x)
 * Include these files in your extension project if you need to use the APIs.
@@ -57,6 +58,7 @@ For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
 * [CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
+* [CEP 6 Feature List](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6_Feature_List.pdf)
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_6.x)
 * Include these files in your extension project if you need to use the APIs.
