@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.adobe.CEPHTMLTEST.invisible">
+        <HostList>
+            <Host Name="DRWV" Port="8001"/>
+            <Host Name="FLPR" Port="8002"/>
+            <Host Name="IDSN" Port="8003"/>
+            <Host Name="AICY" Port="8004"/>
+            <Host Name="ILST" Port="8006"/>
+            <Host Name="PHXS" Port="8007"/>
+            <Host Name="PPRO" Port="8008"/>
+            <Host Name="PRLD" Port="8009"/>
+            <Host Name="AEFT" Port="8010"/>
+            <Host Name="DEMO" Port="8011"/>
+            <Host Name="AUDT" Port="8012"/>
+            <Host Name="LTRM" Port="8013"/>
+            <Host Name="MUSE" Port="8014"/>
+        </HostList>
+        </Extension>
+</ExtensionList>
