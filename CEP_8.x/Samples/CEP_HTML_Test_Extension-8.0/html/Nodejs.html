@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2013, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Test Nodejs</title>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+
+<script>
+    var mongodb = null;
+    var mysql = null;
+    var mysqlConn = null;
+    var dbType = 'mongodb';
+    var mongodbCollection = "";
+    
+	function isNodeJSEnabled() {		
+		if (typeof(cep_node) ​!== 'undefined') {
+            //if require and process is available, it should be mixed context
+            if ((typeof(require) ​!== 'undefined') && (typeof(process) ​!== 'undefined')) {
+                $('#result').val("Node.js is enabled with mixed-context mode");
+            }
+            else
+            {
+			 $('#result').val("Node.js is enabled");
+		    } 
+        else {
+			$('#result').val("Node.js is disabled");
+		}
+	}
+	
+    function connectToDB() {
+        dbtype = $('#db').val();
+        if ('mongodb' == dbtype) {
+            initMongoDB();
+        } else if ('mysql' == dbtype) {
+            initMysqlDB();
+        }
+    }
+    
+    function updateUI() {
+        dbtype = $('#db').val();
+        if (dbtype == 'mongodb') {
+            $('#collections').show();
+            $('#collectionsLabel').show();
+            $('#selectMongoAPI').show();
+            $('#sql').hide();
+            $('#userInputLabel').html('MongoAPI:');
+        } else {
+            $('#collections').hide();
+            $('#collectionsLabel').hide();
+            $('#selectMongoAPI').hide();
+            $('#sql').show();
+            $('#userInputLabel').html('SQL:');
+        }
+        
+        $('#sql').val('');
+        $('#result').val('');
+    }
+    
+    $(function() {
+		$('#btnCheckEnabled').click(isNodeJSEnabled);
+        $('#btnConnect').click(connectToDB);
+        $('#db').change(updateUI);
+        
+        $('#selectMongoAPI').change(function() {
+            var api = $('#selectMongoAPI').val();
+        });
+        
+        $('#btnExecute').click(function() {
+            $('#result').val('');
+            if ('mongodb' == $('#db').val()) {
+                executeMongoAPI();
+            } else if ('mysql' == $('#db').val()) {
+                executeMysql();
+            }
+        });
+        
+        updateUI();
+    });
+    
+    function insertValueToMongo() {
+        mongodb.collection(mongodbCollection, function(err, collection) {
+            var value = {'title':'hello world', 'class':'test'};
+            collection.insert(value, {safe:true},function(err, result) {
+                if (!err) {
+                    $('#result').val('Insert value success');
+                } else {
+                    $('#result').val('Failed to insert value');
+                }
+            }); 
+        }); 
+    }
+    
+    function findValueFromMongo() {
+        mongodb.collection(mongodbCollection, function(err, collection) {
+            collection.findOne({'class':'test'}, function(err, item) {
+                var result;
+                if (err) {
+                    result += err.toString();
+                } else {
+                    if (item && item.title) 
+                        result = 'Find the item, the value is: ' + item.title;
+                    else
+                        result = 'Cannot find the item';
+                }
+                $('#result').val(result);
+            });
+        });
+    }
+    
+    function updateValueToMongo() {
+        mongodb.collection(mongodbCollection, {safe:true}, function(err, collection) {
+            collection.update({'title':'hello world'}, {'title':'hello world new', 'class':'test'}, {safe:true}, function(err, item) {
+                var result;
+                if (err) {
+                    result += err.toString();
+                } else {
+                    mongodb.collection(mongodbCollection, function(err, collection) {
+                            collection.findOne({'class':'test'}, function(err, item) {
+                                    var result;
+                                    if (err) {
+                                        result += err.toString();
+                                    } else {
+                                        if (item && item.title) 
+                                            result = 'Update value successfully, the new value of the item is: ' + item.title;
+                                        else
+                                            result = 'Cannot find the item';
+                                    }
+                                    $('#result').val(result);
+                                });
+                            });
+                }
+                $('#result').val(result);
+            });
+        });
+    }
+    
+    function removeValueFromMongo() {
+        mongodb.collection(mongodbCollection, function(err, collection) {
+            collection.remove({'class': 'test'}, {safe:true}, function(err, item) {
+                var result;
+                if (err) {
+                    result += err.toString();
+                } else {
+                    mongodb.collection(mongodbCollection, function(err, collection) {
+                        collection.findOne({'class':'test'}, function(err, item) {
+                                var result;
+                                if (err) {
+                                    result += err.toString();
+                                } else {
+                                    if (!item) 
+                                        result = 'Delete the value successfully.';
+                                    else
+                                        result = 'Falied to remove this item.';
+                                }
+                                $('#result').val(result);
+                            });
+                    });
+                }
+                $('#result').val(result);
+            });
+        });
+    }
+    
+    function initMongoDB() {
+        $('#result').val('Connecting Mongo DB...');
+        var mongodbModule;
+        try {
+            mongodbModule = cep_node.require('mongodb');
+        } catch(err) {
+            $('#result').val(err);
+            return;
+        }
+        
+        var server = new mongodbModule.Server($('#servAddr').val(), mongodbModule.Connection.DEFAULT_PORT, {auto_reconnect:true});
+        var db = new mongodbModule.Db($('#database').val(), server, {safe:true});
+        db.open(function(err,db) {
+            if (!err) {   
+                // save mongodb instance.
+                mongodb = db;
+                $('#result').val('Create MongoDB instance success.');
+            } else {
+                $('#result').val(err);
+            }   
+        });
+        mongodbCollection = $('#collections').val();
+    }
+    
+    function initMysqlDB() {
+        $('#result').val('Connecting MySQL server...');
+        
+        try {
+            mysql = cep_node.require('mysql');
+        } catch(err) {
+            $('#result').val(err);
+            return;
+        }
+        
+        mysqlConn = mysql.createConnection({
+            host     : $('#servAddr').val(),
+            user     : $('#username').val(),
+            password : $('password').val(),
+        });
+        
+        mysqlConn.connect(function(err) {
+            if (err) {
+                $('#result').val('Failed to connect MySQL.');
+                return;
+            }
+        });
+        
+        var useQuery = 'USE ' + $('#database').val();
+        mysqlConn.query(useQuery, function(err, result) {
+            if (err) {
+                result += err.toString();
+                $('#result').val(result);
+            } else {
+                $('#result').val('MySQL create connection success.');
+            }
+        });
+    }
+    
+    function executeMongoAPI() {
+        if (!mongodb)
+            $('#result').val('No database connection');
+            
+        var api = $('#selectMongoAPI').val();
+        if (api == 'insert') {
+            insertValueToMongo();
+        } else if (api == 'find') {
+            findValueFromMongo();
+        } else if (api == 'remove') {
+            removeValueFromMongo();
+        } else if (api == 'update') {
+            updateValueToMongo();
+        }
+    }
+    
+    function executeMysql() {
+        if (!mysqlConn)
+            $('#result').val('No database connection');
+            
+        mysqlConn.query($('#sql').val(), function(err, result) {
+            if (err) {
+                result += err.toString();
+                $('#result').val(result);
+            } else {
+                var retString = 'Execute SQL successfully\n{';
+                var tagi = 0;
+                for (var itm in result) {
+                    if (typeof result[itm] == 'object') {
+                        retString += '[';
+                        var tagj = 0;
+                        for (itmj in result[itm]) {
+                            if (typeof (result[itm])[itmj] != 'function') {
+                                if (tagj != 0) {
+                                    retString += ' : ';
+                                } else {
+                                    tagj = 1;
+                                }
+                                retString = retString + itmj + ',' + (result[itm])[itmj];
+                            }
+                        }
+                        retString += ']';
+                    } else if (typeof result[itm] != 'function') {
+                        if (tagi != 0) {
+                            retString += ' : ';
+                        } else {
+                            tagi = 1;
+                        }
+                        retString = retString + itm + ',' + result[itm];
+                    }
+                }
+                retString += '}';
+                $('#result').val(retString);
+            }
+        });
+    }
+</script>
+<style type="text/css">
+
+#dbs {
+    width: 760px;
+    height: 280px;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    color: #E3E3E3;
+}
+
+.serverInfo {
+    width: 67px;
+    margin-right: 3px;
+}
+
+.sql {
+    width: 625px;
+    margin-top: 40px;
+}
+
+.selectMongoAPI {
+    width: 500px;
+    margin-top: 40px;
+}
+
+.serverInfoDiv {
+    margin-top: 25px;
+}
+
+.resultTable {
+    margin-top: 55px;
+}
+
+.result {
+    width: 680px;
+    height: 47px;
+    resize: none;
+}
+
+</style>
+</head>
+ 
+<body>
+  <div id="dbs">
+    <div>
+		<table>
+			<tr>
+				<label>Check if Node.js is enabled: </label>
+				<button name="btnCheckEnabled" id="btnCheckEnabled"> IsNodeJSEnabled </button>
+			</tr>
+		</table>
+        <label for="db">DB:</label>
+        <select name="db" id="db">
+            <option value="mongodb">MongoDB</option>
+            <option value="mysql">MySQL</option>
+        </select>
+        <button name="btnConnect" id="btnConnect"> Connect to DB </button>
+        <div class='serverInfoDiv'>
+            <table>
+                <tr>
+                    <td><label for="servAddr">ServerAddress:</label></td> 
+                    <td><input type="text" name="servAddr" id="servAddr" class="serverInfo" value="localhost"/></td>
+                    <td><label for="database">DataBase:</label></td> 
+                    <td><input type="text" name="batabase" id="database" class="serverInfo" value="test"/></td>
+                    <td><label for="username">username:</label></td> 
+                    <td><input type="text" name="username" id="username" class="serverInfo" value="root"/></td>
+                </tr>
+                <tr>
+                    <td><label for="password">password:</label></td> 
+                    <td><input type="text" name="password" id="password" class="serverInfo" value="admin"/></td>
+                    <td><label for="collections" id="collectionsLabel">collections:</label></td>
+                    <td><input type="text" name="collections" id="collections" class="serverInfo" value="test"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <label id="userInputLabel"></label> 
+        <select name="selectMongoAPI" id="selectMongoAPI" class='selectMongoAPI'>
+            <option value="insert">Insert an item:{"title" : "hello world"}</option>
+            <option value="find">Find an item whose value is {"title" : "hello world"} or {"title" : "hello world new"}</option>
+            <option value="update">Update value of item to {"title" : "hello world new"}</option>
+            <option value="remove">Remove all items whose "title" is "hello world" or "hello world new"</option>
+        </select>
+        
+        <input type="text" name="sql" id="sql" class="sql" />
+        <button name="btnExecute" id="btnExecute"> Execute </button>
+    </div>
+    <div>
+        <table class="resultTable">
+            <tr>
+                <td><label for="result">Result:</label></td>
+                <td><textarea id="result" name="result" class="result" readonly="readonly" ></textarea></td>
+            </tr>
+        </table>
+    </div>
+  </div>
+</body>
+</html>
