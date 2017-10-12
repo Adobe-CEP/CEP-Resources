@@ -1086,7 +1086,7 @@ Following table lists the standard events supported by point products.
 
 (![Yes][correct] = supported, ![No][cross]  = not supported)
 
-[cross]: https://github.com/Adobe-CEP/CEP-Resources/raw/master/CEP_8.x/Documentation/images/Issue.png "No"
+[cross]: https://github.com/Adobe-CEP/CEP-Resources/raw/master/CEP_8.x/Documentation/images/cross.png "No"
 [correct]: https://github.com/Adobe-CEP/CEP-Resources/raw/master/CEP_8.x/Documentation/images/correct.png "Yes"
 [issue]: https://github.com/Adobe-CEP/CEP-Resources/raw/master/CEP_8.x/Documentation/images/Issue.png "Issue"
 
