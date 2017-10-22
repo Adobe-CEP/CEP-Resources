@@ -5,6 +5,8 @@ This page provides resources you need to get started creating extensions for Ado
 
 * In the Creative Cloud 2015.x release in June 2016, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ins must be built on at least CEP 6 infrastructure.
 
+* Creative Cloud 2017 products include CEP 8 for developing extensions and add-ons. 
+
 * In the Creative Cloud 2015 release extensions and add-ins must be built on the CEP 6 infrastructure.
 
 * In the Creative Cloud 2014 release, extensions and add-ins must be built on the CEP 5 infrastructure and loaded with Extension Manager. The current releases either do not now or soon will not support CEP 4 and Flash/ActionScript extensions.
@@ -17,6 +19,41 @@ Resources you will need include:
 * CEP JavaScript libraries for communicating with the operating system and Extension Manager and for communicating with the host application and other extensions.
 * Sample code for how to use these libraries
 * The ZXP packager, a command-line utility
+
+---
+
+For developing CEP 8.0 HTML/JavaScript extensions for CC 2017.x host applications
+
+**Documentation**
+* [CEP 8.0 HTML Extension Cookbook for 2017.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
+* CEP 8 provides the runtime as mentioned at https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef 
+
+**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x)
+* Include these files in your extension project if you need to use the APIs.
+  * AgoraLib.js
+  * CSInterface.js
+  * Vulcan.js
+* Do NOT include this file in your extension project. It is already integrated into CEP.
+  * CEPEngine_extensions.js
+* Extension Manifest
+  * ExtensionManifest_v_7_0.xsd (Please note that, there is no change in xsd file for CEP 8).
+
+**Samples**
+* [Sample extensions](https://github.com/Adobe-CEP/Samples)
+
+**Packaging and Signing Tool (ZXPSignCMD)**
+* Tool: [ZXPSignCMD](https://github.com/Adobe-CEP/CEP-Resources/tree/master/ZXPSignCMD)
+* Document: [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) 
+
+**Extension Installation Tools**
+* Extension Manager Command Line Tool
+  * [Announcement: Extension Manager End of Life](https://www.adobeexchange.com/resources/27)
+  * [ExMan Command Line Tool](https://www.adobeexchange.com/resources/28)
+  * [ExMan Command Line Tool's Error Codes](http://www.adobeexchange.com/resources/19#errors)
+* [A Python script to install & manage extensions](https://github.com/adobe-photoshop/generator-panels/blob/master/installPanels.py) (by John Peterson)
+* Other Tools
+  * http://zxpinstaller.com/
+  * http://install.anastasiy.com/
 
 ---
 
