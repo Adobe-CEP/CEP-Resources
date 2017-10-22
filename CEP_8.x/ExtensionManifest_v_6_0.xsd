@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="ExtensionManifest">
+        <xs:annotation>
+            <xs:documentation>ExtensionManifest for CEP extensions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Author" type="OptionalString" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>An optional author of this ExtensionBundle.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Contact" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>An optional contact for this ExtensionBundle.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="OptionalString">
+                                <xs:attribute name="mailto" type="RequiredString" use="optional">
+                                    <xs:annotation>
+                                        <xs:documentation>An optional contact mail.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Legal" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>An optional legal notice for this ExtensionBundle.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="OptionalString">
+                                <xs:attribute name="href" type="xs:anyURI" use="optional">
+                                    <xs:annotation>
+                                        <xs:documentation>A link to a legal site.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Abstract" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>An optional abstract for this ExtensionBundle.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="OptionalString">
+                                <xs:attribute name="href" type="xs:anyURI" use="optional">
+                                    <xs:annotation>
+                                        <xs:documentation>A link to an abstract site.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ExtensionList">
+                    <xs:annotation>
+                        <xs:documentation>Contains a list of extensions defined in this ExtensionManifest.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Extension" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Declaration of an extension specified in this ExtensionManifest. There can be an arbitrary number of extension specified. </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Id" type="ID" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The id of the specific extension. This id has to be unique within the whole CEP system. Recommendation is to use reverse domain names. This id is used within the ExtensionManifest as reference in other tags.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="Version" type="Version" use="optional">
+                                        <xs:annotation>
+                                            <xs:documentation>The version of the specific extension.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ExecutionEnvironment">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="HostList" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Contains a list of all supported hosts.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Host" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>The host defines a supported product.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="Name" type="RequiredString" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>The name must be the enigma code of the supported point product.</xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="Version" type="RangedVersion" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>A version range for this host. See the RangedVersion type for information. </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="LocaleList" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Contains a list for all supported locales.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Locale" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>Contains an entry for a supported code. The code must be given in the form xx_XX or as All to specify that all locales are supported.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="Code" type="RequiredString" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>The language code in the form xx_XX or All.</xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="RequiredRuntimeList" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Contains a list for all required runtimes. The absence for any runtime implies no requirement.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="RequiredRuntime" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>Specifies runtimes which must be available in order for the extension to run. For CS5 and CS5.5, the CEP runtime version is 2.0; for CS6, it is 3.0; for CC 2013, it is 4.0; for CC 2014, it is 5.0. Specifying an accurate CEP runtime requirement is recommended, since this value enables (though does not guarantee) compatibility with future versions of CEP. If no CEP runtime requirement is specified, the target CEP runtime is assumed to be 2.0 and above. This is significant, because extensions which target older CEP runtime versions may not be loaded by future versions of CEP.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="Name" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Name of the runtime.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:pattern value="CSXS"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="Version" type="RangedVersion" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>A version range for this runtime. See the RangedVersion type for information.</xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DispatchInfoList">
+                    <xs:annotation>
+                        <xs:documentation>Contains a list for every extension's attributes.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Extension" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Declaration of the extension for which the following list of DispatchInfos is declared.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="DispatchInfo" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>A DispatchInfo contains all parameter which are needed to run an extension. A DispatchInfo can have an optional attribute "Host" to define specific attributes per "Host". If an DispatchInfo has no "Host" it will act as a default for all values which are not set in a specific Host-DispatchInfo.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Resources" minOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation>The Resources tag contains all resources (source files) to run the extension.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="MainPath" type="RelativePathLoc" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>The MainPath contains the path to the extension's main content file (e.g. main.swf / index.html). The path has to be relative to the extensions root directory and start with a "./". Use "/" as path delimiter. This value is localizable.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element name="ScriptPath" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>The ScriptPath contains the path to the extension's script file. The path has to be relative to the extensions root directory and start with a "./". Use "/" as path delimiter. This value is localizable.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                            <xs:extension base="RelativePathLoc">
+                                                                                <xs:attribute name="Engine" type="RequiredStringLoc" use="optional">
+                                                                                    <xs:annotation>
+                                                                                        <xs:documentation>This defines an optional ID for the ExtendsScript engine. This can be used to run different scripts in the same engine. This value is localizable.</xs:documentation>
+                                                                                    </xs:annotation>
+                                                                                </xs:attribute>
+                                                                            </xs:extension>
+                                                                        </xs:simpleContent>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="CEFCommandLine" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>Contains a list of CEF command line parameters.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                      <xs:sequence>
+                                                                        <xs:element name="Parameter" maxOccurs="unbounded">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>One CEF command line parameter</xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                      </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Lifecycle" minOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation>In the Lifecycle the extension can specify its desired behavior regarding startup and shutdown.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="AutoVisible" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>This flag controls whether the extension's UI should be made visible automatically when started or if the extension wants to control this itself. Panel type extensions should always be made visible automatically in order to maintain consistency with non-CEP panels. This value is localizable.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:union>
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="xs:string">
+                                                                                    <xs:enumeration value="true"/>
+                                                                                    <xs:enumeration value="false"/>
+                                                                                </xs:restriction>
+                                                                            </xs:simpleType>
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="LocalizableString"/>
+                                                                            </xs:simpleType>
+                                                                        </xs:union>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="StartOn" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>With StartOn the extension can define different ways to start itself.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Event" minOccurs="0" maxOccurs="unbounded">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>Specifies zero or more events on which the extension should be started. The name of the event has to be the fully qualified event id. This value is localizable.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:simpleContent>
+                                                                                        <xs:extension base="RequiredStringLoc"/>
+                                                                                    </xs:simpleContent>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="UI" minOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Defines UI related properties of the extension.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Type" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>Specifies the type of the extension. Note that the "Custom" type means that it is up to the point product to decide how this extension will be handled. This value is localizable.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:simpleType>
+                                                                        <xs:union>
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="xs:string">
+                                                                                    <xs:enumeration value="Panel"/>
+                                                                                    <xs:enumeration value="ModalDialog"/>
+                                                                                    <xs:enumeration value="Modeless"/>
+                                                                                    <xs:enumeration value="Custom"/>
+                                                                                    <xs:enumeration value="Embedded"/>
+                                                                                    <xs:enumeration value="Dashboard"/>
+                                                                                </xs:restriction>
+                                                                            </xs:simpleType>
+                                                                            <xs:simpleType>
+                                                                                <xs:restriction base="LocalizableString"/>
+                                                                            </xs:simpleType>
+                                                                        </xs:union>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="Menu" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>Specifies the name for the menu entry. This value is localizable.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                            <xs:extension base="RequiredStringLoc">
+                                                                                <xs:attribute name="Placement" type="RequiredStringLoc" use="optional">
+                                                                                    <xs:annotation>
+                                                                                        <xs:documentation>A special placement which doesn't have to be honored by the point products. This value is localizable.</xs:documentation>
+                                                                                    </xs:annotation>
+                                                                                </xs:attribute>
+                                                                            </xs:extension>
+                                                                        </xs:simpleContent>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="Geometry" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>Specifies the geometry of the extension. Please note that all elements are onle "preferred" values. Some point products will not support all of these values. These values can be overwritten by an AIR extension through the AIR window API.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+																		<xs:element name="ScreenPercentage" minOccurs="0">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>If values are provided here both have to be specified. Note that those values can be scattered over different DispatchInfos.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Height" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The percentage for height based on the screen size.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="Width" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The percentage for width based on the screen size.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element name="Size" minOccurs="0">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>If values are provided here both have to be specified. Note that those values can be scattered over different DispatchInfos.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Height" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The height. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="Width" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The width. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element name="MaxSize" minOccurs="0">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>If values are provided here both have to be specified. Note that those values can be scattered over different DispatchInfos.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Height" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The height. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="Width" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The width. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element name="MinSize" minOccurs="0">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>If values are provided here both have to be specified. Note that those values can be scattered over different DispatchInfos.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Height" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The height. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="Width" type="SizeLoc" minOccurs="0">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>The width. If not provided this will default to the system default or any value set in the AIR API. This value is localizable.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="Icons" minOccurs="0">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>Icons provided for the UI of this extension.</xs:documentation>
+                                                                    </xs:annotation>
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Icon" minOccurs="0" maxOccurs="5">
+                                                                                <xs:annotation>
+                                                                                    <xs:documentation>A specific icon for a given type. This value is localizable.</xs:documentation>
+                                                                                </xs:annotation>
+                                                                                <xs:complexType>
+                                                                                    <xs:simpleContent>
+                                                                                        <xs:extension base="RelativePathLoc">
+                                                                                            <xs:attribute name="Type" use="required">
+                                                                                                <xs:annotation>
+                                                                                                    <xs:documentation>The type of the icon.</xs:documentation>
+                                                                                                </xs:annotation>
+                                                                                                <xs:simpleType>
+                                                                                                    <xs:restriction base="xs:string">
+                                                                                                        <xs:enumeration value="Normal"/>
+                                                                                                        <xs:enumeration value="Disabled"/>
+                                                                                                        <xs:enumeration value="RollOver"/>
+                                                                                                        <xs:enumeration value="DarkNormal"/>
+                                                                                                        <xs:enumeration value="DarkRollOver"/>
+                                                                                                    </xs:restriction>
+                                                                                                </xs:simpleType>
+                                                                                            </xs:attribute>
+                                                                                        </xs:extension>
+                                                                                    </xs:simpleContent>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="ExtensionData" minOccurs="0">
+                                                        <xs:annotation>
+                                                            <xs:documentation>This section contains arbitrary information about this extension. This value is localizable.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType mixed="true">
+                                                            <xs:sequence>
+                                                                <xs:any processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Host" type="RequiredString" use="optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="DependencyList" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>Specifies a list of extensions which this extension depends upon. Adobe Extension Manager will install this extension only if all of its strict dependencies are already installed in the system.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Dependency" maxOccurs="unbounded">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Specifies an extension which this extension depends on.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:attribute name="Id" type="ID" use="required">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>The id of the extension which is depended upon.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:attribute>
+                                                            <xs:attribute name="Version" type="InclusiveRangedVersion" use="optional">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>Specifies that a particular version of the extension is depended upon. Either a single version or a range of versions may be specified. A range of versions must be specified using inclusive lower and upper bounds; exclusive bounds are not allowed. Omitting this attribute indicates that no specific version is required.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:attribute>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Id" type="ID" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The id of the extension. This must refer to an extension defined in /ExtensionManifest/ExtensionList/Extension.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Version" use="required">
+                <xs:annotation>
+                    <xs:documentation>The version of this ExtensionManifest.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="5.0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ExtensionBundleId" type="ID" use="required">
+                <xs:annotation>
+                    <xs:documentation>The Id for all extensions included in this ExtensionManifest.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="ExtensionBundleVersion" type="Version" use="required">
+                <xs:annotation>
+                    <xs:documentation>The version of this ExtensionBundle.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="ExtensionBundleName" type="RequiredString" use="optional">
+                <xs:annotation>
+                    <xs:documentation>An optional user-friendly name for this ExtensionBundle.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="ID">
+        <xs:annotation>
+            <xs:documentation>An ID.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="RequiredString">
+            <xs:pattern value="[A-Za-z0-9._\-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Version">
+        <xs:annotation>
+            <xs:documentation>A version consists of major.minor.micro.special. major, minor, micro must be numbers and special can be any string (version parts can have up to 9 digits). At least the major has to be specified, all other elements are optional. If minor or micro versions are not specified, they are assumed to be zero. When it comes to comparing versions the special discriminator will be compared based on UTF-8 encoding.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RangedVersion">
+        <xs:annotation>
+            <xs:documentation>A ranged version defines at least a minimum version and optionally a maximum version. If only one version is specified it is taken as minimum version with no special maximum version. With "[","]", "(" and ")" inclusive and exclusive ranges can be specified. For example, to define a range from 7.0 to 7.5 inclusive, use [7.0,7.5]. Note that because unspecified versions are assumed to be zero, 7.5.1 is not included in this range. To include 7.5.1 and any other micro version changes, use the range [7.0,7.6) which includes versions greater than 7.0.0 but less than 7.6.0. See definition of Version for further information.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?)|([(\[]\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?,?\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?[)\]])"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InclusiveRangedVersion">
+        <xs:annotation>
+            <xs:documentation>An InclusiveRangedVersion is the same as a RangedVersion, except that only a single version or an inclusive version range may be specified (using "[","]" notation). An exclusive version range cannot be specified.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?)|(\[\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?,?\d{1,9}(\.\d{1,9}(\.\d{1,9}(\.(\w|_|-)+)?)?)?\])"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RelativePath">
+        <xs:annotation>
+            <xs:documentation>A relative path always has to start with ./ and points to a resource relative to the extension bundle's root.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\./.+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RelativePathLoc">
+        <xs:annotation>
+            <xs:documentation>A RelativePath element which can also be localized.</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="RelativePath LocalizableString"/>
+    </xs:simpleType>
+    <xs:simpleType name="RequiredString">
+        <xs:annotation>
+            <xs:documentation>A string with at least one element.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RequiredStringLoc">
+        <xs:annotation>
+            <xs:documentation>A RequiredString which can also be localized.</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="RequiredString LocalizableString"/>
+    </xs:simpleType>
+    <xs:simpleType name="OptionalString">
+        <xs:annotation>
+            <xs:documentation>An optional string.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="OptionalStringLoc">
+        <xs:annotation>
+            <xs:documentation>An OptionalString which can also be localized.</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="OptionalString LocalizableString"/>
+    </xs:simpleType>
+    <xs:simpleType name="LocalizableString">
+        <xs:annotation>
+            <xs:documentation>A string which has to start with '%'. This string denotes a key which will be replaced by the appropriate value from the messages.properties file for the current language.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
+            <xs:pattern value="%[^%].*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Size">
+        <xs:annotation>
+            <xs:documentation>A size which can be a positive number or 0.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:unsignedInt"/>
+    </xs:simpleType>
+    <xs:simpleType name="SizeLoc">
+        <xs:annotation>
+            <xs:documentation>A Size which can also be localized.</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="Size LocalizableString"/>
+    </xs:simpleType>
+</xs:schema>
