@@ -3,7 +3,7 @@ Getting Started with the Creative Cloud Extension SDK
 
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in the Creative Cloud release; support has already been removed from CC2014 and later releases.
 
-* Creative Cloud 2017 products include CEP 8 for developing extensions and add-ons. 
+* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. 
 
 * Refer to https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep for 2017 product integration with CEP 8.
 
@@ -24,10 +24,10 @@ Resources you will need include:
 
 ---
 
-For developing CEP 8.0 HTML/JavaScript extensions for CC 2017.x host applications
+For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
 
 **Documentation**
-* [CEP 8.0 HTML Extension Cookbook for 2017.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
+* [CEP 8.0 HTML Extension Cookbook for 2018.x in October 2018](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
 * CEP 8 provides the runtime as mentioned at https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef 
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_8.x)
