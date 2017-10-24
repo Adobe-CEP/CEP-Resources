@@ -6,9 +6,9 @@ Feature List
 * Bug Fixes
   * Crashes
     * CEP extensions crashing in background
-    * Application hang in PlugPlugOWL (CEP) MonitorThreadProc while application quit
+    * Application hang while application quit
     * MAC Only: CEPHtmlEngine crashes in background while using Illustrator.
-    * AI crashes during PlugPlugOWL is being unloaded.
+    * AI crashes on exit/unload.
     * Crash on Fist Launch of illustrator after ESD install
 
   *	IME 
