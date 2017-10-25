@@ -9,7 +9,7 @@ Feature List
     * Application hang while application quit
     * MAC Only: CEPHtmlEngine crashes in background while using Illustrator.
     * Illustrator crashes on exit/unload.
-    * Crash on Fist Launch of Illustrator after ESD install
+    * Crash on First Launch of Illustrator after ESD install
 
   *	IME 
     * MAC: For First character IME box is being displayed at older position
