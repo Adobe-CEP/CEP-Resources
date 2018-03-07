@@ -2359,23 +2359,31 @@ Here is an example:
 
 The purpose of persistent is to force not reload HTML extension when it is closed or hidden. Photoshop has provided persistent since the version 14.2. Please note that, this feature is product specific and may not be available in few host applications.
 
+InDesign and InCopy support persistent feature from version 13.1. Following are the specific event names to be used:
+Indesign:
+  com.adobe.InDesignPersistent
+  com.adobe.InDesignUnPersistent
+Incopy:
+  com.adobe.InCopyPersistent
+  com.adobe.InCopyUnPersistent
 
 To make an HTML extension persistent in Photoshop
 
  - Upgrade Photoshop version to 14.2 or later
  - Dispatch the event `com.adobe.PhotoshopPersistent` from HTML extension to Photoshop to request persistent
 
-
 Sample code:
-
-
 
 ```
 var Persistent = function(inOn){
   if(inOn){
-    var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
+    var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION"); //Photoshop
+    //var event = new CSEvent("com.adobe.InDesignPersistent", "APPLICATION"); //Indesign
+    //var event = new CSEvent("com.adobe.InCopyPersistent", "APPLICATION"); //Incopy
   } else {
-    var event = new CSEvent("com.adobe.PhotoshopUnPersistent", "APPLICATION");
+    var event = new CSEvent("com.adobe.PhotoshopUnPersistent", "APPLICATION"); //Photoshop
+    //var event = new CSEvent("com.adobe.InDesignUnPersistent", "APPLICATION"); //Indesign
+    //var event = new CSEvent("com.adobe.InCopyUnPersistent", "APPLICATION"); //Incopy
   }
   event.extensionId = <extension id as per manifest definition>;
   csInterface.dispatchEvent(event);
