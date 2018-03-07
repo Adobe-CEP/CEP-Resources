@@ -2359,7 +2359,7 @@ Here is an example:
 
 The purpose of persistent is to force not reload HTML extension when it is closed or hidden. Photoshop has provided persistent since the version 14.2. Please note that, this feature is product specific and may not be available in few host applications.
 
-InDesign and InCopy support perisitent feature from version 13.1. Following are the specific event names to be used:
+InDesign and InCopy support persistent feature from version 13.1. Following are the specific event names to be used:
 Indesign:
   com.adobe.InDesignPersistent
   com.adobe.InDesignUnPersistent
