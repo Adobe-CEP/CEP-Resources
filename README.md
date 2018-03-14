@@ -1,5 +1,4 @@
-Getting Started with the Creative Cloud Extension SDK
-==============
+# Getting Started with the Creative Cloud Extension SDK
 
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in the Creative Cloud release; support has already been removed from CC2014 and later releases.
 
@@ -24,7 +23,7 @@ Resources you will need include:
 
 ---
 
-For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
+## For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
 
 **Documentation**
 * [CEP 8.0 HTML Extension Cookbook for 2018.x in October 2018](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
@@ -59,7 +58,7 @@ For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host application
 
 ---
 
-For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
+## For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
 
 **Documentation**
 * [CEP 7.0 HTML Extension Cookbook for 2015.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
@@ -94,7 +93,7 @@ For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host application
 
 ----
 
-For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
+## For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
 * [CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
@@ -128,7 +127,7 @@ For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 ----
 
-For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
+## For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 
 **Documentation**
 * [CEP 6.0 HTML Extension Cookbook for CC 2015](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015)
@@ -161,7 +160,7 @@ For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 
 ----
 
-For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
+## For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 
 **Documentation**
 * [Offical Adobe Extension SDK Documentation for CC 2014](http://adobe.ly/1rin38t)
@@ -193,7 +192,7 @@ For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 
 ----
 
-For developing CEP 4.x and extensions for CS6/CC host applications
+## For developing CEP 4.x and extensions for CS6/CC host applications
 
 **Documentation**
 * [Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
