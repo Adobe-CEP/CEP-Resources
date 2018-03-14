@@ -21,8 +21,6 @@ Resources you will need include:
 * Sample code for how to use these libraries
 * The ZXP packager, a command-line utility
 
----
-
 ## For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
 
 **Documentation**
@@ -55,8 +53,6 @@ Resources you will need include:
 * Other Tools
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
-
----
 
 ## For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
 
@@ -91,8 +87,6 @@ Resources you will need include:
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
 ## For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
@@ -125,8 +119,6 @@ Resources you will need include:
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
 ## For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 
 **Documentation**
@@ -158,8 +150,6 @@ Resources you will need include:
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
 ## For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 
 **Documentation**
@@ -190,8 +180,6 @@ Resources you will need include:
 * [Guide to signing extensions](http://adobe.ly/1oiS4FE)
    (NOTE:  For CEP 4.0 but valid for CEP 5)
 
-----
-
 ## For developing CEP 4.x and extensions for CS6/CC host applications
 
 **Documentation**
@@ -213,9 +201,7 @@ Resources you will need include:
 * [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
    (NOTE: EB3 is compatible with CEP 4.x only. You can [tweak it](http://adobe.ly/1v3wgiq) so that it supports CC 2014 (with limitations))
 
-----
-
-Miscellaneous help
+## Miscellaneous help
 * [CS SDK Blog](https://blogs.adobe.com/cssdk/)
 * [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P)
 * [Davide Barranca’s blog](http://www.davidebarranca.com/) and [HTML Panels Development Course](http://htmlpanelsbook.com/)
@@ -224,8 +210,6 @@ Miscellaneous help
 * [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 * [Adobe Exchange](http://bit.ly/1mHVksI)
 * [Photoshop CC 2014 CEP samples by John Peterson](http://bit.ly/1nGAWYN)
-
-----
 
 
 
