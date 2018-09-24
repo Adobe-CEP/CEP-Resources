@@ -1,5 +1,4 @@
-Getting Started with the Creative Cloud Extension SDK
-==============
+# Getting Started with the Creative Cloud Extension SDK
 
 This page provides resources you need to get started creating extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in the Creative Cloud release; support has already been removed from CC2014 and later releases.
 
@@ -22,9 +21,7 @@ Resources you will need include:
 * Sample code for how to use these libraries
 * The ZXP packager, a command-line utility
 
----
-
-For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
+## For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host applications
 
 **Documentation**
 * [CEP 8.0 HTML Extension Cookbook for 2018.x in October 2018](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
@@ -57,9 +54,7 @@ For developing CEP 8.0 HTML/JavaScript extensions for CC 2018.x host application
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
----
-
-For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
+## For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host applications
 
 **Documentation**
 * [CEP 7.0 HTML Extension Cookbook for 2015.x in June 2016](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_7.x/CEP_7.0_HTML_Extension_Cookbook.pdf)
@@ -92,9 +87,7 @@ For developing CEP 7.0 HTML/JavaScript extensions for CC 2015.x host application
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
-For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
+## For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
 
 **Documentation**
 * [CEP 6.1 HTML Extension Cookbook for CC 2015.1](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_6.x/CEP_6.1_HTML_Extension_Cookbook.pdf)
@@ -126,9 +119,7 @@ For developing CEP 6.1 HTML/JavaScript extensions for CC2015.1 host applications
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
-For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
+## For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
 
 **Documentation**
 * [CEP 6.0 HTML Extension Cookbook for CC 2015](https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015)
@@ -159,9 +150,7 @@ For developing CEP 6.0 HTML/JavaScript extensions for CC2015 host applications
   * http://zxpinstaller.com/
   * http://install.anastasiy.com/
 
-----
-
-For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
+## For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 
 **Documentation**
 * [Offical Adobe Extension SDK Documentation for CC 2014](http://adobe.ly/1rin38t)
@@ -191,9 +180,7 @@ For developing CEP 5.x HTML/JavaScript extensions for CC2014 host applications
 * [Guide to signing extensions](http://adobe.ly/1oiS4FE)
    (NOTE:  For CEP 4.0 but valid for CEP 5)
 
-----
-
-For developing CEP 4.x and extensions for CS6/CC host applications
+## For developing CEP 4.x and extensions for CS6/CC host applications
 
 **Documentation**
 * [Documentation for CEP 4.2](http://adobe.ly/1cWBggl)
@@ -214,9 +201,7 @@ For developing CEP 4.x and extensions for CS6/CC host applications
 * [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
    (NOTE: EB3 is compatible with CEP 4.x only. You can [tweak it](http://adobe.ly/1v3wgiq) so that it supports CC 2014 (with limitations))
 
-----
-
-Miscellaneous help
+## Miscellaneous help
 * [CS SDK Blog](https://blogs.adobe.com/cssdk/)
 * [Andy Hall's Super Mega Guide (English)] (http://bit.ly/XQn9IV) [ (Japanese)] (http://bit.ly/XQnB9P)
 * [Davide Barranca’s blog](http://www.davidebarranca.com/) and [HTML Panels Development Course](http://htmlpanelsbook.com/)
@@ -225,8 +210,6 @@ Miscellaneous help
 * [The other API (Article on Medium)](http://bit.ly/1hIFZay)
 * [Adobe Exchange](http://bit.ly/1mHVksI)
 * [Photoshop CC 2014 CEP samples by John Peterson](http://bit.ly/1nGAWYN)
-
-----
 
 
 
