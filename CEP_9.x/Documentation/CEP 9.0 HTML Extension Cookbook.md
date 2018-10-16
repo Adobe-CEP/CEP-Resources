@@ -84,13 +84,13 @@ Persistent Cookies location:
 
  - CEP 4.x
 	 - Windows: `C:\Users\<USERNAME>\AppData\Local\Temp\cep_cookies\`
-	 - Mac: `/Users/<USERNAME>/Library/Logs/CSXS/cep_cookies/`
+	 - macOS: `/Users/<USERNAME>/Library/Logs/CSXS/cep_cookies/`
  - CEP 5.x
 	 - Windows: `C:\Users\<USERNAME>\AppData\Local\Temp\cep_cache\`
-	 - Mac: `/Users/<USERNAME>/Library/Logs/CSXS/cep_cache/`
+	 - macOS: `/Users/<USERNAME>/Library/Logs/CSXS/cep_cache/`
  - CEP 6.x and later releases
 	 - Windows: `C:\Users\<USERNAME>\AppData\Local\Temp\cep_cache\`
-	 - Mac: `/Users/<USERNAME>/Library/Caches/CSXS/cep_cache/`
+	 - macOS: `/Users/<USERNAME>/Library/Caches/CSXS/cep_cache/`
 
 Each persistent cookie is a file. File name is HostID_HostVersion_ExtensionName, such as PHXS_15.0.0_com.adobe.extension1.
 
@@ -223,10 +223,10 @@ require(dir + "/js/lib/jquery.js");
 ```
 
 
-In Mac (there is a change in index passed on to substring)
+On macOS (there is a change in index passed on to substring)
 
 
-> **Mac require absolute path for nodejs**
+> **macOS require absolute path for nodejs**
 
 
 ```js
@@ -359,7 +359,7 @@ Following representation provides visual context
 ### Development Machine Setup
 
 
-CEP HTML Extensions can be developed on both Windows and Mac platforms. The development machine needs to have the following applications in order to successfully develop CSXS extensions:
+CEP HTML Extensions can be developed on both Windows and macOS platforms. The development machine needs to have the following applications in order to successfully develop CSXS extensions:
 
  - Adobe Creative Cloud applications supporting CEP HTML extensions.
  - HTML Extension Builder (Nice to have, but not mandatory).
@@ -396,15 +396,15 @@ If you are in the midst of development and are not using HTML Extension Builder 
 These entries will enable debug extensions to be displayed in the host applications. Please note that, CSXS.9 is given with the assumption that, you are developing the extension for CEP 9. If you are developing extension for previous version of CEP, replace 9 with corresponding version number.
 
 
-#### Special notes for Mac 10.9 and higher
+#### Special notes for macOS 10.9 and higher
 
 
-Staring with Mac 10.9, Apple introduced a caching mechanism for plist files. Your modifications to plist files does not take effect until the cache gets updated (on a periodic basis, you cannot know exactly when the update will happen). To make sure your modifications take effect, there are two methods.
+Staring with macOS 10.9, Apple introduced a caching mechanism for plist files. Your modifications to plist files does not take effect until the cache gets updated (on a periodic basis, you cannot know exactly when the update will happen). To make sure your modifications take effect, there are two methods.
 
 
  - Kill **cfprefsd** process. It will restart automatically. Then the update
    takes effect.
- - Restart your Mac, or log out the current user and re-log in.
+ - Restart your macOS, or log out the current user and re-log in.
  - [More Information](http://hints.macworld.com/article.php?story=20130908042828630)
 
 
@@ -415,9 +415,9 @@ CEP supports remote debugging for HTML extensions from 5.0.
 
 
  - Create a “.debug” file to the extension root directory such as `Test_Extension\.debug`. The .debug file contains remote debug ports. Developers must create this file and use valid debug ports because both remote debugging and dev tools are based on it.
- - ".debug" file name is special for both Windows and Mac platforms, it has to be created via command line. 
+ - ".debug" file name is special for both Windows and macOS platforms, it has to be created via command line. 
 	 - On Windows, use "copy con .debug" and "Ctrl+Z" to create an empty file.
-	 - On Mac, use "touch .debug" to create an empty file.
+	 - On macOS, use "touch .debug" to create an empty file.
  - The value of Port should be between 1024 and 65535 (not include 65535), otherwise remote debugging and dev tools will not work.
  - One extension bundle may have multiple extensions. The .debug file can specify debug ports for each extension. Here is an example file:
 
@@ -520,7 +520,7 @@ The **LogLevel** key can be updated at the following location (The application s
  - Mac: `/Users/<USERNAME>/Library/Preferences/com.adobe.CSXS.9.plist`
 
 
-For example of Mac, in the terminal do:
+For example, on macOS, in the terminal do:
 
 
     defaults write com.adobe.CSXS.9 LogLevel 6
@@ -600,7 +600,7 @@ Extension Installation:
 Note:
 
  - Character '#' is not allowed in extension folder path on both Windows
-   and Mac OSX, since CEF treats '#' as a delimiter.
+   and macOS, since CEF treats '#' as a delimiter.
 
 
 ### CEP HTML Test Extensions
@@ -843,7 +843,7 @@ You can specify CEP dialog size as a percentage of screen size. Here is an examp
 
 CEP 5.2 supports shortcut keys for HTML extensions. When focus is on HTML extensions, these shortcut keys are handled by extension. 
 
-|Windows Keys|	Mac Keys|	Function|
+|Windows Keys|	macOS Keys|	Function|
 |---|---|---|
 |Ctrl + A|	Command + A|	Select All|
 |Ctrl + C	|Command + C|	Copy|
@@ -1091,7 +1091,7 @@ Following table lists the standard events supported by point products.
 |documentAfterActivate|	 APPLICATION|	Event fired when a document has been activated(after new/open document; after document has retrieved focus).|	URL to the active document. If the doc was not save,  the NAME will be set instead of the URL.|![No][cross]|![Yes][correct]|![Yes][correct]|![No][cross]|![No][cross]|![No][cross]|![Yes][correct]|
 |documentAfterDeactivate|APPLICATION|	Event fired when the active document has been de-activated.(after document loses focus)|URL to the active document. If the doc was not save,  the name will be set instead of the URL.|![Yes][correct]|![Yes][correct]|![Yes][correct]|![No][cross]|![No][cross]|![No][cross]|![Yes][correct]|
 |applicationBeforeQuit	| APPLICATION|	Event fired when the application got the signal to start to terminate.|	none|![No][cross]|![Issue][issue]|![Issue][issue]|![No][cross]|![No][cross]|![No][cross]|![No][cross]|	 	 	 
-|applicationActivate	| APPLICATION|	Event fired when the Application got an "activation" event from the OS.|	none|![Yes][correct]|![Yes][correct]|![Yes][correct]|![No][cross]|![Yes][correct] on Mac; <br>![No][cross] on Windows|![Yes][correct] on Mac; <br>![No][cross] on Windows|![Yes][correct]|
+|applicationActivate	| APPLICATION|	Event fired when the Application got an "activation" event from the OS.|	none|![Yes][correct]|![Yes][correct]|![Yes][correct]|![No][cross]|![Yes][correct] on macOS; <br>![No][cross] on Windows|![Yes][correct] on macOS; <br>![No][cross] on Windows|![Yes][correct]|
 |documentAfterSave|APPLICATION|Event fired after the document has been saved|URL to the saved document.|![Yes][correct]|![Yes][correct]|![Yes][correct]|![No][cross]|![No][cross]|![No][cross]|![Yes][correct]|	 	 	 	 	 
 
 
@@ -1717,12 +1717,12 @@ This JSON string should be an array, each object has following keys:
  - ctrlKey:      [optional]   a Boolean that indicates if the control key was pressed (true) or not (false) when the event occurred.
  - altKey:       [optional]   a Boolean that indicates if the alt key was pressed (true) or not (false) when the event occurred.
  - shiftKey:    [optional]   a Boolean that indicates if the shift key was pressed (true) or not (false) when the event occurred.
- - metaKey:   [optional]   (Mac Only) a Boolean that indicates if the Meta key was pressed (true) or not (false) when the event occurred. On Macintosh keyboards, this is the command key. To detect Windows key on Windows, please use keyCode instead.
+ - metaKey:   [optional]   (macOS Only) a Boolean that indicates if the Meta key was pressed (true) or not (false) when the event occurred. On Macintosh keyboards, this is the command key. To detect Windows key on Windows, please use keyCode instead.
 
 To learn all key codes:
 
  - [Windows](https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731%28v=vs.85%29.aspx)
- - Mac 
+ - macOS 
 	 - `/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h`
 	 - Install [Key Codes](https://itunes.apple.com/us/app/key-codes/id414568915?mt=12) from the Mac App Store.
 
@@ -2184,7 +2184,7 @@ For WebRTC related development, CEP runtime just keeps the same experiences as t
 ### Scroll bar tips
 
 
-On Mac, scroll bars of panel are hidden by OS (since Lion by design). It can be always shown by settings as below. 
+On macOS, scroll bars of panel are hidden by OS (since Lion by design). It can be always shown by settings as below. 
 
  1. Click the Apple menu at the top-left of the screen, then select System Preferences.
  
@@ -2944,7 +2944,7 @@ function onLoaded() {
 #### Tooltip
 
 
-CEP 5.2 supports HTML title attribute to show the tooltip on Windows. However, it's not supported on Mac due to off-screen rendering. The alternative is use JavaScript instead, please refer to http://www.a2zwebhelp.com/bootstrap-tooltips for good examples.
+CEP 5.2 supports HTML title attribute to show the tooltip on Windows. However, it's not supported on macOS due to off-screen rendering. The alternative is use JavaScript instead, please refer to http://www.a2zwebhelp.com/bootstrap-tooltips for good examples.
 
 
 CEPHtmlEngine
@@ -2954,10 +2954,10 @@ CEPHtmlEngine
 ### Multi-process Architecture
 
 
-CEP and the underlying Chromium have multi-process architecture. Each CEP extension runs in a separate CEP HTML Engine, which might have three processes - one main/browser process, one renderer process, and one GPU process. On Max OSX, the main process is named `CEPHtmlEngine`, and the other two process are named `CEPHtmlEngine Helper`. On Windows, all the three processes are named `CEPHtmlEngine.exe`. As long as the extensions are well implemented, having multiple processes should not be a performance problem.
+CEP and the underlying Chromium have multi-process architecture. Each CEP extension runs in a separate CEP HTML Engine, which might have three processes - one main/browser process, one renderer process, and one GPU process. On macOS, the main process is named `CEPHtmlEngine`, and the other two process are named `CEPHtmlEngine Helper`. On Windows, all the three processes are named `CEPHtmlEngine.exe`. As long as the extensions are well implemented, having multiple processes should not be a performance problem.
 
 
-You can find what extension a CEP HTML Engine process belongs to by checking its command line parameters. On Mac OSX, please use `ps -ef | grep CEPHtmlEngine` in a terminal to check the command line. On Windows, please refer to http://superuser.com/questions/415360/how-do-i-find-out-command-line-arguments-of-a-running-program to check the command line. The browser process does not have `--type` in the command line, while the renderer process and the GPU process have `--type=renderer` and `--type=gpu-process` in the command line.
+You can find what extension a CEP HTML Engine process belongs to by checking its command line parameters. On macOS, please use `ps -ef | grep CEPHtmlEngine` in a terminal to check the command line. On Windows, please refer to http://superuser.com/questions/415360/how-do-i-find-out-command-line-arguments-of-a-running-program to check the command line. The browser process does not have `--type` in the command line, while the renderer process and the GPU process have `--type=renderer` and `--type=gpu-process` in the command line.
 
 
 ### Ports opened in CEPHtmlEngine
