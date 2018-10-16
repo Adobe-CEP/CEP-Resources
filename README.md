@@ -27,12 +27,12 @@ Resources you will need include:
 For developing CEP 9.0 HTML/JavaScript extensions for CC 2019.x host applications
 
 **Documentation**
-* [CEP 9.0 HTML Extension Cookbook for 2019.x in October 2019](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md)
-* CEP 9 provides the runtime as mentioned [here](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
+* [CEP 9.0 HTML Extension Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md)
+* [CEP 9 runtime](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
 
 For CEP 8,
-* [CEP 8.0 HTML Extension Cookbook for 2018.x in October 2018](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
-* CEP 8 provides the runtime as mentioned [here](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
+* [CEP 8.0 HTML Extension Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
+* [CEP 8 runtime](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
 
 **APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_9.x)
 * Include these files in your extension project if you need to use the APIs.
