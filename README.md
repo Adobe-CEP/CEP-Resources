@@ -1,11 +1,11 @@
-Getting Started with the Creative Cloud Extension SDK
+Getting Started with Common Extensibility Platform (CEP)
 ==============
 
 This page provides the resources you need to get started in order to create extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in Creative Cloud releases; Support has already been removed from CC2014 and later releases.
 
-* Creative Cloud 2019 products include CEP 9 for developing extensions and add-ons. Refer to https://github.com/cepos/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep for 2019 products integration with CEP 9.
+* Creative Cloud 2019 products include CEP 9 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2019 products integration with CEP 9.
 
-* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. Refer to https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep for 2018 product integration with CEP 8.
+* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2018 product integration with CEP 8.
 
 * In the Creative Cloud 2015.x release in June 2016, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ons must be built on at least CEP 6 infrastructure.
 
@@ -27,22 +27,20 @@ Resources you will need include:
 For developing CEP 9.0 HTML/JavaScript extensions for CC 2019.x host applications
 
 **Documentation**
-* [CEP 9.0 HTML Extension Cookbook for 2019.x in October 2019](https://github.com/cepos/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md)
-* CEP 9 provides the runtime as mentioned at https://github.com/cepos/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef 
+* [CEP 9.0 HTML Extension Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md)
+* [CEP 9 runtime](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
 
 For CEP 8,
-* [CEP 8.0 HTML Extension Cookbook for 2018.x in October 2018](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
-* CEP 8 provides the runtime as mentioned at https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef 
+* [CEP 8.0 HTML Extension Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
+* [CEP 8 runtime](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
 
-**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_9.x)
+**APIs** 
+CEP 9 APIs: https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_9.x
 * Include these files in your extension project if you need to use the APIs.
-  * AgoraLib.js
   * CSInterface.js
   * Vulcan.js
 * Do NOT include this file in your extension project. It is already integrated into CEP.
   * CEPEngine_extensions.js
-* Extension Manifest
-  * ExtensionManifest_v_7_0.xsd (Please note that, there is no change in xsd file for CEP 8 and 9).
 
 **Samples**
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
