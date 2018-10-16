@@ -1,4 +1,4 @@
-Getting Started with the Creative Cloud Extension SDK
+Getting Started with Common Extensibility Platform (CEP)
 ==============
 
 This page provides the resources you need to get started in order to create extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in Creative Cloud releases; Support has already been removed from CC2014 and later releases.
