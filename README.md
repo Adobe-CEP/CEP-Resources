@@ -5,7 +5,7 @@ This page provides the resources you need to get started in order to create exte
 
 * Creative Cloud 2019 products include CEP 9 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2019 products integration with CEP 9.
 
-* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. Refer to [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2018 product integration with CEP 8.
+* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2018 product integration with CEP 8.
 
 * In the Creative Cloud 2015.x release in June 2016, Photoshop and Illustrator use CEP 7 while other applications still use CEP 6.1. Extensions and add-ons must be built on at least CEP 6 infrastructure.
 
