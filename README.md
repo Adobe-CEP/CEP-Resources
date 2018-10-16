@@ -34,15 +34,13 @@ For CEP 8,
 * [CEP 8.0 HTML Extension Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md)
 * [CEP 8 runtime](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef) 
 
-**APIs** (https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_9.x)
+**APIs** 
+CEP 9 APIs: https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_9.x
 * Include these files in your extension project if you need to use the APIs.
-  * AgoraLib.js
   * CSInterface.js
   * Vulcan.js
 * Do NOT include this file in your extension project. It is already integrated into CEP.
   * CEPEngine_extensions.js
-* Extension Manifest
-  * ExtensionManifest_v_7_0.xsd (Please note that, there is no change in xsd file for CEP 8 and 9).
 
 **Samples**
 * [Sample extensions](https://github.com/Adobe-CEP/Samples)
