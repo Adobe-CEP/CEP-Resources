@@ -53,7 +53,7 @@ These applications support CEP HTML extensions.
 |Dreamweaver|	DRWV|	13 (CEP 4)|	15 (CEP 5)|	16 (CEP 6)|-|	17 (CEP 6.1)|18 (CEP 8)|19 (CEP 9)|
 |Muse| MUSE |7.4|-|2015|-|2017|2018|-|
 |Bridge| KBRG |6|-|6.3.1|-|-|8 (CEP 8)|9 (CEP 9)|
-|Bridge| Rush |-|-|-|-|-|-|1 (CEP 9)|
+|Rush| RUSH |-|-|-|-|-|-|1 (CEP 9)|
 
 
 ### Chromium Embedded Framework (CEF)
