@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2013, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link href="../css/main_tylesheet.css" type="text/css" rel="stylesheet">
+<script src="../js/CSInterface.js"></script>
+<script>
+var CSLibrary = new CSInterface();
+var imageURL;
+
+/**
+ * This function will be called when PP's theme color been changed and it will change
+ * extension's background color according to PP's.
+ **/
+function themeChangedEventListener(event)
+{
+    changeThemeColor();
+}
+
+function changeThemeColor()
+{
+	var hostEnv = CSLibrary.getHostEnvironment();
+    var UIColorObj = new UIColor();
+
+    UIColorObj = hostEnv.appSkinInfo.appBarBackgroundColor;
+    var red = Math.round(UIColorObj.color.red);
+    var green = Math.round(UIColorObj.color.green);
+    var blue = Math.round(UIColorObj.color.blue);
+    var alpha = Math.round(UIColorObj.color.alpha);
+    var colorRGB = "#" + red.toString(16) + green.toString(16) + blue.toString(16);
+
+    if ("#535353" != colorRGB) /* "#535353" is the original color */
+    {
+        document.getElementById("index_body").style.backgroundImage = "none";
+    }
+    else /* for show background color distinctly */
+    {
+        document.getElementById("index_body").style.backgroundImage = imageURL;
+    }
+    document.getElementById("index_body").style.backgroundColor = colorRGB;
+    document.getElementById("index_body").style.opacity = alpha / 255;
+}
+
+/**
+ * Test if the Node.js is enabled.
+ * Append "(Disabled)" to NodeJS link if the Node.js is disabled on main frame.
+ **/
+function checkNodeJS() {
+	if (typeof(require) === 'undefined') {
+		// Get the "naviFrame" iframe object.
+		var naviFarme = document.getElementById('naviFrame');
+		if (naviFrame) {
+			var naviFrameDocument = naviFarme.contentWindow ? naviFarme.contentWindow.document : naviFarme.contentDocument;
+			if (naviFrameDocument) {
+				// Find the Nodejs link.
+				var leftLinks = naviFrameDocument.getElementById('ul1').children;
+				if (leftLinks) {
+					for (var i = 0; i < leftLinks.length; i++) {
+						if ('Nodejs' === leftLinks[i].id) {
+							// Append "(Disabled)" to Nodejs link.
+							leftLinks[i].children[0].innerHTML = leftLinks[i].children[0].innerHTML + '(Disabled)';
+							break;
+						}
+					}
+				}			
+			}
+		}
+	} 
+}
+
+/**
+ * Add eventListener to listen PP's theme change event.
+ **/
+window.onload = function()
+{
+    CSLibrary.addEventListener("com.adobe.csxs.events.ThemeColorChanged", themeChangedEventListener);
+
+    /* store the original background image's path */
+    imageURL = document.getElementById("index_body").style.backgroundImage;
+	
+	checkNodeJS();
+	
+	changeThemeColor();
+};
+</script>
+</head>
+
+<body id="index_body">
+<table width="" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2">
+            <iframe src="index_top.html" name="title" width="900" height="68" scrolling="no" allowtransparency="true" frameborder="0">
+            </iframe>
+        </td>
+    </tr>
+
+    <tr>
+        <td width="1000" rowspan="2" valign="top">
+            <iframe name="naviFrame" id="naviFrame" src="index_left.html" width="180" height="520" scrolling="no" frameborder="0">
+            </iframe>
+            <iframe src="" name="extensionPanel" width="810" height="490" scrolling="no" frameborder="0" enable-nodejs>
+            </iframe>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

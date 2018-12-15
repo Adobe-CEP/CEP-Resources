@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="com.adobe.cephtmltest.invisible" ExtensionBundleVersion="1.0" Version="6.0"> <!-- MAJOR-VERSION-UPDATE-MARKER -->
+    <ExtensionList>
+        <Extension Id="com.adobe.CEPHTMLTEST.invisible" Version="6.1.0"/>
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <Host Name="DRWV" Version="15.0"/>
+            <Host Name="FLPR" Version="15.0"/>
+            <Host Name="IDSN" Version="11.0"/>
+            <Host Name="AICY" Version="11.0"/>
+            <Host Name="ILST" Version="[15.0,99.9]"/>
+            <Host Name="PHSP" Version="16.0"/>
+            <Host Name="PHXS" Version="[16.0,99.9]"/>
+            <Host Name="PPRO" Version="9.0"/>
+            <Host Name="PRLD" Version="4.0"/>
+            <Host Name="AEFT" Version="13.0"/>
+            <Host Name="DEMO" Version="1.0"/>
+            <Host Name="AUDT" Version="8.0"/>
+            <Host Name="LTRM" Version="7.0"/>
+            <Host Name="MUSE" Version="2015"/>
+        </HostList>
+        <LocaleList>
+            <Locale Code="All"/>
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="6.0"/> <!-- MAJOR-VERSION-UPDATE-MARKER -->
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.adobe.CEPHTMLTEST.invisible">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./html/index.html</MainPath>
+                    <CEFCommandLine>
+                        <Parameter>--enable-nodejs</Parameter>
+                    </CEFCommandLine>
+                </Resources>
+                <Lifecycle>
+                    <AutoVisible>false</AutoVisible>
+                    <StartOn>
+                        <!-- PS dispatches this event on startup -->
+                    	<Event>applicationActivate</Event>
+						<!-- PPro dispatches this event on startup -->
+						<Event>com.adobe.csxs.events.ApplicationActivate</Event>
+                    </StartOn>
+                </Lifecycle>
+                <UI>
+                    <Type>Custom</Type>
+                    <Geometry>
+                        <Size>
+                            <Height>100</Height>
+                            <Width>100</Width>
+                        </Size>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

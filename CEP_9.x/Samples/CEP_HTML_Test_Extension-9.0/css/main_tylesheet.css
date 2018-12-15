@@ -1,0 +1,149 @@
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+@charset "utf-8";
+/* CSS Document */
+
+#index_body {
+    background-color: #7c7a7c;
+    background-image:url(../img/bgExtensionMain.png);
+    background-position:left top;
+    background-repeat:no-repeat;
+}
+
+#extensionTitle {
+    font-size:24px;
+    font-weight:bold;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#FFF;
+}
+
+#navigation {
+    width:160px;
+    font-family:Arial;
+    font-size:18px;
+    text-align:left;
+}
+
+#navigation ul {
+    list-style-type:none;               /* no project number */
+    margin:0px;
+    padding:0px;
+}
+
+#navigation li {
+    border-bottom:1px solid #9F9FED;    /* underline */
+}
+
+#navigation li a{
+    display:block;
+    height:1em;
+    padding:5px 5px 5px 0.5em;
+    text-decoration:none;
+    border-left:12px solid #5c5c5c;     /* left bond edge */
+}
+
+#navigation li a:link, #navigation li a:visited{
+    color:#FFFFFF;
+}
+
+#navigation li a:hover{                 /* mouse hover */
+    background-color:#333333;           /* background color */
+    color:#46afa0;                      /* text color */
+    border-left:12px solid #46afa0;
+}
+
+li button{               
+    background-color:#333; 
+	border:none; 
+	color:#FFF;
+}
+
+.CEPAPIOthersDiv {
+    position: absolute;
+    width: 435px;
+    height: 229px;
+    left: 200px;
+    top: 50px;
+    color: #FFF;
+    z-index: 2;
+}
+
+#EnvnavigationDiv {
+    position: absolute;
+    width: 258px;
+    height: 177px;
+    z-index: 1;
+}
+
+#EnvSeperateline {
+    position: absolute;
+    left: 180px;
+    top: 50px;;
+}
+
+#EnvHostEnvironmentDiv {
+    position: absolute;
+    width: 435px;
+    height: 329px;
+    z-index: 2;
+    left: 200px;
+    top: 80px;
+    color: #FFF;
+}
+
+#EnvHostCapabilitiesDiv {
+    position: absolute;
+    width: 572px;
+    height: 190px;
+    z-index: 3;
+    left: 200px;
+    top: 80px;
+    color: #FFF;
+}
+
+#EnvCurrentStateInfoDiv {
+    position: absolute;
+    width: 572px;
+    height: 213px;
+    z-index: 4;
+    left: 200px;
+    top: 80px;
+    color: #FFF;
+}
+
+#EnvOthersDiv {
+    position: absolute;
+    width: 572px;
+    height: 213px;
+    z-index: 5;
+    left: 200px;
+    top: 80px;
+    color: #FFF;
+}
+
+#EnvnavigationDiv li:hover{            /* mouse hover on Environment tab navigation bar */
+    width:120px;
+    background-color:#333;
+    color:#46afa0;
+}
+
+.resizeExtension {
+    color: #FFF;
+}

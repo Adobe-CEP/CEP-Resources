@@ -1,0 +1,27 @@
+Feature List
+==============
+* CEF and nodejs upgrade [Chromium version#57.0.2987.74 with nodeJS version#7.7.4]
+* IME Support on top of latest CEF
+* Windows High DPI Support – 125% scaling supported
+* Bug Fixes
+  * Crashes
+    * CEP extensions crashing in background
+    * Application hang while application quit
+    * MAC Only: CEPHtmlEngine crashes in background while using Illustrator.
+    * Illustrator crashes on exit/unload.
+    * Crash on First Launch of Illustrator after ESD install
+
+  *	IME 
+    * MAC: For First character IME box is being displayed at older position
+    *	CEP8: Highlighted text in search input is deleted after pressing enter
+  *	Focus issues
+    *	Win Only - Have to click buttons on dialogs twice after Photoshop regains focus
+  *	Drag and drop custom type data
+    *	Drag drop between CC Library and document is not working
+  *	DPI fixes
+    *	Win Only: CEP dialog dimensions not correct when the second display is completely above the primary display
+  *	Keyboard handling
+    *	Cntrl + N not working in windows for Dashboard extension
+    *	[Mac Only] Value is changed incorrectly when hit up/down on keyboard at the first time.
+    *	Shortcuts do not work on the start screen after launch till a user clicks on the app bar
+    *	ESC does not dismiss the Start workspace in CEP 8.0 environment
