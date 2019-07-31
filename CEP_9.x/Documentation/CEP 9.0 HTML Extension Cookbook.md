@@ -2274,7 +2274,7 @@ One important thing to note is that not all host applications support Invisible 
 |Animate (Flash Pro)|	Yes	 |
 |Audition|	Yes|	 
 |InDesign|	Yes|	However, as of 2019 you must include a width and height.|
-|InCopy|	No|	Doesn't work at all because InCopy doesn't support 'Custom' window type.|
+|InCopy|	Yes|	However, as of 2019 you must include a width and height.|
 |Illustrator|	Yes|	|
 
 
