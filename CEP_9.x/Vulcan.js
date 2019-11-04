@@ -1,7 +1,7 @@
 /**************************************************************************************************
 *
 * ADOBE SYSTEMS INCORPORATED
-* Copyright 2018 Adobe Systems Incorporated
+* Copyright 2013 Adobe Systems Incorporated
 * All Rights Reserved.
 *
 * NOTICE:  Adobe permits you to use, modify, and distribute this file in accordance with the
@@ -11,7 +11,7 @@
 *
 **************************************************************************************************/
 
-/** Vulcan - v9.2.0 */
+/** Vulcan - v9.4.0 */
 
 /**
  * @class Vulcan
