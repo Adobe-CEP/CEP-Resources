@@ -22,6 +22,7 @@
             <Host Name="AUDT" Version="8.0"/>
             <Host Name="LTRM" Version="7.0"/>
             <Host Name="MUSE" Version="2015"/>
+            <Host Name="KBRG" Version="8.0"/>
         </HostList>
         <LocaleList>
             <Locale Code="All"/>
