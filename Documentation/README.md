@@ -11,4 +11,4 @@ The page provides links to [get started](https://github.com/Adobe-CEP/Getting-St
 * [Getting Started Guides](https://github.com/Adobe-CEP/Getting-Started-guides)
 * [CEP Releases](https://github.com/Adobe-CEP/CEP-Resources/releases)
 
-For older CEP versions 4.x to 7.x follow [link](./README_ArchivedVersions.md)
+For older CEP versions 4.x to 7.x follow [link](../README_ArchivedVersions.md)
