@@ -19,7 +19,7 @@ Resources you will need include:
 
 ---
 
-For developing CEP 10.0 HTML/JavaScript extensions for CC 2021.x host applications
+For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host applications
 
 **Documentation**
 
