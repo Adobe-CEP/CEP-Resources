@@ -1,0 +1,796 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html>
+<head>
+<title>Vulcan JavaScript Test</title>
+<style type="text/css">
+    /*** central column on page ***/
+    div#divContainer
+    {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: Calibri;
+        padding: 0.5em 1em 1em 1em;
+
+        /* rounded corners */
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+        /* add box shadows */
+        -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        z-index: 1;
+    }
+    h1 {color:#FFE47A; font-size:1.5em;}
+
+    /*** sample table to demonstrate CSS3 formatting ***/
+    table.formatHTML5 {
+        width: 100%;
+        border-collapse:collapse;
+        text-align:left;
+        color: #606060;
+    }
+
+    table.formatHTML5 thead tr {
+        display: block;
+    }
+
+    table.formatHTML5 tbody {
+        display: block;
+        height: 260px;
+        overflow: auto;
+    }
+
+    table.formatHTML5 thead th, table.formatHTML5 tbody td {
+        width: 20%;
+    }
+
+    table.formatHTML5 thead th + th, table.formatHTML5 tbody td + td {
+        width: 50%;
+    }
+
+    table.formatHTML5 thead th + th + th, table.formatHTML5 tbody td + td + td {
+        width: 10%;
+    }
+
+    table.formatHTML5 thead th + th + th + th, table.formatHTML5 tbody td + td + td + td {
+        width: 10%;
+    }
+
+    table.formatHTML5 thead th + th + th + th + th, table.formatHTML5 tbody td + td + td + td + td {
+        width: 10%;
+    }
+    
+    /*** table's thead section, head row style ***/
+    table.formatHTML5 thead tr td  {
+        /*background-color: White;*/
+        vertical-align:middle;
+        padding: 0.6em;
+        font-size:0.8em;
+    }
+
+    /*** table's thead section, coulmns header style ***/
+    table.formatHTML5 thead tr th
+    {
+        padding: 0.5em;
+        background: -moz-linear-gradient(top, #606060, #909090);
+        color: #dadada;
+    }
+
+    /*** table's tbody section, odd rows style ***/
+    table.formatHTML5 tbody tr:nth-child(odd) {
+       background-color: #fafafa;
+    }
+
+    /*** hover effect to table's tbody odd rows ***/
+    table.formatHTML5 tbody tr:nth-child(odd):hover
+    {
+        cursor:pointer;
+        /* add gradient */
+        background-color: #808080;
+        background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#909090));
+        background: -moz-linear-gradient(top, #606060, #909090);
+        color: #dadada;
+    }
+
+    /*** table's tbody section, even rows style ***/
+    table.formatHTML5 tbody tr:nth-child(even) {
+        background-color: #efefef;
+    }
+
+    /*** hover effect to apply to table's tbody section, even rows ***/
+    table.formatHTML5 tbody tr:nth-child(even):hover
+    {
+        cursor:pointer;
+        /* add gradient */
+        background-color: #808080;
+        background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#909090));
+        background: -moz-linear-gradient(top, #606060, #909090);
+        color: #dadada;
+    }
+
+   /*** table's tbody section, last row style ***/
+    table.formatHTML5 tbody tr:last-child {
+         border-bottom: solid 1px #404040;
+    }
+
+    /*** table's tbody section, separator row pseudo-class ***/
+    table.formatHTML5 tbody tr.separator {
+        /* add gradient */
+        background-color: #808080;
+        background: -webkit-gradient(linear, left top, left bottom, from(#606060), to(#909090));
+        background: -moz-linear-gradient(top, #606060, #909090);
+        color: #dadada;
+    }
+
+    /*** table's td element, all section ***/
+    table.formatHTML5 td {
+       vertical-align:middle;
+       padding: 0.5em;
+    }
+
+    /*** table's tfoot section ***/
+    table.formatHTML5 tfoot{
+        text-align:center;
+        color:#303030;
+        text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+    }
+</style>
+<script src="../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script type="text/javascript" src="../js/Vulcan.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../js/JQuery/jquery-ui-1.9.1.custom.min.js"></script>
+<link type="text/css" href="../css/jquery-ui-1.9.1.custom.css/ui-darkness/jquery-ui-1.9.1.custom.css" rel="stylesheet"/>
+<script type="text/javascript"> 
+    var refreshCount = 0;
+    var refreshFlag = false;
+
+    var testVulcanMessage = new VulcanMessage(VulcanMessage.TYPE_PREFIX + "test");
+    var testAAMSignInMessage = new VulcanMessage(VulcanMessage.TYPE_PREFIX + "com.adobe.aam.AAMIMSStatus");
+    var testAAMSignOutMessage = new VulcanMessage(VulcanMessage.TYPE_PREFIX + "com.adobe.aam.AAMSIGNOUTStatus");
+    
+    // custom event initialization
+    var customEventType = "vulcan.SuiteMessage.customEvent";    
+    var customEventPayload = "custom message payload";
+    var customMessage = new VulcanMessage(customEventType);    
+    var customEvent = new Object();
+    customEvent.type = customEventType;
+    customEvent.payload = customEventPayload;
+    customEvent.flag = true;
+    // the first three events are hard-coded
+    var customEventArr = new Array(3);
+    var customEventAddPayload = false;
+
+    var stopDispatchingVar = null;
+    var receivedMsgNum = 0;
+	
+	var stopDispatchingP2PVar = null;
+	var receivedMsgNumP2P = 0;
+	var endPointList = null;
+    
+    // Note: In Windows 7 64-bit or Windows 8 64-bit system, some target applications (like Photoshop and Illustrator) have both 32-bit version 
+    // and 64-bit version. Therefore, we need to specify the version by "photoshop-70.032" or "photoshop-70.064". If you 
+    // installed Photoshop 32-bit and 64-bit on one Windows 64-bit system and invoke Vulcan interface like isAppRunning() with parameter                
+    // "photoshop-70.032", you may receive wrong result.
+    // In other platforms there is no such issue, so we can use "photoshop" or "photoshop-70" as specifier.
+    
+    $(document).ready(function() {
+        $("#EventsGreenLightImg1").hide();
+        $("#EventsGreenLightImg2").hide();
+        $("#EventsGreenLightImg3").hide();
+        
+        document.getElementById('EventScope').innerHTML = testVulcanMessage.scope;
+        document.getElementById('EventScope2').innerHTML = testAAMSignInMessage.scope;
+        document.getElementById('EventScope3').innerHTML = testAAMSignOutMessage.scope;
+        
+        document.getElementById('EventType').innerHTML = testVulcanMessage.type;
+        document.getElementById('EventType2').innerHTML = testAAMSignInMessage.type;
+        document.getElementById('EventType3').innerHTML = testAAMSignOutMessage.type;
+    });
+
+    function PP(name) {
+        this.name = name;
+        this.path = "";
+        this.isinstalled = "";
+        this.isrunning = "";
+    }
+
+    function updateRefreshCount()
+    {
+        var refreshCountLabel = document.getElementById("refreshCountLabel");
+        refreshCountLabel.innerHTML = "Refreshed " + refreshCount + " time(s)";
+    }
+
+    function refreshTable()
+    {
+        var ppArray = new Array();
+        var targetSpecifiers = VulcanInterface.getTargetSpecifiers();
+        for (var i = 0; i < targetSpecifiers.length; i++)
+        {
+            var element = new PP(targetSpecifiers[i]);
+            element.path = VulcanInterface.getAppPath(element.name);
+            element.isinstalled = VulcanInterface.isAppInstalled(element.name) ? "true" : "false";
+            element.isrunning = VulcanInterface.isAppRunning(element.name) ? "true" : "false";
+            ppArray[i] = element;
+        }
+
+        clearTableContent();
+
+        var tb = document.getElementById("tablebody");
+        for(var i = 0; i < ppArray.length; i++)
+        {
+            var row = tb.insertRow(-1); 
+
+            var cell1 = row.insertCell(-1); 
+            var cell2 = row.insertCell(-1);  
+            var cell3 = row.insertCell(-1);
+            var cell4 = row.insertCell(-1);    
+            var cell5 = row.insertCell(-1);    
+      
+            cell1.innerHTML = ppArray[i].name;   
+            cell2.innerHTML = ppArray[i].path;
+            cell3.innerHTML = ppArray[i].isinstalled;
+            cell4.innerHTML = ppArray[i].isrunning;
+            cell5.innerHTML = "<button onclick=launch('" + ppArray[i].name + "')>launch</button>";
+        }
+
+        refreshCount++;
+        updateRefreshCount();
+    }
+
+    function refreshTableAgain()
+    {
+        if (refreshFlag)
+        {
+            refreshTable();
+            setTimeout(refreshTableAgain, 1000);
+        }
+    }
+
+    function refreshRepeatedly()
+    {
+        refreshFlag = true;
+        refreshTableAgain();
+
+        RefreshButton.disabled = true;
+        RefreshRepeatedlyButton.disabled = true;
+        StopRefreshButton.disabled = false;
+    }
+
+    function stopRefresh()
+    {
+        refreshFlag = false;
+
+        RefreshButton.disabled = false;
+        RefreshRepeatedlyButton.disabled = false;
+        StopRefreshButton.disabled = true;
+    }
+
+    function clearTableContent()
+    {
+        var tb = document.getElementById("tablebody");
+        var len = tb.rows.length;
+        for (var i = len - 1; i >= 0; i--)
+        {
+            tb.deleteRow(i);
+        }
+    }
+
+    function clearTable()
+    {
+        clearTableContent();
+
+        refreshCount = 0;
+        updateRefreshCount();
+    }
+
+    function launch(name) {
+        VulcanInterface.launchApp(name, true, "");
+    }
+
+    function eventsClearReceivedEvents() {
+        for (var i = 0; i < customEventArr.length; i++){    
+            var temp = i + 1;
+            $("#EventsGreenLightImg" + temp).hide();
+            document.getElementById("payload" + temp).innerHTML = "";
+        };  
+    }
+
+    var callback = function (message) {
+        $("#EventsGreenLightImg1").show();    
+        document.getElementById("payload1").innerHTML = VulcanInterface.getPayload(message);
+    };
+    
+    var callback2 = function (message) {
+        $("#EventsGreenLightImg2").show();    
+        document.getElementById("payload2").innerHTML = VulcanInterface.getPayload(message);
+    };
+    
+    var callback3 = function (message) {
+        $("#EventsGreenLightImg3").show();    
+        document.getElementById("payload3").innerHTML = VulcanInterface.getPayload(message);
+    };
+
+    var callback4 = function (message) {
+        // TODO I have to copy the message, otherwise message.toString() does not work.
+        var msg = new VulcanMessage(message.type);
+        msg.initialize(message);
+
+        var display = ReceivedMessages.value;
+        display += "Received msg " + receivedMsgNum++ + ": " + msg.toString() + ", payload=" + msg.getPayload() + "\n";
+        if (display.length > 8192) {
+            display = display.substr(display.length - 8192);
+        }
+        ReceivedMessages.value = display;
+        ReceivedMessages.scrollTop = ReceivedMessages.scrollHeight;
+    };
+
+    function dispatchVulcanMessage() {
+        testVulcanMessage.setPayload("To be or not to be that is a question!");
+        VulcanInterface.dispatchMessage(testVulcanMessage);
+    }
+
+    function dispatchOneMessage() {
+        var message = new VulcanMessage(MessageType.value);
+        message.setPayload(MessagePayload.value);
+        VulcanInterface.dispatchMessage(message);
+    }
+
+    function dispatchRepeatedly() {
+        stopDispatchingVar = setInterval(dispatchOneMessage, 500);
+        DispatchButton.disabled = true;
+        DispatchRepeatedlyButton.disabled = true;
+        StopDispatchingButton.disabled = false;
+    }
+
+    function stopDispatching() {
+        clearInterval(stopDispatchingVar);
+        stopDispatchingVar = null;
+        DispatchButton.disabled = false;
+        DispatchRepeatedlyButton.disabled = false;
+        StopDispatchingButton.disabled = true;
+    }
+
+    function clearReceivedMessages() {
+        ReceivedMessages.value = null;
+    }
+
+    function onCheckBoxClick() {
+        if(EventsCheckBox.checked) {
+            VulcanInterface.addMessageListener(testVulcanMessage.type, callback);
+        } else {
+            VulcanInterface.removeMessageListener(testVulcanMessage.type, callback);
+        }
+    }
+    
+    function onCheckBoxClick2() {
+        if(EventsCheckBox2.checked) {
+            VulcanInterface.addMessageListener(testAAMSignInMessage.type, callback2);
+        } else {
+            VulcanInterface.removeMessageListener(testAAMSignInMessage.type, callback2);
+        }
+    }
+    
+    function onCheckBoxClick3() {
+        if(EventsCheckBox3.checked) {
+            VulcanInterface.addMessageListener(testAAMSignOutMessage.type, callback3);
+        } else {
+            VulcanInterface.removeMessageListener(testAAMSignOutMessage.type, callback3);
+        }
+    }
+    
+    function onListenBoxClick() {
+        if(ListenCheckBox.checked) {
+            VulcanInterface.addMessageListener(MessageType.value, callback4);
+        } else {
+            VulcanInterface.removeMessageListener(MessageType.value, callback4);
+        }
+    }
+
+    function onClickAddNewEventBtn() {
+        $("#CustomEventDiv").dialog({
+            autoOpen: true,
+            bgiframe: true,
+            width: 420,
+            modal:true,  
+            title: "Add new message",
+                
+            buttons: {
+                "Add": function() {
+                    onClickAddNewEventDlgBtn();
+                    $(this).dialog("close");},
+                "Cancel": function() {
+                    $(this).dialog("close");}                        
+                }
+            });
+            
+        $("#AddpayloadTextArea").html(customEventPayload);
+        $("#CustomEventDiv").dialog("open");
+    };    
+
+    function onCustomEventCheckBoxClick(index) {
+        if(document.getElementById("EventsCheckBox" + index).checked) {
+            VulcanInterface.addMessageListener(customEventArr[index-1].type, function (message) {
+                if (customEventArr[index-1].flag) {
+                    $("#" + "EventsGreenLightImg" + index).show(); 
+                    document.getElementById("payload" + index).innerHTML = VulcanInterface.getPayload(message);                
+                }
+            });
+            customEventArr[index-1].flag = true;
+        } else {
+            VulcanInterface.removeMessageListener(customEventArr[index-1].type);     
+            customEventArr[index-1].flag = false;            
+        }
+    }
+    
+    function onCustomEventAddpayloadClick() {
+        if("checked" == $("#Addpayload").attr("checked")) {
+            customEventAddPayload = true;
+        } else {
+            customEventAddPayload = false;
+        }
+    };    
+
+    function onCustomEventDispatchBtnClick(index) {        
+        customMessage.type = customEventArr[index-1].type;
+        customMessage.setPayload(customEventArr[index-1].payload);
+        
+        VulcanInterface.dispatchMessage(customMessage);
+    }    
+    
+    function onClickAddNewEventDlgBtn() {
+        customEventType = $("#CustomEventType").val();        
+        if(customEventAddPayload) {
+            customEventPayload = $("#AddpayloadTextArea").val();    
+        } else {
+            customEventPayload = "";
+        }        
+
+        var customEvent = new Object();
+        customEvent.type = customEventType;
+        customEvent.payload = customEventPayload;
+        customEvent.flag = true;
+        customEventArr.push(customEvent);
+        var arrLength = customEventArr.length;    
+    
+        var row = document.getElementById("eventsTable").insertRow(-1);     
+        var cell1 = row.insertCell(-1); 
+        var cell2 = row.insertCell(-1);  
+        var cell3 = row.insertCell(-1);
+        var cell4 = row.insertCell(-1);    
+        var cell5 = row.insertCell(-1);   
+        var cell6 = row.insertCell(-1);           
+  
+        cell1.align = "center";
+        cell3.align = "center";
+        cell4.align = "center";
+        cell5.align = "center";
+        cell1.innerHTML = "GLOBAL";   		
+        cell2.innerHTML = customEventType;
+        cell3.innerHTML = "<input type='checkbox' id='EventsCheckBox" + arrLength + "'onclick=onCustomEventCheckBoxClick(" + arrLength + ")></input>";
+        cell4.innerHTML = "<button onclick=onCustomEventDispatchBtnClick(" + arrLength + ")>Dispatch</button>";
+        cell5.innerHTML = "<input type='image' name='EventsGreenLightImg" + arrLength + "' id='EventsGreenLightImg" + arrLength + "'src='../img/greenLED.png'></input>";    
+        $("#" + "EventsGreenLightImg" + arrLength).hide(); 
+        cell6.innerHTML = "<label id='payload" + arrLength + "'></label></td>";    
+    };
+	
+    var callback5 = function (message) {
+        // TODO I have to copy the message, otherwise message.toString() does not work.
+        var msg = new VulcanMessage(message.type);
+        msg.initialize(message);
+
+        var display = ReceivedMessagesP2P.value;
+        display += "Received msg " + receivedMsgNumP2P++ + ": " + msg.toString() + ", payload=" + msg.getPayload() + "\n";
+        if (display.length > 8192) {
+            display = display.substr(display.length - 8192);
+        }
+        ReceivedMessagesP2P.value = display;
+        ReceivedMessagesP2P.scrollTop = ReceivedMessagesP2P.scrollHeight;
+    };
+	
+    function onListenBoxClickP2P() {
+        if(P2PListenCheckBox.checked) {
+            VulcanInterface.addMessageListener(P2PMessageType.value, callback5);
+        } else {
+            VulcanInterface.removeMessageListener(P2PMessageType.value, callback5);
+        }
+    };
+	
+    function getEndPoint() {
+        endPointList = VulcanInterface.getEndPoints();
+		var selfEndPoint = VulcanInterface.getSelfEndPoint();
+		
+		$("#selfEndPoint").val(selfEndPoint);
+		
+		var list = document.getElementById("EndPointList");
+        // clean listbox
+        while (list.firstChild)
+        {
+            list.removeChild(list.firstChild);
+        }
+        // insert all elements to listbox
+        for (i = 0; i < endPointList.length; i++)
+        {
+            var option = document.createElement("option");
+            option.value = i;
+            option.appendChild(document.createTextNode(endPointList[i]));
+            list.appendChild(option);
+        }
+    };
+	
+    function dispatchMessageP2P() {
+		var list = document.getElementById("EndPointList");
+		var appId = GetValueByKey(endPointList[list.selectedIndex], "appId");
+		var appVersion = GetValueByKey(endPointList[list.selectedIndex], "appVersion");
+		
+        var message = new VulcanMessage(P2PMessageType.value, appId, appVersion);
+        message.setPayload(P2PMessagePayload.value);
+        VulcanInterface.dispatchMessage(message);
+    };
+
+    function dispatchRepeatedlyP2P() {
+        stopDispatchingP2PVar = setInterval(dispatchMessageP2P, 500);
+        DispatchP2PButton.disabled = true;
+        DispatchRepeatedlyP2PButton.disabled = true;
+        StopDispatchingP2PButton.disabled = false;
+    };
+
+    function stopDispatchingP2P() {
+        clearInterval(stopDispatchingP2PVar);
+        stopDispatchingP2PVar = null;
+        DispatchP2PButton.disabled = false;
+        DispatchRepeatedlyP2PButton.disabled = false;
+        StopDispatchingP2PButton.disabled = true;
+    };
+	
+    function clearReceivedMessagesP2P() {
+        ReceivedMessagesP2P.value = null;
+    };
+</script>
+</head>
+
+<body>
+    <!-- CENTTERED COLUMN ON THE PAGE-->
+    <div id="TabbedPanelVulcan" class="TabbedPanels">
+      <ul class="TabbedPanelsTabGroup">
+        <li class="TabbedPanelsTab" tabindex="0">Vulcan Control</li>
+        <li class="TabbedPanelsTab" tabindex="0">Vulcan Messages</li>
+        <li class="TabbedPanelsTab" tabindex="0">Vulcan Messages (2)</li>
+		<li class="TabbedPanelsTab" tabindex="0">Vulcan Messages (3)</li>
+      </ul>
+  
+    <div class="TabbedPanelsContentGroup">
+    <!------------------------------>
+    <!-- Vulcan Control tab begin -->
+    <!------------------------------>
+    <div class="TabbedPanelsContent" id="divContainer">
+      <label style="color: #FFF"><strong>All Applications:</strong></label>
+
+      <table class="formatHTML5" id="pptable">
+        <thead>
+          <tr>
+            <th>Specifier</th><th>Installation Path</th><th>IsInstalled</th><th>IsRunning</th><th>Launch</th>
+          </tr>
+        </thead>
+ 
+        <tbody id = "tablebody">
+        </tbody>
+      </table>
+
+      <label style="color: #FFF" id="refreshCountLabel">Refreshed 0 time(s)</label>
+      <br>
+      <input type="button" id="RefreshButton" value="Refresh" onClick="refreshTable()"/>
+      <input type="button" id="RefreshRepeatedlyButton" value="Refresh Repeatedly" onClick="refreshRepeatedly()"/>
+      <input type="button" id="StopRefreshButton" value="Stop" onClick="stopRefresh()" disabled="true"/>
+      <input type="button" value="Clear" onClick="clearTable()"/>
+    </div>
+    <!---------------------------->
+    <!-- Vulcan Control tab end -->
+    <!---------------------------->
+
+    <!------------------------------>
+    <!-- Vulcan Message tab begin -->
+    <!------------------------------>
+    <div class="TabbedPanelsContent" id="divContainer">
+      <div id="buttonDiv">
+        <table width="251" border="0">
+          <tr>
+            <td width="74" valign="bottom"><label style="color: #FFF"><strong>Operations:</strong></label>&nbsp;</td>
+            <td width="142"><input type="button" name="EventsClearReceivedEvents" id="EventsClearReceivedEvents" value="Clear Received Messages" onClick="eventsClearReceivedEvents()"/></td>
+          </tr>
+        </table>
+      </div>  
+      <div id="eventDiv"><label style="color: #FFF"><strong>Events:</strong></label></div>
+      <div>
+        <table width="auto" border="1" id="eventsTable" style="color: #fff;">
+          <tr>
+            <th width="42" scope="col">Scope</th>
+            <th width="34" scope="col">Type</th>
+            <th width="76" scope="col">Listen?</th>
+            <th width="61" scope="col">Dispatch</th>
+            <th width="205" scope="col">Received Messages</th>
+            <th width="300" scope="col">Payload</th>
+          </tr>
+          <tr>
+              <td align="center"><label id="EventScope"></label></td>
+            <td><label id="EventType"></label></td>
+            <td align="center"><input type="checkbox" name="EventsCheckBox" id="EventsCheckBox" onClick="onCheckBoxClick()"/></td>
+            <td><input type="button" name="EventsDispatch" id="EventsDispatch" value="Dispatch" onClick="dispatchVulcanMessage()"/></td>
+            <td align="center"><input type="image" name="EventsGreenLightImg1" id="EventsGreenLightImg1" src="../img/greenLED.png"/></td>
+            <td align="center"><label id="payload1"></label></td>
+          </tr>
+          <tr>
+              <td align="center"><label id="EventScope2"></label></td>
+            <td><label id="EventType2"></label></td>
+            <td align="center"><input type="checkbox" name="EventsCheckBox2" id="EventsCheckBox2" onClick="onCheckBoxClick2()"/></td>
+            <td></td>
+            <td align="center"><input type="image" name="EventsGreenLightImg2" id="EventsGreenLightImg2" src="../img/greenLED.png"/></td>
+              <td align="center"><label id="payload2"></label></td>
+          </tr>
+          <tr>
+              <td align="center"><label id="EventScope3"></label></td>
+            <td><label id="EventType3"></label></td>
+            <td align="center"><input type="checkbox" name="EventsCheckBox3" id="EventsCheckBox3" onClick="onCheckBoxClick3()"/></td>
+            <td></td>
+            <td align="center"><input type="image" name="EventsGreenLightImg3" id="EventsGreenLightImg3" src="../img/greenLED.png"/></td>
+              <td align="center"><label id="payload3"></label></td>
+          </tr>
+      </div>
+      <div>
+        <table>
+          <tr>
+            <td width="600"></td>
+            <td>
+              <button type="button" id="AddNewEventBtn" onclick="onClickAddNewEventBtn()">Add new message</button>
+            </td>
+          </tr>        
+        </table>
+      </div>
+    </div>
+    <!---------------------------->
+    <!-- Vulcan Message tab end -->
+    <!---------------------------->    
+
+    <!---------------------------------->
+    <!-- Vulcan Message (2) tab begin -->
+    <!---------------------------------->
+    <div class="TabbedPanelsContent" id="VulcanMessage2DivContainer">
+      <br>
+      <label style="color: #FFF"><strong>Send Broadcast Messages:</strong></label>
+      <table width="100%" border="1" id="eventsTable" style="color: #fff;">
+        <tr>
+          <th scope="col">Scope</th>
+          <th scope="col">Type</th>
+          <th scope="col">Payload</th>
+          <th scope="col">Listen?</th>
+          <th scope="col">Actions</th>
+        </tr>
+        <tr>
+          <td align="center"><label>GLOBAL</label></td>
+          <td><input type="text" id="MessageType" size="33" value="vulcan.SuiteMessage.customEvent"/></td>
+          <td><textarea type="text" id="MessagePayload" cols="25" rows="3">some data</textarea></td>
+          <td><input type="checkbox" id="ListenCheckBox" onClick="onListenBoxClick()"/></td>
+          <td>
+            <input type="button" id="DispatchButton" value="Dispatch" onClick="dispatchOneMessage()"/>
+            <input type="button" id="DispatchRepeatedlyButton" value="Dispatch Repeatedly" onClick="dispatchRepeatedly()"/>
+            <input type="button" id="StopDispatchingButton" value="Stop" onClick="stopDispatching()" disabled="true"/>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <label style="color: #FFF"><strong>Received Messages:</strong></label>
+      <br>
+      <textarea id="ReceivedMessages" cols="80" rows="14"></textarea>
+      <br>
+      <input type="button" value="Clear Received Messages" onclick="clearReceivedMessages()"/>
+    </div>
+    <!-------------------------------->
+    <!-- Vulcan Message (2) tab end -->
+    <!-------------------------------->
+	
+    <!---------------------------------->
+    <!-- Vulcan Message (3) tab begin -->
+    <!---------------------------------->
+    <div class="TabbedPanelsContent" id="VulcanMessage3DivContainer">
+      <br>
+      <label style="color: #FFF"><strong>Send Point-to-Point Messages:</strong></label>
+      <table width="100%" border="1" id="eventsTable" style="color: #fff;">
+        <tr>
+          <th scope="col">EndPoints</th>
+          <th scope="col">self EndPoint</th>
+          <th scope="col">Type</th>
+          <th scope="col">Payload</th>
+		  <th scope="col">Listen?</th>
+          <th scope="col">Actions</th>
+        </tr>
+        <tr>
+          <td><select name="EndPointList" id="EndPointList" style="width:100px" /></td>
+          <td><input type="text" id="selfEndPoint" readonly="readonly" style="width:100px" /></td>
+          <td><input type="text" id="P2PMessageType" value="vulcan.SuiteMessage.customEvent"/></td>
+          <td><textarea type="text" id="P2PMessagePayload" rows="4">some data</textarea></td>
+		  <td><input type="checkbox" id="P2PListenCheckBox" onClick="onListenBoxClickP2P()"/></td>
+          <td>
+            <input type="button" id="GetEndPointButton" value="GetEndPoint" onClick="getEndPoint()"/>
+            <input type="button" id="DispatchP2PButton" value="Dispatch" onClick="dispatchMessageP2P()"/>
+            <input type="button" id="DispatchRepeatedlyP2PButton" value="Dispatch Repeatedly" onClick="dispatchRepeatedlyP2P()"/>
+            <input type="button" id="StopDispatchingP2PButton" value="Stop" onClick="stopDispatchingP2P()" disabled="true"/>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <label style="color: #FFF"><strong>Received Messages:</strong></label>
+      <br>
+      <textarea id="ReceivedMessagesP2P" cols="80" rows="14"></textarea>
+      <br>
+      <input type="button" value="Clear Received Messages" onclick="clearReceivedMessagesP2P()"/>
+    </div>
+    <!-------------------------------->
+    <!-- Vulcan Message (3) tab end -->
+    <!-------------------------------->
+
+    <!--------------------------------------->
+    <!-- Add Custom Event dialog div begin -->
+    <!--------------------------------------->    
+    <div id="CustomEventDiv" style="font-size:14px;">
+      <table width="380" border="0">
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td width="82"><label>Message Type:</label></td>
+          <td width="208"><form id="form2" name="form2" method="post" action="">
+          <label for="CustomEventType"></label>
+          <textarea name="CustomEventType" id="CustomEventType" cols="30" rows="1">vulcan.SuiteMessage.customEvent</textarea>
+          </form></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      
+      <table width="200" border="0">
+        <tr>
+          <td><form id="form3" name="form3" method="post" action="">
+            <input type="checkbox" name="Addpayload" id="Addpayload" onclick="onCustomEventAddpayloadClick()"/>
+            <label for="Addpayload"></label>Add payload:</form></td>
+        </tr>
+        <tr>
+          <td><form id="form4" name="form4" method="post" action="">
+            <label for="AddpayloadTextArea"></label>
+            <textarea name="AddpayloadTextArea" id="AddpayloadTextArea" cols="45" rows="3"></textarea>
+          </form></td>
+        </tr>
+      </table>      
+    </div>        
+    <!------------------------------------->
+    <!-- Add Custom Event dialog div end -->
+    <!------------------------------------->
+
+    </div>
+    </div>
+    <script type="text/javascript">
+        var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanelVulcan");
+    </script>
+</body>
+
+</html>
