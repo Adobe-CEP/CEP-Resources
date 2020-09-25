@@ -6,7 +6,8 @@ CEP 10 Known Issues
 ## Issue 1 :
   Drag events not fired while debugging an extensions. 
     
-    Workaround: Deactivate the screencast by selecting the "Toggle device Toolbar" in the chrome inspect window. Once done, Drag operation can be performed even while debugging the extension. 
+    Workaround: Deactivate the screencast by selecting the "Toggle device Toolbar" in the chrome inspect window. 
+    Once done, Drag operation can be performed even while debugging the extension. 
   ![Toggle device Toolbar](./images/dragDebug.png)
 
 ## Issues existing in both CEP 9 and CEP 10  
