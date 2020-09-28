@@ -2271,10 +2271,11 @@ One important thing to note is that not all host applications support Invisible 
 |Photoshop|	Yes|	 
 |Premiere Pro|	Yes|	 
 |Prelude	|Yes	 |
+|After Effects	|Yes	 |
 |Animate (Flash Pro)|	Yes	 |
 |Audition|	Yes|	 
-|InDesign|	No|	Doesn't work at all because InDesign doesn't support 'Custom' window type.|
-|InCopy|	No|	Doesn't work at all because InCopy doesn't support 'Custom' window type.|
+|InDesign|	Yes|	However, as of 2019 you must include a width and height.|
+|InCopy|	Yes|	However, as of 2019 you must include a width and height.|
 |Illustrator|	Yes|	|
 
 
