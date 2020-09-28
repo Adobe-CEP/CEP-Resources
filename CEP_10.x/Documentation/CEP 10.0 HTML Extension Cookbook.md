@@ -44,7 +44,7 @@ These applications support CEP HTML extensions. (For older applications, [see th
 |InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)|[Prerelease](https://medium.com/adobetech/cep-10-be-sure-to-test-in-prerelease-builds-this-month-a4e3df558571) (CEP 10 ) |
 |InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)|[Prerelease](https://medium.com/adobetech/cep-10-be-sure-to-test-in-prerelease-builds-this-month-a4e3df558571) (CEP 10 ) |
 |Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)|[Prerelease](https://medium.com/adobetech/cep-10-be-sure-to-test-in-prerelease-builds-this-month-a4e3df558571) (CEP 10) |
-|Premiere Pro|	PPRO|	23 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) |
+|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) |
 |Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)|TBD|
 |After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) |
 |Animate |FLPR|19 (CEP 9)|20 (CEP 9)|[Prerelease](https://medium.com/adobetech/cep-10-be-sure-to-test-in-prerelease-builds-this-month-a4e3df558571) (CEP 10) |
