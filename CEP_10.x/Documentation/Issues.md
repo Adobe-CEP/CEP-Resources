@@ -1,4 +1,4 @@
-CEP 10 Known Issues 
+CEP 10 Known Issues & FAQ
 ====================
 
 ### Following are the known issues in CEP 10.0. Please keep these in mind while creating your own extension...
@@ -8,12 +8,23 @@ CEP 10 Known Issues
     
     Workaround: Deactivate the screencast by selecting the "Toggle device Toolbar" in the chrome inspect window. 
     Once done, Drag operation can be performed even while debugging the extension. 
-  ![Toggle device Toolbar](./images/dragDebug.png)
+  ![Toggle device Toolbar](./images/issues/dragDebug.png)
 
 ## Issues existing in both CEP 9 and CEP 10  
     
     ### Issue 1: 
-    cep.fs.stat() - Not able to access file of size greater than 4GB 
+    In Windows, the API cep.fs.stat() is not able to access file of size greater than 4GB 
 
-    ### Issue 2:
-    Few extensions are displayed truncated on Windows 10
+
+---
+
+## FAQ 
+
+* **If similar error is seen in debug console, following could be the reason**
+
+    ![require not function](./images/issues/requireNotFunction.png)
+
+    * Confirm CEPEngine_extensions.js is NOT integrated in your extension
+
+    * Node could be crashing. Please update node_modules with CEP 10 supported [node version](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef)
+
