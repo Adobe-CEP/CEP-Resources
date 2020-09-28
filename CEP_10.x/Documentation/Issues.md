@@ -30,7 +30,6 @@ CEP 10 Known Issues & FAQ
 
     * Node could be crashing. Please update node_modules with CEP 10 supported [node version](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef). 
    
-    * Verify the migrations pointers from [CEP 9 to CEP 10](https://github.com/Adobe-CEP/CEP-Resources/blob/cep10knownissues/CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#migration-from-cep-9-to-cep-10)
 
     
 
