@@ -50,8 +50,8 @@ These applications support CEP HTML extensions. (For older applications, [see th
 |Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) |
 |Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) |
 |Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)|
-|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    |TBD |
-|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  |1.5.29 (CEP 10) |
+|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) |
+|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) |
 
 ---
 
