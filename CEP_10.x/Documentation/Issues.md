@@ -20,7 +20,7 @@ CEP 10 Known Issues & FAQ
 
 ## FAQ 
 
-*  **Refer the migration Guidelines for [CEP 9 to CEP 10](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#migration-from-cep-9-to-cep-10)**
+*  **Refer the migration Guidelines for [CEP 9 to CEP 10](./CEP%2010.0%20HTML%20Extension%20Cookbook.md#migration-from-cep-9-to-cep-10)**
 
 *  **If similar error is seen in debug console, confirm\verfiy the following**
 
