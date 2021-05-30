@@ -3,11 +3,11 @@ Getting Started with Common Extensibility Platform (CEP)
 
 This page provides the resources you need to [get started](https://github.com/Adobe-CEP/Getting-Started-guides) in order to create extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in Creative Cloud releases; Support has already been removed from CC2014 and later releases.
 
-* CEP 10 is available for developing extensions and add-ons in latest vesions of Creative Cloud Applications. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 10.
+* CEP 11 is available for developing extensions and add-ons in latest vesions of Creative Cloud Applications. Refer to the [table](./CEP_11.x/Documentation/CEP%2011.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 10.) for Creative Cloud products integration with CEP 11.
 
-* Creative Cloud 2019 products include CEP 9 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2019 products integration with CEP 9.
+* CEP 10 is available for developing extensions and add-ons in latest vesions of Creative Cloud Applications. Refer to the [table](./CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 10.
 
-* Creative Cloud 2018 products include CEP 8 for developing extensions and add-ons. Refer to the [table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2018 product integration with CEP 8.
+* Creative Cloud 2019 products include CEP 9 for developing extensions and add-ons. Refer to the [table](./CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for 2019 products integration with CEP 9.
 
 
 This SDK provides the low-level tools that you need to build extensions. Extensions that you build using these tools must be packaged as ZXP files in order to be seen and loaded by Extension Manager. You can offer extensions as free or paid products through our marketing portals (Adobe Exchange, the Add-ins website, the Creative Cloud desktop app). When you do this, you upload the extension to Adobe as a single ZXP file.
@@ -26,7 +26,7 @@ For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host appli
   * **[HTML Extension Cookbook](./Documentation/README.md)**
   
   * **APIs**
-    For CEP 10 and CEP 9 APIs:
+    For CEP 11 APIs:
       * Include these files in your extension project if you need to use the APIs.
           * CSInterface.js
           * Vulcan.js
