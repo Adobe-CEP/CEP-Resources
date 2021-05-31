@@ -44,14 +44,14 @@ These applications support CEP HTML extensions. (For older applications, [see th
 |InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) - pre-release |
 |InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) - pre-release  |
 |Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11) - pre-release  |
-|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11) - pre-release  |
-|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) - pre-release |
-|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11) - pre-release  |
+|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11) - upcoming pre-release  |
+|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) - upcoming pre-release |
+|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11) - upcoming pre-release  |
 |Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | TBD |
-|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11) - pre-release  |
+|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11) - upcoming pre-release  |
 |Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| TBD |
 |Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | TBD |
-|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) - pre-release |
+|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) - upcoming pre-release |
 
 ---
 
