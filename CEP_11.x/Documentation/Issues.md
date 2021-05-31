@@ -28,7 +28,7 @@ CEP 11 Known Issues & FAQ
 
     * Confirm CEPEngine_extensions.js is NOT integrated in your extension
 
-    * Node could be crashing. Please update node_modules with CEP 10 supported [node version](./CEP%2011.1%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef). 
+    * Node could be crashing. Please update node_modules with CEP 11 supported [node version](./CEP%2011.1%20HTML%20Extension%20Cookbook.md#chromium-embedded-framework-cef). 
    
 
     
