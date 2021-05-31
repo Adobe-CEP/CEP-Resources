@@ -1,0 +1,692 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/SpryAssets/SpryTabbedPanels.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script type="text/javascript" src="../js/spin.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<link href="../css/fly_out_menu.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+    var CSLibrary = new CSInterface();
+    function VideoForTest() {
+        var src;
+        var type;
+    }
+        
+    var videoArr = new Array();
+    videoArr[0] = new VideoForTest();
+    videoArr[0].src = "http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm";
+    videoArr[0].type = "video/webm; codecs='vp8, vorbis'";
+    videoArr[1] = new VideoForTest();
+    videoArr[1].src = "http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv";
+    videoArr[1].type = 'video/ogg; codecs="theora, vorbis"';
+    videoArr[2] = new VideoForTest();
+    videoArr[2].src = "http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4";
+    videoArr[2].type = "video/mp4";
+    videoArr[3] = new VideoForTest();
+    videoArr[3].src = "http://www.noiseaddicts.com/samples_1w72b820/4160.mp3";
+    videoArr[3].type = "audio/mpeg";
+    
+    var result;
+    var mediaType;
+    var cookieExpiry;
+
+    $(document).ready(function() {
+        // adjust layout on Windows
+        if ((CSLibrary.getOSInformation()).indexOf("Windows") > -1) {
+            $("#OpenURLInput").attr("size", "100");
+            $("#DisplayArea").attr("width", "728px");
+            $("#HTMLVideoSelect").attr("style", "width:630px");
+            $("#VideoArea").attr("width", "728px");
+        }
+
+        $("#OpenURL").click(function() {
+            $("#DisplayArea").attr("src", $("#OpenURLInput").val());
+        });
+        
+        $("#tooltips").click(function() {
+            $("#DisplayArea").attr("src", "http://www.a2zwebhelp.com/bootstrap-tooltips");
+            $("#OpenURLInput").attr("value", "http://www.a2zwebhelp.com/bootstrap-tooltips");
+        });
+        
+        $("#baidu").click(function() {
+           $("#DisplayArea").attr("src", "http://www.baidu.com");
+           $("#OpenURLInput").attr("value", "http://www.baidu.com");
+        });
+        
+        $("#html5").click(function() {
+            $("#DisplayArea").attr("src", "http://html5demos.com");
+            $("#OpenURLInput").attr("value", "http://html5demos.com");
+        });
+        
+        $("#google").click(function() {
+            $("#DisplayArea").attr("src", "http://www.google.com/custom");
+            $("#OpenURLInput").attr("value", "http://www.google.com/custom");
+        });
+        
+        $("#npapi").click(function() {
+            $("#DisplayArea").attr("src", "http://www.levitated.net/");
+            $("#OpenURLInput").attr("value", "http://www.levitated.net/");
+        });
+        
+        $("#JQueryUI").click(function() {
+            $("#DisplayArea").attr("src", "http://jqueryui.com");
+            $("#OpenURLInput").attr("value", "http://jqueryui.com");
+        });
+
+        $("#jsfiddle").click(function() {
+            $("#DisplayArea").attr("src", "http://jsfiddle.net");
+            $("#OpenURLInput").attr("value", "http://jsfiddle.net");
+        });
+        
+        $("#famo").click(function() {
+            $("#DisplayArea").attr("src", "http://famo.us");
+            $("#OpenURLInput").attr("value", "http://famo.us");
+        });
+
+        $("#behance").click(function() {
+            $("#DisplayArea").attr("src", "http://www.behance.net");
+            $("#OpenURLInput").attr("value", "http://www.behance.net");
+        });
+
+        $("#adobeTV").click(function() {
+            $("#DisplayArea").attr("src", "http://tv.adobe.com");
+            $("#OpenURLInput").attr("value", "http://tv.adobe.com");
+        });	
+        
+        $("#contextMenu").click(function() {
+            $("#DisplayArea").attr("src", "http://www.javascripttoolbox.com/lib/contextmenu/");
+            $("#OpenURLInput").attr("value", "http://www.javascripttoolbox.com/lib/contextmenu/");
+        });	
+        
+        $("#basicAuth").click(function() {
+            $("#DisplayArea").attr("src", "http://www.httpwatch.com/httpgallery/authentication/");
+            $("#OpenURLInput").attr("value", "http://www.httpwatch.com/httpgallery/authentication/");
+        });
+			
+		
+		$("#btnRunScript").click(function() {
+		    var scriptText = $("#JavaScriptCode").val();
+			var tmpFunc = new Function(scriptText);
+			tmpFunc();
+		});
+
+        $("#HTMLVideoSelect").change(function() {
+			$("#VideoSource").attr("src", videoArr[$("#HTMLVideoSelect").val()].src);
+            $("#VideoSource").attr("type", videoArr[$("#HTMLVideoSelect").val()].type);
+			$("#VideoArea").removeAttr("autoplay");
+			$("#VideoArea").removeAttr("loop");
+			$("#VideoArea").removeAttr("preload");
+			$("#VideoArea").attr("controls", "controls");
+			$("#autoplay").removeAttr("checked");
+			$("#loop").removeAttr("checked");
+			$("#preload").removeAttr("checked");
+			$("#controls").attr("checked", "checked");
+			$("#VideoArea").load();
+			
+			if (parseInt($("#HTMLVideoSelect").val()) < 3) {
+				mediaType = "Video";
+			} else {
+				mediaType = "Audio";
+			}
+			
+			if ("0" == $("#HTMLVideoSelect").val()) {
+				result = "This " + mediaType + " is not supported, it should not be able to play.";
+			} else {
+				result = "This " + mediaType + " is supported, it should play normally.";
+			}
+			$("#expectedResult").html(result);
+        });
+        
+        $("#graphic").click(function() {
+            $("#DisplayArea").attr("src", "http://ie.microsoft.com/testdrive");
+            $("#OpenURLInput").attr("value", "http://ie.microsoft.com/testdrive");
+        });
+        
+        // set spin widget.
+        var opts = {
+          lines: 15,        // The number of lines to draw
+          length: 12,       // The length of each line
+          width: 6,         // The line thickness
+          radius: 12,       // The radius of the inner circle
+          corners: 1,       // Corner roundness (0..1)
+          rotate: 58,       // The rotation offset
+          direction: 1,     // 1: clockwise, -1: counterclockwise
+          color: '#FFF',    // #rgb or #rrggbb or array of colors
+          speed: 1,         // Rounds per second
+          trail: 52,        // Afterglow percentage
+          shadow: false,    // Whether to render a shadow
+          hwaccel: false,   // Whether to use hardware acceleration
+          zIndex: 2e9,      // The z-index (defaults to 2000000000)
+          top: '10px',      // Top position relative to parent in px
+          left: '10px'      // Left position relative to parent in px
+        };
+        var target = document.getElementById('spin');
+        var spinner = new Spinner(opts).spin(target);
+        
+        // To show website for testing persistent cookies.
+        $("#btnShowSite").click(function() {
+            document.getElementById("CookieTestWeb").src 
+                = "http://www.w3schools.com/js/tryit.asp?filename=tryjs_cookie_username";
+        });
+        
+        // To create and retrieve file cookies.
+        $("#btnGetCookie").click(function() {
+            var result = "";
+            var name = $("#SessionCookieName").val() + "=";
+            var ca = document.cookie.split(';');
+            for (var i=0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) {
+                    result = c.substring(name.length, c.length);
+                    break;
+                }
+            }
+            $("#cookieOutput").html("Cookie found: " + result);
+        });
+        
+        $("#btnSetCookie").click(function() {
+            cookieExpiry = "";
+            var name = $("#SessionCookieName").val();
+            var value = $("#SessionCookieValue").val();
+            
+            if ($('#sessionCookieExpiry').attr('checked')) {
+                var d = new Date();
+                d.setTime(d.getTime() + (30*24*60*60*1000));
+                cookieExpiry = "; expires=" + d.toGMTString();
+            }
+            document.cookie = name + "=" + value + cookieExpiry;
+            $("#cookieOutput").html("Cookie Set!: " + name);
+        });
+		
+		$('#controls').click(function() {
+			if ($('#controls').attr('checked') != 'checked') {
+			    $('#VideoArea').removeAttr('controls');
+				$('#VideoArea').attr('autoplay', 'autoplay');
+				$('#autoplay').attr('checked', 'checked');
+			} else {
+			    $('#VideoArea').attr('controls', 'controls');
+				$('#autoplay').removeAttr('checked');
+				$('#VideoArea').removeAttr('autoplay');
+			}
+			$('#VideoArea').load();
+		});
+		
+		$('#loop').click(function() {
+			if ($('#loop').attr('checked') != 'checked') {
+				$('#VideoArea').removeAttr('loop');
+			} else {
+				$('#VideoArea').attr('loop', 'loop');
+			}
+			$('#VideoArea').load();
+		});
+		
+		$('#autoplay').click(function() {
+			if ($('#autoplay').attr('checked') != 'checked') {
+				$('#VideoArea').removeAttr('autoplay');
+			} else {
+				$('#VideoArea').attr('autoplay', 'autoplay');
+			}
+			$('#VideoArea').load();
+		});
+		
+		$('#preload').click(function() {
+			if ($('#preload').attr('checked') != 'checked') {
+				$('#VideoArea').removeAttr('preload');
+			} else {
+				$('#VideoArea').attr('preload', 'preload');
+			}
+			$('#VideoArea').load();
+		});
+                      
+       $("#webRTCDemo").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://apprtc.appspot.com");
+        });
+                              
+       $("#videoCapture").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://www.html5rocks.com/en/tutorials/getusermedia/intro/#toc-basic-demo");
+        });
+                      
+       $("#audioCapture").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://webaudiodemos.appspot.com/AudioRecorder/index.html");
+        });
+                      
+       $("#taekScreenShot").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://www.html5rocks.com/en/tutorials/getusermedia/intro/#toc-screenshot");
+        });
+                      
+       $("#cssEffects").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://html5-demos.appspot.com/static/getusermedia/photobooth.html");
+        });
+    
+       $("#webGLTextures").click(function() {
+          $("#WebRTCTestWeb").attr("src", "http://webaudiodemos.appspot.com/input/index.html");
+        });
+        
+       $("#btnTestMouseClick").click(function(e) {
+          $("#btnTestMouseClickLog").prepend('SHIFT_KEY:' + e.shiftKey + ' ALT_KEY:' + e.altKey + ' CTRL_KEY:' + e.ctrlKey + ' META_KEY:' + e.metaKey + '\n');
+       });
+    });
+</script>
+<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.widgetstyle {
+    font-size:15px;
+    color:#EBEBEB;
+    background:#555555;    
+}
+
+.cookiestyle {
+    font-size:15px;
+    color:#EBEBEB;
+    background:#555555;  
+}
+    
+.cookiestyle li {
+    list-style: circle !important;
+}
+
+#cookieOutput p {
+    color: red;
+}
+    
+.videoDescriptionStyle {
+	color:#EBEBEB;
+	line-height:200%;
+	font-size:12px;
+}
+
+.arbitraryjavascript {
+	color:#EBEBEB;
+}
+
+.webRTCStyle {
+    font-size:12px;
+    color:#EBEBEB;
+    background:#555555;
+}
+</style>
+</head>
+
+<body>
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">Open Link</li>
+    <li class="TabbedPanelsTab" tabindex="0">Open Video</li>
+    <li class="TabbedPanelsTab" tabindex="0">Widgets</li>
+    <li class="TabbedPanelsTab" tabindex="0">HTTP Cookies</li>
+    <li class="TabbedPanelsTab" tabindex="0">File Cookies</li>
+	<li class="TabbedPanelsTab" tabindex="0">Run JavaScript</li>
+    <li class="TabbedPanelsTab" tabindex="0">WebRTC</li>
+    <li class="TabbedPanelsTab" tabindex="0">Mouse</li>
+    <li class="TabbedPanelsTab" tabindex="0">Fly out menu</li>
+  </ul>
+  
+  <div class="TabbedPanelsContentGroup">
+    <!----------------------->
+    <!-- Open URL divbegin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent">
+      <table width="200" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <table width="200" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>
+                <form id="form2" name="form2" method="post" action="">
+                  <input type="button" name="OpenURL" id="OpenURL" value="Open Link" />
+                </form>
+              </td>
+              <td>
+                <form id="form1" name="form1" method="post" action="">
+                  <label for="OpenURLInput"></label>
+                  <input name="OpenURLInput" type="text" id="OpenURLInput" value="http://www.a2zwebhelp.com/bootstrap-tooltips" size="110" />
+                </form>
+              </td>
+            </tr>
+            <tr>        
+              <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td> 
+                    <input type="button" name="tooltips" id="tooltips" value="tooltips"/>
+                  </td>
+                  <td>
+                    <input type="button" name="baidu" id="baidu" value="baidu"/>
+                  </td>
+                  <td>
+                    <input type="button" name="html5" id="html5" value="html5"/>
+                  </td>
+                  <td>
+                    <input type="button" name="google" id="google" value="google"/>
+                  </td> 
+                  <td>
+                    <input type="button" name="graphic" id="graphic" value="3D Graphic"/>
+                  </td>
+                  <td>
+                    <input type="button" name="npapi" id="npapi" value="levitated"/>
+                  </td>
+                  <td>
+                    <input type="button" name="JQueryUI" id="JQueryUI" value="JQueryUI"/>
+                  </td>
+                  <td>
+                    <input type="button" name="jsfiddle" id="jsfiddle" value="jsfiddle.net"/>
+                  </td>
+                  <td>
+                    <input type="button" name="famo" id="famo" value="famo.us"/>
+                  </td>
+                  <td>
+                    <input type="button" name="behance" id="behance" value="behance"/>
+                  </td>
+                  </tr>
+                  <tr>
+                  <td>
+                    <input type="button" name="adobeTV" id="adobeTV" value="adobe TV"/>
+                  </td>		
+                  <td>
+                    <input type="button" id="contextMenu" value="Context Menu"/>
+                  </td>
+                  <td>
+                    <input type="button" id="basicAuth" value="Basic Authentication"/>
+                  </td>				  
+                </tr>
+              </table>
+            </tr>
+          </table>
+        </tr>
+        <tr>
+          <td>
+            <iframe width="700" height="380" name="DisplayArea" id="DisplayArea" src="http://www.a2zwebhelp.com/bootstrap-tooltips"  frameborder="1" nodejs-disabled="true">
+            </iframe>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!----------------------->
+    <!-- Open URL div end --->
+    <!----------------------->
+    
+    <!--------------------->
+    <!-- Video div begin -->
+    <!--------------------->
+    <div class="TabbedPanelsContent">
+      <table width="200" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+		    <td>
+                <form id="form6" name="form6" method="post" action="">
+                    <label for="HTMLVideoSelect"></label>
+                    <select name="HTMLVideoSelect" id="HTMLVideoSelect" style="width:600px">
+                        <option value="0">http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm</option>
+                        <option value="1">http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv</option>
+                        <option value="2">http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4</option>
+                        <option value="3">http://www.noiseaddicts.com/samples_1w72b820/4160.mp3</option>
+                    </select>
+                </form>
+			</td>
+        </tr>
+		<tr>
+			<td class="videoDescriptionStyle">
+				<input type="checkbox" name="autoplay" id="autoplay" />autoplay &nbsp;&nbsp;
+                <input type="checkbox" name="loop" id="loop" />loop &nbsp;&nbsp;
+                <input type="checkbox" name="preload" id="preload" />preload &nbsp;&nbsp;
+                <input type="checkbox" name="controls" id="controls" checked="checked" />controls &nbsp;&nbsp;
+			</td>
+		</tr>
+        <tr>
+		    <td class="videoDescriptionStyle">
+                Expected Result: <label id="expectedResult">This Video is not supported, it should not be able to play.</label>
+            </td>
+        </tr>
+        <tr>
+		    <td>
+                <video id="VideoArea" width="700" height="360" poster="http://www.html5rocks.com/en/tutorials/video/basics/star.png" controls>
+                    <source id="VideoSource" src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"'/>
+                </video>
+            </td>
+        </tr>
+      </table>
+    </div>
+    <!--------------------->
+    <!--- Video div end --->
+    <!--------------------->
+    
+    <!----------------------->
+    <!-- Spin Widget begin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent">
+        <div class="widgetstyle">
+            <table width="780">
+                <tr>
+                    <th width="120">Widget's Name</th>
+                    <th width="440">Demo</th>
+                    <th width="220">Description</th>
+                </tr>
+                <tr>
+                    <td align="center">spin.js</td>
+                    <td align="center">
+                        <div id="spin" style="width:80px; height:80px;"></div>
+                    </td>
+                    <td>
+                        This widget may lead to CPU usage reach 100% on Mac OS.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!----------------------->
+    <!--- Spin Widget end --->
+    <!----------------------->
+    
+    <!----------------------->
+    <!-- HTTP Cookie Test begin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent">
+        <div class="cookiestyle">
+            <h2>HTTP/HTTPS Cookies</h2>
+            <div>
+                This test case is used to test if CEPHtmlEngine support HTTP/HTTPS persistent cookies.
+                <ol>
+                    <li>When you load the test website first time, it will require you to enter your name. This name will store in cookies.</li>
+                    <li>When you reclick "Show Test Website" or click the button "Submit Code" on the website, it will pop up a dialog with your name which you entered before.</li>
+                    <li>Close all Html extensions, then delete cookies file.
+                        <ul>
+                            <li>Cookies Path on Windows: "C:\Users\[yourusername]\AppData\Local\Temp\cep_cache"</li>
+                            <li>Cookies Path on Mac: "/Users/[yourusername]/Library/Caches/CSXS/cep_cache"</li>
+                        </ul>
+                    </li>
+                    <li>Reclick "Show Test Website", it will require you to enter your name again. This means this test case has passed for persistent cookies</li>
+                </ol>
+            </div>
+            <button name="btnShowSite" id="btnShowSite">Show Test Website</button>
+        </div>
+        <div>
+            <iframe width="780" height="240" name="CookieTestWeb" id="CookieTestWeb"  frameborder="1">
+            </iframe>
+        </div>
+    </div>
+    <!----------------------->
+    <!--- HTTP Cookie Test end --->
+    <!----------------------->
+      
+      <!----------------------->
+    <!-- File Cookie Test begin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent">
+        <div class="cookiestyle">
+            <h2>File Cookies</h2>
+            <div>
+                <p>This test case is used to test if CEPHtmlEngine supports session and persistent file cookies.</p>
+                <ol>
+                    <li>Enter a cookie name and value (or keep with the defaults) and click Set Cookie.</li>
+                    <li>Click Get Cookie to confirm it has been set.</li>
+                    <li>Restart Application.</li>
+                    <li>Return to File Cookies tab and click Get Cookie. No Cookie should be returned.</li>
+                    <li>Now check Add expiry and click Set Cookie.</li>
+                    <li>Restart Application and return to File Cookies tab.</li>
+                    <li>Click Get Cookie. Your cookie value should be returned.</li>
+                </ol>
+                <label for="SessionCookieName">Cookie Name</label>
+                <input name="SessionCookieName" type="text" id="SessionCookieName" value="myCookie" size="110" />
+                <br />
+                <label for="SessionCookieValue">Cookie Value</label>
+                <input name="SessionCookieValue" type="text" id="SessionCookieValue" value="myCookieValue" size="110" />
+                <br />
+                <input type="checkbox" name="sessionCookieExpiry" id="sessionCookieExpiry" />Add expiry (e.g. persistent cookie)
+                <br />
+                <button name="btnSetCookie" id="btnSetCookie">Set Cookie</button>
+                <button name="btnGetCookie" id="btnGetCookie">Get Cookie</button>
+                <p id="cookieOutput" width="300" height="100"></p>
+            </div>
+        </div>
+    </div>
+    <!----------------------->
+    <!--- File Cookie Test end --->
+    <!----------------------->
+	
+	<!------------------------------->
+    <!-- Arbitrary JavaScript begin -->
+    <!------------------------------->
+    <div class="TabbedPanelsContent" id="test">
+        <div class="arbitraryjavascript">
+            <div>
+				<form id="form7" name="form7" method="post" action="">
+					<label for="JavaScriptCode">Run JavaScript in HTML engine:</label>
+					<textarea name="JavaScriptCode" id="JavaScriptCode" cols="90" rows="20">
+function sum(num1, num2) {return num1 + num2;}
+var a = 1;
+var b = 2;
+var c = sum(a, b);
+
+alert(c);
+					</textarea>
+				</form>
+            </div>
+            <button name="btnRunScript" id="btnRunScript">Run JavaScript</button>
+        </div>
+    </div>
+	<!----------------------------->
+    <!-- Arbitrary JavaScript end -->
+    <!----------------------------->
+      
+    <!----------------------->
+    <!-- WebRTC Test begin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent" id="test">
+      <div>
+          <iframe width="780" height="300" name="WebRTCTestWeb" id="WebRTCTestWeb" src="http://www.html5rocks.com/en/tutorials/getusermedia/intro/#toc-basic-demo" frameborder="1">
+          </iframe>
+      </div>
+          <input type="button" name="WebRTC official demo" id="webRTCDemo" value="WebRTC official demo" title="aaa">
+          <input type="button" name="Video capture test" id="videoCapture" value="Video capture"/>
+          <input type="button" name="Audo capture test" id="audioCapture" value="Audo capture"/>
+          <input type="button" name="Take screenshot" id="taekScreenShot" value="Take screenshot"/>
+          <input type="button" name="Apply CSS effects" id="cssEffects" value="Apply CSS effects"/>
+          <input type="button" name="Apply WebGL Textures" id="webGLTextures" value="Apply WebGL Textures"/>
+          
+      <div class="webRTCStyle">
+          <ol>
+              <li>Run it on any machine with camera and network on.</li> 
+              <li>It's normal that render process causes high CPU usage while capturing. </li>
+              <li>For webRTC official demo, run the url above https://apprtc.appspot.com/?r=######### in chrome. It's OK if alert dialog shows up in extension with message 'RTCPeerConnection is not supported'. Because RTCPeerConnection is supported after CEF3.1547.</li>
+          </ol>
+      </div>
+    </div>
+    <!----------------------->
+    <!--- WebRTC Test end --->
+    <!----------------------->
+
+    <!----------------------->
+    <!-- Mouse Test begin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent" id="test">
+        <div>
+	        <button name="btnTestMouseClick" id="btnTestMouseClick">Click Me!</button>
+			<form>
+	            <label for="btnTestMouseClickLog"/>
+	        	<textarea name="btnTestMouseClickLog" id="btnTestMouseClickLog" cols="80" rows="24"></textarea>
+	        </form>
+	    </div>
+	</div>
+    <!----------------------->
+    <!--- Mouse Test end --->
+    <!----------------------->
+
+    
+    <!----------------------------->
+    <!-- Fly out menu Test begin -->
+    <!----------------------------->
+    <div class="TabbedPanelsContent" id="test">
+        <table width="380" height="280" border="0">
+            <div id='fly_out_menu'>
+                <ul>
+                    <li id="menu_icon"><img src="../img/fly_out_menu_icon.png"></img><a href='#'></a>
+                        <ul>
+                            <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 1'"><span>menu item 1</span></a></li>
+                            <li><a href='#'><span>menu item 2</span></a>
+                                <ul>
+                                    <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 2-1'"><span>Sub menu item 2-1</span></a></li>
+                                    <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 2-2'"><span>Sub menu item 2-2</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a href='#'><span>menu item 3</span></a>
+                                <ul>
+                                    <li><a href='#'><span>sub menu item 3-1</span></a>
+                                        <ul>
+                                            <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 3-1-1'"><span>sub menu 3-1-1</span></a></li>
+                                            <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 3-1-2'"><span>sub menu 3-1-2</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href='#'><span>sub menu item 3-2</span></a>
+                                        <ul>
+                                            <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 3-2-1'"><span>Sub menu 3-2-1</span></a></li>
+                                            <li><a href='#' onclick="document.getElementById('flyoutMenuResult').value='menu item 3-2-2'"><span>Sub menu 3-2-2</span></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="flyoutMenuDescription">
+                <li>&nbsp;</li>    
+                <li>This is an example of HTML fly out menu.</li>
+                <li>&nbsp;</li>
+                <li>Please click the fly out menu icon on right top of this page to try it.</li>
+                <li>We can define the menu items in HTML, and customize menu appearance in fly_out_menu.css.</li>  
+                <li>&nbsp;</li>
+                <li>Selected menu item: <input type="text" readonly="readonly" id="flyoutMenuResult"></input></li>
+            </div>            
+        </table>
+    </div>
+    <!--------------------------->
+    <!-- Fly out menu Test end -->
+    <!--------------------------->
+
+  </div>
+</div>
+<script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
+</body>
+</html>
