@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.adobe.test.ModalDialog">
+        <HostList>
+            <Host Name="DRWV" Port="8401"/>
+            <Host Name="FLPR" Port="8402"/>
+            <Host Name="IDSN" Port="8403"/>
+            <Host Name="AICY" Port="8404"/>
+            <Host Name="ILST" Port="8405"/>
+            <Host Name="PHSP" Port="8406"/>
+            <Host Name="PHXS" Port="8400"/>
+            <Host Name="PPRO" Port="8408"/>
+            <Host Name="PRLD" Port="8409"/>
+            <Host Name="AEFT" Port="8410"/>
+            <Host Name="DEMO" Port="8411"/>
+        </HostList>
+    </Extension>
+</ExtensionList>

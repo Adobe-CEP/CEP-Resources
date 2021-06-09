@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+body {
+  background-color: #D3D3D3;
+}
+</style>
+
+
+<h2>Iframe-1<h4>(Same Origin)</h4></h2>
+
+<div id="container">
+  <div id="div1">
+
+<textarea id="text"  cols="120" rows="1">window.__adobe_cep__.evalScript("app", function(r){alert(r + " : I-Frame");});</textarea>
+</div>
+<div>
+<button onclick="run();">run</button>
+</div>
+</div>
+<script>
+
+// Running Iframe TextArea Script (Evalscript), Works in Older CEP but not in CEP-11.1.0.81 and above due to Cross Origin Security
+function run() {
+  var el = document.getElementById('text');
+  el && eval(el.value);
+}
+
+
+function run() {
+    var el = document.getElementById('text');
+    var scriptText = el.value;
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = el.value;
+    document.body.appendChild(newScript);
+};
+</script>
+
+
+</div>
+
+</body>
+</html>

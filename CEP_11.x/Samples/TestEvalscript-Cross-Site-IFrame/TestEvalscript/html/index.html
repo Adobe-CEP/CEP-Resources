@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+body {
+  background-color: white;
+}
+</style>
+
+<h1>Eval Script checking</h1>
+<h2>Main frame</h2>
+
+
+<div id="container">
+<div id="div1">
+
+<textarea id="text"  cols="120" rows="1">window.__adobe_cep__.evalScript("app", function(r){alert(r + " : Main-Frame");});</textarea>
+<button onclick="run();">run</button>
+
+</div>
+
+<script>
+
+// Running Main Screen Text Area Script (Evalscript)
+function run() {
+  var el = document.getElementById('text');
+  el && eval(el.value);
+}
+
+
+function run() {
+    var el = document.getElementById('text');
+    var scriptText = el.value;
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = el.value;
+    document.body.appendChild(newScript);
+} 
+
+
+
+//Cacthing the event from Iframs
+var eventMethod = window.addEventListener
+    ? "addEventListener"
+    : "attachEvent";
+var eventer = window[eventMethod];
+var messageEvent = eventMethod === "attachEvent"
+  ? "onmessage"
+  : "message";
+
+
+eventer(messageEvent, function (e) {
+  
+  //Add more security checks (basic one is checking origin)
+  if (e.origin === 'http://127.0.0.1:8887') {
+
+    //Running scripts passed from Iframe in form of event Message
+  	eval(e.data);	
+  }
+  else{
+  	alert("Threat, Origin Wrong")
+  	return;
+   }
+  
+});
+</script>
+
+
+<!-- Running Same Origin Iframe inside our Main frame -->
+
+<div style="width:800px; margin:0 auto;">
+<iframe src="sameOriginIframe.html" title="Iframe" width="1200" height="200">
+</iframe>
+</div>
+
+
+
+<!-- Running Cross Origin Iframe inside our Main frame -->
+
+<div style="width:800px; margin:0 auto;">
+
+<!-- Change the Iframe-host origin based on your domain  -->
+<iframe src="http://127.0.0.1:8887/iframe.html" title="Iframe" width="1200" height="200">
+</iframe>
+</div>
+</div>
+
+</body>
+</html>
