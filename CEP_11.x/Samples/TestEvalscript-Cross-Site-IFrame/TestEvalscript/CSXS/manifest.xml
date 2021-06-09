@@ -34,7 +34,6 @@
             <DispatchInfo>
                 <Resources>
                     <MainPath>./html/index.html</MainPath>
-                    <ScriptPath>./jsx/core.jsx</ScriptPath>
                     <CEFCommandLine>
                         <Parameter>--enable-speech-input</Parameter>
                         <Parameter>--enable-media-stream</Parameter>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+body {
+  background-color: #D3D3D3;
+}
+</style>
+
+
+<h2>Add-Listen Event frame</h2>
+
+
+<div id="container">
+
+
+<div id="div2">
+
+<textarea id="text2"  cols="120" rows="1">CSLibrary.addEventListener('My Custom Event', function (e) { alert("Trigged")});</textarea>
+
+<button onclick="listenEvent();">AddListenerEvent</button>
+
+</div>
+
+<div id="div1">
+
+<textarea id="text1"  cols="120" rows="1">var script = 'var mylib = new ExternalObject("lib:" + "PlugPlugExternalObject"); var myObject = new CSXSEvent(); myObject.type = "My Custom Event"; myObject.data = "success"; myObject.dispatch();'; CSLibrary.evalScript(script);</textarea>
+
+<button onclick="addEvent();">addEvent</button>
+
+</div>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script>
+
+var CSLibrary = new CSInterface();
+
+function addEvent() {
+    var el = document.getElementById('text1');
+    var scriptText = el.value;
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = el.value;
+    document.body.appendChild(newScript);
+};
+
+function listenEvent() {
+    var el = document.getElementById('text2');
+    var scriptText = el.value;
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = el.value;
+    document.body.appendChild(newScript);
+}
+
+</script>
+
+
+
+</div>
+
+</body>
+</html>
