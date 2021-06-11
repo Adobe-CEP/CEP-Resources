@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>20D91</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>AIHostAdapter</string>
+	<key>CFBundleExecutable</key>
+	<string>AIHostAdapter</string>
+	<key>CFBundleGetInfoHTML</key>
+	<string>AIHostAdapter version 25 . 3 . 0 . 0, "Copyright © 1987-2021 by Adobe Inc.  All rights reserved."</string>
+	<key>CFBundleGetInfoString</key>
+	<string>AIHostAdapter version 25 . 3 . 0 . 0, "Copyright © 1987-2021 by Adobe Inc.  All rights reserved."</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.adobe.illustrator.plugins.AIHostAdapter</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>AIHostAdapter</string>
+	<key>CFBundlePackageType</key>
+	<string>ARPI</string>
+	<key>CFBundleShortVersionString</key>
+	<string>AIHostAdapter version 25 . 3 . 0 . 0</string>
+	<key>CFBundleSignature</key>
+	<string>ART5</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>25 . 3 . 0 . 0</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>12D4e</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
+	<key>DTPlatformVersion</key>
+	<string>11.1</string>
+	<key>DTSDKBuild</key>
+	<string>20C63</string>
+	<key>DTSDKName</key>
+	<string>macosx11.1</string>
+	<key>DTXcode</key>
+	<string>1240</string>
+	<key>DTXcodeBuild</key>
+	<string>12D4e</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>11.1</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+</dict>
+</plist>
