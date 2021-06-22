@@ -104,6 +104,7 @@ Development and Debugging
 	
 4. CORS checks: With CEP 11, with security updates, we are seeing that a lot more requests are being blocked by CORS checks. The extension may encounter this if it is trying to access an endpoint that does not have the Access-Control-Allow-Origin header. Please ensure that the endpoints that are being accessed have Access-Control-Allow-Origin headers set appropriately.
 
+Also Refer [Known issues](./Issues.md) in CEP 11
 
 ### Migration from CEP 9 to CEP 10
 
