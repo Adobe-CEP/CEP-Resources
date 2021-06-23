@@ -1,9 +1,9 @@
 CEP 11 Known Issues & FAQ
 ====================
 
-### Following are the known issues in CEP 10.0 and above. Please keep these in mind while creating your own extension...
+### Following are the known issues in CEP. Please keep these in mind while creating your own extension...
 
-## Issue 1 : evalScript callback is not triggered in cross-site iFrames
+## Issue 1 (CEP 11) : evalScript callback is not triggered in cross-site iFrames
 
 From CEP-11 one can't access a `<iframe>` with a different origin (Cross-Site) using JavaScript. For the same-origin policy browsers block scripts trying to access a frame with a different origin.
 
@@ -44,18 +44,33 @@ window.addEventListener('message', event => {
 
 This method can be applied in both directions, creating a listener in the cross-site child frame too, and receiving responses from the Mainframe. The same logic can also be implemented for running CEP EvalScript from cross-site child frames- Pass your EvalScript as an event from Cross-Site child frame to Main Page and invoke EvalScript from Main Page/Frame
   
-  
+## Issue 2 (CEP 11): UI issues with cross-site iFrames 
+CEF latest versions has introduced [Site Isolation](https://www.chromium.org/Home/chromium-security/site-isolation) and due to this the **cross site iframes** are handled by their own CEF renderer process. 
+
+Some inter-process communication calls from this new renderer process are not being propagated to the browser process, causing the UI glitches(like tabbing,hover,shortcuts,etc) and the clipboard issues.
+
+**Workaround**: Extensions that are facing these issues can add the `--disable-site-isolation-trials` command line parameter in the manifest. This will disable the Site Isolation features. As a side effect, some checks corresponding to **cross origin iframes** may not be enforced, allowing you to access the cross origin iframe from the parent frame. 
+```
+<CEFCommandLine>
++ <Parameter>--disable-site-isolation-trials</Parameter>
+  <Parameter>--enable-nodejs</Parameter>
+  <Parameter>--mixed-context</Parameter>
+</CEFCommandLine>
+
+```
+
+**Note**: This should not be taken as a permanent fix as with further CEF updates, this parameter might be disabled
 
 
 ## Issues existing in CEP 9 and above  
 
-### Issue 2 : Drag events not fired while debugging an extension. 
+### Issue 3 : Drag events not fired while debugging an extension. 
     
     Workaround: Deactivate the screencast by selecting the "Toggle device Toolbar" in the chrome inspect window. 
     Once done, Drag operation can be performed even while debugging the extension. 
   ![Toggle device Toolbar](./images/issues/dragDebug.png)
     
-### Issue 3: 
+### Issue 4: 
 In Windows, the API cep.fs.stat() is not able to access file of size greater than 4GB 
 
 
