@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+
+<html>
+    <head>
+        <title>CAR APPLICATION</title>
+        <style>
+            #holder1 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder1.hover { border: 10px dashed #333; }
+            #holder2 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder2.hover { border: 10px dashed #333; }
+            #holder3 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder3.hover { border: 10px dashed #333; }
+            #holder4 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder4.hover { border: 10px dashed #333; }
+            #holder5 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder5.hover { border: 10px dashed #333; }
+            #holder6 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder6.hover { border: 10px dashed #333; }
+            #holder7 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder7.hover { border: 10px dashed #333; }
+            #holder8 { border: 10px dashed #ccc; width: 100px; height: 100px; margin: 2px auto;}
+            #holder8.hover { border: 10px dashed #333; }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h3>Drag and Drop PS Layers</h3>
+        </center>
+        
+        <table border="5" bordercolor="black" align="center">
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+            </tr>
+            <tr>
+                <td><div id="holder1" align="center"><img id="myimage1" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder2" align="center"><img id="myimage2" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder3" align="center"><img id="myimage3" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder4" align="center"><img id="myimage4" height="100%" width="100%" src=""/></div></th>
+            </tr>
+            <tr>
+                <td><div id="holder5" align="center"><img id="myimage5" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder6" align="center"><img id="myimage6" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder7" align="center"><img id="myimage7" height="100%" width="100%" src=""/></div></th>
+                <td><div id="holder8" align="center"><img id="myimage8" height="100%" width="100%" src=""/></div></th>
+            </tr>
+        </table>
+        <script>
+            for(var i=1; i<=8; i++)
+            {
+                var holder = document.getElementById('holder'+i);
+                holder.index = i;
+                holder.ondragover = function () { this.className = 'hover'; return false; };
+                holder.ondragend = function () { this.className = ''; return false; };
+                holder.ondrop = function (e) {
+                    this.className = '';
+                    e.preventDefault();
+                    var file = e.dataTransfer.files[0];
+                    if (file != undefined)
+                    {
+                        var reader = new FileReader();
+                        var img = document.getElementById('myimage' + this.index);
+                        reader.onload = function (event) {
+                            img.src = event.target.result;
+                        };
+                        console.log(file);
+                        reader.readAsDataURL(file);
+                    }
+                    else
+                    {
+                        var data = event.dataTransfer.getData("custom.data");
+                        var img = document.getElementById('myimage' + this.index);
+                        img.src = "data:image/png;base64," + data;
+                    }
+                };
+            }
+            </script>
+
+    </body>
+<html>

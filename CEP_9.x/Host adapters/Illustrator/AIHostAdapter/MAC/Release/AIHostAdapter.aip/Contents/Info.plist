@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>18F132</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>CFBundleGetInfoHTML</key>
+	<string> version 18 . 0 . 0 . 0, "Copyright 1987-2014 Adobe Systems Incorporated. All rights reserved."</string>
+	<key>CFBundleGetInfoString</key>
+	<string> version 18 . 0 . 0 . 0, "Copyright 1987-2014 Adobe Systems Incorporated. All rights reserved."</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.adobe.illustrator.plugins.</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>ARPI</string>
+	<key>CFBundleShortVersionString</key>
+	<string> version 18 . 0 . 0 . 0</string>
+	<key>CFBundleSignature</key>
+	<string>ART5</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>18 . 0 . 0 . 0</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>10G8</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>18G74</string>
+	<key>DTSDKName</key>
+	<string>macosx10.14</string>
+	<key>DTXcode</key>
+	<string>1030</string>
+	<key>DTXcodeBuild</key>
+	<string>10G8</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+</dict>
+</plist>

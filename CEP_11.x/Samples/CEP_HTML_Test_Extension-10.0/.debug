@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.adobe.CEPHTMLTEST.Panel1">
+        <HostList>
+            <Host Name="DRWV" Port="8201"/>
+            <Host Name="FLPR" Port="8202"/>
+            <Host Name="IDSN" Port="8203"/>
+            <Host Name="AICY" Port="8204"/>
+            <Host Name="ILST" Port="8205"/>
+            <Host Name="PHSP" Port="8206"/>
+            <Host Name="PHXS" Port="8207"/>
+            <Host Name="PPRO" Port="8208"/>
+            <Host Name="PRLD" Port="8209"/>
+            <Host Name="AEFT" Port="8210"/>
+            <Host Name="DEMO" Port="8211"/>
+        </HostList>
+    </Extension>
+    <Extension Id="com.adobe.CEPHTMLTEST.Panel2">
+        <HostList>
+            <Host Name="DRWV" Port="8301"/>
+            <Host Name="FLPR" Port="8302"/>
+            <Host Name="IDSN" Port="8303"/>
+            <Host Name="AICY" Port="8304"/>
+            <Host Name="ILST" Port="8305"/>
+            <Host Name="PHSP" Port="8306"/>
+            <Host Name="PHXS" Port="8307"/>
+            <Host Name="PPRO" Port="8308"/>
+            <Host Name="PRLD" Port="8309"/>
+            <Host Name="AEFT" Port="8310"/>
+            <Host Name="DEMO" Port="8311"/>
+        </HostList>
+    </Extension>
+    <Extension Id="com.adobe.CEPHTMLTEST.ModalDialog">
+        <HostList>
+            <Host Name="DRWV" Port="8401"/>
+            <Host Name="FLPR" Port="8402"/>
+            <Host Name="IDSN" Port="8403"/>
+            <Host Name="AICY" Port="8404"/>
+            <Host Name="ILST" Port="8405"/>
+            <Host Name="PHSP" Port="8406"/>
+            <Host Name="PHXS" Port="8400"/>
+            <Host Name="PPRO" Port="8408"/>
+            <Host Name="PRLD" Port="8409"/>
+            <Host Name="AEFT" Port="8410"/>
+            <Host Name="DEMO" Port="8411"/>
+        </HostList>
+    </Extension>
+    <Extension Id="com.adobe.CEPHTMLTEST.Modeless">
+        <HostList>
+            <Host Name="DRWV" Port="8501"/>
+            <Host Name="FLPR" Port="8502"/>
+            <Host Name="IDSN" Port="8503"/>
+            <Host Name="AICY" Port="8504"/>
+            <Host Name="ILST" Port="8505"/>
+            <Host Name="PHSP" Port="8506"/>
+            <Host Name="PHXS" Port="8507"/>
+            <Host Name="PPRO" Port="8508"/>
+            <Host Name="PRLD" Port="8509"/>
+            <Host Name="AEFT" Port="8510"/>
+            <Host Name="DEMO" Port="8511"/>
+        </HostList>
+    </Extension>
+</ExtensionList>
