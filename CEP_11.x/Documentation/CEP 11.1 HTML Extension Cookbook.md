@@ -96,11 +96,13 @@ Development and Debugging
 
 1. Update the Node Modules: CEP 11 works with NodeJS 15.9.0 and Node-WebKit 0.50.1 versions. If extensions were build on older version of NodeJS there can be cases where these extensions may not load in CEP 11 due to incompatible node modules. In such cases, the node modules need to be updated using NodeJS version 15.9.0 or higher.
 
-2. Content-Security-Policy Changes: With CEP 11.1 that integrates CEF #88, content-security-policy checks have been enforced strictly. Extensions that embed third-party sites may not be able to do so anymore if the site that is being embedded has a content-security-policy directive that doesn't allow sites to frame them.
+2. Content-Security-Policy Changes: With CEP 11.1 that integrates CEF #88, content-security-policy checks have been enforced strictly. Extensions that embed third-party sites may not be able to do so anymore if the site that is being embedded has a content-security-policy directive that doesn't allow sites to frame them. Refer [Known issues](./Issues.md) for few such scenarios and possible temporary workarounds.
 
 3. Cookies: With #CEF v88 version, we have seen that when no SameSite attribute is set in a cookie, it defaults to SameSite=Lax. This will cause the cookie to be blocked in cross-site contexts. If your application needs cookies to be used in a cross-site context, we suggest you set SameSite=None.If component is not sending `SameSite` attribute in the cookie it would default to `SameSite=Lax` for preventing to set the cookie in cross-site context. 
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie 
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+
+Note: as per a [temporary workaround](https://www.chromium.org/administrators/policy-list-3/cookie-legacy-samesite-policies) provided by CEF, the following option can be added in manifest `--disable-features=SameSiteByDefaultCookies`
 	
 4. CORS checks: With CEP 11, with security updates, we are seeing that a lot more requests are being blocked by CORS checks. The extension may encounter this if it is trying to access an endpoint that does not have the Access-Control-Allow-Origin header. Please ensure that the endpoints that are being accessed have Access-Control-Allow-Origin headers set appropriately.
 
