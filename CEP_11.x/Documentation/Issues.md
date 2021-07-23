@@ -47,7 +47,7 @@ This method can be applied in both directions, creating a listener in the cross-
 ## Issue 2 (CEP 11): UI issues with cross-site iFrames 
 CEF latest versions has introduced [Site Isolation](https://www.chromium.org/Home/chromium-security/site-isolation) and due to this the **cross site iframes** are handled by their own CEF renderer process. 
 
-Some inter-process communication calls from this new renderer process are not being propagated to the browser process, causing the UI glitches(like tabbing,hover,shortcuts,etc) and the clipboard issues.
+Some inter-process communication calls from this new renderer process are not being propagated to the browser process, causing the UI glitches (like tabbing, hover, shortcuts, etc) and the clipboard issues. The use of `dispatchEvent` is also affected.
 
 **Workaround**: Extensions that are facing these issues can add the `--disable-site-isolation-trials` command line parameter in the manifest. This will disable the Site Isolation features. As a side effect, some checks corresponding to **cross origin iframes** may not be enforced, allowing you to access the cross origin iframe from the parent frame. 
 ```
