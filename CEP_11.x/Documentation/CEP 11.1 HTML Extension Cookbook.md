@@ -102,7 +102,17 @@ Development and Debugging
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie 
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
-	Note: as per a [temporary workaround](https://www.chromium.org/administrators/policy-list-3/cookie-legacy-samesite-policies) provided by CEF, the following option can be added in manifest `--disable-features=SameSiteByDefaultCookies`
+	Note: as per a [temporary workaround](https://www.chromium.org/administrators/policy-list-3/cookie-legacy-samesite-policies) provided by CEF, the following option can be added in manifest `--disable-features=SameSiteByDefaultCookies`. Example:
+	```
+	<CEFCommandLine>
+	+ <Parameter>--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure</Parameter>
+	+ <Parameter>--disable-site-isolation-trials</Parameter>
+	  <Parameter>--enable-nodejs</Parameter>
+	  <Parameter>--mixed-context</Parameter>
+	</CEFCommandLine>
+
+	```
+	
 	
 4. CORS checks: With CEP 11, with security updates, we are seeing that a lot more requests are being blocked by CORS checks. The extension may encounter this if it is trying to access an endpoint that does not have the Access-Control-Allow-Origin header. Please ensure that the endpoints that are being accessed have Access-Control-Allow-Origin headers set appropriately.
 
