@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="com.adobe.jolg42" ExtensionBundleVersion="1.0" Version="10.0"> <!-- MAJOR-VERSION-UPDATE-MARKER -->
+    <ExtensionList>
+
+        <Extension Id="com.adobe.test.jolg42" Version="6.1.0"/>
+
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <Host Name="DRWV" Version="15.0"/>
+            <Host Name="FLPR" Version="15.0"/>
+            <Host Name="IDSN" Version="11.0"/>
+            <Host Name="AICY" Version="11.0"/>
+            <Host Name="ILST" Version="19.0"/>
+            <Host Name="PHSP" Version="16.0"/>
+            <Host Name="PHXS" Version="16.0"/>
+            <Host Name="PPRO" Version="9.0"/>
+            <Host Name="PRLD" Version="4.0"/>
+            <Host Name="AEFT" Version="13.0"/>
+            <Host Name="DEMO" Version="1.0"/>
+            <Host Name="AUDT" Version="8.0"/>
+            <Host Name="LTRM" Version="7.0"/>
+            <Host Name="MUSE" Version="2015"/>
+        </HostList>
+        <LocaleList>
+            <Locale Code="All"/>
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="9.0"/> <!-- MAJOR-VERSION-UPDATE-MARKER -->
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.adobe.test.jolg42">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./html/index.html</MainPath>
+                    <CEFCommandLine>
+                        <Parameter>--mixed-context</Parameter>
+                        <Parameter>--enable-nodejs</Parameter>
+                        <Parameter>--disable-site-isolation-trials</Parameter>
+                    </CEFCommandLine>
+                </Resources>
+                <Lifecycle>
+                    <AutoVisible>true</AutoVisible>
+                </Lifecycle>
+                <UI>
+                    <Type>ModalDialog</Type>
+                    <!-- <Type>ModalDialog</Type> -->
+                    <Menu>Vue Mouse TimeStamp</Menu>
+                    <Geometry>
+                        <Size>
+                            <Height>300</Height>
+                            <Width>300</Width>
+                        </Size>
+                        <MaxSize>
+                            <Height>1200</Height>
+                            <Width>1400</Width>
+                        </MaxSize>
+                        <MinSize>
+                            <Height>400</Height>
+                            <Width>600</Width>
+                        </MinSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

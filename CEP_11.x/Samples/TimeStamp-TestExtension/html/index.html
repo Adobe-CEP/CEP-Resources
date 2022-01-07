@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Click Timestamps</title>
+</head>
+<style>
+body {
+  background-color: white;
+}
+</style>
+<body>
+<button id="btn">Click </button>
+<p>Mouse click timestamp: <span id="manual"></span></p>
+<p>Event timestamp: <span id="auto"></span></p>
+
+<script>
+
+var manualEl = document.getElementById("manual");
+var autoEl = document.getElementById("auto");
+var btn = document.getElementById("btn");
+
+var logTimestamp = ($event) => {
+  if ($event.target.id === "btn") {
+    manualEl.innerText = $event.timeStamp;
+    return
+  }
+  autoEl.innerText = $event.timeStamp;
+}
+
+btn.addEventListener("click", logTimestamp)
+document.body.addEventListener("click", logTimestamp)
+
+setInterval(() => document.body.click(), 1000);
+
+</script>
+
+
+</body>
+</html>
