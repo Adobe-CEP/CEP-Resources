@@ -54,11 +54,11 @@
 
   
 
-## 3. Crash Dump
+### 2.4 Crash Dump
 
  - %AppData%\Roaming\Adobe\CRLogs\dumps
 
-## 4. Debugging Tools
+## 3. Debugging Tools
 
 - Add .[.debug](./.debug) file inside the extension folder which should be here 
 - - Mac → /Library/Application
