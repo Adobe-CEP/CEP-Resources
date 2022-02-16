@@ -5,7 +5,7 @@
  - Set Log Level to 6 → defaults write com.adobe.CSXS.11 LogLevel 6
  - Check Log Level → defaults read com.adobe.CSXS.11 LogLevel
 
-### 1.2. Extensions Folders
+### 1.2. Extension Folders
 
  - System Extension Folder → /Library/Application
    Support/Adobe/CEP/extensions
@@ -13,10 +13,10 @@
    Support/Adobe/CEP/extensions
  - Product Extension Folders → ${PP}/CEP/extensions
 
-### 1.3. Logs Folders
+### 1.3. Logs Folder
 
  - CEP Logs Folder → ~/Library/Logs/CSXS
- - CEP Logs → CEP<Version Number>-<Product ID>.log e.g CEP11-ILST.log
+ - CEP Logs → CEP`<Version Number>`-`<Product ID>`.log e.g CEP11-ILST.log
  - CEPHTMLEngine Broser Logs → CEPHTMLEngine-`<versionNumber>`-`<HostID>`-`<HostVersion>`-`<ExtensionID>`.log (e.g
    CEPHtmlEngine11-ILST-26.0.3-com.adobe.illustrator.OnBoarding.
  - CEPHTMLEngine Renderer Logs → CEPHTMLEngine-`<versionNumber>`-`<HostID>`-`<HostVersion>`-`<ExtensionID>`-renderer.log
@@ -46,7 +46,7 @@
 
 - CEP Logs Folder → %temp%
 
-- CEP Logs → CEP<Version Number>-<Product ID>.log e.g CEP11-ILST.log
+- CEP Logs → CEP`<Version Number>`-`<Product ID>`.log e.g CEP11-ILST.log
 
 - CEPHTMLEngine Broser Logs → CEPHTMLEngine-`<versionNumber>`-`<HostID>`-`<HostVersion>`-`<ExtensionID>`.log (e.g CEPHtmlEngine11-ILST-26.0.3-com.adobe.illustrator.OnBoarding.log)
 
@@ -60,19 +60,19 @@
 
 ## 3. Debugging Tools
 
-- Add .[.debug](./.debug) file inside the extension folder which should be here 
+- Add [.debug](./.debug) file inside the extension folder which should be here 
 - - Mac → /Library/Application
    Support/Adobe/CEP/extensions
    - Windows →  C:\Program Files (x86)\Common
    Files\Adobe\CEP\extensions
    
-<Code> 
+<Code> Code
 
     <?xml version="1.0" encoding="UTF-8"?> 
     <ExtensionList>
         <Extension Id="com.adobe.cep.exchange.extension.panel">
             <HostList>
-            	<Host Name="DRWV" Port="8701"/>
+                <Host Name="DRWV" Port="8701"/>
                 <Host Name="FLPR" Port="8702"/>
                 <Host Name="IDSN" Port="8703"/>
                 <Host Name="AICY" Port="8704"/>
