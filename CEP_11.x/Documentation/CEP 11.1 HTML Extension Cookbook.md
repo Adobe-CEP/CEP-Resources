@@ -38,7 +38,7 @@ These extension types are supported by CEP. You need to specify an extension's t
 
 These applications support CEP HTML extensions. (For older applications, [see this chart](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep).)
 
-| Application | Host ID |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|
+| Application | Host ID(Product SAPCode) |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
 |Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | 23.0 (CEP 11) |
 |InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) |
