@@ -45,7 +45,7 @@ Vulcan.prototype.getTargetSpecifiersEx = function()
  * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
  * Changes : New launchAppEx uses productSAPCodeSpecifiers
  *
- * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".(Refer [this](Documentation/CEP%2011.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for productSAPCodeSpecifier)
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".
  * @param focus           True to launch in foreground, or false to launch in the background.
  * @param cmdLine         Optional, command-line parameters to supply to the launch command.
  * @return True if the app can be launched, false otherwise.
@@ -71,7 +71,7 @@ Vulcan.prototype.launchAppEx = function(productSAPCodeSpecifier, focus, cmdLine)
  * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
  * Changes : New isAppRunningEx uses productSAPCodeSpecifiers
  *
- * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".(Refer [this](Documentation/CEP%2011.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for productSAPCodeSpecifier)
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".
  * @return True if the app is running, false otherwise.
  */
 Vulcan.prototype.isAppRunningEx = function(productSAPCodeSpecifier)
@@ -93,7 +93,7 @@ Vulcan.prototype.isAppRunningEx = function(productSAPCodeSpecifier)
  * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
  * Changes : New isAppInstalledEx uses productSAPCodeSpecifiers
  *
- * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".(Refer [this](Documentation/CEP%2011.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for productSAPCodeSpecifier)
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST".
  * @return True if the app is installed, false otherwise.
  */
 Vulcan.prototype.isAppInstalledEx = function(productSAPCodeSpecifier)
