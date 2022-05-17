@@ -11,7 +11,7 @@
 *
 **************************************************************************************************/
 
-/** Vulcan - v11.0.0 */
+/** Vulcan - v11.2.0 */
 
 /**
  * @class Vulcan
@@ -25,17 +25,126 @@ function Vulcan()
 }
 
 /**
+ * Gets all available application SAPCode-Specifiers on the local machine.
+ *
+ * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
+ * Changes : New getTargetSpecifiersEx returns productSAPCodeSpecifiers
+ *
+ * @return The array of all available application SAPCode-Specifiers.
+ */
+Vulcan.prototype.getTargetSpecifiersEx = function()
+{   
+    var params = {};
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetTargetSpecifiersEx", JSON.stringify(params)));
+};
+
+/**
+ * Launches a CC application on the local machine, if it is not already running.
+ *
+ * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
+ * Changes : New launchAppEx uses productSAPCodeSpecifiers
+ *
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST. Refer to `Documentation/CEP 11.1 HTML Extension Cookbook.md#applications-integrated-with-cep` for product SAPCode.
+ * @param focus           True to launch in foreground, or false to launch in the background.
+ * @param cmdLine         Optional, command-line parameters to supply to the launch command.
+ * @return True if the app can be launched, false otherwise.
+ */
+Vulcan.prototype.launchAppEx = function(productSAPCodeSpecifier, focus, cmdLine)
+{
+    if(!requiredParamsValid(productSAPCodeSpecifier))
+    {
+        return false;
+    }
+    
+    var params = {};
+    params.productSAPCodeSpecifier = productSAPCodeSpecifier;
+    params.focus = focus ? "true" : "false";
+    params.cmdLine = requiredParamsValid(cmdLine) ? cmdLine : "";
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanLaunchAppEx", JSON.stringify(params))).result;
+};
+
+/**
+ * Checks whether a CC application is running on the local machine.
+ *
+ * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
+ * Changes : New isAppRunningEx uses productSAPCodeSpecifiers
+ *
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST. Refer to `Documentation/CEP 11.1 HTML Extension Cookbook.md#applications-integrated-with-cep` for product SAPCode.
+ * @return True if the app is running, false otherwise.
+ */
+Vulcan.prototype.isAppRunningEx = function(productSAPCodeSpecifier)
+{
+    if(!requiredParamsValid(productSAPCodeSpecifier))
+    {
+        return false;
+    }
+    
+    var params = {};
+    params.productSAPCodeSpecifier = productSAPCodeSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppRunningEx", JSON.stringify(params))).result;
+};
+
+/**
+ * Checks whether a CC application is installed on the local machine.
+ *
+ * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
+ * Changes : New isAppInstalledEx uses productSAPCodeSpecifiers
+ *
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST. Refer to `Documentation/CEP 11.1 HTML Extension Cookbook.md#applications-integrated-with-cep` for product SAPCode.
+ * @return True if the app is installed, false otherwise.
+ */
+Vulcan.prototype.isAppInstalledEx = function(productSAPCodeSpecifier)
+{
+    if(!requiredParamsValid(productSAPCodeSpecifier))
+    {
+        return false;
+    }
+    
+    var params = {};
+    params.productSAPCodeSpecifier = productSAPCodeSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppInstalledEx", JSON.stringify(params))).result;
+};
+
+/**s
+ * Retrieves the local install path of a CC application.
+ *
+ * Vulcan Control New 6.x APIs, and Deprecating older Vulcan Control APIs.
+ * Changes : New getAppPathEx uses productSAPCodeSpecifiers
+ *
+ * @param productSAPCodeSpecifier The application specifier; for example "ILST-25.2.3", "ILST-25", "ILST-25.2.3-en_US" and "ILST. Refer to `Documentation/CEP 11.1 HTML Extension Cookbook.md#applications-integrated-with-cep` for product SAPCode.
+ * @return The path string if the application is found, "" otherwise.
+ */
+Vulcan.prototype.getAppPathEx = function(productSAPCodeSpecifier)
+{
+    if(!requiredParamsValid(productSAPCodeSpecifier))
+    {
+        return "";
+    }
+    
+    var params = {};
+    params.productSAPCodeSpecifier = productSAPCodeSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetAppPathEx", JSON.stringify(params))).result;
+};
+
+/**
+ * DEPRECATED API:: use getTargetSpecifiersEx
  * Gets all available application specifiers on the local machine.
  *
  * @return The array of all available application specifiers.
  */
 Vulcan.prototype.getTargetSpecifiers = function()
-{
-	var params = {};
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetTargetSpecifiers", JSON.stringify(params)));
+{   
+    console.warn("WARNING! Function 'getTargetSpecifiers' has been deprecated, please use the new 'getTargetSpecifiersEx' function instead!");
+    var params = {};
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetTargetSpecifiers", JSON.stringify(params)));
 };
 
 /**
+ * DEPRECATED API:: use launchAppEx
  * Launches a CC application on the local machine, if it is not already running.
  *
  * @param targetSpecifier The application specifier; for example "indesign".
@@ -53,20 +162,22 @@ Vulcan.prototype.getTargetSpecifiers = function()
  */
 Vulcan.prototype.launchApp = function(targetSpecifier, focus, cmdLine)
 {
+    console.warn("WARNING! Function 'launchApp' has been deprecated, please use the new 'launchAppEx' function instead!");
     if(!requiredParamsValid(targetSpecifier))
     {
         return false;
     }
-
-	var params = {};
-	params.targetSpecifier = targetSpecifier;
-	params.focus = focus ? "true" : "false";
-	params.cmdLine = requiredParamsValid(cmdLine) ? cmdLine : "";
-
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanLaunchApp", JSON.stringify(params))).result;
+    
+    var params = {};
+    params.targetSpecifier = targetSpecifier;
+    params.focus = focus ? "true" : "false";
+    params.cmdLine = requiredParamsValid(cmdLine) ? cmdLine : "";
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanLaunchApp", JSON.stringify(params))).result;
 };
 
 /**
+ * DEPRECATED API:: use isAppRunningEx
  * Checks whether a CC application is running on the local machine.
  *
  * @param targetSpecifier The application specifier; for example "indesign".
@@ -82,18 +193,20 @@ Vulcan.prototype.launchApp = function(targetSpecifier, focus, cmdLine)
  */
 Vulcan.prototype.isAppRunning = function(targetSpecifier)
 {
+    console.warn("WARNING! Function 'isAppRunning' has been deprecated, please use the new 'isAppRunningEx' function instead!");
     if(!requiredParamsValid(targetSpecifier))
     {
         return false;
     }
-
-	var params = {};
-	params.targetSpecifier = targetSpecifier;
-
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppRunning", JSON.stringify(params))).result;
+    
+    var params = {};
+    params.targetSpecifier = targetSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppRunning", JSON.stringify(params))).result;
 };
 
 /**
+ * DEPRECATED API:: use isAppInstalledEx
  * Checks whether a CC application is installed on the local machine.
  *
  * @param targetSpecifier The application specifier; for example "indesign".
@@ -109,18 +222,20 @@ Vulcan.prototype.isAppRunning = function(targetSpecifier)
  */
 Vulcan.prototype.isAppInstalled = function(targetSpecifier)
 {
+    console.warn("WARNING! Function 'isAppInstalled' has been deprecated, please use the new 'isAppInstalledEx' function instead!");
     if(!requiredParamsValid(targetSpecifier))
     {
         return false;
     }
-
-	var params = {};
-	params.targetSpecifier = targetSpecifier;
-
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppInstalled", JSON.stringify(params))).result;
+    
+    var params = {};
+    params.targetSpecifier = targetSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanIsAppInstalled", JSON.stringify(params))).result;
 };
 
 /**
+ * DEPRECATED API:: use getAppPathEx
  * Retrieves the local install path of a CC application.
  *
  * @param targetSpecifier The application specifier; for example "indesign".
@@ -136,15 +251,16 @@ Vulcan.prototype.isAppInstalled = function(targetSpecifier)
  */
 Vulcan.prototype.getAppPath = function(targetSpecifier)
 {
+    console.warn("WARNING! Function 'getAppPath' has been deprecated, please use the new 'getAppPathEx' function instead!");
     if(!requiredParamsValid(targetSpecifier))
     {
         return "";
     }
-
-	var params = {};
-	params.targetSpecifier = targetSpecifier;
-
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetAppPath", JSON.stringify(params))).result;
+    
+    var params = {};
+    params.targetSpecifier = targetSpecifier;
+    
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetAppPath", JSON.stringify(params))).result;
 };
 
 /**
@@ -163,10 +279,10 @@ Vulcan.prototype.addMessageListener = function(type, callback, obj)
         return;
     }
 
-	var params = {};
-	params.type = type;
-
-	window.__adobe_cep__.invokeAsync("vulcanAddMessageListener", JSON.stringify(params), callback, obj);
+    var params = {};
+    params.type = type;
+    
+    window.__adobe_cep__.invokeAsync("vulcanAddMessageListener", JSON.stringify(params), callback, obj);
 };
 
 /**
@@ -184,10 +300,10 @@ Vulcan.prototype.removeMessageListener = function(type, callback, obj)
     {
         return;
     }
-
+    
     var params = {};
     params.type = type;
-
+    
     window.__adobe_cep__.invokeAsync("vulcanRemoveMessageListener", JSON.stringify(params), callback, obj);
 };
 
@@ -203,12 +319,12 @@ Vulcan.prototype.dispatchMessage = function(vulcanMessage)
         return;
     }
 
-	var params = {};
-	var message = new VulcanMessage(vulcanMessage.type);
-	message.initialize(vulcanMessage);
-	params.vulcanMessage = message;
-
-	window.__adobe_cep__.invokeSync("vulcanDispatchMessage", JSON.stringify(params));
+    var params = {};
+    var message = new VulcanMessage(vulcanMessage.type);
+    message.initialize(vulcanMessage);
+    params.vulcanMessage = message;
+    
+    window.__adobe_cep__.invokeSync("vulcanDispatchMessage", JSON.stringify(params));
 };
 
 /**
@@ -224,9 +340,9 @@ Vulcan.prototype.getPayload = function(vulcanMessage)
         return null;
     }
 
-	var message = new VulcanMessage(vulcanMessage.type);
-	message.initialize(vulcanMessage);
-	return message.getPayload();
+    var message = new VulcanMessage(vulcanMessage.type);
+    message.initialize(vulcanMessage);
+    return message.getPayload();
 };
 
 /**
@@ -243,8 +359,8 @@ Vulcan.prototype.getPayload = function(vulcanMessage)
  */
 Vulcan.prototype.getEndPoints = function()
 {
-	var params = {};
-	return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetEndPoints", JSON.stringify(params)));
+    var params = {};
+    return JSON.parse(window.__adobe_cep__.invokeSync("vulcanGetEndPoints", JSON.stringify(params)));
 };
 
 /**
@@ -256,8 +372,8 @@ Vulcan.prototype.getEndPoints = function()
  */
 Vulcan.prototype.getSelfEndPoint = function()
 {
-	var params = {};
-	return window.__adobe_cep__.invokeSync("vulcanGetSelfEndPoint", JSON.stringify(params));
+    var params = {};
+    return window.__adobe_cep__.invokeSync("vulcanGetSelfEndPoint", JSON.stringify(params));
 };
 
 /** Singleton instance of Vulcan **/
@@ -285,7 +401,7 @@ function VulcanMessage(type, appId, appVersion)
     this.type = type;
     this.scope = VulcanMessage.SCOPE_SUITE;
     this.appId = requiredParamsValid(appId) ? appId : VulcanMessage.DEFAULT_APP_ID;
-	this.appVersion = requiredParamsValid(appVersion) ? appVersion : VulcanMessage.DEFAULT_APP_VERSION;
+    this.appVersion = requiredParamsValid(appVersion) ? appVersion : VulcanMessage.DEFAULT_APP_VERSION;
     this.data = VulcanMessage.DEFAULT_DATA;
 }
 
@@ -321,8 +437,8 @@ VulcanMessage.prototype.xmlData = function()
     if(this.data === undefined)
     {
         var str = "";
-		str = String.format(VulcanMessage.payloadTemplate, str);
-		this.data = String.format(VulcanMessage.dataTemplate, str);
+        str = String.format(VulcanMessage.payloadTemplate, str);
+        this.data = String.format(VulcanMessage.dataTemplate, str);
     }
     return this.data;
 };
