@@ -26,7 +26,7 @@ This guide is geared towards CEP (Common Extensibility Platform) developers who 
       - [Use Case: Adjusting Plugin Size](#use-case-adjusting-plugin-size)
   - [Migrating ExtendScript/EvalScript to the Photoshop DOM API](#migrating-extendscriptevalscript-to-the-photoshop-dom-api)
 
-CEP is no longer supported on M1 machines natively but continues to work on Windows and on M1 machines that run Photoshop in Rosetta mode. The missing M1 support for native Photoshop usage on M1 machines is a strong reason to start thinking about migrating existing CEP extensions to UXP plugins.  
+CEP is natively supported on M1 devices for all applications except for Photoshop.  You can continue to run CEP extensions natively on Windows and on M1 machines by running Photoshop in Rosetta mode. The missing M1 support for native Photoshop usage on M1 machines is a strong reason to start thinking about migrating existing CEP extensions to UXP plugins.  
 
 There is no clear-cut path for migration, given that CEP and UXP are fundamentally different. CEP was based on CEF, making it effectively act as a browser. UXP on the other hand is not a browser, and therefore complete feature parity will never happen. This migration should serve as an opportunity to design a better, more performant version of your existing CEP extension, and perhaps add new features to support modern workflows. In fact, it is better to think of this process as a “reconstruction” with the benefits of UXP in mind, rather than a migration. 
 
@@ -84,7 +84,7 @@ Using `entrypoints.setup()` API, handlers and menu items for the entry points ar
    * `cancel()`: This is called when the command is cancelled/aborted before completion. 
 
 ### User Interface
-UXP plugins can use platform-native HTML and CSS components such as buttons, input fields, etc. But a plugin can also use Spectrum UXP components based on Adobe Spectrum CSS. 
+UXP plugins can use platform-native HTML and CSS components such as buttons, input fields, etc. But a plugin can also use Spectrum UXP components.
 
 ## Migrating Native CEP Functions
 There is a common set of APIs that plugins need access to, regardless of the host app. These include file I/O and network, among others. This section will discuss the native CEP APIs extensions are able to rely on, and guidelines for migrating those APIs to UXP.  
@@ -92,7 +92,7 @@ There is a common set of APIs that plugins need access to, regardless of the hos
 ### Directory and File I/O Operations (File APIs) 
 In CEP extensions, developers use the `window.cep.fs` object to perform directory and file I/O operations. CEP developers have arbitrary access to disk and machine resources, and arbitrary ability to launch processes (including bash scripts). Users do not have to consent to extensions accessing their file system. Because developers have full access, all file access is technically persistent. Secure storage, on the other hand, does not exist for CEP. 
 
-UXP’s `fs` module can read and write files and folders in the user's file system, but with different API signatures. Because of sandboxing requirements of recent OS releases, UXP does not allow arbitrary access to any file on the host system. Therefore, these files are accessed by making a request to the user (by showing a file-picker dialog) and obtaining a token. File accesses outside of the plugin's root folder, the plugin's data folder, and a plugin temporary folder require the user's permission. Persistent file storage and secure storage are available in UXP as well. Refer to these notes: [file access](https://developer.adobe.com/photoshop/uxp/2022/guides/uxp_guide/uxp-misc/file-access/), [persistent file storage](https://developer.adobe.com/photoshop/uxp/2022/uxp/reference-js/Modules/uxp/Persistent%20File%20Storage/), and UXP-specific [(secure) storage](https://developer.adobe.com/photoshop/uxp/2022/uxp/reference-js/Modules/uxp/Key-Value%20Storage/SecureStorage/). If you need constant access to a location to write and read files, for now, use the UXP sanctioned location for your plugin data. 
+UXP’s `storage` module can read and write files and folders in the user's file system, but with different API signatures. Because of sandboxing requirements of recent OS releases, UXP does not allow arbitrary access to any file on the host system. Therefore, these files are accessed by making a request to the user (by showing a file-picker dialog) and obtaining a token. File accesses outside of the plugin's root folder, the plugin's data folder, and a plugin temporary folder require the user's permission. Persistent file storage and secure storage are available in UXP as well. Refer to these notes: [file access](https://developer.adobe.com/photoshop/uxp/2022/guides/uxp_guide/uxp-misc/file-access/), [persistent file storage](https://developer.adobe.com/photoshop/uxp/2022/uxp/reference-js/Modules/uxp/Persistent%20File%20Storage/), and UXP-specific [(secure) storage](https://developer.adobe.com/photoshop/uxp/2022/uxp/reference-js/Modules/uxp/Key-Value%20Storage/SecureStorage/). If you need constant access to a location to write and read files, for now, use the UXP sanctioned location for your plugin data or [persistent file access tokens](https://developer.adobe.com/photoshop/uxp/2022/uxp/reference-js/Modules/uxp/Persistent%20File%20Storage/FileSystemProvider/#createpersistenttokenentry).
 
 ### Encoding API
 CEP extensions can access the encoding API with the `window.cep.encoding` object. With this API, they can implement encoding while reading and writing file content. In UXP, you can directly provide the required encoding as a string literal argument when invoking methods to read/write file content. CEP developers can use UTF8 or Base64 encoding. UXP on the other hand, supports the following text encodings: utf-8, utf-16be, and utf-16le. 
@@ -233,7 +233,7 @@ CEP uses host environment information provided in the manifest to load and updat
 
 #### Use Case: Keyboard Events 
 
-CEP allows you to register an interest in specific keyboard events to prevent them from being sent directly to the host application, allowing you to implement your own callback functions. UXP does not support registering keyboard events.  
+CEP allows you to register an interest in specific keyboard events to prevent them from being sent directly to the host application, allowing you to implement your own callback functions. UXP does not support registering keyboard events in the same manner. Your UXP plugin can set focus on a control inside a panel and listen for several types of keyboard presses, but there’s no way to do this globally to override the global shortcuts. 
 
 #### Use Case: Adjusting Plugin Size 
 
