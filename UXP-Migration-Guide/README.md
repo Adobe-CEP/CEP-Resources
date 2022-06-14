@@ -1,5 +1,5 @@
 # CEP to UXP Technical Migration Guide
-This guide is geared towards CEP (Common Extensibility Platform) developers who would like more technical guidance on migrating their extensions to UXP. The migration process is no doubt challenging but will dramatically improve your development experience for future iterations of your plugins. 
+This guide is geared towards CEP (Common Extensibility Platform) developers who would like more technical guidance on migrating their extensions to UXP (Unified eXtensibility Platform). The migration process is no doubt challenging but will dramatically improve your development experience for future iterations of your plugins. 
 
 - [CEP to UXP Technical Migration Guide](#cep-to-uxp-technical-migration-guide)
   - [Why migrate to UXP?](#why-migrate-to-uxp)
@@ -28,13 +28,13 @@ This guide is geared towards CEP (Common Extensibility Platform) developers who 
 
 CEP is natively supported on M1 devices for all applications except for Photoshop.  You can continue to run CEP extensions natively on Windows and on M1 machines by running Photoshop in Rosetta mode. The missing M1 support for native Photoshop usage on M1 machines is a strong reason to start thinking about migrating existing CEP extensions to UXP plugins.  
 
-There is no clear-cut path for migration, given that CEP and UXP are fundamentally different. CEP was based on CEF, making it effectively act as a browser. UXP on the other hand is not a browser, and therefore complete feature parity will never happen. This migration should serve as an opportunity to design a better, more performant version of your existing CEP extension, and perhaps add new features to support modern workflows. In fact, it is better to think of this process as a “reconstruction” with the benefits of UXP in mind, rather than a migration. 
+There is no clear-cut path for migration, given that CEP and UXP are fundamentally different. CEP was based on CEF ([Chromium Embedded Framework](https://bitbucket.org/chromiumembedded/cef)), making it effectively act as a browser. UXP, on the other hand, is not a browser, and therefore complete feature parity is unlikely. This migration should serve as an opportunity to design a better, more performant version of your existing CEP extension, and perhaps a chance to add new features and support modern workflows. In fact, it is better to think of this process as a “reconstruction” with the benefits of UXP in mind, rather than a migration. 
 
-For most of your end-users who love the existing CEP version of your plugin, there will be no need at all to switch at all. It is the group of users running Photoshop natively on M1 Mac machines that require a UXP version of your plugin and delivering a UXP plugin can attract new and additional users! 
+For many of your end-users who love the existing CEP version of your plugin, there may be no need to switch for several years. It is the group of users running Photoshop natively on M1 Mac machines that require a UXP version of your plugin and delivering a UXP plugin could attract new users! 
 
 ## Why migrate to UXP? 
 
-UXP provides a comprehensive extensibility solution, turning JavaScript and HTML markup into controls in native application windows. You can think of UXP as a small runtime with a subset of browser functionality that we intend to grow. It has a DOM, with auto-layout and CSS Flexbox layout capabilities. UXP can run JS using the platform-specific JS engine, laying out native controls on screen, and enabling C++ and JS hybrid app development. A unified, modern execution environment (JavaScript V8) allows plugin UI and business logic to share the same context, which means no need to use `evalScript` anymore! 
+UXP provides a comprehensive extensibility solution, turning JavaScript and HTML markup into controls in native application windows. You can think of UXP as a small runtime with a subset of browser functionality that we intend to grow. It has a DOM, with auto-layout and CSS Flexbox layout capabilities. UXP can run JS using the platform-specific JS engine, laying out native controls on screen, and enabling C++ and JS hybrid app development. A unified, modern execution environment (JavaScript V8) allows plugin UI and business logic to share the same context, which means no need to use `evalScript` anymore!
 
 ### Developer Tooling
 
@@ -44,7 +44,6 @@ Here is the [CEP debugging guide](https://github.com/Adobe-CEP/CEP-Resources/blo
 
 In the CEP world, if you want the extension to appear in the Window-->Extensions menu, add the `<Menu>` tag. If you want the extension to launch on an event, specify those events using the `<StartOn>` tag. All CEP extension types must be specified in the manifest.xml file.  
 
-
 |CEP Extension Type |Specifications| 
 |:------ | :------ |
 | Panel | <ul><li>Dockable</li><li>Resizable</li><li>Fly-out menus</li><li>Re-opened at startup if open at shutdown</li></ul>
@@ -52,7 +51,7 @@ In the CEP world, if you want the extension to appear in the Window-->Extensions
 | Invisible/Custom | Extensions that never become visible during their lifecycle (CEP 5.0+)
 | Modeless | Opens a new extension window but does not force the user to interact with the extension window
 
-Meanwhile, UXP plugins are either commands or panels. Plugin metadata like the size, icons, label, and ID are defined in the manifest.json file. Plugin functionality and behavior is defined using the `entrypoints.setup()` API.   
+Meanwhile, UXP plugins are either commands or panels. Plugin metadata like the size, icons, label, and ID are defined in the `manifest.json` file. Plugin functionality and behavior is defined using the `entrypoints.setup()` API.   
 
 |UXP Plugin Type |Specifications| 
 |:------ | :------ |
@@ -64,10 +63,10 @@ Meanwhile, UXP plugins are either commands or panels. Plugin metadata like the s
 ## UXP Plugin Development
 ### Entrypoint Setup
 Using `entrypoints.setup()` API, handlers and menu items for the entry points are defined in manifest. The `entrypoints` object consists of 3 objects: 
-1. plugin: This can be an object or a function. If this is a function, it is assumed as the 'create' handler (described below). 
+1. plugin: This can be an object or a function. If this is a function, it is assumed as the `create` handler (described below). 
    * `create()`: This is called after plugin is loaded. 
    * `destroy()`: This is called before plugin is unloaded. 
-2. panels: This contains a list of key-value pairs where each key is a panel id (string) and value is the data for the panel whose type can be object/function. If the value is a function, it is assumed to be the 'show' method (described below). If an object, it can contain any of the following properties but must define either 'create' or 'show'. Each of the following functions return a promise if successful and should throw an exception or return a rejected promise to signal failure.  
+2. panels: This contains a list of key-value pairs where each key is a panel id (string) and value is the data for the panel whose type can be object/function. If the value is a function, it is assumed to be the `show` method (described below). If an object, it can contain any of the following properties but must define either `create` or `show`. Each of the following functions return a promise if successful and should throw an exception or return a rejected promise to signal failure.  
    * `create()`: This is called when a panel is created. 
    * `show()`: This is called when a panel is shown. 
    * `hide()`: This is called when a panel is hidden. 
@@ -78,13 +77,13 @@ Using `entrypoints.setup()` API, handlers and menu items for the entry points ar
      * {string} label - display text for the menu item. Should be localized. If label is not specified, id is used as label. 
      * {boolean} enabled - enabled/disabled state for the menu item. Default - true. 
      * {boolean} checked - checked state for the menu item. Default - false. 
-     * {Array} submenu - submenu for this menu item again as an array of 'menuItems'. 'id' of submenus should still be unique across panel. 
+     * {Array} submenu - submenu for this menu item again as an array of `menuItems`. `id` of submenus should still be unique across panel. 
 3. commands: This object contains a list of key-value pairs where each key is the command ID and each value is the command's data whose type can be an object or function. If the command’s data is a function, it is assumed to be the `run()` method.
    * `run()`: This is called when the command is invoked via menu entry. 
    * `cancel()`: This is called when the command is cancelled/aborted before completion. 
 
 ### User Interface
-UXP plugins can use platform-native HTML and CSS components such as buttons, input fields, etc. But a plugin can also use Spectrum UXP components.
+UXP plugins can use platform-native HTML and CSS components such as buttons, input fields, etc. But a plugin can also use [Spectrum UXP](https://developer.adobe.com/xd/uxp/uxp/reference-spectrum/) components.
 
 ## Migrating Native CEP Functions
 There is a common set of APIs that plugins need access to, regardless of the host app. These include file I/O and network, among others. This section will discuss the native CEP APIs extensions are able to rely on, and guidelines for migrating those APIs to UXP.  
@@ -180,7 +179,7 @@ While plugins can still use v1, many new features are only available on Photosho
 
 CSXS/CEP events are used to send events among extensions in an application, and among extensions in different applications.  
 
-**Photoshop DOM events**: You can send and receive events within an extension by attaching event listeners in the DOM of the plugin panel or modal, and then listening for changes in the Photoshop app by using the Photoshop API. 
+**Photoshop DOM events**: You can send and receive events within an extension by attaching event listeners in the DOM of the plugin panel or modal, and then listening for changes in the Photoshop app by using the Photoshop UXP API. 
 
 **UXP events**: UXP has lifecycle events that allow you to receive and send events to the host application and better manage your plugin’s lifecycle.  
 
@@ -233,19 +232,19 @@ CEP uses host environment information provided in the manifest to load and updat
 
 #### Use Case: Keyboard Events 
 
-CEP allows you to register an interest in specific keyboard events to prevent them from being sent directly to the host application, allowing you to implement your own callback functions. UXP does not support registering keyboard events in the same manner. Your UXP plugin can set focus on a control inside a panel and listen for several types of keyboard presses, but there’s no way to do this globally to override the global shortcuts. 
+CEP allows you to register an interest in specific keyboard events to prevent them from being sent directly to the host application, allowing you to implement your own callback functions. UXP does not support registering keyboard events in the same manner. Your UXP plugin can set focus on a control inside a panel and listen for several types of keyboard presses, but there’s no way to do this globally to override the global shortcuts. (To request this feature, please mention it [in our UXP developer forums](https://forums.creativeclouddeveloper.com/t/how-to-set-a-keyboard-shortcut-for-a-photoshop-uxp-plugin/3236).)
 
 #### Use Case: Adjusting Plugin Size 
 
 For modal and modeless CEP extensions, using `window.__adobe_cep__.resizeContent()` takes two parameters (width and height) and resizes the extension’s content to the specified dimensions. The width and height parameters are expected to be unsigned integers. Please note that extension min/max size constraints as specified in the manifest file apply and take precedence. If the specified size is out of the min/max size range, the min or max bounds will be used. 
 
-UXP plugins are restricted to the sizes defined by the manifest. Plugins also cannot control the size of their panel programmatically. The expectation is that plugin developers will design their UI in a responsive manner – allowing the user to configure the panel to their liking. If your plugin consists of multiple accordions in the UI, you might want to consider shipping with multiple panels instead. Then the user can group all those panels together, resize them, reorder them, collapse them, etc., as they define in the manifest. 
+UXP plugins are restricted to the sizes defined by the manifest. Plugins also cannot control the size of their panel programmatically. The expectation is that plugin developers will design their UI in a responsive manner – allowing the user to configure the panel to their liking. If your plugin consists of multiple accordions in the UI, you might want to consider shipping with multiple panels instead. Then the user can group all those panels together, resize them, reorder them, collapse them, etc., as defined in the manifest. 
 
 ## Migrating ExtendScript/EvalScript to the Photoshop DOM API
 JSX files define functions and objects to be executed in Photoshop’s ExtendScript environment. These are executed in CEP either at plugin load time or using `evalScript`. You specify the path to JSX files in <ScriptPath> node in manifest.xml.  
 
 All ExtendScript calls to Photoshop were synchronous and blocked the host application UI while executing. In UXP, method calls are asynchronous and do not block the UI thread. To assist a smoother transition between the ExtendScript DOM and the UXP API, UXP functions are asynchronous by design but can be used for synchronous execution and do not need to be awaited.  
 
-In UXP, you cannot load and execute JSX files directly. Instead, you can access the Photoshop DOM directly using the Photoshop DOM API. If the current implementation does not fulfill your needs, you can use batchPlay to execute Photoshop actions. 
+In UXP, you cannot load and execute JSX files directly. Instead, you can access the Photoshop DOM directly using the Photoshop DOM API. If the current implementation does not fulfill your needs, you can use [`batchPlay`](https://developer.adobe.com/photoshop/uxp/ps_reference/media/advanced/batchplay/) to execute Photoshop actions.
 
-batchPlay is the evolution of executeAction from ExtendScript. Where executeAction could only play one descriptor at a time, batchPlay accepts an array of action descriptors. In ExtendScript, we provided a class around constructing descriptors, references, and putting values in. With batchPlay, we have replaced these related classes with actionJSON. If you have used executeAction in ExtendScript, you may recall 4-character codes (OSTypes) and helper methods around them. In actionJson, we instead use extended string identifiers such as colorSampler. You can still use an OSType by pre-pending it with a $ sign and passing that as a string, like '$app '. 
+`batchPlay` is the evolution of `executeAction` from ExtendScript. Where `executeAction` could only play one descriptor at a time, `batchPlay` accepts an array of action descriptors. In ExtendScript, we provided a class around constructing descriptors, references, and putting values in. With `batchPlay`, we have replaced these related classes with `actionJSON`. If you have used `executeAction` in ExtendScript, you may recall 4-character codes (OSTypes) and helper methods around them. In `actionJson`, we instead use extended string identifiers such as `colorSampler`. You can still use an OSType by pre-pending it with a $ sign and passing that as a string, like `$app `. 
