@@ -1,6 +1,6 @@
 ## Appendix 1: UXP vs. CEP vs. ExtendScript
 
-|**Platform** |**CEP** |  **UXP** | **ExtendScript**
+|**Platform** |**UXP** |  **CEP** | **ExtendScript**
 |:----|:----|:----|:--- 
 |Developer Tooling | UDT | Chrome Debugging; ZXP packaging and signing | ESTK (Deprecated, not supported on macOS anymore); VSCode ExtendScript Debugger
 | Bundle Format | .ccx: a renamed zip folder containing manifest + code | .zxp: a custom archive format containing manifest + code + signed certificate | None but supports ZXP format
