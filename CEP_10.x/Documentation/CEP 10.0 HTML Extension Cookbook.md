@@ -2790,7 +2790,7 @@ Please use "namespace" if the developers want to define new variable/function/ob
 #### Use Drag and Drop
 
 
-CEP 5.2 support HTML 5 Drag and Drop. There are four types.
+CEP 5.2 support [HTML 5](https://www.interviewbit.com/blog/difference-between-html-and-html5/) Drag and Drop. There are four types.
 
  1. Drag and drop inside HTML extension.
  
