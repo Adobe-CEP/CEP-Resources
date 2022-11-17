@@ -896,7 +896,7 @@ CEP JavaScript Libraries are counterparts of the Flex CSXS Library. They provide
  - CSInterface.js
  - Vulcan.js
 
-Get them from: https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_10.x
+Get them from: https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_12.x
 
 
 To use them, please include these JavaScript files in your HTML extension.
