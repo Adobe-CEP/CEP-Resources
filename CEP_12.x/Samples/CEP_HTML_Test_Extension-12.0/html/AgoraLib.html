@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html>
+<head>
+<title>AgoraLib JavaScript Test</title>
+<script type="text/javascript" src="../js/AgoraLib.js"></script>
+<script type="text/javascript" src="../js/Vulcan.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script src="../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<style type="text/css">
+    /*** central column on page ***/
+    div#divContainer
+    {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: Calibri;
+        padding: 0.5em 1em 1em 1em;
+
+        /* rounded corners */
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+        /* add box shadows */
+        -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        z-index: 1;
+    }
+    
+    body {
+        color: #fff;
+    }
+    
+    .agora_button {
+        width: 125px;
+    }
+
+    .agora_result {
+        width: 350px;
+    }
+
+    .note {
+        font-size: 9pt;
+        clear: both;
+    }
+
+    .header {
+        color: red;
+        font-size: 14px;
+        font-weight: bolder;
+    }
+
+</style>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript"> 
+    var agoraLib = new AgoraLib();
+
+    var addToStatus = function(string)
+    {
+        var outputField = $("#agoralib_output").val();
+        outputField += string + "\n";
+        $("#agoralib_output").val(outputField);
+    }
+
+    var handleRequestCallback = function(message) {
+        var message = VulcanInterface.getPayload(message);
+        addToStatus("The message is received in the client callback with data " + message);
+        var testVulcanMessage = new VulcanMessage(AgoraLib.RESPONSE_TYPE);
+        var sub_payload = "";
+        if (window.DOMParser) {
+            var parser = new window.DOMParser();
+            try {
+                var payloadDoc = parser.parseFromString(message, "text/xml");
+                var requests = payloadDoc.getElementsByTagName("Request");
+                for (var i = 0; i < requests.length; i++) {
+                    var reqElem = requests[i];
+                    if (reqElem) {
+                        var apiName = reqElem.attributes.getNamedItem("name").nodeValue;
+                        var callerID = reqElem.attributes.getNamedItem("callerID").nodeValue;
+
+                        if (apiName === AgoraLib.IS_ENTITLED) {
+                            sub_payload = getEntitlementResponse(callerID);
+                        } else if (apiName === AgoraLib.GET_PURCHASE_URL) {
+                            sub_payload = getPurchaseUrlResponse(callerID);
+                        } else if (apiName === AgoraLib.GET_VERSION) {
+                            sub_payload = getVersionResponse(callerID);
+                        } else if (apiName === AgoraLib.CREATE_ENTITLEMENT) {
+                            sub_payload = getCreateEntitlementResponse(callerID);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log("AgoraLib.html: something went wrong! " + e);
+            }
+        }
+
+        testVulcanMessage.setPayload(sub_payload);
+        VulcanInterface.dispatchMessage(testVulcanMessage);
+    };
+
+    var getEntitlementResponse = function(callerID) {
+        addToStatus("Retrieving entitlement response");
+        return String.format(AgoraLib.MESSAGE_RESPONSE_TEMPLATE, "<Response name=\"" + AgoraLib.IS_ENTITLED + "\" callerID=\"" + callerID + "\"><Results><Result name=\"" + AgoraLib.IS_ENTITLED + "\"><Value>" + agora_fakeExchangePluginReturnValues.value + "</Value></Result><Result name=\"Status\"><Value>Subscription purchase</Value></Result><Result name=\"StatusCode\"><Value>3</Value></Result></Results></Response>");
+    };
+
+    var getPurchaseUrlResponse = function(callerID) {
+        addToStatus("Retrieving getPurchaseUrl response");
+        return String.format(AgoraLib.MESSAGE_RESPONSE_TEMPLATE, "<Response name=\"" + AgoraLib.GET_PURCHASE_URL + "\" callerID=\"" + callerID + "\"><Results><Result name=\"URL\"><Value>http://www.adobeexchange.com/producer</Value></Result><Result name=\"Status\"><Value>Success</Value></Result><Result name=\"StatusCode\"><Value>0</Value></Result></Results></Response>");
+    };
+
+    var getVersionResponse = function(callerID) {
+        addToStatus("Retrieving getVersion response");
+        return String.format(AgoraLib.MESSAGE_RESPONSE_TEMPLATE, "<Response name=\"" + AgoraLib.GET_VERSION + "\" callerID=\"" + callerID + "\"><Results><Result name=\"Version\"><Value>1.2.1</Value></Result><Result name=\"Status\"><Value>Success</Value></Result><Result name=\"StatusCode\"><Value>0</Value></Result></Results></Response>");
+    };
+    
+    var getCreateEntitlementResponse = function(callerID) {
+        addToStatus("Retrieving createEntitlement response");
+        return String.format(AgoraLib.MESSAGE_RESPONSE_TEMPLATE, "<Response name=\"" + AgoraLib.CREATE_ENTITLEMENT + "\" callerID=\"" + callerID + "\"><Results><Result name=\"Status\"><Value>Success</Value></Result><Result name=\"StatusCode\"><Value>0</Value></Result></Results></Response>");
+    };
+
+    var createEntitlementResponseCallback = function(resultObj) {
+        VulcanInterface.removeMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        addToStatus("createEntitlementResponseCallback with statusCode: " + resultObj.statusCode + " status: " + resultObj.status + " and response: " + resultObj.response);
+    };
+
+    var isEntitledResponseCallback = function(resultObj) {
+        VulcanInterface.removeMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        addToStatus("isEntitledResponseCallback with statusCode: " + resultObj.statusCode + " status: " + resultObj.status + " and response: " + resultObj.response);
+    };
+
+    var getPurchaseUrlResponseCallback = function(resultObj) {
+        VulcanInterface.removeMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        addToStatus("getPurchaseUrlResponseCallback with statusCode: " + resultObj.statusCode + " status: " + resultObj.status + " and response: " + resultObj.response);
+        agora_loadPurchaseUrl.disabled = false;
+    };
+
+    function onclickCreateEntitlement() {
+        if (agora_fakeExchangePlugin.checked) {
+            addToStatus("onclickCreateEntitlement: faking exchange plugin workflows.");
+            VulcanInterface.addMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        }
+        addToStatus("onclickCreateEntitlement: calling createEntitlement with ignoreACCC value of: " + agora_ignoreACCC.checked);
+        agoraLib.createEntitlement(createEntitlementResponseCallback, agora_ignoreACCC.checked);
+    }
+
+    function onclickIsEntitled() {
+        if (agora_fakeExchangePlugin.checked) {
+            addToStatus("onclickIsEntitled: faking exchange plugin workflows.");
+            VulcanInterface.addMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        }
+        addToStatus("onclickIsEntitled: calling isEntitled with ignoreACCC value of: " + agora_ignoreACCC.checked);
+        agoraLib.isEntitled(isEntitledResponseCallback, agora_ignoreACCC.checked);
+    }
+
+    function onclickGetPurchaseUrl() {
+        if (agora_fakeExchangePlugin.checked) {
+            addToStatus("onclickGetPurchaseUrl: faking exchange plugin workflows.");
+            VulcanInterface.addMessageListener(AgoraLib.MESSAGE_TYPE, handleRequestCallback);
+        }
+
+        agora_loadPurchaseUrl.disabled = true;
+        addToStatus("onclickGetPurchaseUrl: calling getPurchaseUrl with straightToCheckout: " + agora_straightToCheckout.checked + " ignoreACCC: " + agora_ignoreACCC.checked);
+        agoraLib.getPurchaseUrl(getPurchaseUrlResponseCallback, agora_straightToCheckout.checked, agora_ignoreACCC.checked);
+    }
+
+    function openInNewTab() {
+        var CSLibrary = new CSInterface();
+        CSLibrary.openURLInDefaultBrowser(agora_getPurchaseUrl_result.value);
+    }
+</script>
+</head>
+
+<body>
+    <fieldset>
+        <legend>AgoraLib APIs</legend>
+    <p>
+        <label class="agora_label" for="agora_ignoreACCC">Don't launch ACCC if not running?</label><input type="checkbox" name="agora_ignoreACCC" id="agora_ignoreACCC" value="false" />
+    </p>
+    <p>
+        <input type="button" name="createEntitlement" class="agora_button" id="createEntitlement" value="Create Entitlement" onclick="onclickCreateEntitlement()" />&nbsp;
+        <input type="button" name="isEntitled" class="agora_button" id="isEntitled" value="IsEntitled?" onclick="onclickIsEntitled()" />&nbsp;
+        <input type="button" name="agora_getPurchaseUrl" class="agora_button" id="agora_getPurchaseUrl" value="GetPurchaseUrl" onclick="onclickGetPurchaseUrl()" />
+    </p>
+    <p>
+       <input type="button" name="agora_loadPurchaseUrl" id="agora_loadPurchaseUrl" class="agora_button" value="Load returned purchase url" size="90" onclick="openInNewTab()" disabled/><br />
+       <label class="agora_label" for="agora_straightToCheckout">Return StraightToCheckout purchase url?</label><input type="checkbox" name="agora_straightToCheckout" id="agora_straightToCheckout" value="StraightToCheckout?" />
+    </p>
+    <p><textarea id="agoralib_output" cols="80" rows="10"></textarea></p>
+    </fieldset>
+
+    <p class="header">The following are for testing purposes until Exchange Plugin has finished their implementation</p>
+    <p>
+        <label class="agora_label" for="agora_fakeExchangePlugin">Fake ExchangePlugin?</label><input type="checkbox" name="agora_fakeExchangePlugin" id="agora_fakeExchangePlugin" value="agora_fakeExchangePlugin" /><br />
+        <label class="agora_label" for="agora_fakeExchangePluginReturnValues">IsEntitled Return Status:</label>
+        <select id="agora_fakeExchangePluginReturnValues"><option value="True">True</option><option value="False">False</option><option value="Unknown">Unknown</option></select>
+        <br />
+        <span class="note">If the above is checked then the HTML Test panel will act like the Exchange Plugin and respond to the AgoraLib API requests.</span>
+    </p>
+</body>
+</html>

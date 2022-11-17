@@ -1,0 +1,87 @@
+/*customize menu icon here*/
+#menu_icon {
+    height: 32px;
+    width: 32px;
+}
+
+/*customize menu position here*/
+#fly_out_menu {
+    width: 50px; 
+    position: absolute;
+    right: 0;
+}
+
+/*customize sub menu from here*/
+#fly_out_menu ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#fly_out_menu ul li.hover,
+
+#fly_out_menu ul li:hover { 
+    position: relative; 
+    z-index: 10; 
+}
+ 
+#fly_out_menu ul ul{
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 9;
+}
+ 
+#fly_out_menu ul li:hover > ul { 
+    visibility: visible; 
+} 
+ 
+#fly_out_menu ul ul {
+    top: 0; 
+    right: 100%; 
+}
+
+/*customize menu text from here*/ 
+#fly_out_menu span, #fly_out_menu a {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #000000;
+    text-decoration: none; 
+}
+
+#fly_out_menu a {
+    line-height: 90%;
+    padding: 15px 5px 10px 10px;
+    width: 110px; 
+}
+
+/*customize color from here*/ 
+#fly_out_menu li { 
+    background: #D2D2D2; 
+}
+
+#fly_out_menu li:hover, #fly_out_menu li.active { 
+    background: #828282; 
+}
+ 
+#fly_out_menu ul ul li {
+    background: #D2D2D2;
+    border-bottom: 1px solid #A2A2A2; }
+ 
+#fly_out_menu ul ul li:hover { 
+    background: #A2A2A2; 
+}
+
+.flyoutMenuDescription {
+    color:#EBEBEB;
+    font-size: 16px;
+}
+
+#flyoutMenuResult {
+    color:#EBEBEB;
+    font-size:16px;
+	background-color:transparent; 
+	border-color:transparent;
+}

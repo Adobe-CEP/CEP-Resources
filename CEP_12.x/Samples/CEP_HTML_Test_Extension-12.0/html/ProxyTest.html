@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html>
+<head>
+<title>Proxy Test</title>
+<style type="text/css">
+    /*** central column on page ***/
+    div#divContainer
+    {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: Calibri;
+        padding: 0.5em 1em 1em 1em;
+
+        /* rounded corners */
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+        /* add box shadows */
+        -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+        z-index: 1;
+    }
+    
+    body {
+        color: #fff;
+    }
+
+    a {
+        color: #fff;
+    }
+
+</style>
+<script src="../js/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript"> 
+    var CSLibrary = new CSInterface();
+    $(document).ready(function() {
+        // adjust layout on Windows
+        if ((CSLibrary.getOSInformation()).indexOf("Windows") > -1) {
+            $("#DisplayArea").attr("width", "728px");
+        }        
+    });
+
+    function openInNewTab() {
+        CSLibrary.openURLInDefaultBrowser("https://wiki.corp.adobe.com/display/csxs/CEP+5.2+Test+Suite+-+Test+HTML+Features+with+Proxy+Server");
+    }
+
+    function onclickBasic() {
+        $("#DisplayArea").attr("src", "http://httpbin.org/basic-auth/user/passwd");
+    }
+
+    function onclickWProxy() {
+        $("#DisplayArea").attr("src", "http://html5demos.com");
+    }
+</script>
+</head>
+
+<body>
+    <fieldset>
+        <legend>ProxyTest</legend>
+    <p>Use this page to test Proxy workflows.<p>
+    <p>
+        <input type="button" name="basic" id="basic" value="Test Basic Authentication" onclick="onclickBasic()" /><br />
+        Tests authentication workflows on a server by targeting the Basic Auth URL on http://httpbin.org. You should be prompted for a username and password. Please enter user / passwd
+    </p>
+    <p>
+        <input type="button" name="wproxy" id="wproxy" value="Test with a Proxy Server" onclick="onclickWProxy()" /><br />
+        This testcase has a couple of pre-requisites before invoking:
+        <ol>
+            <li>Setup local proxy server by following steps at: <a href="javascript:openInNewTab();">Test HTML Features with Proxy Server</a></li>
+            <li>Restart Point Product and relaunch HTML Test Extension</li>
+        </ol>
+    </p>
+    <iframe width="680" height="180" name="DisplayArea" id="DisplayArea" frameborder="1" nodejs-disabled="true"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,1743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/SpryAssets/SpryTabbedPanels.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript">
+    // Initialization
+    // File open EX dialog
+    var SODEXTitleVal = "TestTitle";
+    var SODEXInitialPathVal;
+    var SODEXFileTypesVal = new Array();
+    SODEXFileTypesVal[0] = "*.*";
+    var SODEXFriendlyFilePrefixVal = "All files";
+    var SODEXAllowMultipleSelectionVal = true;
+    var SODEXChooseDirectoryVal = false;
+    var SODEXPromptVal = "OK";
+    
+    // File save EX dialog
+    var SSDEXTitleVal = "TestTitle";
+    var SSDEXInitialPathVal;
+    var SSDEXFileTypesVal = new Array();
+    SSDEXFileTypesVal[0] = "*.*";
+    var SSDEXDefaultNameVal = "test.txt"
+    var SSDEXFriendlyFilePrefixVal = "All files";
+    var SSDEXPromptVal = "Save";
+    var SSDEXNameFieldLabelVal = "File name:";
+	
+    $(document).ready(function() {
+	
+	    var gPID = -1;
+		var CSLibrary = new CSInterface();
+	
+        $("#ShowOpenDialogDiv").show();
+        $("#ShowOpenDialogEXDiv").hide();
+        $("#ShowSaveDialogEXDiv").hide();
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#MakeDirSuccessLabel").hide();
+        $("#RenamePathSuccessLabe").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();
+        $("#WriteFileSuccessLabel").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").hide();
+        $("#WaitForProcessDiv").hide();
+		$("#OnQuitProcessDiv").hide();
+		
+        // initialize test values
+        if ((navigator.platform == "Win32") || (navigator.platform == "Windows")){
+            var myDocumentsPath = CSLibrary.getSystemPath(SystemPath.MY_DOCUMENTS);
+            document.getElementById("DeleteFilePath").value = myDocumentsPath + "/test.txt";
+            document.getElementById("ReadDirPath").value = myDocumentsPath;
+            document.getElementById("MakeDirPath").value = myDocumentsPath + "/test";
+            document.getElementById("RPOldPath").value = myDocumentsPath + "/test";
+            document.getElementById("RPNewPath").value = myDocumentsPath + "/newTest";
+            document.getElementById("GFMTGetInfo").value = myDocumentsPath + "/test";
+            document.getElementById("ReadFilePath").value = myDocumentsPath + "/test.txt";
+            document.getElementById("WriteFilePath").value = myDocumentsPath + "/test.txt";
+            document.getElementById("SFPFilePath").value = myDocumentsPath + "/test.txt";
+			
+            document.getElementById("CreateProProgramName").value = "C:/windows/system32/notepad.exe";
+            document.getElementById("SetStdOutProgramName").value = "C:/windows/system32/netstat.exe";
+            document.getElementById("SetStdErrProgramName").value = "C:/windows/system32/cmd.exe";
+            document.getElementById("WriteStdInProgramName").value = "C:/windows/system32/ftp.exe";
+            document.getElementById("WaitForProProgramName").value = "C:/windows/system32/notepad.exe";
+			document.getElementById("OnQuitProProgramName").value = "C:/windows/system32/notepad.exe";
+			
+            document.getElementById("CreateProArgument1").value = "";
+			document.getElementById("CreateProArgument2").value = "";
+            document.getElementById("SetStdOutArgument1").value = "-e";
+			document.getElementById("SetStdOutArgument2").value = "-s";
+            document.getElementById("SetStdErrArgument1").value = "";
+			document.getElementById("SetStdErrArgument2").value = "";
+            document.getElementById("WriteStdInArgument1").value = "";
+			document.getElementById("WriteStdInArgument2").value = "";
+            document.getElementById("WaitForProArgument1").value = "";
+			document.getElementById("WaitForProArgument2").value = "";
+			document.getElementById("OnQuitProArgument1").value = "";
+			document.getElementById("OnQuitProArgument2").value = "";
+			
+			document.getElementById("SetStdErrInput").value = "aaaaa\r\n";
+			document.getElementById("StdInInput").value = "quit\r\n";
+			
+            SODEXInitialPathVal = "C:\\";
+            SSDEXInitialPathVal = "C:\\";
+            document.getElementById("SODEXAllowMultipleSelection").checked = SODEXAllowMultipleSelectionVal;
+            document.getElementById("SODEXChooseDirectory").checked = SODEXChooseDirectoryVal;                
+            document.getElementById("SODEXTitle").value = SODEXTitleVal;
+            document.getElementById("SODEXInitialPath").value = SODEXInitialPathVal;
+            document.getElementById("SODEXFileTypes").value = SODEXFileTypesVal;
+            document.getElementById("SODEXFileTypes").disabled = document.getElementById("SODEXChooseDirectory").checked;    
+            document.getElementById("SODEXFriendlyFilePrefix").value = SODEXFriendlyFilePrefixVal;
+            document.getElementById("SODEXFriendlyFilePrefix").disabled = document.getElementById("SODEXChooseDirectory").checked;    
+            document.getElementById("SODEXPrompt").value = "Only available on Mac";    
+            document.getElementById("SODEXPrompt").disabled = true;            
+            
+            document.getElementById("SSDEXTitle").value = SSDEXTitleVal;
+            document.getElementById("SSDEXInitialPath").value = SSDEXInitialPathVal;
+            document.getElementById("SSDEXFileTypes").value = SSDEXFileTypesVal;
+            document.getElementById("SSDEXDefaultName").value = SSDEXDefaultNameVal;
+            document.getElementById("SSDEXFriendlyFilePrefix").value = SSDEXFriendlyFilePrefixVal;
+            document.getElementById("SSDEXPrompt").value = "Only available on Mac";    
+            document.getElementById("SSDEXPrompt").disabled = true;    
+            document.getElementById("SSDEXNameFieldLabel").value = "Only available on Mac";    
+            document.getElementById("SSDEXNameFieldLabel").disabled = true;    
+        } else if ((navigator.platform == "MacIntel") || (navigator.platform == "Macintosh")){
+            document.getElementById("DeleteFilePath").value = "/tmp/test.rtf";
+            document.getElementById("ReadDirPath").value = "/tmp";
+            document.getElementById("MakeDirPath").value = "/tmp/test";
+            document.getElementById("RPOldPath").value = "/tmp/test";
+            document.getElementById("RPNewPath").value = "/tmp/newTest";
+            document.getElementById("GFMTGetInfo").value = "/tmp/test";
+            document.getElementById("ReadFilePath").value = "/tmp/test.rtf";
+            document.getElementById("WriteFilePath").value = "/tmp/test.rtf";
+            document.getElementById("SFPFilePath").value = "/tmp/test.rtf";
+			
+            document.getElementById("CreateProProgramName").value = "/Applications/TextEdit.app/Contents/MacOS/TextEdit";
+            document.getElementById("SetStdOutProgramName").value = "/bin/ls";
+            document.getElementById("SetStdErrProgramName").value = "/bin/ls";
+            document.getElementById("WriteStdInProgramName").value = "/usr/bin/ftp";
+            document.getElementById("WaitForProProgramName").value = "/Applications/TextEdit.app/Contents/MacOS/TextEdit";
+			document.getElementById("OnQuitProProgramName").value = "/Applications/TextEdit.app/Contents/MacOS/TextEdit";
+			
+            document.getElementById("CreateProArgument1").value = "";
+			document.getElementById("CreateProArgument2").value = "";
+            document.getElementById("SetStdOutArgument1").value = "-a";
+			document.getElementById("SetStdOutArgument2").value = "-l";
+            document.getElementById("SetStdErrArgument1").value = "aaaaa";
+			document.getElementById("SetStdErrArgument2").value = "";
+            document.getElementById("WriteStdInArgument1").value = "";
+			document.getElementById("WriteStdInArgument2").value = "";
+            document.getElementById("WaitForProArgument1").value = "";
+			document.getElementById("WaitForProArgument2").value = "";
+			document.getElementById("OnQuitProArgument1").value = "";
+			document.getElementById("OnQuitProArgument2").value = "";
+			
+			document.getElementById("StdInInput").value = "quit\r";
+
+            SODEXInitialPathVal = "~/Documents";
+            SSDEXInitialPathVal = "~/Documents";            
+            document.getElementById("SODEXAllowMultipleSelection").checked = SODEXAllowMultipleSelectionVal;
+            document.getElementById("SODEXChooseDirectory").checked = SODEXChooseDirectoryVal;                
+            document.getElementById("SODEXTitle").value = SODEXTitleVal;
+            document.getElementById("SODEXInitialPath").value = SODEXInitialPathVal;
+            document.getElementById("SODEXFileTypes").value = SODEXFileTypesVal;
+            document.getElementById("SODEXFileTypes").disabled = document.getElementById("SODEXChooseDirectory").checked;
+            document.getElementById("SODEXFriendlyFilePrefix").value = "Only available on Windows";    
+            document.getElementById("SODEXFriendlyFilePrefix").disabled = true;    
+            document.getElementById("SODEXPrompt").value = SODEXPromptVal;            
+
+            document.getElementById("SSDEXTitle").value = SSDEXTitleVal;
+            document.getElementById("SSDEXInitialPath").value = SSDEXInitialPathVal;
+            document.getElementById("SSDEXFileTypes").value = SSDEXFileTypesVal;
+            document.getElementById("SSDEXDefaultName").value = SSDEXDefaultNameVal;
+            document.getElementById("SSDEXFriendlyFilePrefix").value = "Only available on Windows";    
+            document.getElementById("SSDEXFriendlyFilePrefix").disabled = true;    
+            document.getElementById("SSDEXPrompt").value = SSDEXPromptVal;    
+            document.getElementById("SSDEXNameFieldLabel").value = SSDEXNameFieldLabelVal;				
+        }
+        
+        // invoke API ShowOpenDialog
+        $("#SODShowOpenDialog").click(function () {
+            var result = window.cep.fs.showOpenDialog();
+            document.getElementById("ShowOpenDialogOutput").innerHTML = "The file you selected is: " + "\n" + result.data;
+        })
+        $("#SODClearArea").click(function () {
+            document.getElementById("ShowOpenDialogOutput").innerHTML = "";
+        })
+
+        function getValidFileSuffix (inputStr) {
+            var outputArr = new Array();
+     
+            if (0 == inputStr.length || -1 != inputStr.indexOf(".*")) {
+                outputArr[0] = "*";
+            } else {
+                inputStr = " " + inputStr + " ";
+                inputStr = inputStr.replace(/\*/g, " ");
+                inputStr = inputStr.replace(/,/g, " ");
+                inputStr = inputStr.replace(/;/g, " ");
+                inputStr = inputStr.replace(/\./g, " ");
+     
+                outputArr = inputStr.match(/\s\b\w*\b\s/g);
+                outputArr.forEach(function(val, i, arr){
+                    arr[i] = val.replace(/\s/g, "");     
+                });         
+            }
+            
+            return outputArr;
+        }
+        
+    	// invoke API ShowOpenDialogEx
+        $("#SODShowOpenDialogEX").click(function () {        
+            SODEXAllowMultipleSelectionVal = document.getElementById("SODEXAllowMultipleSelection").checked;
+            SODEXChooseDirectoryVal = document.getElementById("SODEXChooseDirectory").checked;                    
+            SODEXTitleVal = document.getElementById("SODEXTitle").value;
+            SODEXInitialPathVal = document.getElementById("SODEXInitialPath").value;
+            if (!document.getElementById("SODEXFileTypes").disabled) {
+                SODEXFileTypesVal = getValidFileSuffix(document.getElementById("SODEXFileTypes").value);
+            }
+            SODEXFriendlyFilePrefixVal = document.getElementById("SODEXFriendlyFilePrefix").value;
+            if (!document.getElementById("SODEXPrompt").disabled) {
+                SODEXPromptVal = document.getElementById("SODEXPrompt").value;
+            }
+
+            var result = window.cep.fs.showOpenDialogEx(SODEXAllowMultipleSelectionVal,
+                                                        SODEXChooseDirectoryVal,
+                                                        SODEXTitleVal,
+                                                        SODEXInitialPathVal,
+                                                        SODEXFileTypesVal,
+                                                        SODEXFriendlyFilePrefixVal,
+                                                        SODEXPromptVal);
+            document.getElementById("ShowOpenDialogOutputEX").innerHTML = "The file you selected is: " + "\n" + result.data;
+        })
+        $("#SODClearAreaEX").click(function () {
+            document.getElementById("ShowOpenDialogOutputEX").innerHTML = "";
+        })
+
+        // invoke API ShowSaveDialogEx
+        $("#SSDShowSaveDialogEX").click(function () {
+            SSDEXTitleVal = document.getElementById("SSDEXTitle").value;
+            SSDEXInitialPathVal = document.getElementById("SSDEXInitialPath").value;
+            SSDEXFileTypesVal = getValidFileSuffix(document.getElementById("SSDEXFileTypes").value);
+            SSDEXDefaultNameVal = document.getElementById("SSDEXDefaultName").value;            
+            if (!document.getElementById("SSDEXFriendlyFilePrefix").disabled) {
+                SSDEXFriendlyFilePrefixVal = document.getElementById("SSDEXFriendlyFilePrefix").value;    
+            }        
+            if (!document.getElementById("SSDEXPrompt").disabled) {
+                SSDEXPromptVal = document.getElementById("SSDEXPrompt").value;
+            }
+            if (!document.getElementById("SSDEXNameFieldLabel").disabled) {
+                SSDEXNameFieldLabelVal = document.getElementById("SSDEXNameFieldLabel").value;                
+            }            
+
+            var result = window.cep.fs.showSaveDialogEx(SSDEXTitleVal,
+                                                        SSDEXInitialPathVal,
+                                                        SSDEXFileTypesVal,
+                                                        SSDEXDefaultNameVal,
+                                                        SSDEXFriendlyFilePrefixVal,
+                                                        SSDEXPromptVal,
+                                                        SSDEXNameFieldLabelVal);
+            var targetFilePath = result.data;
+            var writeResult = window.cep.fs.writeFile(targetFilePath, "/*This is a test file*/");
+            if (0 != writeResult.err){
+                alert("failed to write a file at the destination:" + targetFilePath + ", error code:" + writeResult.err);
+            }
+            
+            document.getElementById("ShowSaveDialogOutputEX").innerHTML = "The file is: " + "\n" + targetFilePath;
+        })
+        $("#SSDClearAreaEX").click(function () {
+            document.getElementById("ShowSaveDialogOutputEX").innerHTML = "";
+        })        
+
+        // invoke API ReadDir        
+        $("#ReadDirectoryBtn").click(function () {
+            var path = document.getElementById("ReadDirPath").value;
+            var result = window.cep.fs.readdir(path);
+            document.getElementById("ReadDirTextArea").innerHTML = "The specified folder contains: " + "\n" + result.data;
+        })
+
+        // invoke API MakeDir
+        $("#MakeDirecotryBtn").click(function () {
+            var path = document.getElementById("MakeDirPath").value;
+            var result = window.cep.fs.makedir(path);
+            if (0 == result.err) {
+                $("#MakeDirSuccessLabel").show();
+            }
+			else {
+				$("#MakeDirSuccessLabel").hide();
+			}
+        })
+
+        // invoke API Rename
+        $("#RenamePathButton").click(function () {
+            var oldPath = document.getElementById("RPOldPath").value;
+            var newPath = document.getElementById("RPNewPath").value;
+            var result = window.cep.fs.rename(oldPath, newPath);
+            if (0 == result.err) {
+                $("#RenamePathSuccessLabel").show();
+            }
+			else {
+				$("#RenamePathSuccessLabel").hide();
+			}
+        })
+        
+        // invoke API stat
+        $("#GFMTGetFileInfo").click(function () {
+			$("#GFMTCheckbox").removeAttr("checked");
+			$("#GFMTIsDirectory").removeAttr("checked");
+			$("#GFMTModificationTime").val("")
+
+            var fileName = document.getElementById("GFMTGetInfo").value;
+            var result = window.cep.fs.stat(fileName);
+            if(result.err == 0)
+            {
+                $("#GFMTModificationTime").val(result.data.mtime);
+                if (result.data.isFile()) {
+                    $("#GFMTCheckbox").attr("checked", "true");
+                }
+                if (result.data.isDirectory()) {
+                    $("#GFMTIsDirectory").attr("checked", "true");
+                }
+            }
+        })
+
+        // invoke API readFile
+        $("#ReadFileDivBtn").click(function () {
+            var fileName = document.getElementById("ReadFilePath").value;
+            var result = {};
+			
+			if (ReadBase64.checked) {
+				result = window.cep.fs.readFile(fileName, cep.encoding.Base64);
+				var base64Text = result.data;
+				var plainText = cep.encoding.convertion.b64_to_utf8(base64Text);
+				result.data = plainText + "\n" + "Base64 text: \n" + base64Text;
+			}
+			else {
+				result = window.cep.fs.readFile(fileName);
+			}
+			$("#ReadFileTextArea").val("File content:" + "\n" + result.data);
+        })
+        
+        // invoke API writeFile
+        $("#WriteFileDivBtn").click(function () {
+            var fileName = document.getElementById("WriteFilePath").value;
+            var data = $("#WriteFileTextArea").attr("value");
+			var result = {};
+			
+			if (WriteBase64.checked) {
+				data = cep.encoding.convertion.utf8_to_b64(data);
+				result = window.cep.fs.writeFile(fileName, data, cep.encoding.Base64);
+			}
+			else {
+				result = window.cep.fs.writeFile(fileName, data);
+			}
+
+            if (0 == result.err){
+                $("#WriteFileSuccessLabel").show();
+            }
+			else {
+				$("#WriteFileSuccessLabel").hide();
+			}
+        })
+        
+        // invoke API chmod
+        $("#SetFilePermissionDivButton").click(function () {
+            var fileName = document.getElementById("SFPFilePath").value;
+            var filePermisssion = parseInt(document.getElementById("SFPFilePermission").value);
+            var result = window.cep.fs.chmod(fileName, filePermisssion);
+            if (0 == result.err){
+                $("#SFPFilePermissionSuccessLabel").show();
+            }
+			else {
+				$("#SFPFilePermissionSuccessLabel").hide();
+			}
+        })
+        
+        // invoke API deleteFile
+        $("#DeleteFileDivBtn").click(function () {
+            var fileName = document.getElementById("DeleteFilePath").value;
+            var result = window.cep.fs.deleteFile(fileName);
+            if (0 == result.err){
+                $("#DelFileSuccessLabel").show();
+            }
+			else {
+				$("#DelFileSuccessLabel").hide();
+			}
+        })
+		
+        // invoke API createProcess, isRunning, getWorkingDirectory
+        $("#CreateProcessDivCreateBtn").click(function () {
+		    $("#IsRunningCheckbox").removeAttr("checked");
+			$("#WorkingDir").val("");
+			var text = "createProcess failed";
+            var progName = document.getElementById("CreateProProgramName").value;
+			var arg1 = document.getElementById("CreateProArgument1").value;
+			var arg2 = document.getElementById("CreateProArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				text = "createProcess succeed, ";
+				
+				var isRunningResult = window.cep.process.isRunning(gPID);
+				if (0 == isRunningResult.err) {
+				    if (true == isRunningResult.data) {
+				        $("#IsRunningCheckbox").attr("checked", "true");
+					}
+					text += "isRunning succeed, ";
+				} else {
+				    text += "isRunning failed, ";
+				}
+				
+			    var workingDirResult = window.cep.process.getWorkingDirectory(gPID);
+			    if (0 == workingDirResult.err) {
+			        $("#WorkingDir").val(workingDirResult.data);
+					text += "getWorkingDirectory succeed";
+			    } else {
+				    text += "getWorkingDirectory failed";
+				}
+			}
+			$("#CreateProcessDivResult").val(text);
+        })
+		
+        // invoke API terminate        
+        $("#CreateProcessDivTerminateBtn").click(function () {
+		    $("#IsRunningCheckbox").removeAttr("checked");
+			$("#WorkingDir").val("");
+		    var terminateResult = window.cep.process.terminate(gPID);
+			if (0 == terminateResult.err) {
+			    $("#CreateProcessDivResult").val("terminate succeed");
+			} else {
+			    $("#CreateProcessDivResult").val("terminate failed");
+			}
+        })
+
+        // invoke API stdout
+        $("#SetStdOutHandlerDivSetHandlerBtn").click(function () {
+            var progName = document.getElementById("SetStdOutProgramName").value;
+			var arg1 = document.getElementById("SetStdOutArgument1").value;
+			var arg2 = document.getElementById("SetStdOutArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				var stdoutResult = window.cep.process.stdout(gPID, function(output) {
+                    $("#StdOutResult").val(output);
+                });
+			} else {
+			    $("#StdOutResult").val("createProcess failed");
+			}
+        })
+		
+        // invoke API terminate        
+        $("#SetStdOutHandlerDivTerminateBtn").click(function () {
+		    var terminateResult = window.cep.process.terminate(gPID);
+			if (0 == terminateResult.err) {
+			    $("#StdOutResult").val("terminate succeed");
+			} else {
+			    $("#StdOutResult").val("terminate failed");
+			}
+        })
+		
+        // invoke API stderr
+        $("#SetStdErrHandlerDivSetHandlerBtn").click(function () {
+            var progName = document.getElementById("SetStdErrProgramName").value;
+			var arg1 = document.getElementById("SetStdErrArgument1").value;
+			var arg2 = document.getElementById("SetStdErrArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				var input = document.getElementById("SetStdErrInput").value;
+				var stderrInputResult = window.cep.process.stdin(gPID, input);
+				if (0 == stderrInputResult.err) {
+				    var stderrResult = window.cep.process.stderr(gPID, function(output) {
+				        $("#StdErrResult").val(output);
+                    });
+				    if (0 == stderrResult.err) {
+				        $("#StdErrResult").val("stderr succeed");
+				    } else {
+				        $("#StdErrResult").val("stderr failed");
+				    }
+				} else {
+				    $("#StdErrResult").val("input failed");
+				}
+			} else {
+			    $("#StdErrResult").val("createProcess failed");
+			}
+        })
+		
+        // invoke API terminate        
+        $("#SetStdErrHandlerDivTerminateBtn").click(function () {
+		    var terminateResult = window.cep.process.terminate(gPID);
+			if (0 == terminateResult.err) {
+			    $("#StdErrResult").val("terminate succeed");
+			} else {
+			    $("#StdErrResult").val("terminate failed");
+			}
+        })
+		
+        // invoke API stdin
+        $("#WriteStdInDivWriteInBtn").click(function () {
+            var progName = document.getElementById("WriteStdInProgramName").value;
+			var arg1 = document.getElementById("WriteStdInArgument1").value;
+			var arg2 = document.getElementById("WriteStdInArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				var input = document.getElementById("StdInInput").value;
+				var stdinResult = window.cep.process.stdin(gPID, input);
+				if (0 == stdinResult.err) {
+				    $("#StdInResult").val("stdin succeed");
+				} else {
+				    $("#StdInResult").val("stdin failed");
+				}
+			} else {
+			    $("#StdInResult").val("createProcess failed");
+			}
+        })
+		
+        // invoke API terminate        
+        $("#WriteStdInDivTerminateBtn").click(function () {
+		    var terminateResult = window.cep.process.terminate(gPID);
+			if (0 == terminateResult.err) {
+			    $("#StdInResult").val("terminate succeed");
+			} else {
+			    $("#StdInResult").val("terminate failed");
+			}
+        })
+		
+        // invoke API waitfor
+        $("#WaitForProcessDivWaitBtn").click(function () {
+            var progName = document.getElementById("WaitForProProgramName").value;
+			var arg1 = document.getElementById("WaitForProArgument1").value;
+			var arg2 = document.getElementById("WaitForProArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				var waitforResult = window.cep.process.waitfor(gPID);
+				if (0 == waitforResult.err) {
+				    $("#WaitForProResult").val("waitfor succeed");
+					$("#WaitForProcessSuccessLabel").show();
+				} else {
+				    $("#WaitForProResult").val("waitfor failed");
+				}
+			} else {
+			    $("#WaitForProResult").val("createProcess failed");
+			}
+        })
+		
+		// invoke API onquit
+        $("#OnQuitProcessDivWaitBtn").click(function () {
+            var progName = document.getElementById("OnQuitProProgramName").value;
+			var arg1 = document.getElementById("OnQuitProArgument1").value;
+			var arg2 = document.getElementById("OnQuitProArgument2").value;
+            var createProcessResult = window.cep.process.createProcess(progName, arg1, arg2);
+			if (0 == createProcessResult.err) {
+			    gPID = createProcessResult.data;
+				var OnQuitResult = window.cep.process.onquit(gPID, function() {
+				        $("#OnQuitProResult").val("Process " + gPID + " does quit successfully.");
+						$("#OnQuitProcessSuccessLabel").show();
+                    });
+				if (0 == OnQuitResult.err) {
+				    $("#OnQuitProResult").val("Succeed to set onquit handler. Host application should be responsive.");
+				} else {
+				    $("#OnQuitProResult").val("Fail to set onquit handler.");
+				}
+			} else {
+			    $("#OnQuitProResult").val("createProcess failed");
+			}
+        })
+    });
+    
+    function onclickSODBtn() {
+        $("#ShowOpenDialogDiv").show();
+        $("#ShowOpenDialogEXDiv").hide();        
+        $("#ShowSaveDialogEXDiv").hide();				
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();        
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    }
+	
+    function onclickSODBEXtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").show();        
+        $("#ShowSaveDialogEXDiv").hide();                
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();        
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    }    
+	
+    function onclickSSDBEXtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();		
+        $("#ShowSaveDialogEXDiv").show();				
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();        
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    }
+    
+    function onclickReadDirBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();
+        $("#ShowSaveDialogEXDiv").hide();		
+        $("#ReadDirectoryDiv").show();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    }
+    
+    function onclickMakeDirBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();	
+        $("#ShowSaveDialogEXDiv").hide();			
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").show();
+        $("#MakeDirSuccessLabel").hide();
+        $("#RenamePathDiv").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();    
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    } 
+    
+    function onclickRenamePathBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();	
+        $("#ShowSaveDialogEXDiv").hide();			
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").show();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").hide();
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();    
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+    } 
+    
+    function onclickGetFileInfoBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();
+        $("#ShowSaveDialogEXDiv").hide();		
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").show();    
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+    } 
+    
+    function onclickReadFileBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();	
+        $("#ShowSaveDialogEXDiv").hide();			
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").hide();    
+        $("#ReadFileDiv").show();
+        $("#WriteFileDiv").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+    }     
+    
+    function onclickWriteFileBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();		
+        $("#ShowSaveDialogEXDiv").hide();				
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").hide();    
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").show();
+        $("#WriteFileSuccessLabel").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+    }
+    
+    function onclickSetPermissinBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();		
+        $("#ShowSaveDialogEXDiv").hide();				
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").hide();    
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();
+        $("#WriteFileSuccessLabel").hide();
+        $("#SetFilePermissionDiv").show();
+        $("#DeleteFileDiv").hide();
+        $("#DelFileSuccessLabel").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+    }
+    
+    function onclickDeleteFileBtn() {
+        $("#ShowOpenDialogDiv").hide();
+        $("#ShowOpenDialogEXDiv").hide();		
+        $("#ShowSaveDialogEXDiv").hide();				
+        $("#ReadDirectoryDiv").hide();
+        $("#MakeDirDiv").hide();
+        $("#RenamePathDiv").hide();
+        $("#RenamePathSuccessLabel").hide();
+        $("#GetFileInfoDiv").hide();    
+        $("#ReadFileDiv").hide();
+        $("#WriteFileDiv").hide();
+        $("#WriteFileSuccessLabel").hide();
+        $("#SetFilePermissionDiv").hide();
+        $("#DeleteFileDiv").show();
+        $("#DelFileSuccessLabel").hide();
+        $("#SFPFilePermissionSuccessLabel").hide();
+    }    
+	
+    function onclickCreateProBtn() {
+        $("#CreateProcessDiv").show();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").hide();
+        $("#WaitForProcessDiv").hide();
+		$("#OnQuitProcessDiv").hide();
+    }    
+
+    function onclickSetOutHandlerBtn() {
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").show();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").hide();
+        $("#WaitForProcessDiv").hide();
+		$("#OnQuitProcessDiv").hide();
+    }
+	
+    function onclickSetErrHandlerBtn() {
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").show();
+        $("#WriteStdInDiv").hide();
+        $("#WaitForProcessDiv").hide();
+		$("#OnQuitProcessDiv").hide();
+    }
+	
+    function onclickWriteInBtn() {
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").show();
+        $("#WaitForProcessDiv").hide();
+		$("#OnQuitProcessDiv").hide();
+    }
+	
+    function onclickWaitForBtn() {
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").hide();
+        $("#WaitForProcessDiv").show();
+		$("#WaitForProcessSuccessLabel").hide();
+		$("#OnQuitProcessDiv").hide();
+    }
+	
+	function onclickOnQuitBtn() {
+        $("#CreateProcessDiv").hide();
+        $("#SetStdOutHandlerDiv").hide();
+        $("#SetStdErrHandlerDiv").hide();
+        $("#WriteStdInDiv").hide();
+		$("#WaitForProcessDiv").hide();
+		$("#WaitForProcessSuccessLabel").hide();
+		$("#OnQuitProcessDiv").show();
+		$("#OnQuitProcessSuccessLabel").hide();
+    }
+
+    function onclickSODEXChooseDirectory() {
+        document.getElementById("SODEXFileTypes").disabled = document.getElementById("SODEXChooseDirectory").checked;    
+        if ((navigator.platform == "Win32") || (navigator.platform == "Windows")){
+            document.getElementById("SODEXFriendlyFilePrefix").disabled = document.getElementById("SODEXChooseDirectory").checked;                	
+        }
+    }
+</script>
+
+<style type="text/css">
+<!-- style begin -->
+.NavigationDiv {
+    position: absolute;
+    width: 258px;
+    height: 177px;
+    z-index: 1;
+}
+
+.EnvSeperateline {
+    position: absolute;
+    left: 190px;
+    top: 50px;
+}
+
+#ShowOpenDialogDiv,
+#ShowOpenDialogEXDiv,
+#ShowSaveDialogEXDiv,
+#MakeDirDiv,
+#ReadDirectoryDiv,
+#RenamePathDiv,
+#GetFileInfoDiv,
+#ReadFileDiv,
+#WriteFileDiv,
+#SetFilePermissionDiv,
+#DeleteFileDiv {
+    position: absolute;
+    width: 435px;
+    height: 229px;
+    z-index: 2;
+    left: 200px;
+    top: 50px;
+    color: #FFF;
+}    
+
+#CreateProcessDiv,
+#SetStdOutHandlerDiv,
+#SetStdErrHandlerDiv,
+#WriteStdInDiv,
+#WaitForProcessDiv {
+    position: absolute;
+    width: 435px;
+    height: 229px;
+    z-index: 2;
+    left: 200px;
+    top: 50px;
+    color: #FFF;
+}  
+#OnQuitProcessDiv {
+    position: absolute;
+    width: 435px;
+    height: 229px;
+    z-index: 2;
+    left: 200px;
+    top: 50px;
+    color: #FFF;
+}  
+.NavigationDiv li:hover {
+    width: 130px;
+    background-color: #333;
+    color: #46afa0;
+}
+
+.SODEXDlgEdit {
+    width: 260px;
+}
+<!-- style end -->
+</style>
+</head>
+
+<body>
+  <div id="TabbedPanels1" class="TabbedPanels">
+    <ul class="TabbedPanelsTabGroup">
+      <li class="TabbedPanelsTab" tabindex="0">File APIs</li>
+      <li class="TabbedPanelsTab" tabindex="0">Process APIs</li>
+    </ul>
+    
+    <div class="TabbedPanelsContentGroup">
+      <!-- File access tabe begin -->
+      <div class="TabbedPanelsContent">
+        
+        <!-- Navigation div begin -->
+        <div class="NavigationDiv">
+          <ul class="ul1">
+            <li><button id="SODBtn" onclick="onclickSODBtn()" style="background-color:#333; border:none; color:#FFF;">File Open Dialog </button></li>    
+            <li><button id="SODBEXtn" onclick="onclickSODBEXtn()" style="background-color:#333; border:none; color:#FFF;">File Open Dialog EX</button></li>    
+            <li><button id="SSDBEXtn" onclick="onclickSSDBEXtn()" style="background-color:#333; border:none; color:#FFF;">File Save Dialog EX</button></li>                
+            <li><button id="ReadDirBtn" onclick="onclickReadDirBtn()" style="background-color:#333; border:none; color:#FFF;">Read Directory</button></li>    
+            <li><button id="MakeDirBtn" onclick="onclickMakeDirBtn()" style="background-color:#333; border:none; color:#FFF;" >Make Directory</button></li>
+            <li><button id="RenamePathBtn" onclick="onclickRenamePathBtn()" style="background-color:#333; border:none; color:#FFF;" >Rename Path</button></li>
+            <li><button id="GetFileInfoBtn" onclick="onclickGetFileInfoBtn()" style="background-color:#333; border:none; color:#FFF;" >Get File Info</button></li>
+            <li><button id="ReadFileBtn" onclick="onclickReadFileBtn()" style="background-color:#333; border:none; color:#FFF;" >Read File</button></li>
+            <li><button id="WriteFileBtn" onclick="onclickWriteFileBtn()" style="background-color:#333; border:none; color:#FFF;" >Write File</button></li>
+            <li><button id="SetPermissinBtn" onclick="onclickSetPermissinBtn()" style="background-color:#333; border:none; color:#FFF;" >Set permission</button></li>            
+            <li><button id="DeleteFileBtn" onclick="onclickDeleteFileBtn()" style="background-color:#333; border:none; color:#FFF;" >Delete file</button></li>
+          </ul>
+          <p>&nbsp;</p> 
+          <p>&nbsp;</p>    
+          <p>&nbsp;</p> 
+          <p>&nbsp;</p>
+        </div>
+        <!-- Navigation div end -->
+      
+        <!-- seperateline begin -->
+        <table class="EnvSeperateline" width= "2" border= "0" cellspacing= "0" cellpadding= "0" height= "230">
+          <tr>
+            <td width= "1" bgcolor = "#666666"> </td>
+          </tr>
+        </table>
+        <!-- seperateline end -->
+      
+        <!-- Show Open dialog div begin -->
+        <div id="ShowOpenDialogDiv">
+          <table width="200" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>
+                <table width="200" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td>
+                     <form id="form2" name="form2" method="post" action="">
+                       <input type="button" name="SODShowOpenDialog" id="SODShowOpenDialog" value="Show File Open dialog" />
+                     </form>
+                   </td>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+           <tr>
+            <td>
+             <form id="form1" name="form1" method="post" action="">
+              <label for="ShowOpenDialogOutput"></label>
+              <textarea name="ShowOpenDialogOutput" cols="60" rows="10" readonly="readonly" id="ShowOpenDialogOutput"></textarea>
+             </form>
+            </td>
+           </tr>
+           <tr>
+             <td>
+               <form id="form3" name="form3" method="post" action="">
+               <input type="button" name="SODClearArea" id="SODClearArea" value="Clear Result" />
+               </form>
+             </td>
+           </tr>
+         </table>
+       </div>
+       <!-- Show Open dialog di end -->
+       
+        <!-- Show Open dialog EX div begin -->
+        <div id="ShowOpenDialogEXDiv">
+          <table width="200" border="0" cellspacing="0" cellpadding="0">
+            <tr><td>
+               <table width="474" border="0">
+                <tr>
+                  <td>
+                    <form id="form2" name="form2" method="post" action="">
+                      <input type="button" name="SODShowOpenDialogEX" id="SODShowOpenDialogEX" value="Show File Open dialog EX" />
+                    </form>
+                  </td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="297"><input type="checkbox" name="SODEXAllowMultipleSelection" id="SODEXAllowMultipleSelection">AllowMultipleSelection
+                    <input type="checkbox" name="SODEXChooseDirectory" id="SODEXChooseDirectory" onclick="onclickSODEXChooseDirectory()">
+                    <label for="SODEXChooseDirectory">ChooseDirectory </label></td>
+                </tr>
+                <tr>
+                  <td><table width="200" border="0">
+                    <tr>
+                      <td>Title:</td>
+                      <td><input class="SODEXDlgEdit" name="SODEXTitle" type="text" id="SODEXTitle"></td>
+                    </tr>
+                    <tr>
+                      <td>InitialPath:</td>
+                      <td><input class="SODEXDlgEdit" name="SODEXInitialPath" type="text" id="SODEXInitialPath"></td>
+                    </tr>
+                    <tr>
+                      <td>FileTypes:</td>
+                      <td><input class="SODEXDlgEdit" name="SODEXFileTypes" type="text" id="SODEXFileTypes"></td>
+                    </tr>
+                    <tr>
+                      <td>FriendlyFilePrefix:</td>
+                      <td><input class="SODEXDlgEdit" name="SODEXFriendlyFilePrefix" type="text" id="SODEXFriendlyFilePrefix"></td>
+                    </tr>
+                    <tr>
+                      <td>Prompt:</td>
+                      <td><input class="SODEXDlgEdit" name="SODEXPrompt" type="text" id="SODEXPrompt"></td>
+                    </tr>
+                    <tr>
+                      <td>Selected file: </td>
+                      <td><textarea class="SODEXDlgEdit" name="ShowOpenDialogOutputEX" rows="3" readonly="readonly" id="ShowOpenDialogOutputEX"></textarea></td>
+                    </tr>					
+                  </table></td>
+                </tr>
+              </table></td>
+           </tr>
+           <tr> 
+              <td>
+                <input type="button" name="SODClearAreaEX" id="SODClearAreaEX" value="Clear Result" />
+              </td>
+           </tr>
+         </table>
+        </div>
+        <!-- Show Open dialog EX div end -->
+
+        <!-- Show Save dialog EX div begin -->
+        <div id="ShowSaveDialogEXDiv">
+          <table width="200" border="0" cellspacing="0" cellpadding="0">
+            <tr><td>
+               <table width="474" border="0">
+                <tr>
+                  <td>
+                    <form id="form2" name="form2" method="post" action="">
+                      <input type="button" name="SSDShowSaveDialogEX" id="SSDShowSaveDialogEX" value="Show File Save dialog EX" />
+                    </form>
+                  </td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><table width="200" border="0">
+                    <tr>
+                      <td>Title:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXTitle" type="text" id="SSDEXTitle"></td>
+                    </tr>
+                    <tr>
+                      <td>InitialPath:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXInitialPath" type="text" id="SSDEXInitialPath"></td>
+                    </tr>
+                    <tr>
+                      <td>FileTypes:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXFileTypes" type="text" id="SSDEXFileTypes"></td>
+                    </tr>
+                    <tr>
+                      <td>defaultName:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXDefaultName" type="text" id="SSDEXDefaultName"></td>
+                    </tr>                    
+                    <tr>
+                      <td>FriendlyFilePrefix:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXFriendlyFilePrefix" type="text" id="SSDEXFriendlyFilePrefix"></td>
+                    </tr>                    
+                    <tr>
+                      <td>Prompt:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXPrompt" type="text" id="SSDEXPrompt"></td>
+                    </tr>
+                    <tr>
+                      <td>NameFieldLabel:</td>
+                      <td><input class="SODEXDlgEdit" name="SSDEXNameFieldLabel" type="text" id="SSDEXNameFieldLabel"></td>
+                    </tr>
+                    <tr>
+                        <td>Selected file: </td>
+                        <td><textarea class="SODEXDlgEdit" name="ShowSaveDialogOutputEX" rows="3" readonly="readonly" id="ShowSaveDialogOutputEX"></textarea></td>
+                    </tr>                    
+    	          </table></td>
+                </tr>
+              </table></td>
+           </tr>
+           <tr>
+              <td>
+                <input type="button" name="SSDClearAreaEX" id="SSDClearAreaEX" value="Clear Result" />
+              </td>
+           </tr>
+         </table>
+       </div>
+       <!-- Show Save dialog EX div end -->
+
+       <!-- Read directory div begin -->
+       <div id="ReadDirectoryDiv">
+         <table width="200" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td>
+               <table width="376" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td width="108"><form id="form4" name="form4" method="post" action="">
+                     <input type="button" name="ReadDirectoryBtn" id="ReadDirectoryBtn" value="Read directory" />
+                     </form>
+                   </td>
+                   <td width="10">&nbsp;</td>
+                   <td width="258"><form id="form5" name="form5" method="post" action="">
+                     <label for="ReadDirPath"></label>
+                     <input name="ReadDirPath" type="text" id="ReadDirPath" size="44" />
+                     </form>
+                   </td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+           <tr>
+             <td><form id="form6" name="form6" method="post" action="">
+               <label for="ReadDirTextArea"></label>
+               <textarea name="ReadDirTextArea" cols="60" rows="10" readonly="readonly" id="ReadDirTextArea"></textarea>
+               </form>
+             </td>
+           </tr>
+         </table>
+       </div>
+       <!-- Read directory div end -->
+      
+       <!-- Make directory div begin -->
+       <div id="MakeDirDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td><label >New folder path:</label></td>
+             <td><form id="form17" name="form17" method="post" action="">
+               <label for="MakeDirPath">&nbsp;</label>
+               <input name="MakeDirPath" type="text" id="MakeDirPath" size="45" />
+               </form>
+             </td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+             <td>&nbsp;</td>
+           </tr>
+         </table>
+         <table border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td>
+               <form id="form19" name="form19" method="post" action="">
+                 <input type="button" name="MakeDirecotryBtn" id="MakeDirecotryBtn" value="Make directory" /></form>
+               </form>
+             </td>
+             <td>
+               <label id="MakeDirSuccessLabel">Success!</label>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Make directory div end -->
+  
+       <!-- Rename path Div begin -->
+       <div id="RenamePathDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td><label>Old folder: </label>&nbsp;
+             </td>
+             <td><form id="form10" name="form7" method="post" action="">
+               <label for="RPOldPath"></label>
+               <input name="RPOldPath" type="text" id="RPOldPath" size="45" />
+               </form>
+             </td>
+           </tr>
+           <tr>
+             <td><label>New folder:</label>&nbsp;</td>
+             <td><form id="form11" name="form8" method="post" action="">
+               <label for="RPNewPath"></label>
+               <input name="RPNewPath" type="text" id="RPNewPath" size="45" />
+               </form>
+             </td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+             <td>&nbsp;</td>
+           </tr>
+         </table>
+         <form id="form12" name="form9" method="post" action="">
+           <input type="button" name="RenamePathButton" id="RenamePathButton" value="Rename path" />
+           <label id="RenamePathSuccessLabel">Success!</label>
+         </form>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Rename path Div end -->
+       
+       <!-- Get file info Div begin -->
+       <div id="GetFileInfoDiv">
+         <table width="482" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td width="124"><form id="form3" name="form3" method="post" action="">
+              <input type="button" name="GFMTGetFileInfo" id="GFMTGetFileInfo" value="Get file/folder Info"/>
+              </form>
+             </td>
+             <td width="339"><form id="form1" name="form1" method="post" action="">
+              <label for="GFMTGetInfo"></label>
+              <input name="GFMTGetInfo" type="text" id="GFMTGetInfo" size="50" />
+              </form>
+             </td>
+             <td width="19">&nbsp;</td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td width="124">Modification time:</td>
+             <td width="339"><form id="form1" name="form1" method="post" action="">
+               <label for="GFMTCheckbox"></label>
+               <label for="GFMTModificationTime"></label>
+               <input name="GFMTModificationTime" type="text" id="GFMTModificationTime" readonly="readonly" size="50"/>
+               </form></td>
+             <td width="19">&nbsp;</td>
+           </tr>
+           <tr>
+             <td><label>IsFile:</label>&nbsp;</td>
+             <td><input type="checkbox" name="GFMTCheckbox" id="GFMTCheckbox" /></td>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td><label>IsDirectory:</label>&nbsp;</td>
+             <td><form id="form2" name="form2" method="post" action="">
+               <input type="checkbox" name="GFMTIsDirectory" id="GFMTIsDirectory" />
+               <label for="GFMTIsDirectory"></label>
+               </form></td>
+             <td>&nbsp;</td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+        </div>
+        <!-- Get file info Div end -->
+        
+        <!-- Read file Div begin -->
+        <div id="ReadFileDiv">
+         <table width="200" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td>
+               <table width="376" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td width="108"><form id="form4" name="form4" method="post" action="">
+                     <input type="button" name="ReadFileDivBtn" id="ReadFileDivBtn" value="Read file " />
+                     </form>
+                   </td>
+                   <td width="10">&nbsp;</td>
+                   <td width="258"><form id="form5" name="form5" method="post" action="">
+                     <input name="Read file" type="text" id="ReadFilePath" size="44" />
+                     </form>
+                   </td>
+				   <td>
+				     <input type="checkbox" name="ReadBase64Checkbox" id="ReadBase64"/>
+				   </td>
+				   <td>
+				     <label>Base64<label/>
+				   </td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr><label>With the Base64 option checked, the ReadFile function is called with Base64 encoding mode in which
+               the data is converted to a base64-encoded string after it is read from the local disk.</label></tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><form id="form6" name="form6" method="post" action="">
+               <label for="ReadFileTextArea"></label>
+               <textarea name="ReadFileTextArea" cols="60" rows="10" readonly="readonly" id="ReadFileTextArea"></textarea>
+               </form>
+             </td>
+           </tr>
+         </table>
+        </div>
+        <!-- Read file Div end -->
+        
+        <!-- Write file Div begin -->
+        <div id="WriteFileDiv">
+         <table width="200" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td>
+               <table width="376" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td width="108"><form id="form4" name="form4" method="post" action="">
+                     <input type="button" name="WriteFileDivBtn" id="WriteFileDivBtn" value="Write file " />
+                     </form>
+                   </td>
+                   <td width="10">&nbsp;</td>
+                   <td width="258"><form id="form5" name="form5" method="post" action="">
+                     <input name="Write file" type="text" id="WriteFilePath" size="44" />
+                     </form>
+                   </td>
+				   <td>
+				     <input type="checkbox" name="WriteBase64Checkbox" id="WriteBase64"/>
+				   </td>
+				   <td>
+				     <label>Base64<label/>
+				   </td>
+                 </tr>
+               </table>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr><label>With the Base64 option checked, the input file content is converted into a Base64-encoded string,then WriteFile
+               function decodes this string to get the raw input content before writing it to the local disk.</label></tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Please input new file content:</label></td>
+           </tr>
+           <tr>
+             <td>
+               <label for="WriteFileTextArea"></label>
+               <textarea name="WriteFileTextArea" id="WriteFileTextArea" cols="60" rows="10">Test content Test content</textarea>
+             </td>
+           </tr>
+           <tr>
+             <td><label id="WriteFileSuccessLabel">Success!</label></form></td>
+           </tr>
+         </table>
+        </div>
+        <!-- Write file Div end -->
+        
+        <!-- Set file permission Div begin -->
+        <div id="SetFilePermissionDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td><label>File name: </label>&nbsp;
+             </td>
+             <td><form id="form10" name="form7" method="post" action="">
+               <label for="SFPFilePath"></label>
+               <input name="SFPFilePath" type="text" id="SFPFilePath" size="45" />
+               </form>
+             </td>
+           </tr>
+           <tr>
+             <td><label>New permission:</label>&nbsp;</td>
+             <td><form id="form11" name="form8" method="post" action="">
+               <label for="SFPFilePermission"></label>
+               <input name="SFPFilePermission" type="number" id="SFPFilePermission" value="0777" />
+               <label>(e.g 0777 for -rwxrwxrwx)</label>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <form id="form12" name="form9" method="post" action="">
+           <input type="button" name="SetFilePermissionDivButton" id="SetFilePermissionDivButton" value="Set file permission" />
+           <label id="SFPFilePermissionSuccessLabel">Success!</label></form></td>
+         </form>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Set file permission Div end -->
+       
+       <!-- Delete file Div begin -->
+       <div id="DeleteFileDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td><label>File path: </label></td>
+             <td>&nbsp;</td>
+             <td><form id="form7" name="form7" method="post" action="">
+               <label for="DeleteFilePath"></label>
+               <input name="DeleteFilePath" type="text" id="DeleteFilePath" size="45" />
+               </form>
+             </td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+             <td>&nbsp;</td>
+           </tr>
+         </table>
+         <form id="form9" name="form9" method="post" action="">
+         <input type="button" name="DeleteFileDivBtn" id="DeleteFileDivBtn" value="Delete file" />
+         <label id="DelFileSuccessLabel">Success!</label></form>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Delete file Div end -->
+       
+      </div>
+      <!-- File access tabe end -->
+  
+  
+      
+      <!-- Process API tabe begin -->
+      <div class="TabbedPanelsContent">
+	  
+        <!-- Navigation div begin -->
+        <div class="NavigationDiv">
+          <ul class="ul1">
+            <li><button id="CreateProBtn" onclick="onclickCreateProBtn()" style="background-color:#333; border:none; color:#FFF;">Create Process</button></li>    
+            <li><button id="SetOutHandlerBtn" onclick="onclickSetOutHandlerBtn()" style="background-color:#333; border:none; color:#FFF;">Set StdOut Handler</button></li>    
+            <li><button id="SetErrHandlerBtn" onclick="onclickSetErrHandlerBtn()" style="background-color:#333; border:none; color:#FFF;">Set StdErr Handler</button></li>
+            <li><button id="WriteInBtn" onclick="onclickWriteInBtn()" style="background-color:#333; border:none; color:#FFF;">Write StdIn</button></li>
+            <li><button id="WaitForBtn" onclick="onclickWaitForBtn()" style="background-color:#333; border:none; color:#FFF;">Wait For Process</button></li>
+			<li><button id="OnQuitBtn" onclick="onclickOnQuitBtn()" style="background-color:#333; border:none; color:#FFF;">Set OnQuit Handler</button></li>
+          </ul>
+          <p>&nbsp;</p> 
+          <p>&nbsp;</p>    
+          <p>&nbsp;</p> 
+          <p>&nbsp;</p>
+          <p>&nbsp;</p> 
+          <p>&nbsp;</p>
+        </div>
+        <!-- Navigation div end -->
+      
+        <!-- seperateline begin -->
+        <table class="EnvSeperateline" width= "2" border= "0" cellspacing= "0" cellpadding= "0" height= "230">
+          <tr>
+            <td width= "1" bgcolor = "#666666"> </td>
+          </tr>
+        </table>
+        <!-- seperateline end -->
+      
+       <!-- Create Process div begin -->
+       <div id="CreateProcessDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="CreateProProgramName"></label>
+               <input name="CreateProProgramName" type="text" id="CreateProProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="CreateProArgument1"></label>
+               <input name="CreateProArgument1" type="text" id="CreateProArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="CreateProArgument2"></label>
+               <input name="CreateProArgument2" type="text" id="CreateProArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Working Directory:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WorkingDir"></label>
+               <input name="WorkingDir" type="text" id="WorkingDir" readonly="readonly" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>IsRunning:</label><input type="checkbox" name="IsRunningCheckbox" id="IsRunningCheckbox" /></td>
+             <td><label>Result:</label><input name="CreateProcessDivResult" type="text" id="CreateProcessDivResult" readonly="readonly" size="38"/></td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="CreateProcessDivCreateBtn" id="CreateProcessDivCreateBtn" value="Create Process"/>&nbsp;
+               <input type="button" name="CreateProcessDivTerminateBtn" id="CreateProcessDivTerminateBtn" value="Terminate Process"/>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Create Process div end -->
+	   
+       <!-- Set StdOut Handler div begin -->
+       <div id="SetStdOutHandlerDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdOutProgramName"></label>
+               <input name="SetStdOutProgramName" type="text" id="SetStdOutProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdOutArgument1"></label>
+               <input name="SetStdOutArgument1" type="text" id="SetStdOutArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdOutArgument2"></label>
+               <input name="SetStdOutArgument2" type="text" id="SetStdOutArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Result:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="StdOutResult"></label>
+               <textarea name="StdOutResult" cols="38" rows="4" readonly="readonly" id="StdOutResult"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="SetStdOutHandlerDivSetHandlerBtn" id="SetStdOutHandlerDivSetHandlerBtn" value="Set StdOut Handler"/>
+               <input type="button" name="SetStdOutHandlerDivTerminateBtn" id="SetStdOutHandlerDivTerminateBtn" value="Terminate Process"/>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Set StdOut Handler div end -->
+	   
+       <!-- Set StdErr Handler div begin -->
+       <div id="SetStdErrHandlerDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdErrProgramName"></label>
+               <input name="SetStdErrProgramName" type="text" id="SetStdErrProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdErrArgument1"></label>
+               <input name="SetStdErrArgument1" type="text" id="SetStdErrArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="SetStdErrArgument2"></label>
+               <input name="SetStdErrArgument2" type="text" id="SetStdErrArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Input:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="SetStdErrInput"></label>
+               <textarea name="SetStdErrInput" cols="38" rows="2" id="SetStdErrInput"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Result:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="StdErrResult"></label>
+               <textarea name="StdErrResult" cols="38" rows="2" readonly="readonly" id="StdErrResult"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="SetStdErrHandlerDivSetHandlerBtn" id="SetStdErrHandlerDivSetHandlerBtn" value="Set StdErr Handler"/>
+               <input type="button" name="SetStdErrHandlerDivTerminateBtn" id="SetStdErrHandlerDivTerminateBtn" value="Terminate Process"/>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Set StdErr Handler div end -->
+
+       <!-- Write StdIn div begin -->
+       <div id="WriteStdInDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WriteStdInProgramName"></label>
+               <input name="WriteStdInProgramName" type="text" id="WriteStdInProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WriteStdInArgument1"></label>
+               <input name="WriteStdInArgument1" type="text" id="WriteStdInArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WriteStdInArgument2"></label>
+               <input name="WriteStdInArgument2" type="text" id="WriteStdInArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Input:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="StdInInput"></label>
+               <textarea name="StdInInput" cols="38" rows="2" id="StdInInput"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Result:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="StdInResult"></label>
+               <textarea name="StdInResult" cols="38" rows="2" readonly="readonly" id="StdInResult"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="WriteStdInDivWriteInBtn" id="WriteStdInDivWriteInBtn" value="Write StdIn"/>
+               <input type="button" name="WriteStdInDivTerminateBtn" id="WriteStdInDivTerminateBtn" value="Terminate Process"/>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Write StdIn div end -->
+	   
+       <!-- Wait For Process div begin -->
+       <div id="WaitForProcessDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WaitForProProgramName"></label>
+               <input name="WaitForProProgramName" type="text" id="WaitForProProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WaitForProArgument1"></label>
+               <input name="WaitForProArgument1" type="text" id="WaitForProArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="WaitForProArgument2"></label>
+               <input name="WaitForProArgument2" type="text" id="WaitForProArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Result:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="WaitForProResult"></label>
+               <textarea name="WaitForProResult" cols="38" rows="2" readonly="readonly" id="WaitForProResult"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="WaitForProcessDivWaitBtn" id="WaitForProcessDivWaitBtn" value="Wait For Process"/>
+			   <label id="WaitForProcessSuccessLabel">Process Exit!</label>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Wait For Process div end -->
+	   
+	   <!-- Set up OnQuit Handler div begin -->
+       <div id="OnQuitProcessDiv">
+         <table border="0" cellspacing="0" cellpadding="0">
+		   <tr>
+             <td><label>Program Name:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="OnQuitProProgramName"></label>
+               <input name="OnQuitProProgramName" type="text" id="OnQuitProProgramName" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument1:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="OnQuitProArgument1"></label>
+               <input name="OnQuitProArgument1" type="text" id="OnQuitProArgument1" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+		   <tr>
+             <td><label>Argument2:</label></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <label for="OnQuitProArgument2"></label>
+               <input name="OnQuitProArgument2" type="text" id="OnQuitProArgument2" size="45"/>
+               </form>
+			 </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+             <td><label>Result:</label></td>
+             <td>
+               <form id="form1" name="form1" method="post" action="">
+               <label for="OnQuitProResult"></label>
+               <textarea name="OnQuitProResult" cols="38" rows="2" readonly="readonly" id="OnQuitProResult"></textarea>
+               </form>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td></tr>
+           <tr>
+		     <td></td>
+             <td><form id="form1" name="form1" method="post" action="">
+               <input type="button" name="OnQuitProcessDivWaitBtn" id="OnQuitProcessDivWaitBtn" value="OnQuit"/>
+			   <label id="OnQuitProcessSuccessLabel">Process Exit!</label>
+               </form>
+             </td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+       </div>
+       <!-- Set up OnQuit Handler div end -->
+      </div>
+      <!-- Process API tabe end -->
+    </div>
+  </div>
+  <script type="text/javascript">
+    var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+  </script>
+</body>
+</html>

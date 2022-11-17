@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2013, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<script src="../js/CSInterface.js"></script>
+
+<script>
+
+var httpServer;
+
+window.onload = function()
+{
+	var csLib = new CSInterface();
+	var hostEnv = csLib.getHostEnvironment();
+	var appVersion = hostEnv.appVersion;
+	var appId = hostEnv.appId;
+
+	var port = 8000;
+	switch (appId)
+	{
+		case 'PHXS':
+		case 'PHSP':
+		    port = 8000;
+		break;
+
+		case 'PPRO':
+		    port = 8001;
+		break;
+
+		case 'PRLD':
+		    port = 8002;
+		break;
+
+		case 'IDSN':
+		    port = 8003;
+		break;
+
+		case 'AICY':
+		    port = 8004;
+		break;
+
+		case 'FLPR':
+		    port = 8005;
+		break;
+
+		case 'ILST':
+		    port = 8012;
+		break;
+
+		default:
+		break;
+	}
+	
+    var http = cep_node.require('http');
+    httpServer = http.createServer(function (req, res)
+    {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Greetings from ' + appId + ' ' + appVersion);
+    }).listen(port, '127.0.0.1');
+};
+
+window.onunload = function()
+{
+    httpServer.close();
+}
+
+</script>
+</head>
+
+<body>
+</body>
+
+</html>
