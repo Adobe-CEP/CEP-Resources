@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest version="2.0">
+    <versioninfo>
+        <build version="4.1" subproduct="CommandLine-64bit-OpenSSL1.1" product="ZXPSign" platform="osx10" licensemodel="None" lang="mul" format="Folder" datetime="2020/02/19:15:02:07" compilertarget="Release" build="2">
+            <fileinfo>
+                <file size="4322931" name="ZXPSignCmd-64bit.dmg" md5="f4e85351c80cb78619dbbd7da680342d"/>
+            </fileinfo>
+            <repository scheme="p4" query="@24235" path="//depot/Suite/ZXPSign/release_2.0/..." authority="boxer.corp.adobe.com:1680"/>
+        </build>
+    </versioninfo>
+</manifest>

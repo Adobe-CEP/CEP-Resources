@@ -1,0 +1,11 @@
+/*
+ *  BasicExternalObject_Prefix.pch
+ *  BasicExternalObject
+ *
+ *  Created by Alan Morris on 20/12/2006.
+ *  Copyright 2006 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#include <Carbon/Carbon.h>
+
