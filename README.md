@@ -38,7 +38,7 @@ For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host appli
 
   * **Packaging and Signing Tool (ZXPSignCMD)**
     * Tool: [ZXPSignCMD](https://github.com/Adobe-CEP/CEP-Resources/tree/master/ZXPSignCMD)
-    * Document: [Packaging and Signing Adobe Extensions](http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/creativesuite/pdfs/SigningTechNote_CC.pdf) 
+    <!--- * Document: [Packaging and Signing Adobe Extensions](https://github.com/Adobe-CEP/CEP-Resources/blob/master/ZXPSignCMD/SigningTechNote_CC.pdf) ---> 
 
   * **Extension Installation Tools** 
     * Extension Manager Command Line Tool
