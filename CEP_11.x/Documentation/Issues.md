@@ -73,6 +73,11 @@ Some inter-process communication calls from this new renderer process are not be
 ### Issue 4: 
 In Windows, the API cep.fs.stat() is not able to access file of size greater than 4GB 
 
+### Issue 5: CEP capped to 30fps
+On Mac, CEF has frame rate clamped at 30 fps. CEP doesn't interfere with these configuration for performance concerns.
+Although a possible workaround to remove this cap is to add --disable-frame-rate-limit as CEFCommandLineArgs in manifest.xml, we don't recommend this as
+it turn vsync off, which virtually creates uncontrolled number of frames. This can max out CPU & GPU usage which may cause hanged & stuttering display. 
+
 
 ---
 
