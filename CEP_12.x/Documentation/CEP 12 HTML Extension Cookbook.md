@@ -40,18 +40,18 @@ These applications support CEP HTML extensions. (For older applications, [see th
 
 | Application | Host ID(Product SAPCode) |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|FY2022|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
-|Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | 23.0 (CEP 11) | TDB (CEP12)|
-|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) | TDB (CEP12)|
-|InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11)  | TDB (CEP12)|
-|Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11)  | TDB (CEP12)|
-|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11)  | TDB (CEP12)|
-|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) | TDB (CEP12)|
-|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11)  | TDB (CEP12)|
-|Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | 22.0(CEP 11) | TDB (CEP12)|
-|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11)  | TDB (CEP12)|
-|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| 21.2.0(CEP 11) | TDB (CEP12)|
-|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | 12.0(CEP 11) | TDB (CEP12)|
-|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) | TDB (CEP12)|
+|Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | 23.0 (CEP 11) | TBD (CEP12)|
+|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) | TBD (CEP12)|
+|InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11)  | TBD (CEP12)|
+|Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11)  | TBD (CEP12)|
+|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11)  | TBD (CEP12)|
+|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) | TBD (CEP12)|
+|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11)  | TBD (CEP12)|
+|Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | 22.0(CEP 11) | TBD (CEP12)|
+|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11)  | TBD (CEP12)|
+|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| 21.2.0(CEP 11) | TBD (CEP12)|
+|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | 12.0(CEP 11) | TBD (CEP12)|
+|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) | TBD (CEP12)|
 
 ---
 
