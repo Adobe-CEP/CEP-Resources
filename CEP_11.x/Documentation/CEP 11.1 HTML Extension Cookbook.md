@@ -28,7 +28,9 @@ These extension types are supported by CEP. You need to specify an extension's t
  - **ModalDialog**
 	 - A Modal Dialog type opens a new extension window and forces the user to interact only with the extenison window before returning control to the host application. User can interact with host application only after closing extension window.
  - **Modeless**
-	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window.
+	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window
+- **Embedded**
+	 - An Embedded Panel is the same as a **Panel**, but it cannot be undocked.
  - **Custom (Since CEP 5.0)**
 	 - This type is for invisible extensions. An invisible extension remains hidden and never becomes visible during its whole life cycle. Read "Invisible HTML Extensions" for more details.
 
