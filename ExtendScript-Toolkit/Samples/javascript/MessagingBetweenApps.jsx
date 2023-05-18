@@ -110,7 +110,7 @@ MessagingBetweenApps.prototype.run = function() {
 	// ESTK handles any errors  that occur when sending the initial message
 	btMsg.onError = function( errorMsg ) {
 		 retval = false; 
-		 $.writeln(eObj.body); 
+		 $.writeln(errorMsg.body); 
 	}
 	// ESTK sends the initial message
 	$.writeln("MessagingBetweenApps: In ESTK - about to send initial message to Photoshop");
