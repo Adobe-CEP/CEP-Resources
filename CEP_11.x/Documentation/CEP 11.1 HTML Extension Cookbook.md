@@ -390,14 +390,15 @@ Following representation provides visual context
 CEP HTML Extensions can be developed on both Windows and macOS platforms. The development machine needs to have the following applications in order to successfully develop CSXS extensions:
 
  - Adobe Creative Cloud applications supporting CEP HTML extensions.
+ - VS Code and extensions for building CEP HTML extensions for Adobe Creative Cloud.
  - Adobe ExtendScript Tool Kit (This is available as an optional install, note that this 32-bit app is not supported by macOS High Sierra 10.13.4 and later).
  - Chrome browser for debug workflow.
 
 
-### HTML Extension Builder
+### VS Code
 
 
-HTML Extension Builder is a tool set built on top of Eclipse and can be used for developing and debugging HTML extensions. Please download the Extension Builder 3 from [here](http://labs.adobe.com/technologies/extensionbuilder3/).
+VS Code supports development and debugging of CEP HTML extensions as well as debugging ExtendScript. Learn more about the ExtendScript tools [here](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug).
 
 
 ### Signing extensions
