@@ -28,7 +28,9 @@ These extension types are supported by CEP. You need to specify an extension's t
  - **ModalDialog**
 	 - A Modal Dialog type opens a new extension window and forces the user to interact only with the extenison window before returning control to the host application. User can interact with host application only after closing extension window.
  - **Modeless**
-	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window.
+	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window
+- **Embedded**
+	 - An Embedded Panel is the same as a **Panel**, but it cannot be undocked.
  - **Custom (Since CEP 5.0)**
 	 - This type is for invisible extensions. An invisible extension remains hidden and never becomes visible during its whole life cycle. Read "Invisible HTML Extensions" for more details.
 
@@ -388,32 +390,28 @@ Following representation provides visual context
 CEP HTML Extensions can be developed on both Windows and macOS platforms. The development machine needs to have the following applications in order to successfully develop CSXS extensions:
 
  - Adobe Creative Cloud applications supporting CEP HTML extensions.
- - HTML Extension Builder (Nice to have, but not mandatory).
- - Adobe ExtendScript Tool Kit (This is available as an optional install). 
+ - VS Code and extensions for building CEP HTML extensions for Adobe Creative Cloud.
+ - Adobe ExtendScript Tool Kit (This is available as an optional install, note that this 32-bit app is not supported by macOS High Sierra 10.13.4 and later).
  - Chrome browser for debug workflow.
 
 
-### HTML Extension Builder
+### VS Code
 
 
-HTML Extension Builder is a tool set built on top of Eclipse and can be used for developing and debugging HTML extensions. Please download the Extension Builder 3 from [here](http://labs.adobe.com/technologies/extensionbuilder3/).
+VS Code supports development and debugging of CEP HTML extensions as well as debugging ExtendScript. Learn more about the ExtendScript tools [here](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug).
 
 
 ### Signing extensions
 
 
- - Before you sign the extensions, you need to get or create the certificate file. Configurator and Adobe Exchange Packer can create certificates. Developers can get all information [here](https://www.adobeexchange.com/resources/7) after logging in.
- - Three tools can be used to sign a HTML extension.
- - [Extension Builder 3](http://labs.adobe.com/downloads/extensionbuilder3.html)
- - CC Extensions Signing Toolkit (also on above labs web site)
-      - Example of using CC Extension signing toolkit: ccextensionswin64.exe -sign "d:\Adobe Layer Namer\Adobe Layer Namer\"*(input extension path)* d:\AdobeLayerNamer.zxp *(output zxp path)* d:\sign.p12 *(certificate path)* 1 *(certificate password)* Adobe Exchange Packer (please sign in so that you can see it.)
- - [Adobe Exchange Packer](http://www.adobeexchange.com/resources) (please sign in so that you can see it.)
+- Before you sign the extensions, you need to get or create the certificate file. [Please read our guide to signing here.](https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install).
+- You will need the ZXPSignCMD tool, [available here](https://github.com/Adobe-CEP/CEP-Resources/tree/master/ZXPSignCMD).
 
 
 ### Debugging Unsigned Extensions
 
 
-If you are in the midst of development and are not using HTML Extension Builder for debug workflows and want to bypass the need to sign your extensions, you can bypass the check for extension signatures by editing the CSXS preference properties file, located at:
+If you are in the midst of development and want to bypass the need to sign your extensions, you can bypass the check for extension signatures by editing the CSXS preference properties file, located at:
 
  - Win: regedit > HKEY_CURRENT_USER/Software/Adobe/CSXS.11, then add a new entry PlayerDebugMode of type "string" with the value of "1".
  - macOS: In the terminal, type: `defaults write com.adobe.CSXS.11 PlayerDebugMode 1` (The plist is also located at /Users/`<username>`/Library/Preferences/com.adobe.CSXS.11.plist)
