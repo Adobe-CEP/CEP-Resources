@@ -32,17 +32,22 @@
     var dbType = 'mongodb';
     var mongodbCollection = "";
     
-	function isNodeJSEnabled() {		
-		if (typeof(cep_node) ​!== 'undefined') {
+	function isNodeJSEnabled() 
+	{		
+		if (typeof(cep_node) !== 'undefined')
+		{
             //if require and process is available, it should be mixed context
-            if ((typeof(require) ​!== 'undefined') && (typeof(process) ​!== 'undefined')) {
+            if ((typeof(require) !== 'undefined') && (typeof(process) !== 'undefined')) 
+			{
                 $('#result').val("Node.js is enabled with mixed-context mode");
             }
             else
             {
-			 $('#result').val("Node.js is enabled");
-		    } 
-        else {
+			 	$('#result').val("Node.js is enabled");
+		    }
+		}
+        else 
+		{
 			$('#result').val("Node.js is disabled");
 		}
 	}
@@ -353,7 +358,7 @@
             <option value="mysql">MySQL</option>
         </select>
         <button name="btnConnect" id="btnConnect"> Connect to DB </button>
-        <div class='serverInfoDiv'>
+        <div class="serverInfoDiv">
             <table>
                 <tr>
                     <td><label for="servAddr">ServerAddress:</label></td> 
@@ -374,7 +379,7 @@
     </div>
     <div>
         <label id="userInputLabel"></label> 
-        <select name="selectMongoAPI" id="selectMongoAPI" class='selectMongoAPI'>
+        <select name="selectMongoAPI" id="selectMongoAPI" class="selectMongoAPI">
             <option value="insert">Insert an item:{"title" : "hello world"}</option>
             <option value="find">Find an item whose value is {"title" : "hello world"} or {"title" : "hello world new"}</option>
             <option value="update">Update value of item to {"title" : "hello world new"}</option>
