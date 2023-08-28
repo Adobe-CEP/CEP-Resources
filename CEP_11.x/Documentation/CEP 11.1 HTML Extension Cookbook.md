@@ -51,7 +51,7 @@ These applications support CEP HTML extensions. (For older applications, [see th
 |After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11)  |
 |Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | 22.0(CEP 11) |
 |Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11)  |
-|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| 22.0(CEP 11) |
+|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| 21.2(CEP 11) |
 |Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | 12.0(CEP 11) |
 |Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) |
 
