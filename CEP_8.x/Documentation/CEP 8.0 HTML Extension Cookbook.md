@@ -992,7 +992,7 @@ Here is the definition for `CSInterface.dispatchEvent`. Refer to `CSInterface.js
 
 ```js
 /**
- * Triggers a CEP event programmatically. Yoy can use it to dispatch
+ * Triggers a CEP event programmatically. You can use it to dispatch
  * an event of a predefined type, or of a type you have defined.
  *
  * @param event A \c CSEvent object.
@@ -1010,7 +1010,7 @@ Here are three samples to demonstrate how to dispatch an event in JavaScript.
 var csInterface = new CSInterface();
 var event = new CSEvent("com.adobe.cep.test", "APPLICATION");
 event.data = "This is a test!";
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```	
 
 
@@ -1023,7 +1023,7 @@ var event = new CSEvent();
 event.type = "com.adobe.cep.test";
 event.scope = "APPLICATION";
 event.data = "This is a test!";
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```
 
 
@@ -1036,7 +1036,7 @@ var obj = new Object();
 obj.a = "a";
 obj.b = "b";
 event.data = obj;
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```
 
 
