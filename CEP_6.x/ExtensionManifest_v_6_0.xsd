@@ -501,7 +501,7 @@
                 </xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="5.0"/>
+                        <xs:enumeration value="6.0"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
