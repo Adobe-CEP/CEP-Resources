@@ -54,6 +54,8 @@ For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host appli
     * [Extension Builder 3 Preview](http://adobe.ly/1pho2QU)
     * [Extension Builder 3 forums - get help from the developer community](http://adobe.ly/1mgZ2xe)
    (NOTE: EB3 is compatible with CEP 4.x only. You can [tweak it](http://adobe.ly/1v3wgiq) so that it supports CC 2014 (with limitations))
+    * [BOLT CEP Extension framework](https://github.com/hyperbrew/bolt-cep)
+   (NOTE: BOLT is a boilerplate for building CEP extensions in React, Vue or Svelte, built on TypeScript + Sass)
 
   * **[Older CEP versions 4.x to 7.x](./README_ArchivedVersions.md)**
 
