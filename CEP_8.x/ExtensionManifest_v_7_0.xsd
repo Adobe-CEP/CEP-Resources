@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+CEP_8.x/ExtensionManifest_v_7_0.xsd<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="ExtensionManifest">
         <xs:annotation>
