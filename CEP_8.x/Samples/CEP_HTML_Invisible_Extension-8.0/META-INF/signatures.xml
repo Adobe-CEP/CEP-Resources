@@ -1,4 +1,4 @@
-<signatures>
+defaults write com.adobe.CSXS.8 LogLevel 6<signatures>
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="PackageSignature">
     <SignedInfo>
       <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
