@@ -74,5 +74,11 @@ For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host appli
 
 ----
 
+**License**
+* [English](./License/GenSDK_IHC-en_US-20120323_1224.pdf)
+* [French](./License/GenSDK_IHC-fr_FR-20120323_1224.pdf)
+
+----
+
 
 
