@@ -3,6 +3,8 @@ Getting Started with Common Extensibility Platform (CEP)
 
 This page provides the resources you need to [get started](https://github.com/Adobe-CEP/Getting-Started-guides) in order to create extensions for Adobe Creative Cloud applications, using the new HTML5/JavaScript interface model. The Flash/ActionScript interface model for extensions is deprecated in Creative Cloud releases; Support has already been removed from CC2014 and later releases.
 
+* CEP 12 is available for developing extensions and add-ons in latest versions of Creative Cloud Applications. Refer to the [table](./CEP_12.x/Documentation/CEP%2012.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 12.
+
 * CEP 11 is available for developing extensions and add-ons in latest versions of Creative Cloud Applications. Refer to the [table](./CEP_11.x/Documentation/CEP%2011.1%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 11.
 
 * CEP 10 is available for developing extensions and add-ons in latest versions of Creative Cloud Applications. Refer to the [table](./CEP_10.x/Documentation/CEP%2010.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) for Creative Cloud products integration with CEP 10.
@@ -19,14 +21,14 @@ Resources you will need include:
 
 ---
 
-For developing CEP 10.0 HTML/JavaScript extensions for Creative Cloud host applications
+For developing CEP 12.0 HTML/JavaScript extensions for Creative Cloud host applications
 
 **Documentation**
 
   * **[HTML Extension Cookbook](./Documentation/README.md)**
   
   * **APIs**
-    For CEP 11 APIs:
+    For CEP 12 APIs:
       * Include these files in your extension project if you need to use the APIs.
           * CSInterface.js
           * Vulcan.js
