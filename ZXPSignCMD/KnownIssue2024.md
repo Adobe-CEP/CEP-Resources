@@ -15,7 +15,7 @@ A. We're not sure. It could be related to Creative Cloud desktop app 6.4. It may
 
 ### Q. Will I need to maintain two different listings on the Adobe Exchange Marketplace?
 
-A. We're still investigation this.
+A. We're still investigating this.
 
 ### Q. I don't have two computers handy for signing two ZXPs, what are my options?
 
