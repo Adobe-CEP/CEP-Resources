@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CEP 9 Known Issues](#cep-9-known-issues)
+    - [Following are the known issues in the latest version. Please keep these in mind while creating your own extension...](#following-are-the-known-issues-in-the-latest-version-please-keep-these-in-mind-while-creating-your-own-extension)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 CEP 9 Known Issues 
 ====================

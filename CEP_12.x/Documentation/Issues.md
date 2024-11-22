@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CEP 12 Known Issues & FAQ](#cep-12-known-issues--faq)
+    - [Following are the known issues in CEP. Please keep these in mind while creating your own extensions](#following-are-the-known-issues-in-cep-please-keep-these-in-mind-while-creating-your-own-extensions)
+  - [Issue 1 (CEP 12) : CSInterface's version specific APIs show incorrect Operating System Version](#issue-1-cep-12--csinterfaces-version-specific-apis-show-incorrect-operating-system-version)
+    - [Note:](#note)
+  - [Issue 2 (CEP 12): SharedArrayBuffer changes can't be accessed if Cross-Origin isolation is disabled](#issue-2-cep-12-sharedarraybuffer-changes-cant-be-accessed-if-cross-origin-isolation-is-disabled)
+  - [FAQ](#faq)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 CEP 12 Known Issues & FAQ
 ====================
 

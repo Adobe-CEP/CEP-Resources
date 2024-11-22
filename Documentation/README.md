@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Quick Links for CEP](#quick-links-for-cep)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Quick Links for CEP 
 ==============
 The page provides links to [get started](https://github.com/Adobe-CEP/Getting-Started-guides) with Common Extensibility Platform (CEP) in order to create extensions for Adobe Creative Cloud applications. 

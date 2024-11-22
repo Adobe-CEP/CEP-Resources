@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CEP 11 Known Issues & FAQ](#cep-11-known-issues--faq)
+    - [Following are the known issues in CEP. Please keep these in mind while creating your own extension...](#following-are-the-known-issues-in-cep-please-keep-these-in-mind-while-creating-your-own-extension)
+  - [Issue 1 (CEP 11) : evalScript callback is not triggered in cross-site iFrames](#issue-1-cep-11--evalscript-callback-is-not-triggered-in-cross-site-iframes)
+  - [Issue 2 (CEP 11): UI issues with cross-site iFrames](#issue-2-cep-11-ui-issues-with-cross-site-iframes)
+  - [Issues existing in CEP 9 and above](#issues-existing-in-cep-9-and-above)
+    - [Issue 3 : Drag events not fired while debugging an extension.](#issue-3--drag-events-not-fired-while-debugging-an-extension)
+    - [Issue 4:](#issue-4)
+    - [Issue 5: CEP capped to 30fps](#issue-5-cep-capped-to-30fps)
+  - [FAQ](#faq)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 CEP 11 Known Issues & FAQ
 ====================
 

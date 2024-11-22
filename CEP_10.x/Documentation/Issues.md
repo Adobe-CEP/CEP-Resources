@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CEP 10 Known Issues & FAQ](#cep-10-known-issues--faq)
+    - [Following are the known issues in CEP 10.0. Please keep these in mind while creating your own extension...](#following-are-the-known-issues-in-cep-100-please-keep-these-in-mind-while-creating-your-own-extension)
+  - [Issue 1 :](#issue-1-)
+  - [Issues existing in both CEP 9 and CEP 10](#issues-existing-in-both-cep-9-and-cep-10)
+  - [FAQ](#faq)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 CEP 10 Known Issues & FAQ
 ====================
 

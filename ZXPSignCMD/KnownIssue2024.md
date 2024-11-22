@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [November 2024 Cross-platform ZXP Signing Compatibility Known Issue and Workaround](#november-2024-cross-platform-zxp-signing-compatibility-known-issue-and-workaround)
+  - [The Workaround](#the-workaround)
+    - [Plugin Users](#plugin-users)
+    - [Plugin Developers](#plugin-developers)
+  - [Why is this happening?](#why-is-this-happening)
+  - [FAQ](#faq)
+    - [Q. Which versions of Creative Cloud apps are affected?](#q-which-versions-of-creative-cloud-apps-are-affected)
+    - [Q. Does this happen with plugins installed via the Adobe Exchange Marketplace?](#q-does-this-happen-with-plugins-installed-via-the-adobe-exchange-marketplace)
+    - [Q. Is a fix on the way?](#q-is-a-fix-on-the-way)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # November 2024 Cross-platform ZXP Signing Compatibility Known Issue and Workaround
 
 **The problem:**  Some users are experiencing blank panels after a successful installation of a ZXP plugin. ZXP certificate signatures are appearing to be invalid, even after appearing to be signed successfully.

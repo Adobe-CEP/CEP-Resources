@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Archived versions CEP 4.x to CEP 7.x](#archived-versions-cep-4x-to-cep-7x)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Archived versions CEP 4.x to CEP 7.x
 ==============
 

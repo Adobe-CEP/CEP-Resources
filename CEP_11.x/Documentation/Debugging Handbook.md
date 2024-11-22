@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [1. Mac](#1-mac)
+  - [1.1 Checking & Editing Logging Settings](#11-checking--editing-logging-settings)
+  - [1.2. Extension Folders](#12-extension-folders)
+  - [1.3. Logs Folder](#13-logs-folder)
+  - [1.4. Crash Dump](#14-crash-dump)
+- [2. Windows](#2-windows)
+  - [2.1. Checking & Editing Logging Settings](#21-checking--editing-logging-settings)
+  - [2.2. Extensions Folders](#22-extensions-folders)
+  - [2.3. Logs Folders](#23-logs-folders)
+  - [2.4 Crash Dump](#24-crash-dump)
+- [3. Debugging Tools](#3-debugging-tools)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 1. Mac
 
 ### 1.1 Checking & Editing Logging Settings

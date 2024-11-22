@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Known issues](#known-issues)
+  - [32-bit application](#32-bit-application)
+  - [Workaround for ExtendScript Toolkit Debugger Error #1116](#workaround-for-extendscript-toolkit-debugger-error-1116)
+- [Another option](#another-option)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Use of Adobe ExtendScript Toolkit is governed by the Adobe Terms of Use and [Adobe Developer Additional Terms](http://www.adobe.com/go/developer-terms), and the license attached to this repo does not apply.
 
 # Known issues

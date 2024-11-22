@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Appendix 1: UXP vs. CEP vs. ExtendScript](#appendix-1-uxp-vs-cep-vs-extendscript)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Appendix 1: UXP vs. CEP vs. ExtendScript
 
 |**Platform** |**UXP** |  **CEP** | **ExtendScript**

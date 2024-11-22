@@ -1,3 +1,34 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CEP to UXP Technical Migration Guide](#cep-to-uxp-technical-migration-guide)
+  - [Why migrate to UXP?](#why-migrate-to-uxp)
+    - [Developer Tooling](#developer-tooling)
+    - [Plugin Types](#plugin-types)
+  - [UXP Plugin Development](#uxp-plugin-development)
+    - [Entrypoint Setup](#entrypoint-setup)
+    - [User Interface](#user-interface)
+  - [Migrating Native CEP Functions](#migrating-native-cep-functions)
+    - [Directory and File I/O Operations (File APIs)](#directory-and-file-io-operations-file-apis)
+    - [Encoding API](#encoding-api)
+    - [Opening Remote Resources](#opening-remote-resources)
+    - [Process APIs](#process-apis)
+  - [Migrating CEP JavaScript Libraries](#migrating-cep-javascript-libraries)
+    - [Vulcan Interface: Communicating across plugins within Photoshop](#vulcan-interface-communicating-across-plugins-within-photoshop)
+    - [CS APIs: Communicating with your plugin and with Photoshop](#cs-apis-communicating-with-your-plugin-and-with-photoshop)
+      - [Use Case: API Version](#use-case-api-version)
+      - [Use Case: Sending/Receiving Events](#use-case-sendingreceiving-events)
+      - [Use Case: Network Access](#use-case-network-access)
+      - [Use Case: Customizing Menus](#use-case-customizing-menus)
+      - [Use Case: Theme Support](#use-case-theme-support)
+      - [Use Case: Localization](#use-case-localization)
+      - [Use Case: Keyboard Events](#use-case-keyboard-events)
+      - [Use Case: Adjusting Plugin Size](#use-case-adjusting-plugin-size)
+  - [Migrating ExtendScript/EvalScript to the Photoshop DOM API](#migrating-extendscriptevalscript-to-the-photoshop-dom-api)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # CEP to UXP Technical Migration Guide
 This guide is geared towards CEP (Common Extensibility Platform) developers who would like more technical guidance on migrating their extensions to UXP (Unified eXtensibility Platform). The migration process is no doubt challenging but will dramatically improve your development experience for future iterations of your plugins. 
 
