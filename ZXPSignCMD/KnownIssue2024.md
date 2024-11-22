@@ -1,5 +1,8 @@
 # November 2024 Cross-platform ZXP Signing Compatibility Known Issue and Workaround
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 **The problem:**  Some users are experiencing blank panels after a successful installation of a ZXP plugin. ZXP certificate signatures are appearing to be invalid, even after appearing to be signed successfully.
 
 **Expected Behavior:** Historically ZXP files signed by ZXPSignCmd may be installed and used succesfully using ExManCmd, [UPIA](https://helpx.adobe.com/in/creative-cloud/help/working-from-the-command-line.html), or popular installers using these tools (e.g., [ZXPInstaller](https://aescripts.com/learn/zxp-installer/), [Anastasiy's Extension Manager](https://install.anastasiy.com/), and others).
