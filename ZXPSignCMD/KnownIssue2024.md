@@ -1,14 +1,26 @@
 # November 2024 Cross-platform ZXP Signing Compatibility Known Issue and Workaround
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**The problem:**  Some users are experiencing blank panels after a successful installation of a ZXP plugin. ZXP certificate signatures are appearing to be invalid, even after appearing to be signed successfully.
+- [The Problem](#the-problem)
+- [The Workaround](#the-workaround)
+  - [Plugin Users](#plugin-users)
+  - [Plugin Developers](#plugin-developers)
+- [Why is this happening?](#why-is-this-happening)
+- [FAQ](#faq)
+  - [Q. Which versions of Creative Cloud apps are affected?](#q-which-versions-of-creative-cloud-apps-are-affected)
+  - [Q. Does this happen with plugins installed via the Adobe Exchange Marketplace?](#q-does-this-happen-with-plugins-installed-via-the-adobe-exchange-marketplace)
+  - [Q. Is a fix on the way?](#q-is-a-fix-on-the-way)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## The Problem  
+Some users are experiencing blank panels after a successful installation of a ZXP plugin. ZXP certificate signatures are appearing to be invalid, even after appearing to be signed successfully.
 
 **Expected Behavior:** Historically ZXP files signed by ZXPSignCmd may be installed and used succesfully using ExManCmd, [UPIA](https://helpx.adobe.com/in/creative-cloud/help/working-from-the-command-line.html), or popular installers using these tools (e.g., [ZXPInstaller](https://aescripts.com/learn/zxp-installer/), [Anastasiy's Extension Manager](https://install.anastasiy.com/), and others).
 
 ## The Workaround
-
 There are several known workarounds.
 
 ### Plugin Users
