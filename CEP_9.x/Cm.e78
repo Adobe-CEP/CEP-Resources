@@ -1,0 +1,32 @@
+<VAST version="3.0">
+<Ad id="1">
+<InLine>
+<AdSystem>
+<![CDATA[ Bongacams.com ]]>
+</AdSystem>
+<AdTitle/>
+<Creatives>
+<Creative sequence="1" id="1">
+<Linear skipoffset="00:00:10">
+<VideoClicks>
+<ClickThrough>
+<![CDATA[ https://bongacams8.com/track?c=814863&ps=pre_roll ]]>
+</ClickThrough>
+</VideoClicks>
+<Duration>
+<![CDATA[ 00:00:20 ]]>
+</Duration>
+<MediaFiles>
+<MediaFile delivery="progressive" type="video/mp4" width="1280" height="720">
+<![CDATA[ https://i.bngrol.com/pre_roll/amg63/bonga/ru_z.mp4 ]]>
+</MediaFile>
+<MediaFile delivery="progressive" type="video/webm" width="1280" height="720">
+<![CDATA[ https://i.bngrol.com/pre_roll/amg63/bonga/ru_z.webm ]]>
+</MediaFile>
+</MediaFiles>
+</Linear>
+</Creative>
+</Creatives>
+</InLine>
+</Ad>
+</VAST>

@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<!-- Bootstrap -->
+<link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#StoreSuccess").hide();
+        $("#LSTextAreaInput").attr("value", localStorage.lstest);
+        $("[rel='tooltip']").tooltip();
+        if ((navigator.platform == "Win32") || (navigator.platform == "Windows")){
+            $("#LSTextAreaInput").attr("cols", 30);
+            $("#LSTextAreaOutput").attr("cols", 30);            
+        } else {
+            $("#LSTextAreaInput").attr("cols", 35);
+            $("#LSTextAreaOutput").attr("cols", 35);            
+        }
+        
+        $("#LSStoreBtn").click(function() {
+            localStorage.lstest = $("#LSTextAreaInput").val();
+            $("#StoreSuccess").show();
+        });
+        
+        $("#LSTextAreaInput").keyup(function() {
+            $("#StoreSuccess").hide();
+        });
+        
+        $("#LSReadBtn").click(function() {
+            $("#LSTextAreaOutput").attr("value", localStorage.lstest);
+        });
+		
+		$("#OnChangeInput").change(function() {
+			$("#OnChangeOutput").text($("#OnChangeInput").val());
+		});
+		
+		$("#OnChangeInput").keyup(function() {
+			$("#OnChangeInput").change();
+		});
+    });
+</script>
+
+<style type="text/css">
+.LocalStorageTab {
+    overflow:auto;
+    font-size:15px;
+    margin-left: 20px;
+    height:450px;
+}
+
+.CursorTab {
+    overflow:auto;
+    height:450px;
+    width:auto;
+    margin-left: 20px;
+}
+
+.TooltipTab {
+    margin-left: 70px;
+}
+
+.OnChangeTab {
+    overflow:auto;
+    font-size:15px;
+    margin-left: 20px;
+    height:450px;
+}
+
+body {
+    text-align: left;
+    color:#000 !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Local Storage</a></li>
+    <li><a href="#tab2" data-toggle="tab">Cursors</a></li>
+    <li><a href="#tab3" data-toggle="tab">Tooltips</a></li>
+	<li><a href="#tab4" data-toggle="tab">OnChange Event</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+        <div class="LocalStorageTab">
+            <label for="LSTextAreaInput">This is a test page for HTML5 local storage. <br>
+            Click &quot;Store&quot; button to save the string of left text area to local storage; <br>
+            Click &quot;Read from local storage&quot; button to read from the local storage.
+            </label>
+            <table width="395" border="0">
+                <tr>
+                    <td colspan="3">Please input string to store locally:</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><textarea name="LSTextAreaInput" rows="12" id="LSTextAreaInput">Test text for local storage.</textarea></td>
+                    <td><textarea name="LSTextAreaOutput" rows="12" id="LSTextAreaOutput" readonly></textarea></td>
+                </tr>
+                <tr>
+                    <td><label id="StoreSuccess">Stored successfully!</label></td>
+                    <td><input type="button" name="LSStoreBtn" id="LSStoreBtn" value="Store"></td>
+                    <td><input type="button" name="LSReadBtn" id="LSReadBtn" value="Read from local storage"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" id="tab2">
+        <div class="CursorTab">
+            <label for="LSTextAreaInput">This is a test page for HTML Cursors. <br>
+            Mouse your mouse over the following input to see different cursor settings.
+            </label>
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>Category</th>
+                        <th>CSS value</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr style="cursor: auto;">
+                        <td rowspan="3">General</td>
+                        <td><code>auto</code></td>
+                        <td>The browser determines the cursor to display based on the current context.<br>E.g. equivalent to <code>text</code> when hovering text.</td>
+                    </tr>
+                    <tr style="cursor: default;">
+                        <td><code>default</code></td>
+                        <td>Default cursor, typically an arrow.</td>
+                    </tr>
+                    <tr style="cursor: none;">
+                        <td><code>none</code></td>
+                        <td>No cursor is rendered.</td>
+                    </tr>
+                    <tr style="cursor: context-menu;">
+                        <td rowspan="5" style="cursor: auto;">Links &amp; status</td>
+                        <td><code>context-menu</code></td>
+                        <td>A context menu is available under the cursor.<br>Only IE 10 and up have implemented this on Windows: <a class="external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=258960" title="'context-menu' cursor glyph missing for Windows">bug 258960</a>.</td>
+                    </tr>
+                    <tr style="cursor: help;">
+                        <td><code>help</code></td>
+                        <td>Indicating help is available.</td>
+                    </tr>
+                    <tr style="cursor: pointer;">
+                        <td><code>pointer</code></td>
+                        <td>E.g. used when hovering over links, typically a hand.</td>
+                    </tr>
+                    <tr style="cursor: progress;">
+                        <td><code>progress</code></td>
+                        <td>The program is busy in the background but the user can still interact with the interface (unlike for <code>wait</code>).</td>
+                    </tr>
+                    <tr style="cursor: wait;">
+                        <td><code>wait</code></td>
+                        <td>The program is busy (sometimes an hourglass or a watch).</td>
+                    </tr>
+                    <tr style="cursor: cell;">
+                        <td rowspan="4" style="cursor: auto;">Selection</td>
+                        <td><code>cell</code></td>
+                        <td>Indicating that cells can be selected.</td>
+                    </tr>
+                    <tr style="cursor: crosshair;">
+                        <td><code>crosshair</code></td>
+                        <td>Cross cursor, often used to indicate selection in a bitmap.</td>
+                    </tr>
+                    <tr style="cursor: text;">
+                        <td><code>text</code></td>
+                        <td>Indicating text can be selected, typically an I-beam.</td>
+                    </tr>
+                    <tr style="cursor: vertical-text;">
+                        <td><code>vertical-text</code></td>
+                        <td>Indicating that vertical text can be selected, typically a sideways I-beam.</td>
+                    </tr>
+                    <tr style="cursor: alias;">
+                        <td rowspan="5" style="cursor: auto;">Drag and drop</td>
+                        <td><code>alias</code></td>
+                        <td>Indicating an alias or shortcut is to be created.</td>
+                    </tr>
+                    <tr style="cursor: copy;">
+                        <td><code>copy</code></td>
+                        <td>Indicating that something can be copied.</td>
+                    </tr>
+                    <tr style="cursor: move;">
+                        <td><code>move</code></td>
+                        <td>The hovered object may be moved.</td>
+                    </tr>
+                    <tr style="cursor: no-drop;">
+                        <td><code>no-drop</code></td>
+                        <td>Cursor showing that a drop is not allowed at the current location.<br><a class="external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=275173" title="Cursor glyph for CSS3 'no-drop' is the same as for 'not-allowed'">bug 275173</a> on Windows, "no-drop is the same as not-allowed".</td>
+                    </tr>
+                    <tr style="cursor: not-allowed;">
+                        <td><code>not-allowed</code></td>
+                        <td>Cursor showing that something cannot be done.</td>
+                    </tr>
+                    <tr style="cursor: all-scroll;">
+                        <td rowspan="15" style="cursor: auto;">Resize &amp; scrolling</td>
+                        <td><code>all-scroll</code></td>
+                        <td>Cursor showing that something can be scrolled in any direction (panned).<br><a class="external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=275174" title="Cursor glyph for CSS3 'all-scroll' is the same as for 'move'">bug 275174</a> on Windows, "<em>all-scroll</em> is the same as <em>move</em>".</td>
+                    </tr>
+                    <tr style="cursor: col-resize;">
+                        <td><code>col-resize</code></td>
+                        <td>The item/column can be resized horizontally. Often rendered as arrows pointing left and right with a vertical bar separating.</td>
+                    </tr>
+                    <tr style="cursor: row-resize;">
+                        <td><code>row-resize</code></td>
+                        <td>The item/row can be resized vertically. Often rendered as arrows pointing up and down with a horizontal bar separating them.</td>
+                    </tr>
+                    <tr style="cursor: n-resize;">
+                        <td><code>n-resize</code></td>
+                        <td rowspan="8" style="cursor: auto;">Some edge is to be moved. For example, the <code>se-resize</code> cursor is used when the movement starts from the <em>south-east</em> corner of the box.</td>
+                    </tr>
+                    <tr style="cursor: e-resize;">
+                        <td><code>e-resize</code></td>
+                    </tr>
+                    <tr style="cursor: s-resize;">
+                        <td><code>s-resize</code></td>
+                    </tr>
+                    <tr style="cursor: w-resize;">
+                        <td><code>w-resize</code></td>
+                    </tr>
+                    <tr style="cursor: ne-resize;">
+                        <td><code>ne-resize</code></td>
+                    </tr>
+                    <tr style="cursor: nw-resize;">
+                        <td><code>nw-resize</code></td>
+                    </tr>
+                    <tr style="cursor: se-resize;">
+                        <td><code>se-resize</code></td>
+                    </tr>
+                    <tr style="cursor: sw-resize;">
+                        <td><code>sw-resize</code></td>
+                    </tr>
+                    <tr style="cursor: ew-resize;">
+                        <td><code>ew-resize</code></td>
+                        <td rowspan="4" style="cursor: auto;">Indicates a bidirectional resize cursor.</td>
+                    </tr>
+                    <tr style="cursor: ns-resize;">
+                        <td><code>ns-resize</code></td>
+                    </tr>
+                    <tr style="cursor: nesw-resize;">
+                        <td><code>nesw-resize</code></td>
+                    </tr>
+                    <tr style="cursor: nwse-resize;">
+                        <td><code>nwse-resize</code></td>
+                    </tr>
+                    <tr style="cursor: -webkit-zoom-in; cursor: zoom-in;">
+                        <td rowspan="2">Zoom</td>
+                        <td><code>zoom-in</code></td>
+                        <td rowspan="2" style="cursor: auto;"><p>Indicates that something can be zoomed (magnified) in or out.</p></td>
+                    </tr>
+                    <tr style="cursor: -webkit-zoom-out; cursor: zoom-out;">
+                        <td><code>zoom-out</code></td>
+                    </tr>
+                    <tr id="grab" style="cursor: -moz-grab; cursor: -webkit-grab; cursor: grab;">
+                        <td rowspan="2">Grab</td>
+                        <td><code>grab</code></td>
+                        <td rowspan="2" style="cursor: auto;"><p>Indicates that something can be grabbed (dragged to be moved).</p></td>
+                    </tr>
+                    <tr style="cursor: -moz-grabbing; cursor: -webkit-grabbing; cursor: grabbing;">
+                        <td><code>grabbing</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" id="tab3">
+        <div class="TooltipTab">
+            <p><a title="Default tooltip" rel='tooltip'>Test Tooltip</a></p>
+            <p><a title='Left Tooltip' rel='tooltip' data-placement='left' >Left Tooltip</a></p>
+            <p><a title='Right Tooltip' rel='tooltip' data-placement='right'>Right Tooltip</a></p>
+            <p><a title='Bottom Tooltip' rel='tooltip' data-placement='bottom'>Bottom Tooltip</a></p>
+            <p><a title='HTML Tooltip Lin1 -1 
+                        <br/> HTML Tooltip Lin1 -2 
+                        <br/> HTML Tooltip Lin1 -3
+                        <br/> HTML Tooltip Lin1 -4' 
+                rel='tooltip' data-html='true'> HTML Tooltip</a></p>
+        </div>
+    </div>
+    <div class="tab-pane" id="tab4">
+        <div class="OnChangeTab">
+			<p>Enter text: <input type="text" name="OnChangeInput" id="OnChangeInput"/></p>
+			<p>Updates to include input text:</p>
+			<p name="OnChangeOutput" id="OnChangeOutput"></p>
+        </div>
+    </div>
+  </div>
+</div>
+<script src="../js/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

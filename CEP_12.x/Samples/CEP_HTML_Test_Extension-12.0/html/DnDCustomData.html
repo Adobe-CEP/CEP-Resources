@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+
+<html>
+<head>
+
+<style>
+#drag_div {width:100px;height:30px;text-align:center;background-color:#AAAAFF}
+#drop_div {width:500px;height:1000px;padding:5px;border:1px solid #aaaaaa;}
+</style>
+
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function entities(s) {
+  var e = {
+    '"' : '"',
+    '&' : '&',
+    '<' : '<',
+    '>' : '>'
+  };
+  return s.replace(/["&<>]/g, function (m) {
+    return e[m];
+  });
+}
+
+function dragHandler(event)
+{
+    var dt = event.dataTransfer;
+    dt.setData("text", "demo text");
+    
+    var currentPageUrl;
+    if (typeof this.href != "undefined")
+    {
+       currentPageUrl = this.href.toString().toLowerCase(); 
+    }
+    else
+    { 
+        currentPageUrl = document.location.toString().toLowerCase();
+    }
+    
+    dt.setData("url", currentPageUrl);
+    dt.setData("text/html", '<p>A link to a local file: <a href="../img/red.png">red.png</a></p>');
+    dt.setData("application/json", 'a json string');
+    dt.setData("custom type", 'custom data');
+}
+
+function dropHandler(e)
+{
+    if (e.preventDefault) e.preventDefault(); // stops the browser from redirecting off to the text.
+
+    //--------- dropEffect -------------
+    dropEffect.innerHTML = 'dropEffect: ' + entities(e.dataTransfer.dropEffect);
+    
+    //--------- effectAllowed -------------
+    effectAllowed.innerHTML = 'effectAllowed: ' + entities(e.dataTransfer.effectAllowed);
+
+    //--------- types -------------
+    var typesHtml = '';
+    for (var i = 0; i < e.dataTransfer.types.length; i++)
+    {
+        var type = e.dataTransfer.types[i];
+        typesHtml += '<li>Type ' + i + '<ul><li>' + entities('type: ' + type) + '</li><li>' + entities('data: ' + e.dataTransfer.getData(type)) + '</li></ul></li>';
+    }
+    types.innerHTML = typesHtml;
+
+    //--------- files -------------
+    var filesHtml = '';
+    for (var i = 0; i < e.dataTransfer.files.length; i++)
+    {
+        var file = e.dataTransfer.files[i];
+      //fileli.innerHTML += '<li>' + entities('name: ' + file.name) + entities(', lastModifiedDate: ' + file.lastModifiedDate) + '</li>';
+        filesHtml += '<li>File ' + i + '<ul><li>' + entities('name: ' + file.name) + '</li><li>' + entities('lastModifiedDate: ' + file.lastModifiedDate) + '</li></ul></li>';
+    }
+    files.innerHTML = filesHtml;
+
+    //--------- items -------------
+    var itemsHtml = '';
+    for (var i = 0; i < e.dataTransfer.items.length; i++)
+    {
+        var item = e.dataTransfer.items[i];
+        itemsHtml += '<li>Item ' + i + '<ul><li>' + entities('kind: ' + item.kind) + '</li><li>' + entities('type: ' + item.type) + '</li>';
+        
+        if (item.kind == 'string')
+        {
+            // print string data
+        }
+        
+        if (item.kind == 'file')
+        {
+            var file = item.getAsFile();
+            itemsHtml += '<li>' + entities('file: ' + file.name) + '</li>';
+        }
+        itemsHtml += '</ul></li>';
+    }
+    items.innerHTML = itemsHtml;
+    
+  return false;
+
+}
+</script>
+</head>
+
+<body>
+
+<div id="container" style="width:100%">
+
+    <div id="left" style="width:40%;float:left;">
+        <p><b>Drag Area</b> (Drag each object to)</p>
+        <ul>
+            <li>The drop area</li>
+            <li>The drop area on another extension</li>
+            <li>Desktop (Finder/Explorer)</li>
+            <li>CC apps</li>
+            <li>Browser apps</li>
+        </ul>
+        <p>1. Link to online resource: <a href="http://www.adobe.com">Adobe</a></p>
+        <p>2. Link to a local file: <a href="../img/red.png">red.png</a></p>
+        <p>3. Local image: <img src="../img/green.png" draggable="true"></p>
+        <p>4. Custom:</p>
+        <div id="drag_div" draggable="true" ondragstart="dragHandler(event)">drag me</div>
+    </div>
+
+    <div id="right" style="width:60%;float:left;">
+        <p><b>Drop Area</b> (Drag from these sources and drop here)</p>
+        <ul>
+            <li>The drag area</li>
+            <li>The drag area on another extension</li>
+            <li>Desktop (Finder/Explorer)</li>
+            <li>CC apps</li>
+            <li>Browser apps</li>
+        </ul>
+        <div id="drop_div" ondrop="dropHandler(event)" ondragover="allowDrop(event)">
+            <p id="dropEffect">dropEffect:</p>
+            <p id="effectAllowed">effectAllowed:</p>
+            <p>Types and each type's data</p>
+            <ul id="types"></ul>
+            <p>Files</p>
+            <ul id="files"></ul>
+            <p>Items</p>
+            <ul id="items"></ul>
+        </div>
+    </div>
+
+</div>
+    
+</body>
+</html>

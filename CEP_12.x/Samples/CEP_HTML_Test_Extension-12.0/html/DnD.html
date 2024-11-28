@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/SpryAssets/SpryTabbedPanels.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script type="text/javascript" src="../js/spin.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $("#OpenURL").click(function() {
+            $("#DisplayArea").attr("src", $("#OpenURLInput").val());
+      });
+      $("#DnDInsidePanel").click(function() {
+            $("#DisplayArea").attr("src", "http://html5demos.com/drag");
+            $("#OpenURLInput").attr("value", "http://html5demos.com/drag");
+      });
+      $("#DndFiles").click(function() {
+            $("#DisplayArea").attr("src", "http://html5demos.com/file-api");
+            $("#OpenURLInput").attr("value", "http://html5demos.com/file-api");
+      });
+      $("#DndAnything").click(function() {
+            $("#DisplayArea").attr("src", "http://html5demos.com/drag-anything");
+            $("#OpenURLInput").attr("value", "http://html5demos.com/drag-anything");
+      });
+      $("#DndPSLayerToPanel").click(function() {
+            $("#DisplayArea").attr("src", "DnDPSLayer.html");
+            $("#OpenURLInput").attr("value", "DnDPSLayer.html");
+      });
+      $("#DnDCustomData").click(function() {
+            $("#DisplayArea").attr("src", "DnDCustomData.html");
+            $("#OpenURLInput").attr("value", "DnDCustomData.html");
+      });
+    });
+</script>
+<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">Open Link</li>
+  </ul>
+  
+  <div class="TabbedPanelsContentGroup">
+    <!----------------------->
+    <!-- Open URL divbegin -->
+    <!----------------------->
+    <div class="TabbedPanelsContent">
+      <table width="200" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <table width="200" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>
+                <form id="form2" name="form2" method="post" action="">
+                  <input type="button" name="OpenURL" id="OpenURL" value="Open Link" />
+                </form>
+              </td>
+              <td>
+                <form id="form1" name="form1" method="post" action="">
+                  <label for="OpenURLInput"></label>
+                  <input name="OpenURLInput" type="text" id="OpenURLInput" value="http://html5demos.com/drag" size="110" />
+                </form>
+              </td>
+            </tr>
+            <tr>        
+              <table width="200" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                <td>
+                    <input type="button" name="DnDInsidePanel" id="DnDInsidePanel" value="DnDInsidePanel"/>
+                </td>
+                <td>
+                    <input type="button" name="DndFiles" id="DndFiles" value="DndFiles"/>
+                </td>
+                <td>
+                    <input type="button" name="DndAnything" id="DndAnything" value="DndAnything"/>
+                </td>
+                <td>
+                    <input type="button" name="DndPSLayerToPanel" id="DndPSLayerToPanel" value="DndPSLayerToPanel"/>
+                </td>
+                <td>
+                    <input type="button" name="DnDCustomData" id="DnDCustomData" value="DnDCustomData"/>
+                </td>
+                </tr>
+              </table>
+            </tr>
+          </table>
+        </tr>
+        <tr>
+          <td>
+            <iframe width="770" height="380" name="DisplayArea" id="DisplayArea" src="http://html5demos.com/drag"  frameborder="1" nodejs-disabled="true">
+            </iframe>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!----------------------->
+    <!-- Open URL div end --->
+    <!----------------------->
+    
+  </div>
+</div>
+<script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
+</body>
+</html>

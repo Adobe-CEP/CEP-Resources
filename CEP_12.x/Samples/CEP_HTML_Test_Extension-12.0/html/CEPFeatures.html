@@ -1,0 +1,740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="../js/SpryAssets/SpryTabbedPanels.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<link href="../js/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#EnvHostEnvironmentDiv").show();
+        $("#EnvHostCapabilitiesDiv").hide();
+        $("#EnvCurrentStateInfoDiv").hide();
+        $("#EnvOthersDiv").hide();
+        $("#GetExtensionIdDiv").hide();
+        $("#GetScaleFactorDiv").hide();
+        $("#GetCurrentApiVersionDiv").hide();
+                      
+        $("#OpenURL").click(function() {
+            $("#DisplayArea").attr("src", $("#OpenURLInput").val());
+        });
+    });
+    
+	<!--------------------------->
+    <!-- Flyout Menu tab begin -->
+    <!--------------------------->
+    var CSLibrary = new CSInterface();
+	var setMenuXML;
+	function setPanelCallback(event) {
+		if (event.type === "com.adobe.csxs.events.flyoutMenuClicked") {
+			document.getElementById("ReturnObject").value = 'The menu ID is: ' + event.data.menuId + '\n' + 'The menu name is: ' + event.data.menuName;
+			$("#GreenLightImg").show();
+		} else if (event.type === "com.adobe.csxs.events.flyoutMenuOpened") {
+			$("#GreenLightImg2").show();
+		} else if (event.type === "com.adobe.csxs.events.flyoutMenuClosed") {
+			$("#GreenLightImg3").show();
+		}
+	}
+	
+	function checkCapabilities() {
+		if (CSLibrary.getHostCapabilities().EXTENDED_PANEL_MENU) {
+			document.getElementById('LabelList').removeAttribute('disabled');
+			document.getElementById('ItemEnabled').removeAttribute('disabled');
+			document.getElementById('ItemChecked').removeAttribute('disabled');
+			document.getElementById('UpdateMenuItem').removeAttribute('disabled');	
+			document.getElementById("CapabilityLabel").innerHTML  += 'true';		
+		}
+		else {
+			document.getElementById("CapabilityLabel").innerHTML  += 'false';	
+		}
+	}
+	
+	function onclickSetPanelMenu() {
+	  var menuXML = document.getElementById("TestMenuStructure").value;
+    CSLibrary.setPanelFlyoutMenu(menuXML, setPanelCallback);
+		setMenuXML = menuXML;
+		setMenuList();
+	}
+	
+	function onclickClearPanelMenu() {
+		CSLibrary.setPanelFlyoutMenu("", setPanelCallback);
+		setMenuXML = "";
+		setMenuList();
+	}
+
+	function onclickReset() {
+		$("#GreenLightImg").hide();
+		$("#GreenLightImg2").hide();
+		$("#GreenLightImg3").hide();
+		document.getElementById("ReturnObject").value = "";
+	}	
+	
+	function onclickUpdateMenuItem(){
+		var list = document.getElementById("LabelList");	
+		CSLibrary.updatePanelMenuItem(list.options[list.selectedIndex].text, document.getElementById("ItemEnabled").checked, document.getElementById("ItemChecked").checked);
+	}
+	
+	function setMenuList() { 
+		var list = document.getElementById("LabelList");
+		list.innerHTML = "";
+		xmlDoc = $.parseXML(setMenuXML),
+		$xml = $(xmlDoc);
+		var i = 0;
+		$($xml).find("MenuItem").each(function() {
+			var option = document.createElement("option");
+			var name = $(this).attr("Label");
+			if (-1 == name.indexOf('---')) {
+			    option.value = ++i;
+				option.appendChild(document.createTextNode(name));
+				list.appendChild(option);
+			}
+		});
+	}
+
+    $(document).ready(function() {
+		$("#GreenLightImg").hide();
+		$("#GreenLightImg2").hide();
+		$("#GreenLightImg3").hide();
+		CSLibrary.addEventListener("com.adobe.csxs.events.flyoutMenuClicked", setPanelCallback);
+		CSLibrary.addEventListener("com.adobe.csxs.events.flyoutMenuOpened", setPanelCallback);
+		CSLibrary.addEventListener("com.adobe.csxs.events.flyoutMenuClosed", setPanelCallback);
+		checkCapabilities();
+    }); 
+
+    <!--------------------------->
+    <!-- Flyout Menu tab end   -->
+    <!--------------------------->
+	
+	
+	<!--------------------------->
+    <!-- Context Menu tab begin -->
+    <!--------------------------->
+	var setContextMenuXML;
+    var SetContextMenuByJSON;
+	function contextMenuCallback(menuID) {
+		document.getElementById("ReturnMenuID").value = 'The menu ID is: ' + menuID;
+	}
+
+    function contextMenuByJSONCallback(menuID) {
+        document.getElementById("ReturnMenuIDJSON").value = 'The menu ID is: ' + menuID;
+    }
+
+	function onclickSetContextMenu() {
+	    var menuXML = document.getElementById("TestContextMenuStructure").value;
+		CSLibrary.setContextMenu(menuXML, contextMenuCallback);
+		setContextMenuXML = menuXML;
+		setContextMenuList();
+	}
+
+    function onclickSetContextMenuByJSON() {
+        var menuJSON = document.getElementById("TestContextMenuJSONStructure").value;
+        CSLibrary.setContextMenuByJSON(menuJSON, contextMenuByJSONCallback);
+        SetContextMenuByJSON = menuJSON;
+        setContextMenuByJSONList();
+    }
+	
+	function onclickClearContextMenu() {
+		CSLibrary.setContextMenu("", contextMenuCallback);
+		setContextMenuXML = "";
+        SetContextMenuByJSON = "";
+		setContextMenuList();
+        setContextMenuByJSONList();
+	}
+	
+	function onclickContextUpdateMenuItem(){
+		var list = document.getElementById("ContextLabelList");	
+		CSLibrary.updateContextMenuItem(list.options[list.selectedIndex].text, document.getElementById("ContextItemEnabled").checked, document.getElementById("ContextItemChecked").checked);
+	}
+
+    function onclickContextUpdateMenuItemByJSON(){
+        var list = document.getElementById("ContextJSONLabelList");
+        CSLibrary.updateContextMenuItem(list.options[list.selectedIndex].text, document.getElementById("ContextItemJSONEnabled").checked, document.getElementById("ContextItemJSONChecked").checked);
+    }
+	
+	function setContextMenuList() { 
+		var list = document.getElementById("ContextLabelList");
+		list.innerHTML = "";
+		xmlDoc = $.parseXML(setContextMenuXML);
+		$xml = $(xmlDoc);
+		var i = 0;
+		$($xml).find("MenuItem").each(function() {
+			var option = document.createElement("option");
+			var id = $(this).attr("Id");
+			var name = $(this).attr("Label")
+			if (id != undefined && id != '' && name != undefined && name != '' && name != '---') {
+				option.value = ++i;
+				option.appendChild(document.createTextNode(id));
+				list.appendChild(option);
+			}
+		});
+	}
+
+    function setContextMenuByJSONList() {
+        var list = document.getElementById("ContextJSONLabelList");
+        list.innerHTML = "";
+        jsonDoc = $.parseJSON(SetContextMenuByJSON);
+        
+        function iterateMenu(i, obj) {
+            var option = document.createElement("option");
+			var id = obj.id;
+			var name = obj.label;
+			if (id != undefined && id != '' && name != undefined && name != '' && name != '---') {
+				option.value = ++i;
+				option.appendChild(document.createTextNode(id));
+				list.appendChild(option);
+			}
+            
+            if (obj.menu != undefined) {
+                $(obj.menu).each(iterateMenu);
+            }
+        }
+        
+        iterateMenu(0, jsonDoc);
+    }
+    <!--------------------------->
+    <!-- Context Menu tab end   -->
+    <!--------------------------->
+    
+    <!--------------------------->
+    <!-- Key Event Interest tab begin -->
+    <!--------------------------->
+    var setKeyEventInterestJSON;
+    
+    function formatKeyEvent(keyEvent)
+    {
+        var resultStr = "";
+        resultStr = "keyCode:" + keyEvent.keyCode + "\n";
+        resultStr = resultStr + "ctrlKey:" + keyEvent.ctrlKey + "\n";
+        resultStr = resultStr + "altKey:" + keyEvent.altKey + "\n";
+        resultStr = resultStr + "shiftKey:" + keyEvent.shiftKey + "\n";
+        resultStr = resultStr + "metaKey:" + keyEvent.metaKey + "\n";
+        return resultStr;
+    }
+
+	function onclickRegisterInterest() {
+	    var jsonString = document.getElementById("TestKeyEventInterestStructure").value;
+		CSLibrary.registerKeyEventsInterest(jsonString);
+		setKeyEventInterestJSON = jsonString;
+		$("#TestKeyEventInterestStructure").blur();
+		$("#KeyHitReturnObject").blur();
+	}
+	
+	function onclickClearTestResult() {
+	    document.getElementById("KeyHitReturnObject").value = "";	
+		$("#TestKeyEventInterestStructure").blur();
+		$("#KeyHitReturnObject").blur();
+	}
+
+	function onclickClearKeyInterest() {
+		CSLibrary.registerKeyEventsInterest(null);
+        setKeyEventInterestJSON = "";
+		$("#TestKeyEventInterestStructure").blur();
+		$("#KeyHitReturnObject").blur();
+	}
+
+    function keyDownInBody(event) {
+        var resultStr = "";
+        var resultValue = document.getElementById("KeyHitReturnObject").value;
+        resultValue = resultValue + "\n";
+        resultValue = resultValue + formatKeyEvent(event);
+        document.getElementById("KeyHitReturnObject").value = resultValue;
+    }
+
+    <!--------------------------->
+    <!-- Key Event Interest tab end   -->
+    <!--------------------------->
+</script>
+
+</head>
+
+<body onkeydown="keyDownInBody(event)">
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab">Flyout Menu</li>
+    <li class="TabbedPanelsTab">Context Menu</li>
+    <li class="TabbedPanelsTab">Context Menu Using JSON</li>
+    <li class="TabbedPanelsTab">Key Event Interest</li>
+	<li class="TabbedPanelsTab">Testing Iframe</li>
+  </ul>
+  
+  <div class="TabbedPanelsContentGroup">
+    <!--------------------------->
+    <!-- Flyout Menu tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <div><label style="color: #FFF">Test Flyout Menu: THIS FEATURE IS ONLY AVAILABLE ON PANEL EXTENSIONS</label></div>
+      <div>
+        <table width="800" border="0">
+           <tr>
+            <td width="300">&nbsp;</td>
+            <td width="300">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td><label style="color: #FFF">Test Menu Structure:</label>&nbsp;</td>
+            <td>
+              <label for="TestMenuStructure"></label>
+              <textarea name="TestMenuStructure" id="TestMenuStructure" cols="80" rows="6" align="left">
+            <Menu>
+             <MenuItem Id="menuItemId1" Label="TestExample1" Enabled="true" Checked="false"/>
+             <MenuItem Label="TestExample2">
+               <MenuItem Label="TestExample2-1" >
+                 <MenuItem Label="TestExample2-1-1" Enabled="false" Checked="true"/>
+               </MenuItem>
+               <MenuItem Label="TestExample2-2" Enabled="true" Checked="true"/>
+             </MenuItem>
+             <MenuItem Label="---" />
+             <MenuItem Label="TestExample3" Enabled="false" Checked="false"/>
+            </Menu>
+              </textarea>
+          </td>
+          </tr>
+
+          <tr>
+            <td><label style="color: #FFF">Return Object:</label>&nbsp;</td>
+            <td><form id="formESP" name="formESP" method="post" action="">
+              <label for="ReturnObject"></label>
+              <textarea name="ReturnObject" id="ReturnObject" cols="80" rows="4" align="left"></textarea>
+            </form></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+          <td><label style="color: #FFF">Dispatch XML:</label>&nbsp;</td>
+            <td><form id="formIES" name="formIES" method="post" action="">
+              <input type="button" name="SetPanelMenu" id="SetPanelMenu" value="SetPanelMenu" onclick="onclickSetPanelMenu()" />
+            </form></td>
+            <td><label style="color: #FFF">Dispatch Null:</label>&nbsp;</td>
+            <td><form id="formIES" name="formIES" method="post" action="">
+              <input type="button" name="ClearPanelMenu" id="ClearPanelMenu" value="ClearPanelMenu" onclick="onclickClearPanelMenu()" />
+            </form></td>
+          </tr>
+        </table>
+        <!-- Test flyout menu events -->
+        <table width="100%">
+          <tr>
+            <!-- Test event type com.adobe.csxs.events.flyoutMenuClicked -->
+            <td width="30%">
+              <label style="color: #FFF">Flyout MenuItem Clicked:</label>
+              <input type="image" name="GreenLightImg" id="GreenLightImg" src="../img/greenLED.png"/>
+            </td>
+            <!-- Test event type com.adobe.csxs.events.flyoutMenuOpened -->
+            <td width="30%">
+              <label style="color: #FFF">Flyout MenuItem Opened:</label>
+              <input type="image" name="GreenLightImg2" id="GreenLightImg2" src="../img/greenLED.png"/>
+            </td>
+            <!-- Test event type com.adobe.csxs.events.flyoutMenuClosed -->
+            <td width="30%">
+              <label style="color: #FFF">Flyout MenuItem Closed:</label>
+              <input type="image" name="GreenLightImg3" id="GreenLightImg3" src="../img/greenLED.png"/>
+            </td>
+            <!-- Reset -->
+            <td width="10%">
+              <input type="button" value="Reset" onclick="onclickReset()" />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <label style="color: #FFF">Update Extension Menu Item:</label>
+        <table width="800" border="0">
+
+          <tr>
+            <td><label style="color: #FFF">Capability:</label>&nbsp;</td>
+            <td><label style="color: #FFF" id="CapabilityLabel">EXTENDED_PANEL_MENU is : </label>&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td><label style="color: #FFF">Item Labels:</label>&nbsp;</td>
+            <td><form id="formESP" name="formESP" method="post" action="">
+                  <label for="LabelList"></label>
+                  <select name="LabelList" id="LabelList" style="width:300px" disabled="disable"/>
+            </form></td>
+          </tr>
+          
+          <tr>
+          <td><label style="color: #FFF">Item Enabled:</label>&nbsp;</td>
+            <td><form id="formIES" name="formIES" method="post" action="">
+               <input type="checkbox" name="ItemEnabled" id="ItemEnabled" disabled="disable"/>
+            </form></td>
+          </tr>
+
+          <tr>
+          <td><label style="color: #FFF">Item Checked:</label>&nbsp;</td>
+            <td><form id="formIES" name="formIES" method="post" action="">
+               <input type="checkbox" name="ItemChecked" id="ItemChecked" disabled="disable"/>
+            </form></td>
+          </tr>
+          
+          <tr>
+          <td><label style="color: #FFF">Dispatch:</label>&nbsp;</td>
+            <td><form id="formIES" name="formIES" method="post" action="">
+              <input type="button" name="UpdateMenuItem" id="UpdateMenuItem" value="UpdateMenuItem" onclick="onclickUpdateMenuItem()" disabled="disable"/>
+            </form></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!------------------------->
+    <!-- Flyout Menu tab end -->
+    <!------------------------->
+    
+    <!--------------------------->
+    <!-- Context Menu tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <!-- Environment tab div begin -->
+      <div>
+        <div>
+          <table width="800" border="0">
+            <tr>
+              <td width="300">&nbsp;</td>
+              <td width="300">&nbsp;</td>
+            </tr>
+              
+            <tr>
+              <td><label style="color: #FFF">Test Menu Structure:</label>&nbsp;</td>
+              <td>
+                <label for="TestMenuStructure"></label>
+                <textarea name="TestMenuStructure" id="TestContextMenuStructure" cols="80" rows="6" align="left">
+                  <Menu>
+                    <MenuItem Id="menuItemId1" Label="TestExample1" Enabled="true" Checkable="true" Checked="false"
+                        Icon="./img/context-menu-item-icon.png"/>
+                    <MenuItem Id="menuItemId2" Label="TestExample2">
+                      <MenuItem Id="menuItemId2-1" Label="TestExample2-1" >
+                        <MenuItem Id="menuItemId2-1-1" Label="TestExample2-1-1" Enabled="false" Checkable="true" Checked="true"/>
+                      </MenuItem>
+                      <MenuItem Id="menuItemId2-2" Label="TestExample2-2" Enabled="true" Checkable="true" Checked="true"/>
+                    </MenuItem>
+                    <MenuItem Label="---" />
+                    <MenuItem Id="menuItemId3" Label="TestExample3" Enabled="false" Checkable="true" Checked="false"/>
+                  </Menu>
+                </textarea>
+              </td>
+            </tr>
+              
+            <tr>
+              <td><label style="color: #FFF">Return Object:</label>&nbsp;</td>
+              <td>
+                <label for="ReturnMenuID"></label>
+                <textarea name="ReturnObject" id="ReturnMenuID" cols="80" rows="4" align="left"></textarea>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><label style="color: #FFF">Dispatch XML:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="SetContextMenu" id="SetContextMenu" value="SetContextMenu" onclick="onclickSetContextMenu()" />
+              </td>
+              <td><label style="color: #FFF">Dispatch Null:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="ClearContextMenu" id="ClearContextMenu" value="ClearContextMenu" onclick="onclickClearContextMenu()" />
+              </td>
+            </tr>
+          </table>
+       </div>
+      
+       <div>
+          <label style="color: #FFF">Update Extension Menu Item:</label>
+          <table width="800" border="0">
+            <tr>
+              <td width="100">&nbsp;</td>
+              <td width="300">&nbsp;</td>
+            </tr>
+              
+            <tr>
+              <td><label style="color: #FFF">Item Labels:</label>&nbsp;</td>
+              <td>
+                <label for="ContextLabelList"></label>
+                <select name="ContextLabelList" id="ContextLabelList" style="width:300px" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Item Enabled:</label>&nbsp;</td>
+              <td>
+                <input type="checkbox" name="ItemEnabled" id="ContextItemEnabled" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Item Checked:</label>&nbsp;</td>
+              <td>
+                <input type="checkbox" name="ItemChecked" id="ContextItemChecked" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Dispatch:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="UpdateContextMenuItem" id="UpdateContextMenuItem" value="UpdateContextMenuItem" onclick="onclickContextUpdateMenuItem()"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!------------------------->
+    <!-- Context Menu tab end -->
+    <!------------------------->
+        
+    <!--------------------------->
+    <!-- Context Menu Using JSON tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+      <!-- Environment tab div begin -->
+      <div>
+        <div>
+          <table width="800" border="0">
+            <tr>
+              <td width="300">&nbsp;</td>
+              <td width="300">&nbsp;</td>
+            </tr>
+              
+            <tr>
+              <td><label style="color: #FFF">Test Menu Structure:</label>&nbsp;</td>
+              <td>
+                <label for="TestContextMenuJSONStructure"></label>
+                <textarea name="TestContextMenuJSONStructure" id="TestContextMenuJSONStructure" cols="80" rows="6" align="left">
+                    {
+                          "menu": [
+                              {
+                                  "id": "menuItemId1",
+                                  "label": "testExample1",
+                                  "enabled": true,
+                                  "checkable": true,
+                                  "checked": false,
+                                  "icon": "./img/context-menu-item-icon.png"
+                              },
+                              {
+                                  "id": "menuItemId2",
+                                  "label": "testExample2",
+                                  "menu": [
+                                      {
+                                          "id": "menuItemId2-1",
+                                          "label": "testExample2-1",
+                                          "menu": [
+                                              {
+                                                  "id": "menuItemId2-1-1",
+                                                  "label": "testExample2-1-1",
+                                                  "enabled": false,
+                                                  "checkable": true,
+                                                  "checked": true
+                                              }
+                                          ]
+                                      },
+                                      {
+                                          "id": "menuItemId2-2",
+                                          "label": "testExample2-2",
+                                          "enabled": true,
+                                          "checkable": true,
+                                          "checked": true
+                                      }
+                                  ]
+                              },
+                              {
+                                  "label": "---"
+                              },
+                              {
+                                  "id": "menuItemId3",
+                                  "label": "testExample3",
+                                  "enabled": false,
+                                  "checkable": true,
+                                  "checked": false
+                              }
+                          ]
+                      }
+
+                </textarea>
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Return Object:</label>&nbsp;</td>
+              <td>
+                <label for="ReturnMenuIDJSON"></label>
+                <textarea name="ReturnObject" id="ReturnMenuIDJSON" cols="80" rows="4" align="left"></textarea>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><label style="color: #FFF">Dispatch JSON:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="SetContextMenuByJSON" id="SetContextMenuByJSON" value="SetContextMenuByJSON" onclick="onclickSetContextMenuByJSON()" />
+              </td>
+              <td><label style="color: #FFF">Dispatch Null:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="ClearContextMenu" id="ClearContextMenu" value="ClearContextMenu" onclick="onclickClearContextMenu()" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <div>
+          <label style="color: #FFF">Update Extension Menu Item:</label>
+          <table width="800" border="0">
+            <tr>
+              <td width="100">&nbsp;</td>
+              <td width="300">&nbsp;</td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Item Labels:</label>&nbsp;</td>
+              <td>
+                <label for="ContextJSONLabelList"></label>
+                <select name="ContextJSONLabelList" id="ContextJSONLabelList" style="width:300px" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Item Enabled:</label>&nbsp;</td>
+              <td>
+                <input type="checkbox" name="ItemEnabled" id="ContextItemJSONEnabled" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Item Checked:</label>&nbsp;</td>
+              <td>
+                <input type="checkbox" name="ItemChecked" id="ContextItemJSONChecked" />
+              </td>
+            </tr>
+            
+            <tr>
+              <td><label style="color: #FFF">Dispatch:</label>&nbsp;</td>
+              <td>
+                <input type="button" name="UpdateContextMenuItem" id="UpdateContextMenuItem" value="UpdateContextMenuItem" onclick="onclickContextUpdateMenuItemByJSON()"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!------------------------->
+    <!-- Context Menu Using JSON tab end -->
+    <!------------------------->
+    
+    <!--------------------------->
+    <!-- Key Event Interest tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+        <div><label style="color: #FFF">Test Key Event Interest Registration: THIS FEATURE IS ONLY AVAILABLE ON MODELEESS AND PANEL EXTENSIONS</label></div>
+        <div>
+            <table width="800" border="0">
+                <tr>
+                    <td width="300">&nbsp;</td>
+                    <td width="300">&nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td><label style="color: #FFF">Test Key Interest Structure:</label>&nbsp;</td>
+                    <td>
+                        <label for="TestKeyEventInterestStructure"></label>
+                        <textarea name="TestKeyEventInterestStructure" id="TestKeyEventInterestStructure" cols="80" rows="6" align="left">
+                            [
+                                {
+                                    "keyCode": 0
+                                },
+                                {
+                                    "keyCode": 0,
+                                    "ctrlKey": true
+                                }
+                            ]
+                        </textarea>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label style="color: #FFF">Test Result:</label>&nbsp;</td>
+                    <td><form id="formESP" name="formESP" method="post" action="">
+                        <label for="KeyHitReturnObject"></label>
+                        <textarea name="KeyHitReturnObject" id="KeyHitReturnObject" cols="80" rows="4" align="left">
+                            Please make sure the keyboard focus is out of any text editable or dropdown element, then hit keys.
+                        </textarea>
+                    </form></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td><label style="color: #FFF">Register Interest:</label>&nbsp;</td>
+                    <td><form id="formIES" name="formIES" method="post" action="">
+                        <input type="button" name="RegisterKeyEventInterest" id="RegisterKeyEventInterest" value="RegisterKeyEventInterest" onclick="onclickRegisterInterest()" />
+                    </form></td>
+                    <td><label style="color: #FFF">Register Null:</label>&nbsp;</td>
+                    <td><form id="formIES" name="formIES" method="post" action="">
+                        <input type="button" name="ClearKeyEventInterest" id="ClearKeyEventInterest" value="ClearKeyEventInterest" onclick="onclickClearKeyInterest()" />
+                    </form></td>
+					<td><label style="color: #FFF">Clear Test Result:</label>&nbsp;</td>
+                    <td><form id="formIES" name="formIES" method="post" action="">
+                        <input type="button" name="ClearTestResult" id="ClearTestResult" value="ClearTestResult" onclick="onclickClearTestResult()" />
+                    </form></td>
+                </tr>
+            </table>           
+        </div>
+    </div>
+    <!------------------------->
+    <!-- Key Event Interest tab end -->
+    <!------------------------->
+	
+	<!--------------------------->
+    <!-- Key Event Interest iframe tab begin -->
+    <!--------------------------->
+    <div class="TabbedPanelsContent">
+        <div><label style="color: #FFF">Test Key Event Interest Registration: THIS FEATURE IS ONLY AVAILABLE ON MODELEESS AND PANEL EXTENSIONS</label></div>
+        <div>
+                <table>
+                <tr>
+                    <td>
+                        <input type="button" name="OpenURL" id="OpenURL" value="Open Link" />
+                        <input name="OpenURLInput" type="text" id="OpenURLInput" value="http://www.a2zwebhelp.com/bootstrap-tooltips" size="110"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe width="780" height="780" name="DisplayArea" id="DisplayArea" src="http://www.a2zwebhelp.com/bootstrap-tooltips"  frameborder="1" nodejs-disabled="true"  scrolling="yes">
+                        </iframe>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!------------------------->
+    <!-- Key Event Interest iframe end -->
+    <!------------------------->
+
+    <!--------------------------->
+    <!-- All extensions tab end-->
+    <!--------------------------->
+  </div>
+</div>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
+</body>
+</html>

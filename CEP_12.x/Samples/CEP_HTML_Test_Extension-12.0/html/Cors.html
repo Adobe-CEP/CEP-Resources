@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>XMLHttpRequest Example</title>
+<script language="javascript">
+var xmlhttp=false;
+var ds="";
+/*@cc_on @*/
+
+/*@if (@_jscript_version >= 5)
+
+	try {
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {
+		try {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} catch (E) {
+			xmlhttp = false;
+		}
+	}
+
+@else
+
+	xmlhttp = false;
+
+@end @*/
+
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+
+	try {
+      xmlhttp = new XMLHttpRequest();
+    } catch (e) {
+      xmlhttp = false;
+    }
+
+}
+
+function loadDoc(docname) {
+
+	if (xmlhttp) {
+
+	xmlhttp.open("GET", docname,true);
+	 xmlhttp.onreadystatechange=function() {
+	  if (xmlhttp.readyState==4) {
+           ds=xmlhttp.responseText;
+	   document.forms[0].textArea1.value=ds+ds.length;
+	  }
+	 }
+	 xmlhttp.send(null)
+
+	 }
+
+}
+</script>
+<style>
+body, td {
+	font-family: Arial;
+	font-size: 13px;
+	}
+</style>
+</head>
+
+<body>
+<h1>XMLHttpRequest Example</h1>
+<h4>This script uses XMLHttpRequest, Javascript and HTML to load Readme.txt from the server dynamically.</h4>
+<form name="form1">
+<p><textarea cols="60" rows="8" name="textArea1"></textarea></p>
+<p><input value="Load Readme.txt" onclick="loadDoc('http://www.ltg.ed.ac.uk/~ht/testxhr2.txt');" type="button"></p>
+</form>
+
+<p><a href="http://www.ltg.ed.ac.uk/%7Eht/index.html">Example 1</a> | <a href="http://www.ltg.ed.ac.uk/%7Eht/example2.html">Example 2</a>
+  | <a href="http://www.ltg.ed.ac.uk/%7Eht/indextimer.html">Example 3 with Timeout</a></p>
+
+<p><a href="http://bugninja.blogspot.com/">bugninja</a></p>
+
+
+
+<object data-extension-version="0.4.0.129" data-install-updates-user-configuration="true" id="__symantecPKIClientMessenger" style="display: none;"></object></body></html>

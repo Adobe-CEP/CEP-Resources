@@ -28,7 +28,9 @@ These extension types are supported by CEP. You need to specify an extension's t
  - **ModalDialog**
 	 - A Modal Dialog type opens a new extension window and forces the user to interact only with the extenison window before returning control to the host application. User can interact with host application only after closing extension window.
  - **Modeless**
-	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window.
+	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window
+- **Embedded**
+	 - An Embedded Panel is the same as a **Panel**, but it cannot be undocked.
  - **Custom (Since CEP 5.0)**
 	 - This type is for invisible extensions. An invisible extension remains hidden and never becomes visible during its whole life cycle. Read "Invisible HTML Extensions" for more details.
 
@@ -38,20 +40,20 @@ These extension types are supported by CEP. You need to specify an extension's t
 
 These applications support CEP HTML extensions. (For older applications, [see this chart](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_9.x/Documentation/CEP%209.0%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep).)
 
-| Application | Host ID |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|
+| Application | Host ID(Product SAPCode) |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
-|Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | TBD |
-|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) - pre-release |
-|InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) - pre-release  |
-|Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11) - pre-release  |
-|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11) - upcoming pre-release  |
-|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) - upcoming pre-release |
-|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11) - upcoming pre-release  |
-|Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | TBD |
-|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11) - upcoming pre-release  |
-|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| TBD |
-|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | TBD |
-|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) - upcoming pre-release |
+|Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | 23.0 (CEP 11) |
+|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) |
+|InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11)  |
+|Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11)  |
+|Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11)  |
+|Prelude|	PRLD|	8 (CEP 9)|9 (CEP 9)| 10.0(CEP 10) | 10.1(CEP 11) |
+|After Effects|	AEFT|	16 (CEP 9)|17 (CEP 9)| 17.1.4 (CEP 10) | 18.4(CEP 11)  |
+|Animate |FLPR|19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10) | 22.0(CEP 11) |
+|Audition|	AUDT|	12 (CEP 9)|13 (CEP 9)| 13.0.10 (CEP 10) | 14.4(CEP 11)  |
+|Dreamweaver|	DRWV|	19 (CEP 9)|20 (CEP 9)| 21.0 (CEP 10)| 22.0(CEP 11) |
+|Bridge     | KBRG  |9 (CEP 9)|10 (CEP 9)    | 11.0 (CEP 10) | 12.0(CEP 11) |
+|Rush       | RUSH |1 (CEP 9)|1.2.1 (CEP 9)  | 1.5.29 (CEP 10) | 2.1(CEP 11) |
 
 ---
 
@@ -96,14 +98,28 @@ Development and Debugging
 
 1. Update the Node Modules: CEP 11 works with NodeJS 15.9.0 and Node-WebKit 0.50.1 versions. If extensions were build on older version of NodeJS there can be cases where these extensions may not load in CEP 11 due to incompatible node modules. In such cases, the node modules need to be updated using NodeJS version 15.9.0 or higher.
 
-2. Content-Security-Policy Changes: With CEP 11.1 that integrates CEF #88, content-security-policy checks have been enforced strictly. Extensions that embed third-party sites may not be able to do so anymore if the site that is being embedded has a content-security-policy directive that doesn't allow sites to frame them.
+2. Content-Security-Policy Changes: With CEP 11.1 that integrates CEF #88, content-security-policy checks have been enforced strictly. Extensions that embed third-party sites may not be able to do so anymore if the site that is being embedded has a content-security-policy directive that doesn't allow sites to frame them. Refer [Known issues](./Issues.md) for few such scenarios and possible temporary workarounds.
 
 3. Cookies: With #CEF v88 version, we have seen that when no SameSite attribute is set in a cookie, it defaults to SameSite=Lax. This will cause the cookie to be blocked in cross-site contexts. If your application needs cookies to be used in a cross-site context, we suggest you set SameSite=None.If component is not sending `SameSite` attribute in the cookie it would default to `SameSite=Lax` for preventing to set the cookie in cross-site context. 
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie 
 	- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+
+	Note: as per a [temporary workaround](https://www.chromium.org/administrators/policy-list-3/cookie-legacy-samesite-policies) provided by CEF, the following option can be added in manifest `--disable-features=SameSiteByDefaultCookies`. Example:
+	```
+	<CEFCommandLine>
+	+ <Parameter>--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,NetworkService</Parameter>
+	+ <Parameter>--disable-site-isolation-trials</Parameter>
+	  <Parameter>--enable-nodejs</Parameter>
+	  <Parameter>--mixed-context</Parameter>
+	</CEFCommandLine>
+
+	```
+	
+	Note: `NetworkService` needs to be added to provide backward compatibility with CEP 10.
 	
 4. CORS checks: With CEP 11, with security updates, we are seeing that a lot more requests are being blocked by CORS checks. The extension may encounter this if it is trying to access an endpoint that does not have the Access-Control-Allow-Origin header. Please ensure that the endpoints that are being accessed have Access-Control-Allow-Origin headers set appropriately.
 
+Also Refer [Known issues](./Issues.md) in CEP 11
 
 ### Migration from CEP 9 to CEP 10
 
@@ -374,32 +390,28 @@ Following representation provides visual context
 CEP HTML Extensions can be developed on both Windows and macOS platforms. The development machine needs to have the following applications in order to successfully develop CSXS extensions:
 
  - Adobe Creative Cloud applications supporting CEP HTML extensions.
- - HTML Extension Builder (Nice to have, but not mandatory).
- - Adobe ExtendScript Tool Kit (This is available as an optional install). 
+ - VS Code and extensions for building CEP HTML extensions for Adobe Creative Cloud.
+ - Adobe ExtendScript Tool Kit (This is available as an optional install, note that this 32-bit app is not supported by macOS High Sierra 10.13.4 and later).
  - Chrome browser for debug workflow.
 
 
-### HTML Extension Builder
+### VS Code
 
 
-HTML Extension Builder is a tool set built on top of Eclipse and can be used for developing and debugging HTML extensions. Please download the Extension Builder 3 from [here](http://labs.adobe.com/technologies/extensionbuilder3/).
+VS Code supports development and debugging of CEP HTML extensions as well as debugging ExtendScript. Learn more about the ExtendScript tools [here](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug).
 
 
 ### Signing extensions
 
 
- - Before you sign the extensions, you need to get or create the certificate file. Configurator and Adobe Exchange Packer can create certificates. Developers can get all information [here](https://www.adobeexchange.com/resources/7) after logging in.
- - Three tools can be used to sign a HTML extension.
- - [Extension Builder 3](http://labs.adobe.com/downloads/extensionbuilder3.html)
- - CC Extensions Signing Toolkit (also on above labs web site)
-      - Example of using CC Extension signing toolkit: ccextensionswin64.exe -sign "d:\Adobe Layer Namer\Adobe Layer Namer\"*(input extension path)* d:\AdobeLayerNamer.zxp *(output zxp path)* d:\sign.p12 *(certificate path)* 1 *(certificate password)* Adobe Exchange Packer (please sign in so that you can see it.)
- - [Adobe Exchange Packer](http://www.adobeexchange.com/resources) (please sign in so that you can see it.)
+- Before you sign the extensions, you need to get or create the certificate file. [Please read our guide to signing here.](https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install).
+- You will need the ZXPSignCMD tool, [available here](https://github.com/Adobe-CEP/CEP-Resources/tree/master/ZXPSignCMD).
 
 
 ### Debugging Unsigned Extensions
 
 
-If you are in the midst of development and are not using HTML Extension Builder for debug workflows and want to bypass the need to sign your extensions, you can bypass the check for extension signatures by editing the CSXS preference properties file, located at:
+If you are in the midst of development and want to bypass the need to sign your extensions, you can bypass the check for extension signatures by editing the CSXS preference properties file, located at:
 
  - Win: regedit > HKEY_CURRENT_USER/Software/Adobe/CSXS.11, then add a new entry PlayerDebugMode of type "string" with the value of "1".
  - macOS: In the terminal, type: `defaults write com.adobe.CSXS.11 PlayerDebugMode 1` (The plist is also located at /Users/`<username>`/Library/Preferences/com.adobe.CSXS.11.plist)

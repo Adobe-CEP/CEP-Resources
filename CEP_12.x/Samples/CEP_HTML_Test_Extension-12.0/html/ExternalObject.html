@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2014, Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="../js/JQuery/jquery.js"></script>
+<script type="text/javascript" src="../js/CSInterface.js"></script>
+<script type="text/javascript" src="../js/JQuery/jquery-ui-1.9.1.custom.min.js"></script>
+<link type="text/css" href="../css/jquery-ui-1.9.1.custom.css/ui-darkness/jquery-ui-1.9.1.custom.css" rel="stylesheet"/>
+<script type="text/javascript">
+    var CSLibrary = new CSInterface();
+	var eventType;
+	var receivedEventNum = 0;
+
+    $(document).ready(function() {
+        
+		eventType = document.getElementById("EventType").value;
+		$("#EventsGreenLightImg").hide();
+		$("#EventsClearReceivedEvent").click(function() {
+			receivedEventNum = 0;
+			$("#ReceivedEvents").val("");			
+            $("#EventsGreenLightImg").hide();
+        }); 
+		
+		$("input[name=EventType]").keyup(function() {
+			$("#EventsCheckBox").attr('checked', false);
+			checkboxChanged();
+		});
+		
+        function eventCallback(event) {
+            var display = $("#ReceivedEvents").val();
+            display += "Received event " + receivedEventNum++ + ": " + JSON.stringify(event) + "\n";
+            $("#ReceivedEvents").val(display);
+            ReceivedEvents.scrollTop = ReceivedEvents.scrollHeight;
+            $("#EventsGreenLightImg").show();
+        }
+		
+        function checkboxChanged() {
+			if ($("#EventsCheckBox").attr("checked")) {    
+				if (eventType != document.getElementById("EventType").value) {
+					CSLibrary.removeEventListener(eventType, eventCallback);
+					eventType = document.getElementById("EventType").value;	
+				}
+				CSLibrary.addEventListener(eventType, eventCallback);		
+            } else {
+                CSLibrary.removeEventListener(eventType, eventCallback);
+            }
+		}
+		
+        $("#EventsCheckBox").change(checkboxChanged);
+        
+        $("#EventsDispatch").click(function() {
+            var script = 'var mylib = new ExternalObject("lib:" + "PlugPlugExternalObject"); var myObject = new CSXSEvent(); myObject.type = "CEP.externalobject.test"; myObject.data = "success"; myObject.dispatch();'
+			CSLibrary.evalScript(script);
+        });  
+    }); 
+	
+    function onclickInvokeEvalScript() {
+            var exeTimes = parseInt(document.getElementById("ExecutionTimes").value);
+            for (i = 0; i < exeTimes; i++) {
+                CSLibrary.evalScript(document.getElementById("EvalScriptPara").value);            
+            }
+        }        
+</script>
+
+
+</head>
+<div><label style="color: #FFF">Test ExternalObject</label></div>
+<div><label style="color: #FFF">Dispatch Events by ExtendScript:</label></div>
+
+<div>
+  <table width="100%" border="0">
+	<tr>
+	  <td><label style="color: #FFF">Script:</label>&nbsp;</td>
+	  <td><form id="formESP" name="formESP" method="post" action="">
+		<label for="EvalScriptPara"></label>
+		<textarea name="EvalScriptPara" id="EvalScriptPara" cols="80" rows="6">var mylib = new ExternalObject ("lib:" + "PlugPlugExternalObject");
+var myObject = new CSXSEvent();
+myObject.type = "CEP.externalobject.test";
+myObject.data = "success";
+myObject.dispatch();
+		</textarea>
+	  </form></td>
+	</tr>
+	
+	<tr>
+	  <td><label style="color: #FFF">Execution times:</label>&nbsp;</td>
+	  <td><form id="formESP" name="formESP" method="post" action="">
+		<label for="ExecutionTimes"></label>
+		<textarea name="ExecutionTimes" id="ExecutionTimes" cols="80" rows="1">1</textarea>
+	  </form></td>
+	</tr>
+		
+	<tr>
+	  <td>&nbsp;</td>
+	  <td><form id="formIES" name="formIES" method="post" action="">
+		<input type="button" name="InvokeEvalScript" id="InvokeEvalScript" value="Invoke evalScript()" onclick="onclickInvokeEvalScript()" />
+	  </form></td>
+	</tr>
+  </table>
+</div>
+
+<div><label style="color: #FFF">Receive Events by JavaScript:</label></div>
+<div style="overflow:auto; height:350px; width:auto">
+  <table width="752" border="1" id="eventsTable">
+    <tr>
+      <th width="42" scope="col" style="color: #FFF">Scope</th>
+      <th width="334" scope="col" style="color: #FFF">Type</th>
+      <th width="76" scope="col" style="color: #FFF">Listen?</th>
+      <th width="205" scope="col" style="color: #FFF">Received?</th>
+    </tr>
+    
+    <tr>
+      <td><label id="EventsScope" style="color: #FFF">Application</label></td>
+      <td><input type="text" name="EventType" id="EventType" size="55" value="CEP.externalobject.test"></input></td>
+      <td align="center"><form id="form7" name="form7" method="post" action="">
+        <input type="checkbox" name="EventsCheckBox" id="EventsCheckBox"/>
+        <label for="EventsCheckBox"></label>
+      </form></td>
+      <td align="center"><form id="form24" name="form24" method="post" action="">
+        <input type="image" name="EventsGreenLightImg" id="EventsGreenLightImg" src="../img/greenLED.png"/>
+      </form></td>
+    </tr>
+  </table>
+
+  <table width="100%" border="0">
+	<tr>
+	  <td><label style="color: #FFF">Received Events:</label></td>
+	  <td><textarea name="ReceivedEvents" id="ReceivedEvents" cols="80" rows="5" readonly="readonly"></textarea></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td><input type="button" name="EventsClearReceivedEvent" id="EventsClearReceivedEvent" value="Clear Received Events"/></td>
+	</tr>
+  </table>
+</div>
+
+</body>
+</html>

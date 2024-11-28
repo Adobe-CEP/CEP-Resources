@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			// Needed to allow for communication between ActionScript and JavaScript
+			import flash.external.ExternalInterface;
+			
+			[Bindable] private var estkString:String = "Ready...";
+			[Bindable] private var estkNumber:int;
+		
+			// This function is called when the 'Get String' button is pressed and updates
+			// the textarea with the string received from the getJavaScriptString function
+			public function requestJavaScriptString():void{
+				var res:String = ExternalInterface.call("getJavaScriptString");
+				estkString = res;
+			}
+			// This function is called when the 'Get Number' button is pressed and updates
+			// the textarea with the number received from the getJavaScriptNumber function.
+			public function requestJavaScriptNumber():void{
+				var res:int = ExternalInterface.call("getJavaScriptNumber");
+				estkNumber = res;
+			}
+			// this function is called when the 'Launch JavaScript' button is pressed
+			public function launchJavaScript():void{
+				ExternalInterface.call("launchJavaScript");
+			}
+		]]>
+		
+	</mx:Script>
+	<!-- the following code creates a form with two textareas and three buttons that interact with the JavaScript code -->
+	<mx:Form x="0" y="0" width="322" height="168">
+		<mx:FormItem  width="100%" height="100%">
+			<mx:Grid  width="100%" height="100%">
+				<mx:GridRow width="100%" height="100%">
+					<mx:GridItem width="100%" height="100%">
+						<mx:TextArea text="{estkString}"/>
+					</mx:GridItem>
+					<mx:GridItem width="100%" height="100%">
+						<mx:Button label="Get String" click="requestJavaScriptString();" width="92"/>
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="100%">
+					<mx:GridItem width="100%" height="100%">
+						<mx:TextArea text="{estkNumber}"/>
+					</mx:GridItem>
+					<mx:GridItem width="100%" height="100%">
+						<mx:Button label="Get Number" click="requestJavaScriptNumber();"/>
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="100%" cornerRadius="2" verticalAlign="middle" horizontalAlign="center">
+					<mx:GridItem width="260" height="100%" horizontalAlign="center" colSpan="2">
+						<mx:Button label="Launch JavaScript" click="launchJavaScript();" width="234"/>
+					</mx:GridItem>
+				</mx:GridRow>
+			</mx:Grid>
+		</mx:FormItem>
+	</mx:Form>
+</mx:Application>
