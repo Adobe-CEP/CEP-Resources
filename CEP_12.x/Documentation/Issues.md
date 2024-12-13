@@ -16,7 +16,7 @@ For more details refer [here](https://github.com/browserify/node-util/issues/58)
 
 ## Issue 3 (CEP 12) : Flicker during a resize around the corners of a CEP Panel
 CEP has moved from using OpenGL to Metal for CEP drawings. Metal defaults to rescaling panel contents to fit panel size in response to a panel resize.
-But most of the clinet wanted an older CEP behaviour, where content doesn't rescale for a panel resize, During a rezise out of bound pixels are simply filled. Backporting this behavior in Metal has some side efferts and there may be(not necessarily) some flicker around the corner of a panel during a resize.
+But most of the client wanted an older CEP behaviour, where content doesn't rescale for a panel resize, During a resize out of bound pixels are simply filled. Back-porting this behavior in Metal has some side effects and there may be(not necessarily) some flicker around the corner of a panel during a resize.
 
 ---
 
