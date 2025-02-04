@@ -58,7 +58,8 @@ These applications support CEP HTML extensions. (For older applications, [see th
 ### Chromium Embedded Framework (CEF)
 
 
-CEP HTML engine is based on Chromium Embedded Framework version 3 (CEF3). You can find more information about CEF [here](http://code.google.com/p/chromiumembedded/). Here are the versions used in CEP:
+CEP HTML engine is based on Chromium Embedded Framework version 3 (CEF3). You can find more information about CEF [here](https://bitbucket.org/chromiumembedded/cef). Here are the versions used in CEP:
+
 
 |Component| CEP 9.0|CEP 10.0|
 |-------|---------------------------|-------------------------------|
