@@ -102,7 +102,7 @@ However few point to be noted with CEP 10
 For example: There are errors noticed when node module "winston" is used with any other node module which uses duplex. 
 Workaround: In case you are using the node module "winston" please add this below script to the extension.
 
-```
+```javascript
 var {Duplex} = require('stream')
 var {Writable} = require('stream')
 {
@@ -210,7 +210,7 @@ Newly integrated nodejs adds "module" and "exports" symbols to the global contex
 > **JQuery startup code**
 
 
-```js
+```javascript
 if ( typeof module === "object" && typeof module.exports === "object" ) {
     // set jQuery in `module`
 } else {
@@ -678,7 +678,7 @@ To check if the extension's manifest is in sync with the latest schema, perform 
 Make sure correct point product versions are used. Here is an example.
 
 
-```
+```xml
 <HostList>
     <Host Name="PHXS" Version="[15.0,15.9]"/>
     <Host Name="PHSP" Version="[15.0,15.9]"/>
@@ -689,7 +689,7 @@ Make sure correct point product versions are used. Here is an example.
 This will support Photoshop version 15.0 up to, and including, 15.9. If you use the following syntax then you are supporting releases up to 15.9 but not including 15.9
 
 
-```
+```xml
 <HostList>
     <Host Name="PHXS" Version="[15.0,15.9)"/>
     <Host Name="PHSP" Version="[15.0,15.9)"/>
@@ -700,7 +700,7 @@ This will support Photoshop version 15.0 up to, and including, 15.9. If you use 
 Make sure correct CEP version is used.
 
 
-```
+```xml
 <RequiredRuntimeList>
     <RequiredRuntime Name="CSXS" Version="5.0"/>
 </RequiredRuntimeList>
@@ -713,7 +713,7 @@ Make sure correct CEP version is used.
 CEP 7.0 manifest files now support the use of a `HostList` specific to an extension in the bundle. For example, the following qualifies as the "default" `HostList`:
 
 
-```
+```xml
 ...
 <ExecutionEnvironment>
   <HostList>
@@ -741,7 +741,7 @@ CEP 7.0 manifest files now support the use of a `HostList` specific to an extens
 However, you can also specify a custom `HostList` on a per extension basis as in the following example:
 
 
-```
+```xml
 ...
 <DispatchInfoList>
   ...
@@ -771,7 +771,7 @@ You can specify extension size, max size and min size in extension manifest. Siz
 A modal or modeless dialog is resizable if there are different max and min size, otherwise it is un-resizable. When you move mouse pointer over dialog border, CEP shows different cursor for resizable and un-resizable dialogs.
 
 
-```
+```xml
 <Geometry>
     <Size>
         <Height>580</Height>
@@ -798,7 +798,7 @@ This is only supported in InDesign and InCopy.
 You can customize the extension menu by editing `<menu/>` item in manifest. Here is an example. In this example, the Adobe Add-ons extension is displayed under Windows main menu, rather than extensions menu under Windows. You can customize the location of extension to somewhere else by changing the value of attribute Placement in `<menu/>` item.
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
     <Extension Id="Adobe Add-ons" Version="1.0"/>
@@ -826,7 +826,7 @@ You can customize the extension menu by editing `<menu/>` item in manifest. Here
 In high DPI display mode, panel extensions may want to use high DPI icons. You set these icons in extension's manifest.
 
 
-```
+```xml
 <Icons>
 
  <Icon Type="Normal">./images/IconLight.png</Icon>
@@ -861,7 +861,7 @@ Note: Photoshop supports _x2.ext format.
 You can specify CEP dialog size as a percentage of screen size. Here is an example.
 
 
-```
+```xml
 <UI>
     <Type>Modeless</Type>                  
     ...
@@ -936,7 +936,7 @@ There are `dispatchEvent/addEventListener/removeEventListener` APIs available in
 In terms of CSEvent, it just means CEP Event here. The data structure of CSEvent (CEP Event) is as below.
 
 
-```
+```javascript
 /**
  * Class CSEvent.
  * You can use it to dispatch a standard CEP event.
@@ -973,7 +973,7 @@ You could create a `CSEvent` object and dispatch it by using `CSInterface.dispat
 Here is the definition for addEventListener. Refer to CSInterface.js for more information:
 
 
-```
+```javascript
  /**
  * Registers an interest in a CEP event of a particular type, and
  * assigns an event handler.
@@ -992,7 +992,7 @@ One thing needs to be mentioned here is both named and anonymous callback functi
  * An example of how to use named callback function in `CSInterface.addEventListener`.
 
 
-```
+```javascript
 function callback(event)
 {
     console.log(“type=” + event.type + “, data=” + event.data);
@@ -1007,7 +1007,7 @@ csInterface.addEventListener(“com.adobe.cep.test”, callback); //invoke the f
    `CSInterface.addEventListener`.
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 csInterface.addEventListener(“com.adobe.cep.test”, function (event)
 {
@@ -1024,7 +1024,7 @@ Before CEP 6.1, we regarded every attribute in event.data object as a regular st
 Here is an example on how to use it.
 
 
-``` 
+```javascript
 var csInterface = new CSInterface();
 csInterface.addEventListener(“com.adobe.cep.test”, function (event)
 {
@@ -1057,7 +1057,7 @@ Here are three samples to demonstrate how to dispatch an event in JavaScript.
 - An example of how to dispatch event in JavaScript.
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 var event = new CSEvent("com.adobe.cep.test", "APPLICATION");
 event.data = "This is a test!";
@@ -1068,7 +1068,7 @@ cSInterface.dispatchEvent(event);
 - Another example of creating event object and setting property, then dispatch it. 
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 var event = new CSEvent();
 event.type = "com.adobe.cep.test";
@@ -1081,7 +1081,7 @@ cSInterface.dispatchEvent(event);
 - An example of dispatching an event whose data is an object.
 
 
-```
+```javascript
 var event = new CSEvent("com.adobe.cep.test", "APPLICATION");
 var obj = new Object();
 obj.a = "a";
@@ -1103,7 +1103,7 @@ Please refer the following steps:
 First, define a callback function in CEP extension:
 
 
-```
+```javascript
 function callback(event)
 {
     // do something here
@@ -1114,7 +1114,7 @@ function callback(event)
 Then call CSInterface.addEventListener with event type you want to listen and the callback function: 
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 csInterface.addEventListener(“com.adobe.cep.test”, callback);
 ```
@@ -1168,7 +1168,7 @@ In Photoshop, the following specific events are defined:
 For example, a CEP extension yields the mouse focus back to Photoshop by sending the `com.adobe.PhotoshopLoseFocus` event:
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 var event = new CSEvent("com.adobe.PhotoshopLoseFocus", "APPLICATION");
 event.extensionId = csInterface.getExtensionID();
@@ -1179,7 +1179,7 @@ csInterface.dispatchEvent(event);
 `com.adobe.PhotoshopCallback` will be removed in Photoshop 17.0 as adding a listener results in all CS Extensions receiving the event. As of Photoshop CC 2015 June release, developers can now use this alternative, which fixes the broadcast issue:
 
 
-```
+```javascript
 csInterface.addEventListener("com.adobe.PhotoshopJSONCallback" + gExtensionID, PhotoshopCallbackUnique);
 ```
 
@@ -1190,7 +1190,7 @@ csInterface.addEventListener("com.adobe.PhotoshopJSONCallback" + gExtensionID, P
 First, define a callback function in CEP extension:
 
 
-```
+```javascript
 function evalScriptCallback(result)
 {
    // process the result string here.
@@ -1201,7 +1201,7 @@ function evalScriptCallback(result)
 Then call `CSInterface.evalScript` with the script you want to call and the callback function:
 
 
-```
+```javascript
 var script = "app.documents.add";  //Demo script
 CSInterface.evalScript(script, evalScriptCallback);
 ```
@@ -1222,7 +1222,7 @@ Starting with CEP 5.0, global CEP Events whose scope attribute is set to "GLOBAL
 The data structure of Vulcan message in JavaScript is as below.
 
 
-```
+```javascript
 /**
  * @class VulcanMessage
  * Message type for sending messages between host applications.
@@ -1263,7 +1263,7 @@ VulcanMessage.payloadTemplate = "<payload>{0}</payload>";
 `addMessageListener`, `removeMessageListener`, `dispatchMessage` and `getPayload` APIs are available to dispatch and listen for Vulcan messages. The API definitions are as below. Refer to Vulcan.js for more information.
 
 
-```
+```javascript
 /**
  * Registers a message listener callback function for a Vulcan message.
  *
@@ -1306,7 +1306,7 @@ Vulcan.prototype.getPayload = function(vulcanMessage)
 Here is the example to demonstrate how to use the APIs in JavaScript.
 
 
-```
+```javascript
 var testVulcanMessage = new VulcanMessage(VulcanMessage.TYPE_PREFIX + "test");
 testVulcanMessage.setPayload("To be or not to be that is a question!");
  
@@ -1324,7 +1324,7 @@ VulcanInterface.removeMessageListener(testVulcanMessage.type, callback);
 `getEndPoints` and `getSelfEndPoint` APIs are available to support point-to-point Vulcan message. The API definitions are as below. Refer to Vulcan.js for more information.
 
 
-```
+```javascript
 /**
  * Gets all available endpoints of the running Vulcan-enabled applications.
  *
@@ -1358,7 +1358,7 @@ The steps to send point-to-point Vulcan message are as follows:
  - Dispatch Vulcan message.
 
 
-```
+```javascript
 var endPointList = VulcanInterface.getEndPoints();
 var destIndex = 0;
 var appId = GetValueByKey(endPointList[destIndex], "appId");
@@ -1390,7 +1390,7 @@ To access Application DOM from CEP extensions, CEP JavaScript library provides a
 Here is the sample JavaScript code snippet in HTML extension.
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 csInterface.evalScript('app.documents.add();', function(result){
   alert(result);
@@ -1414,7 +1414,7 @@ Some CC applications (Photoshop, Illustrator, Premiere Pro) integrated PlugPlugE
 
 ExtendScript developers need to create external object instance first.
 
-```
+```javascript
 var externalObjectName = "PlugPlugExternalObject"; 
 var mylib = new ExternalObject( "lib:" + externalObjectName );
 ```
@@ -1423,7 +1423,7 @@ var mylib = new ExternalObject( "lib:" + externalObjectName );
 And then create the CSXSEvent instance.
 
 
-```
+```javascript
 var eventObj = new CSXSEvent(); 
 eventObj.type="documentCreated"; 
 eventObj.data="blahblah"; 
@@ -1433,7 +1433,7 @@ eventObj.data="blahblah";
 At last use this instance to dispatch event:
 
 
-```
+```javascript
 eventObj.dispatch();
 ```
 
@@ -1441,7 +1441,7 @@ eventObj.dispatch();
 Below is the sample code of ExtendScript.
 
 
-```
+```javascript
 ...
 var cs = new CSInterface();
 
@@ -1463,7 +1463,7 @@ For fly-out menu on the native panel of HTML extension, it has been supported.
 Two new interfaces are added to CSInterface. 
 
 
-```
+```javascript
 CSInterface.prototype.setPanelFlyoutMenu = function(menu){
   window.__adobe_cep__.invokeSync("setPanelFlyoutMenu", menu);
 };
@@ -1483,7 +1483,7 @@ CSInterface.prototype.updatePanelMenuItem = function(menuItemLabel, enabled, che
 The "menu" parameter for `setPanelFlyoutMenu` is a XML string. Below is an example:
 
 
-```
+```xml
 <Menu>
   <MenuItem Id="menuItemId1" Label="TestExample1" Enabled="true" Checked="false"/>
   <MenuItem Label="TestExample2">
@@ -1504,7 +1504,7 @@ If user wants to be notified when clicking a menu item, user needs to register `
 To get notified when fly-out menu is opened and closed, register event listener for below event types respectively:
 
 
-```
+```javascript
 "com.adobe.csxs.events.flyoutMenuOpened"
 "com.adobe.csxs.events.flyoutMenuClosed"
 ```
@@ -1519,7 +1519,7 @@ To get notified when fly-out menu is opened and closed, register event listener 
 There are three APIs in `CSInterface` for developers to set and update the customized context menu.
 
 
-```
+```javascript
 CSInterface.prototype.setContextMenu = function(menu, callback){
   window.__adobe_cep__.invokeAsync("setContextMenu", menu, callback);
 };
@@ -1548,7 +1548,7 @@ The "menu" parameter for "setContextMenu" is a XML string.
 Here is an example.
 
 
-```
+```xml
 <Menu>
    <MenuItem Id="menuItemId1" Label="TestExample1" Enabled="true" Checked="false" Icon="./img/small_16X16.png"/>
    <MenuItem Id="menuItemId2" Label="TestExample2">
@@ -1582,7 +1582,7 @@ The "menu" parameter for `setContextMenuByJSON` is a JSON string.
 Here is an JSON example
 
 
-```
+```json
 { 
        "menu": [
            {
@@ -1659,8 +1659,8 @@ To disable the context menu, you can call `setContextMenu` by null.
 Another way is to add `oncontextmenu="return false;"` to the HTML tag. For example, 
 
 
-```
-<body oncontextmenu="return false;">
+```xml
+<body oncontextmenu="return false;"> </body>
 ```
 
 #### Get Display Status of HTML Extension Window
@@ -1700,7 +1700,7 @@ Getting extension content size can be done using `window.innerWidth` and `window
 Changing modal and modeless extension content size is supported in all Adobe applications that supports CEP. However, changing panel HTML extension size is not supported in Premiere Pro, Prelude, After Effects and Audition.
 
 
-```
+```javascript
 CSInterface.prototype.resizeContent = function(width, height)
 ```
 
@@ -1718,7 +1718,7 @@ Please note that extension min/max size constraints as specified in the manifest
 Register the invalid certificate error callback for an extension. This callback will be triggered when the extension try to access the web site that contains the invalid certificate on main frame. But if the extension does not call this function and try to access the web site containing the invalid certificate, a default error page will be shown:
 
 
-```
+```javascript
 CSInterface.prototype.registerInvalidCertificateCallback = function(callback)
 ```
 
@@ -1730,7 +1730,7 @@ CSInterface.prototype.registerInvalidCertificateCallback = function(callback)
 Register an interest in some key events to prevent them from being sent to the host application:
 
 
-```
+```javascript
 CSInterface.prototype.registerKeyEventsInterest = function(keyEventsInterest)
 ```
 
@@ -1763,7 +1763,7 @@ To learn all key codes:
 An example JSON string:
 
 
-```
+```javascript
  [{
     "keyCode": 48
  },
@@ -1781,7 +1781,7 @@ An example JSON string:
 CEP 6.1 introduces two APIs to set and get the title of extension windows. Those functions work with modal and modeless extensions in all Adobe products, and panel extensions in Photoshop, InDesign, InCopy, Illustrator, Animate (Flash Pro) and Audition:
 
 
-```
+```javascript
 CSInterface.prototype.setWindowTitle = function(title){
   window.__adobe_cep__.invokeSync("setWindowTitle", title);
 };
@@ -1802,7 +1802,7 @@ CEP JavaScript library provides APIs for detecting the availability of HI-DPI di
  - `CSInterface.setScaleFactorChangedHandler()` Use this function to add a event handler that will be called when calling extension window is moved between HI-DPI and non-HI-DPI displays.
 
 
-```
+```javascript
 window.scaleFactorHandler = function(){
 var scaleFactor = CSLibrary.getScaleFactor();
 if (scaleFactor === 2){
@@ -1842,7 +1842,7 @@ For example, you want to
  - create a folder.
 
 
-```
+```javascript
 var path = "/tmp/test";
 var result = window.cep.fs.makedir(path);
 if (0 == result.err){
@@ -1856,7 +1856,7 @@ if (0 == result.err){
  - write a file.
 
 
-```
+```javascript
 var data = "This is a test.";
 var path = "/tmp/test";
 var result = window.cep.fs.writeFile(path, data);
@@ -1871,7 +1871,7 @@ if (0 == result.err){
  - Write file with base64 encoding mode. To use this mode, you need to convert the input string to a base64-encoded string before calling `writeFile()`. The following is an example.
 
 
-```
+```javascript
 var data = "This is a test.";
 var path = "/tmp/test";
 data = cep.encoding.convertion.utf8_to_b64(data);
@@ -1888,7 +1888,7 @@ if (0 == result.err) {
  - read a file.
 
 
-```
+```javascript
 var path = "/tmp/test";
 var result = window.cep.fs.readFile(path);
 if(result.err === 0){
@@ -1903,7 +1903,7 @@ if(result.err === 0){
  - Read file with base64 encoding mode in which the read data after `readFile` called is converted to a base-encoded string. You need to decode this string to any format you want. The following is an example
 
 
-```
+```javascript
 var path = "/tmp/test";
 result = window.cep.fs.readFile(path, cep.encoding.Base64);
 if(result.err === 0){
@@ -1919,7 +1919,7 @@ if(result.err === 0){
  - Create a process and check if it's running.
 
 
-```
+```javascript
 var result = window.cep.process.createProcess("usr/X11/bin/xterm");
 
 if(result.err === 0){
@@ -1985,7 +1985,7 @@ YourExtension/
 A locale file contains multiple lines of `<key>=<value>`. There should be a new line below the last property key/value.
 
 
-```
+```javascript
 key1=value1
 key2=value2
 key3.value=value3
@@ -1996,7 +1996,7 @@ key4.innerHTML=value4
 CEP provides a JS interface named `initResourceBundle` to initialize the locale resources. This should be called during the loading of the extension. CEP initializes the resource bundle for the extension with property values for the current application and UI locale. Then users can access the resource bundle (object) to get the localized strings.
 
 
-```
+```javascript
 var csInterface = new CSInterface();
 csInterface.initResourceBundle();
 ```
@@ -2026,7 +2026,7 @@ YourExtension/
 In the `fallback.properties` file, you specify which locale's localized resources you want es_MX to use, in below format
 
 
-```
+```javascript
 fallback=es_ES
 ```
 
@@ -2047,7 +2047,7 @@ Side Notes:
 In manifest, it supports to use locale string as menu. For example, in ShareOnBehance's manifest, it is using `%UI_share_on_Behance`. `UI_share_on_Behance` is defined as `UI_share_on_Behance=xxx` in `messages.properties`.
 
 
-```
+```xml
 <UI>
     <Type>ModalDialog</Type>
     <Menu>%UI_share_on_Behance</Menu>
@@ -2062,7 +2062,7 @@ In manifest, it supports to use locale string as menu. For example, in ShareOnBe
 ##### Example 1
 
 
-```
+```javascript
 var cs = new CSInterface();
 // Get properties according to current locale of host application.
 var resourceBundle = cs.initResourceBundle();
@@ -2083,7 +2083,7 @@ In this example, there is `key3.value=value3` in the property file. In the HTML 
 In this example, there is `key4.innerHTML=value4` in the property file. In the HTML file, the text area widget has attribute `data-locale` with `key4`, then its `innerHTML` is set to `value4`.
 
 
-```
+```xml
 <script type="text/javascript">
   var cs = new CSInterface();
  
@@ -2106,7 +2106,7 @@ In this example, there is `key4.innerHTML=value4` in the property file. In the H
 Use parameters `($1, $2, ...)` in localized strings.
 
 
-```
+```javascript
 var localize = function(key){
   var cs = new CSInterface();
   var resourceBundle = cs.initResourceBundle();
@@ -2140,7 +2140,7 @@ MENA stands for "Middle East and North Africa". Support needs to be provided for
 If an extension needs to be loaded in host applications in MENA locales, MENA locales must be added to the supported locale list of the extension manifest file. For example:
 
 
-```
+```xml
 <LocaleList>
     ...
     <Locale Code="en_AE"/>
@@ -2190,7 +2190,7 @@ CEP 5.0 and higher versions supports playing video and audio encoded in below fo
 Here is an example of playing video in your extension:
 
 
-```
+```xml
 <video poster="http://www.html5rocks.com/en/tutorials/video/basics/star.png" controls>
     <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/>
 </video>
@@ -2206,7 +2206,7 @@ One thing to note is that because HTML extensions are hosted in integrating appl
 [WebRTC](http://www.webrtc.org/) is targeting to serve stream audio, video capture, like online video conference. WebRTC is not enabled by default. To enable it, the schema below need to be added in manifest file. For details, refer to Customize CEF command parameters.
 
 
-```
+```xml
 <CEFCommandLine> <Parameter>--enable-media-stream</Parameter> </CEFCommandLine>
 ```
 
@@ -2245,7 +2245,7 @@ To make an HTML extension invisible
 Here is an example:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="IamInvisible" ExtensionBundleVersion="1.0" Version="5.0">
     <ExtensionList>
@@ -2340,7 +2340,7 @@ All other parameters are passed to underlying CEF. It is up to CEF to decide whe
 Here is an example:
 
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="xx.yy.zz" ExtensionBundleVersion="1.0" Version="5.0">
     <ExtensionList>
@@ -2421,7 +2421,7 @@ Sample code:
 
 
 
-```
+```javascript
 var Persistent = function(inOn){
   if(inOn){
     var event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");  //Photoshop
@@ -2448,7 +2448,7 @@ Persistent(false); //unpersistent
 In HTML extension, URL link could be opened in the default browser by calling `window.cep.util.openURLInDefaultBrowser(‘http://example.com')`:
 
 
-```
+```xml
 <li><button onclick="window.cep.util.openURLInDefaultBrowser('http://www.adobe.com')">Open browser</button></li>
 ```
 
@@ -2471,7 +2471,7 @@ From extension's side, a JavaScript function `registerExtensionUnloadCallback` i
 Example
 
 
-```
+```javascript
 window.cep.util.registerExtensionUnloadCallback(function(){
 window.cep.fs.writeFile("D:\\1.txt", "Hello");
 });
@@ -2513,7 +2513,7 @@ Other things to note:
 	 - If your app uses libraries like `RequireJS` that inserts a require function into DOM, you should consider renaming CEP's require function to something else before migrating.
 
 
-```
+```javascript
 <script type="text/javascript">windows.nodeRequire=window.require && window.require=undefined</script>
 <script type="text/javascript" src="your/require/js/file.js"></script>
 ```
@@ -2522,7 +2522,7 @@ Other things to note:
 	 - If your app uses `JQuery` that is trying to register itself as `nodejs` plugin, then you will have to add the script below inside script tag to define window.module as undefined.
 
 
-```
+```xml
 <script type="text/javascript">window.module = undefined</script> 
 ```
 
@@ -2530,14 +2530,14 @@ Other things to note:
 	 - Because of security consideration, CEP provides an option to disable Node.js APIs in iframe. To do so, add a `nodejs-disabled="true"` attribute to iframe tag. For example:
 
 
-```
-<iframe id="xxx" class="xxxxx" nodejs-disabled="true">
+```xml
+<iframe id="xxx" class="xxxxx" nodejs-disabled="true"> </iframe>
 ```
 
  - Forcing the environment implementation. If you are using `RequireJS`, and the text plugin tries to detect what environment is available for loading text resources, `Node`, `XMLHttpRequest (XHR)` or `Rhino`, but sometimes the `Node` or `Rhino` environment may have loaded a library that introduces an `XHR` implementation. You can force the environment implementation to use by passing an `"env"` module config to the plugin:
 
 
-```
+```javascript
 requirejs.config({
    config: {
    text: {
@@ -2600,8 +2600,8 @@ To enable Node.js APIs:
  - To use `Node.js` APIs in IFrames, add property `enable-nodejs` to it and to all its ancestor iFrames. If any of its ancestors don't have this property specified, `Node.js` APIs won't work
 
 
-```
-<iframe id="xxx" class="xxxxx" enable-nodejs>
+```xml
+<iframe id="xxx" class="xxxxx" enable-nodejs> </iframe>
 ```
 
  - The old `nodejs-disabled` CEF command line parameter and iFrame property are no longer supported and ignored by the new HTML engine.
@@ -2621,7 +2621,7 @@ In addition to the existing `Node.js` support in CEP 6.1, CEP 7.0 provided a new
 This mode is disabled by default. To enable it, add command line parameter `--mixed-context` to your extension manifest.
 
 
-```
+```xml
 <Parameter>--mixed-context</Parameter>
 ```
 
@@ -2629,7 +2629,7 @@ This mode is disabled by default. To enable it, add command line parameter `--mi
 
 In addition to existing `Node.js` support in CEP 9, CEP 10 provide a new `disable-nodejs` attribute for iframe. When this attribute is used in iframe, `Node.js` will be disabled in `separate context` and `mixed-context` both.
 
-```
+```xml
     <iframe name="iframe-1">
     	\\ Node will be accesible here
     </iframe>
@@ -2651,7 +2651,7 @@ For applications that has not integrated CEP 5, there are two workarounds sugges
 
  
 
-```
+```javascript
 var getSTDOutput = function(){ 
   console.log("getSTDOutput");
   window.cep.process.stdout(pid, function(output){
@@ -2669,7 +2669,7 @@ var getSTDOutput = function(){
  - Join all stdout output as one, like below
 
  
-```
+```javascript
 var str1 = 'abcdef';
 var str2 = '12345';
 var str3 = 'gghhtt';
@@ -2680,7 +2680,7 @@ console.log(str1 + str2 + str3);
 An example on how to get curl downloading progress through stderr:
 
 
-```
+```javascript
 <script>
         var downloadPid = -1;
         function getStdErrOutput()
@@ -2737,26 +2737,26 @@ There are two approaches for HTML extension to trigger JSX files to be loaded in
  - Define `<ScriptPath>` node in `manifest.xml`, and the value of the
    node is the relative path for the JSX file. For example:
 
-```
-Extension Id="com.adobe.CEPHTMLTEST.Panel1">
-<DispatchInfo>
-       <Resources>
-           <MainPath>./html/index.html</MainPath>
+```xml
+<Extension Id="com.adobe.CEPHTMLTEST.Panel1">
+    <DispatchInfo>
+        <Resources>
+            <MainPath>./html/index.html</MainPath>
             <CEFCommandLine>
                 <Parameter>--enable-speech-input</Parameter>
-          		<Parameter>--enable-media-stream</Parameter>
+                <Parameter>--enable-media-stream</Parameter>
             </CEFCommandLine>
-	            <ScriptPath>./jsx/example.jsx</ScriptPath> <!-- ExtensionRootPath/jsx/example.jsx -->
-	        </Resources>
-		...........................
-	</DispatchInfo>
+            <ScriptPath>./jsx/example.jsx</ScriptPath> <!-- ExtensionRootPath/jsx/example.jsx -->
+        </Resources>
+        ...........................
+    </DispatchInfo>
 </Extension>
 ```
 
  - HTML extension uses CEP JavaScript API `evalScript` with the script    `$.evalFile(jsxFile)` to trigger JSX files to get loaded in host application's ExtendScript. Developers may need more script code to determine the path of `jsxFile` before the `evalScript` call. For example, they may refer to `$.fileName` to find out the path and the value of `$.fileName` should be the currently executed `JSX` file path. Here is an example:
 
 
-```
+```javascript
 var extensionPath = $.fileName.split('/').slice(0, -1).join('/') + '/';  // The value of $.fileName should be ExtensionRootPath/jsx/example.jsx as mentioned above, while the value of extensionPath should be "ExtensionRootPath/jsx/"
 $.evalFile(extensionPath + 'example1.jsx');
 $.evalFile(extensionPath + 'example2.jsx');
@@ -2766,7 +2766,7 @@ $.evalFile(extensionPath + 'example3.jsx');
 But if the `$.fileName` is referred in the FIRST LOADED JSX file, the value is not correct. That is to say, if the snippet above runs in `example.jsx` which is referred in the `manifest.xml`, the error will arise. So, PLEASE AVOID using `$.fileName` in the FIRST LOADED JSX file, maybe this is a limitation in ExtendScript. The workaround is to refer it in the second loaded and afterward JSX files. For example:
 
 
-```
+```javascript
 // After finishing loading the jsx file refered in the manifest.xml, please use evalScript of CSInterface to load other jsx files.
 // "anotherJSXFile" is not the first loaded jsx file, so the value of "$.fileName" in it's stage is correct.
 CSInterface.evalScript('$.evalFile(anotherJSXFile)', callback);
@@ -2819,15 +2819,15 @@ Extension developers can disable the default behavior of DnD by JavaScript.
 Method 1
 
 
-```
-<body ondragover="return false" ondrop="return false">
+```xml
+<body ondragover="return false" ondrop="return false"> </body>
 ```
 
 
 Method 2 (using jQuery)
 
 
-```
+```javascript
 $(document.body).on('dragover drop', function(e) {
   e.preventDefault();
 });
@@ -2872,7 +2872,7 @@ There are couples of JavaScript ways to increase or decrease font size in HTML p
  - Plain JavaScript - Use `document.body.style.fontSize` to change font
    size in page.
 
-```
+```javascript
 <script type="text/javascript" language="javascript">
     window.onload = function() {
         var fontchange = document.createElement("div");
@@ -2900,7 +2900,7 @@ There are couples of JavaScript ways to increase or decrease font size in HTML p
  - JQuery - Use `$('html').css('font-size', size)` to change font size in page.
 
 
-```
+```javascript
 <script type="text/javascript" language="javascript">
         $(document).ready(function(){
               // Reset Font Size
@@ -2940,7 +2940,7 @@ The ways above are the common used solution for JavaScript developers to increas
 #### Check Internet Connection
 
 
-```
+```javascript
 if (navigator.onLine === true)
 {
   //system is online
@@ -2958,7 +2958,7 @@ else
 Please refer to http://jsfiddle.net/BfLAh/1390/
 
 
-```
+```javascript
 $(document).mousemove(function(e){
     $("#image").css({left:e.pageX, top:e.pageY});
 });
@@ -2974,7 +2974,7 @@ Due to the [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/X
 **iFrame alternative for HTTPS content** 
 
 
-```
+```javascript
 // html
 <body onLoad="onLoaded()">
 <!--iframe src="https://www.trello.com"></iframe--> <!-- this line can be deleted as HTTPS blocks content being displayed in an iframe -->
