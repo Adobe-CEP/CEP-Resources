@@ -1035,7 +1035,7 @@ Here are three samples to demonstrate how to dispatch an event in JavaScript.
 var csInterface = new CSInterface();
 var event = new CSEvent("com.adobe.cep.test", "APPLICATION");
 event.data = "This is a test!";
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```	
 
 
@@ -1048,7 +1048,7 @@ var event = new CSEvent();
 event.type = "com.adobe.cep.test";
 event.scope = "APPLICATION";
 event.data = "This is a test!";
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```
 
 
@@ -1061,7 +1061,7 @@ var obj = new Object();
 obj.a = "a";
 obj.b = "b";
 event.data = obj;
-cSInterface.dispatchEvent(event);
+csInterface.dispatchEvent(event);
 ```
 
 
