@@ -2673,16 +2673,16 @@ There are two approaches for HTML extension to trigger JSX files to be loaded in
    node is the relative path for the JSX file. For example:
 
 ```xml
-Extension Id="com.adobe.CEPHTMLTEST.Panel1">
-<DispatchInfo>
-       <Resources>
-           <MainPath>./html/index.html</MainPath>
-            <CEFCommandLine>
-                <Parameter>--enable-speech-input</Parameter>
-          		<Parameter>--enable-media-stream</Parameter>
-            </CEFCommandLine>
-	            <ScriptPath>./jsx/example.jsx</ScriptPath> <!-- ExtensionRootPath/jsx/example.jsx -->
-	        </Resources>
+<Extension Id="com.adobe.CEPHTMLTEST.Panel1">
+	<DispatchInfo>
+	   <Resources>
+		   <MainPath>./html/index.html</MainPath>
+		   <CEFCommandLine>
+			   <Parameter>--enable-speech-input</Parameter>
+			   <Parameter>--enable-media-stream</Parameter>
+		   </CEFCommandLine>
+		   <ScriptPath>./jsx/example.jsx</ScriptPath> <!-- ExtensionRootPath/jsx/example.jsx -->
+	   </Resources>
 		...........................
 	</DispatchInfo>
 </Extension>
