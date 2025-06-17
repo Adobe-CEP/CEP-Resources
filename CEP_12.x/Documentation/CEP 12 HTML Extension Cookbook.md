@@ -41,7 +41,7 @@ These applications support CEP HTML extensions. (For older applications, [see th
 | Application | Host ID(Product SAPCode) |CC 2019 Version|CC 2020 Version|FY 2020|FY2021|FY2024|
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |
 |Photoshop|	PHSP/PHXS|20 (CEP 9)|21 (CEP 9)| 22.0 (CEP 10) | 23.0 (CEP 11) |  25.12 (CEP 12) |
-|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) | TBD |
+|InDesign|	IDSN|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11) | 20.4 |
 |InCopy|	AICY|	14 (CEP 9)|15 (CEP 9)| 16.0 (CEP 10 ) | 16.3(CEP 11)  | TBD |
 |Illustrator|	ILST|	23 (CEP 9)|24 (CEP 9)| 25.0 (CEP 10) | 25.3(CEP 11)  | TBD |
 |Premiere Pro|	PPRO|	13 (CEP 9)|14 (CEP 9)| 14.4 (CEP 10) | 15.4(CEP 11)  | 25.0 (CEP 12) |
