@@ -31,6 +31,8 @@ These extension types are supported by CEP. You need to specify an extension's t
 	 - A Modeless Dialog type opens a new extension window but doesn't force the user to interact with the extension window.
  - **Custom (Since CEP 5.0)**
 	 - This type is for invisible extensions. An invisible extension remains hidden and never becomes visible during its whole life cycle. Read "Invisible HTML Extensions" for more details.
+ - **Embedded (Bridge only)**
+	 - This is supported by Bridge, and appears to function identically to Panel.
 
 
 ### Applications Integrated with CEP
